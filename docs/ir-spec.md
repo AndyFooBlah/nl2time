@@ -6,7 +6,7 @@ Normative companion to [`schema/timeexpr.schema.json`](../schema/timeexpr.schema
 
 - **Values are half-open intervals `[start, end)` with a `grain`** (`instant`…`year`). A point is an interval with `start == end` and grain `instant`. Durations (`{op:'duration'}`, exact) and calendar amounts (`{op:'amount'}`, unit-preserving) are separate value kinds.
 - **Resolution** is a pure function `resolve(expr, context) → ordered candidates`. Same expr + same context ⇒ same candidates, always.
-- **Context** supplies: `now` (reference instant), `timeZone` (IANA), `locale` (language + region), `weekStart`, `dateOrder`, `bias` (`past|future|none`), `nextWeekday` (`nearest|week-after`), `partialPeriod` (`include|exclude`). All civil arithmetic happens in `timeZone`.
+- **Context** supplies: `now` (reference instant), `timeZone` (IANA), `locale` (language + region), `weekStart`, `dateOrder`, `bias` (`past|future|none`), `nextWeekday` (`nearest|week-after`), `partialPeriod` (`include|exclude`), and optionally `dayPeriods` (override the locale's day-period boundary rules — used e.g. to encode another system's conventions when replaying its test corpus). All civil arithmetic happens in `timeZone`.
 - Ambiguity produces **multiple candidates, ordered best-first** (cap: 4). Unresolvable ops throw (`recur` in v1); empty candidate lists are legal (e.g. "5th Monday of February").
 
 ## Operators
@@ -32,8 +32,8 @@ Shift both endpoints by `amount` calendar units. Day-and-coarser units preserve 
 ### `snap {base, unit, edge?}`
 The containing `unit` interval of `base.start`: floor to the unit boundary, extend one unit; grain = `unit`. `week` floors to `context.weekStart`; `quarter` to calendar quarters. `edge:'start'|'end'` collapses to the corresponding boundary point (grain `instant`).
 
-### `span {anchor, amount}`
-Anchored extent. Signed `amount` fields: negative extends backward from `anchor.end`, positive forward from `anchor.start`. Grain = smallest unit present in `amount`. If the anchor is a point (grain `instant`), the amount's smallest unit is day-or-coarser, and `partialPeriod:'exclude'`, the anchor first floors to its day start (complete periods only).
+### `span {anchor, amount, business?}`
+Anchored extent. Signed `amount` fields: negative extends backward from `anchor.end`, positive forward from `anchor.start`. Grain = smallest unit present in `amount`. If the anchor is the reference point itself (grain `instant`, equal to `now`), the amount's smallest unit is day-or-coarser, and `partialPeriod:'exclude'`, the span covers complete days only ("the last 3 days" ends at today's start; "the next 3 days" begins at tomorrow's start). `business: true` counts weekdays only, walking day by day from the anchor and skipping Saturday/Sunday.
 
 ### `between {start, end}`
 `[start.start, end.end)`, cartesian over candidates, dropping pairs where start ≥ end. Grain = finer of the two.
@@ -54,13 +54,13 @@ Left-to-right composition; each part evaluates with the accumulated interval as 
 Pass-through values: exact ISO-8601 duration; unit-preserving calendar amount.
 
 ### `holiday {name, year?, dir?}`
-A named holiday resolved by the engine's table: fixed-date (christmas, halloween, …), nth-weekday (thanksgiving = 4th Thursday of November, memorial-day = last Monday of May), or computed (easter, Anonymous Gregorian computus). With `year`: that occurrence. Without: the most recent occurrence on-or-before the reference plus the following one, bias-ordered; `dir` forces the strictly previous/next single occurrence.
+A named holiday resolved by the engine's table: fixed-date (christmas, halloween, valentines, independence-day, earth-day, st-patricks, workers-day, new-year, …), nth-weekday (thanksgiving = 4th Thursday of November, labor-day, mothers-day, fathers-day, memorial-day = last Monday of May), or computed (easter via the Anonymous Gregorian computus; black-friday = thanksgiving + 1 day). With `year`: that occurrence. Without: the most recent occurrence on-or-before the reference plus the following one, bias-ordered; `dir` forces the strictly previous/next single occurrence.
 
 ### `recur {every, filter?}`
 Representable and serializable in v1; resolution throws `NotResolvableError` (v2 lands occurrence enumeration against a range).
 
 ### `mod` (any node)
-`approx | start | mid | end` — carried through resolution untouched in v1 (renderers may hedge); semantic narrowing (e.g. `start` of month = first ~10 days) is future work.
+`approx | start | mid | end`. `approx` is carried through resolution untouched (renderers may hedge). `start`/`end` narrow the resolved interval to its earlier/later half ("early July", "later this week"): the midpoint floors to the day for week-and-coarser grains (to the month for years), and when the reference day falls strictly inside the interval it tightens the bound toward it ("earlier this year" ends today, not at midyear); a degenerate result falls back to the plain half. `mid` selects the middle stretch: the 10th–20th for months, 10:00–14:00 for days, the middle half otherwise. Fixed splits that must *not* reference-clamp ("end of year" = July onward regardless of today) are expressed structurally with `between`/`span` instead of `mod`.
 
 ## Versioning
 

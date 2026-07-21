@@ -40,7 +40,7 @@ Executed by the runner exported as **`nl2time/corpus`** (`runForwardCase`, `runR
 }
 ```
 
-`start`/`end` are instants; `startLocal`/`endLocal`/`pointLocal` are civil datetimes compared in the case's `timeZone` (used by imported cases, whose upstream expectations are timezone-agnostic). `grain` omitted/null skips the grain check. Intervals are half-open `[start, end)`.
+`start`/`end` are instants; `startLocal`/`endLocal`/`pointLocal` are civil datetimes compared in the case's `timeZone` (used by imported cases, whose upstream expectations are timezone-agnostic). `grain` omitted/null skips the grain check. Intervals are half-open `[start, end)`. Two comparison tolerances absorb upstream formatting conventions: an expected end of `…:59:59` also matches our half-open end one second later, and a time-range end that textually precedes its start (a cross-midnight range emitted without the date roll) also matches the next-day equivalent.
 
 **Reverse** — `(value, ctx, opts) → expected text`:
 

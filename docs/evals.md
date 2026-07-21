@@ -1,5 +1,7 @@
 # Evaluation & conformance corpus plan
 
+> **Status (2026-07-21):** the Recognizers-Text import below is done (693 cases, 80.7% passing as the CI-gated baseline); both hand-authored sets exist and pass 100%. Remaining items — Duckling/dateparser/chrono importers and reverse-set expansion — are tracked in issues [#2](https://github.com/AndyFooBlah/nl2time/issues/2) and [#3 (closed, initial set landed)](https://github.com/AndyFooBlah/nl2time/issues/3).
+
 Goal: a large, license-clean, language-neutral test corpus covering **both directions**, shared verbatim by every port (JS now, Python later). Every case is JSON:
 
 ```

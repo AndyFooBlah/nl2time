@@ -19,6 +19,10 @@
     "type": "git",
     "url": "git+https://github.com/AndyFooBlah/nl2time.git"
   },
+  "homepage": "https://github.com/AndyFooBlah/nl2time#readme",
+  "bugs": {
+    "url": "https://github.com/AndyFooBlah/nl2time/issues"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "prepare": "npm run build",
