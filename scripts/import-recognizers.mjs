@@ -23,7 +23,6 @@ const GRAIN_BY_TIMEX_DURATION = {
   P1D: 'day',
   P1W: 'week',
   P1M: 'month',
-  P3M: 'quarter',
   P1Y: 'year',
 };
 

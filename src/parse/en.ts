@@ -191,11 +191,17 @@ const ruleRange: Rule = (tokens, i, ctx) => {
 
   // Joined tokens: "4-23" (day range), "11-4" (hour range), "2014-2018".
   const joined = word(tokens[at]);
-  // "10/1/2018-10/7/2018": two joined full numeric dates.
-  const fdr = joined?.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})-(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  // "10/1/2018-10/7/2018" and "5/1-5/7/2020": joined numeric-date ranges.
+  const fdr =
+    joined?.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})-(\d{1,2})\/(\d{1,2})\/(\d{4})$/) ??
+    joined?.match(/^(\d{1,2})\/(\d{1,2})()-(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
   if (fdr) {
-    const d1 = numericDate([Number(fdr[1]), Number(fdr[2]), Number(fdr[3])], ctx.dateOrder);
-    const d2 = numericDate([Number(fdr[4]), Number(fdr[5]), Number(fdr[6])], ctx.dateOrder);
+    const sharedYear = Number(fdr[6]);
+    const d1 = numericDate(
+      fdr[3] === '' ? [Number(fdr[1]), Number(fdr[2]), sharedYear] : [Number(fdr[1]), Number(fdr[2]), Number(fdr[3])],
+      ctx.dateOrder,
+    );
+    const d2 = numericDate([Number(fdr[4]), Number(fdr[5]), sharedYear], ctx.dateOrder);
     if (d1 && d2) {
       return {
         expr: { op: 'between', start: { op: 'literal', date: d1 }, end: { op: 'literal', date: d2 } },
@@ -411,6 +417,28 @@ function readOperand(
   i: number,
   ctx: TimeContext,
 ): { operand: RangeOperand; consumed: number } | undefined {
+  // "between the end of 2007 and the end of 2008" — inside a range, "end of
+  // YEAR" means the year's end boundary (a point), not its final third.
+  const w0 = word(tokens[i]);
+  if ((w0 === 'end' || w0 === 'beginning' || w0 === 'start') && word(tokens[i + 1]) === 'of') {
+    let yAt = i + 2;
+    if (word(tokens[yAt]) === 'the') yAt += 1;
+    const year = yearAt(tokens, yAt);
+    if (year !== undefined) {
+      return {
+        operand: {
+          kind: 'date',
+          expr: {
+            op: 'snap',
+            base: { op: 'literal', date: { year } },
+            unit: 'year',
+            edge: w0 === 'end' ? 'end' : 'start',
+          },
+        },
+        consumed: yAt + 1 - i,
+      };
+    }
+  }
   const rel = ruleLastThisNext(tokens, i, ctx);
   if (rel && rel.role === 'date') {
     return { operand: { kind: 'date', expr: rel.expr }, consumed: rel.consumed };
@@ -431,6 +459,13 @@ function readOperand(
   }
   const deictic = ruleDeicticDay(tokens, i, ctx);
   if (deictic) return { operand: { kind: 'date', expr: deictic.expr }, consumed: deictic.consumed };
+  if (word(tokens[i]) === 'now') {
+    // In a date range, "now" means today ("between now and November 15th").
+    return {
+      operand: { kind: 'date', expr: { op: 'snap', base: NOW, unit: 'day', edge: 'start' } },
+      consumed: 1,
+    };
+  }
   return undefined;
 }
 
@@ -602,14 +637,15 @@ const ruleWeekOf: Rule = (tokens, i, ctx) => {
   if (nth === undefined) {
     expr = { op: 'snap', base: scope, unit: 'week' };
   } else if (nth === 'last') {
-    // Last FULL week: the week containing (scope end − 7 days) — a partial
-    // trailing week spilling into the next period doesn't count.
+    // Last week mostly within the scope: the week containing (end − 4 days) —
+    // the ISO minDays-4 idea. A week needs ≥4 of its days inside the period
+    // to be its last week.
     expr = {
       op: 'snap',
       base: {
         op: 'offset',
         base: { op: 'snap', base: scope, unit: monthOrYearUnit(scope), edge: 'end' },
-        amount: -7,
+        amount: -4,
         unit: 'day',
       },
       unit: 'week',
@@ -716,27 +752,47 @@ const ruleEarlyLate: Rule = (tokens, i, ctx) => {
   };
 };
 
-/** "end of this sunday", "beginning of next month" → boundary points / halves. */
+/** "end of this sunday", "beginning of next month", "the middle of 2000". */
 const ruleEndOf: Rule = (tokens, i, ctx) => {
   const w = word(tokens[i]);
   const isEnd = w === 'end';
   const isStart = w === 'beginning' || w === 'start';
-  if (!isEnd && !isStart) return undefined;
+  const isMid = w === 'middle';
+  if (!isEnd && !isStart && !isMid) return undefined;
   if (word(tokens[i + 1]) !== 'of') return undefined;
   let at = i + 2;
   if (word(tokens[at]) === 'the') at += 1;
   const inner =
     ruleDeicticDay(tokens, at, ctx) ??
     ruleLastThisNext(tokens, at, ctx) ??
+    ruleBareYear(tokens, at, ctx) ??
     ruleCalendarDate(tokens, at, ctx);
   if (!inner || inner.role !== 'date') return undefined;
+
+  // Year scopes split into thirds: beginning = Jan–Apr, middle = May–Aug,
+  // end = Sep–Dec (Recognizers convention).
+  if (inner.expr.op === 'literal' && inner.expr.date?.year !== undefined && inner.expr.date.month === undefined) {
+    const year = inner.expr.date.year;
+    const startMonth = isStart ? 1 : isMid ? 5 : 9;
+    return {
+      expr: {
+        op: 'span',
+        anchor: { op: 'literal', date: { year, month: startMonth } },
+        amount: { months: 4 },
+      },
+      consumed: at + inner.consumed - i,
+      confidence: 0.95,
+      role: 'date',
+    };
+  }
+
   const dayScoped =
     inner.expr.op === 'seek' ||
     (inner.expr.op === 'snap' && inner.expr.unit === 'day') ||
     (inner.expr.op === 'literal' && inner.expr.date?.day !== undefined);
   const expr: TimeExpr = dayScoped
     ? { op: 'snap', base: inner.expr, unit: 'day', edge: isEnd ? 'end' : 'start' }
-    : { ...inner.expr, mod: isEnd ? 'end' : 'start' };
+    : { ...inner.expr, mod: isEnd ? 'end' : isMid ? 'mid' : 'start' };
   return { expr, consumed: at + inner.consumed - i, confidence: 0.95, role: 'date' };
 };
 
@@ -828,6 +884,26 @@ const ruleLastThisNext: Rule = (tokens, i, ctx) => {
       },
       consumed: 2,
       confidence: 1,
+      role: 'date',
+    };
+  }
+
+  if (nextWord === 'fortnight') {
+    // "the next fortnight" = the coming two whole weeks (week-aligned).
+    const weekDelta = w === 'last' ? -2 : w === 'next' ? 1 : 0;
+    return {
+      expr: {
+        op: 'span',
+        anchor: {
+          op: 'snap',
+          base: { op: 'offset', base: NOW, amount: weekDelta, unit: 'week' },
+          unit: 'week',
+          edge: 'start',
+        },
+        amount: { days: 14 },
+      },
+      consumed: 2,
+      confidence: 0.95,
       role: 'date',
     };
   }
@@ -933,10 +1009,10 @@ const ruleUnitAfterNext: Rule = (tokens, i) => {
   return { expr: snapOffset(2, unit), consumed: 3, confidence: 1, role: 'date' };
 };
 
-/** "last/past N units" → span backwards; "the past week" → trailing 7 days. */
+/** "last/past/previous N units" → span backwards; "the past week" → trailing 7 days. */
 const rulePastN: Rule = (tokens, i) => {
   const w = word(tokens[i]);
-  if (w !== 'last' && w !== 'past') return undefined;
+  if (w !== 'last' && w !== 'past' && w !== 'previous' && w !== 'prior') return undefined;
   const n = readNumber(tokens, i + 1);
   if (n && Number.isInteger(n.value)) {
     const unit = UNIT_WORDS[word(tokens[i + 1 + n.consumed]) ?? ''];
@@ -968,9 +1044,10 @@ const rulePastN: Rule = (tokens, i) => {
   return undefined;
 };
 
-/** "next N units" / "over the next couple weeks" → span forward. */
+/** "next/coming/following N units" / "over the next couple weeks" → span forward. */
 const ruleNextN: Rule = (tokens, i) => {
-  if (word(tokens[i]) !== 'next') return undefined;
+  const w0 = word(tokens[i]);
+  if (w0 !== 'next' && w0 !== 'coming' && w0 !== 'upcoming' && w0 !== 'following') return undefined;
   const n = readNumber(tokens, i + 1);
   if (!n || !Number.isInteger(n.value)) return undefined;
   let at = i + 1 + n.consumed;
@@ -992,8 +1069,13 @@ const ruleTheUnit: Rule = (tokens, i) => {
   if (word(tokens[i]) !== 'the') return undefined;
   const uw = word(tokens[i + 1]);
   if (uw === 'fortnight') {
+    // Week-aligned: the previous two whole weeks.
     return {
-      expr: { op: 'span', anchor: NOW, amount: { days: -14 } },
+      expr: {
+        op: 'span',
+        anchor: { op: 'snap', base: { op: 'offset', base: NOW, amount: -1, unit: 'week' }, unit: 'week', edge: 'start' },
+        amount: { days: 14 },
+      },
       consumed: 2,
       confidence: 0.85,
       role: 'date',
@@ -1106,14 +1188,44 @@ const ruleHoliday: Rule = (tokens, i) => {
 
   const prev = word(tokens[i - 1]);
   const dir = prev === 'last' || prev === 'previous' ? 'prev' : prev === 'next' || prev === 'coming' ? 'next' : undefined;
+  const holiday: TimeExpr = {
+    op: 'holiday',
+    name,
+    ...(year !== undefined ? { year } : {}),
+    ...(dir !== undefined ? { dir } : {}),
+  };
+
+  // "labor day weekend": Saturday before through the end of the holiday span.
+  if (word(tokens[i + consumed]) === 'weekend') {
+    return {
+      expr: {
+        op: 'between',
+        start: { op: 'seek', base: holiday, dir: 'prev', target: { kind: 'weekday', weekday: 'sat' }, n: 1 },
+        end: { op: 'snap', base: holiday, unit: 'day', edge: 'end' },
+      },
+      consumed: consumed + 1,
+      confidence: 0.95,
+      role: 'date',
+    };
+  }
+  return { expr: holiday, consumed, confidence: 0.95, role: 'date' };
+};
+
+/** "the weekend of halloween" / "the weekend of <date>". */
+const ruleWeekendOf: Rule = (tokens, i, ctx) => {
+  let at = i;
+  if (word(tokens[at]) === 'the') at += 1;
+  if (word(tokens[at]) !== 'weekend' || word(tokens[at + 1]) !== 'of') return undefined;
+  at += 2;
+  const inner = ruleHoliday(tokens, at, ctx) ?? ruleCalendarDate(tokens, at, ctx);
+  if (!inner || inner.role !== 'date') return undefined;
   return {
     expr: {
-      op: 'holiday',
-      name,
-      ...(year !== undefined ? { year } : {}),
-      ...(dir !== undefined ? { dir } : {}),
+      op: 'between',
+      start: { op: 'seek', base: inner.expr, dir: 'prev', target: { kind: 'weekday', weekday: 'sat' }, n: 1 },
+      end: { op: 'snap', base: inner.expr, unit: 'day', edge: 'end' },
     },
-    consumed,
+    consumed: at + inner.consumed - i,
     confidence: 0.95,
     role: 'date',
   };
@@ -1221,12 +1333,20 @@ const ruleNthWeekdayOf: Rule = (tokens, i, ctx) => {
   const weekday = WEEKDAY_WORDS[word(tokens[at + 1]) ?? ''];
   if (!weekday) return undefined;
   at += 2;
-  // Optional day-period between weekday and "of" ("first Monday evening of…").
+  // Optional day-period or time range between weekday and "of" ("first
+  // Monday evening of…", "first Monday 1pm to 3pm of next month").
   let period: DayPeriod | undefined;
+  let timeRange: TimeExpr | undefined;
   const pw = word(tokens[at]);
   if (pw !== undefined && PERIOD_WORDS[pw]) {
     period = PERIOD_WORDS[pw];
     at += 1;
+  } else {
+    const range = ruleRange(tokens, at, ctx);
+    if (range && range.role === 'time') {
+      timeRange = range.expr;
+      at += range.consumed;
+    }
   }
   if (word(tokens[at]) !== 'of') return undefined;
   at += 1;
@@ -1246,12 +1366,14 @@ const ruleNthWeekdayOf: Rule = (tokens, i, ctx) => {
       : { op: 'seek', base: scope.expr, dir: 'next', target: { kind: 'weekday', weekday }, n };
   const expr: TimeExpr = period
     ? { op: 'intersect', parts: [seek, { op: 'literal', dayPeriod: period }] }
-    : seek;
+    : timeRange
+      ? { op: 'intersect', parts: [seek, timeRange] }
+      : seek;
   return {
     expr,
     consumed: at + scope.consumed - i,
     confidence: 1,
-    role: period ? 'datetime' : 'date',
+    role: period || timeRange ? 'datetime' : 'date',
   };
 };
 
@@ -1397,6 +1519,17 @@ const ruleCalendarDate: Rule = (tokens, i, ctx) => {
   }
 
   // "oct/2", "mar4", "mar.4"
+  // "Dec/2018" → month+year
+  const attachedYear = w?.match(/^([a-z]{3,9})\/(\d{4})$/);
+  if (attachedYear && MONTH_WORDS[attachedYear[1]!] !== undefined) {
+    return {
+      expr: { op: 'literal', date: { month: MONTH_WORDS[attachedYear[1]!]!, year: Number(attachedYear[2]) } },
+      consumed: 1,
+      confidence: 0.9,
+      role: 'date',
+    };
+  }
+
   const attached = w?.match(/^([a-z]{3,9})[/.]?(\d{1,2})$/);
   if (attached && MONTH_WORDS[attached[1]!] !== undefined) {
     const day = Number(attached[2]);
@@ -1451,9 +1584,9 @@ const ruleCalendarDate: Rule = (tokens, i, ctx) => {
         role: 'date',
       };
     }
-    // "Dec 2018" / "Dec-2018" (dash-split)
+    // "Dec 2018" / "Dec-2018" (dash-split) / "april in 2016"
     let yAt = i + 1;
-    if (word(tokens[yAt]) === '-') yAt += 1;
+    if (word(tokens[yAt]) === '-' || word(tokens[yAt]) === 'in' || word(tokens[yAt]) === 'of') yAt += 1;
     const year = yearAt(tokens, yAt);
     if (year !== undefined) {
       return { expr: { op: 'literal', date: { month, year } }, consumed: yAt + 1 - i, confidence: 1, role: 'date' };
@@ -1469,7 +1602,7 @@ const ruleCalendarDate: Rule = (tokens, i, ctx) => {
     const m2 = MONTH_WORDS[word(tokens[at]) ?? ''];
     if (m2 !== undefined) {
       let yAt = at + 1;
-      if (word(tokens[yAt]) === '-') yAt += 1;
+      if (word(tokens[yAt]) === '-' || word(tokens[yAt]) === 'in' || word(tokens[yAt]) === 'of') yAt += 1;
       const year = yearAt(tokens, yAt);
       const date: { month: number; day: number; year?: number } = { month: m2, day: n.value };
       if (year !== undefined) date.year = year;
@@ -1558,6 +1691,21 @@ const ruleClockTime: Rule = (tokens, i, ctx) => {
   if (w === 'midnight') {
     return { expr: { op: 'literal', time: { hour: 12, meridiem: 'am' } }, consumed: 1, confidence: 1, role: 'time' };
   }
+  // "11.00am" — dotted time with explicit meridiem.
+  const dottedMer = w?.match(/^(\d{1,2})\.(\d{2})(am|pm)$/);
+  if (dottedMer) {
+    const h = Number(dottedMer[1]);
+    const min = Number(dottedMer[2]);
+    if (h >= 1 && h <= 12 && min <= 59) {
+      return {
+        expr: { op: 'literal', time: { hour: h, minute: min, meridiem: dottedMer[3] as 'am' | 'pm' } },
+        consumed: 1,
+        confidence: 1,
+        role: 'time',
+      };
+    }
+  }
+
   // "at 6.45" — dot as minute separator after a time preposition.
   const dottedTime = w?.match(/^(\d{1,2})\.(\d{2})$/);
   if (dottedTime && ['at', 'around', 'about'].includes(word(tokens[i - 1]) ?? '')) {
@@ -1637,6 +1785,17 @@ const ruleClockTime: Rule = (tokens, i, ctx) => {
         role: 'time',
       };
     }
+  }
+
+  // "eod"/"eow"/"eom": end-of-period points.
+  if (w === 'eod' || w === 'eow' || w === 'eom') {
+    const unit: Unit = w === 'eod' ? 'day' : w === 'eow' ? 'week' : 'month';
+    return {
+      expr: { op: 'snap', base: NOW, unit, edge: 'end' },
+      consumed: 1,
+      confidence: 0.9,
+      role: w === 'eod' ? 'time' : 'date',
+    };
   }
 
   if (w === 'lunchtime') {
@@ -1856,6 +2015,7 @@ export const EN_RULES: readonly Rule[] = [
   ruleWeekOf,
   ruleNthWeekdayOf,
   ruleDayOfScope,
+  ruleWeekendOf,
   ruleHoliday,
   ruleEarlyLate,
   ruleEndOf,

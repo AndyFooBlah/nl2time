@@ -35,7 +35,10 @@ export function tokenize(text: string): Token[] {
     // them. Pure-numeric joins (11-4, 2014-2018) and "mid-…" stay intact.
     if (raw.includes('-') && !raw.startsWith('mid')) {
       const segments = raw.split('-');
-      const alpha = segments.filter((s) => /^[a-z']+$/.test(s)).length;
+      // Word-ish segments include month/year compounds ("dec/2018"); pure
+      // digit-with-suffix segments like "4.30pm" must NOT count, so joined
+      // time ranges stay intact.
+      const alpha = segments.filter((s) => /^[a-z']{2,}(\/\d{1,4})?$/.test(s)).length;
       const numeric = segments.filter((s) => /^[\d.:]+$/.test(s)).length;
       const splittable =
         segments.length >= 2 &&

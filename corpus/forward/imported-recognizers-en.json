@@ -11582,8 +11582,7 @@
     "values": [
      {
       "startLocal": "2016-11-01T00:00:00",
-      "endLocal": "2017-02-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2017-02-01T00:00:00"
      }
     ]
    },
@@ -16981,8 +16980,7 @@
     "values": [
      {
       "startLocal": "2015-01-01T00:00:00",
-      "endLocal": "2015-04-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2015-04-01T00:00:00"
      }
     ]
    },
@@ -18221,8 +18219,7 @@
     "values": [
      {
       "startLocal": "2017-01-01T00:00:00",
-      "endLocal": "2017-04-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2017-04-01T00:00:00"
      }
     ]
    },
@@ -18277,8 +18274,7 @@
     "values": [
      {
       "startLocal": "2017-01-01T00:00:00",
-      "endLocal": "2017-04-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2017-04-01T00:00:00"
      }
     ]
    },
@@ -19332,8 +19328,7 @@
     "values": [
      {
       "startLocal": "2019-07-01T00:00:00",
-      "endLocal": "2019-10-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2019-10-01T00:00:00"
      }
     ]
    },
@@ -19388,8 +19383,7 @@
     "values": [
      {
       "startLocal": "2019-07-01T00:00:00",
-      "endLocal": "2019-10-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2019-10-01T00:00:00"
      }
     ]
    },
@@ -19444,8 +19438,7 @@
     "values": [
      {
       "startLocal": "2019-04-01T00:00:00",
-      "endLocal": "2019-07-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2019-07-01T00:00:00"
      }
     ]
    },
@@ -19500,8 +19493,7 @@
     "values": [
      {
       "startLocal": "2018-10-01T00:00:00",
-      "endLocal": "2019-01-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2019-01-01T00:00:00"
      }
     ]
    },
@@ -19556,8 +19548,7 @@
     "values": [
      {
       "startLocal": "2019-10-01T00:00:00",
-      "endLocal": "2020-01-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2020-01-01T00:00:00"
      }
     ]
    },
@@ -19612,8 +19603,7 @@
     "values": [
      {
       "startLocal": "2020-01-01T00:00:00",
-      "endLocal": "2020-04-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2020-04-01T00:00:00"
      }
     ]
    },
@@ -19668,8 +19658,7 @@
     "values": [
      {
       "startLocal": "2019-10-01T00:00:00",
-      "endLocal": "2020-01-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2020-01-01T00:00:00"
      }
     ]
    },
@@ -19724,8 +19713,7 @@
     "values": [
      {
       "startLocal": "2019-10-01T00:00:00",
-      "endLocal": "2020-01-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2020-01-01T00:00:00"
      }
     ]
    },
@@ -19780,8 +19768,7 @@
     "values": [
      {
       "startLocal": "2019-04-01T00:00:00",
-      "endLocal": "2019-07-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2019-07-01T00:00:00"
      }
     ]
    },
@@ -19836,8 +19823,7 @@
     "values": [
      {
       "startLocal": "2019-04-01T00:00:00",
-      "endLocal": "2019-07-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2019-07-01T00:00:00"
      }
     ]
    },
@@ -22283,8 +22269,7 @@
     "values": [
      {
       "startLocal": "2019-01-01T00:00:00",
-      "endLocal": "2019-04-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2019-04-01T00:00:00"
      }
     ]
    },
@@ -22339,8 +22324,7 @@
     "values": [
      {
       "startLocal": "2019-01-01T00:00:00",
-      "endLocal": "2019-04-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2019-04-01T00:00:00"
      }
     ]
    },
@@ -22395,8 +22379,7 @@
     "values": [
      {
       "startLocal": "2019-07-01T00:00:00",
-      "endLocal": "2019-10-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2019-10-01T00:00:00"
      }
     ]
    },
@@ -22451,8 +22434,7 @@
     "values": [
      {
       "startLocal": "2019-01-01T00:00:00",
-      "endLocal": "2019-04-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2019-04-01T00:00:00"
      }
     ]
    },
@@ -25170,13 +25152,11 @@
     "values": [
      {
       "startLocal": "2020-01-01T00:00:00",
-      "endLocal": "2020-04-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2020-04-01T00:00:00"
      },
      {
       "startLocal": "2021-01-01T00:00:00",
-      "endLocal": "2021-04-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2021-04-01T00:00:00"
      }
     ]
    },
@@ -26833,13 +26813,11 @@
     "values": [
      {
       "startLocal": "2016-04-01T00:00:00",
-      "endLocal": "2016-07-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2016-07-01T00:00:00"
      },
      {
       "startLocal": "2017-04-01T00:00:00",
-      "endLocal": "2017-07-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2017-07-01T00:00:00"
      }
     ]
    },
@@ -37590,8 +37568,7 @@
     "values": [
      {
       "startLocal": "2019-04-01T00:00:00",
-      "endLocal": "2019-07-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2019-07-01T00:00:00"
      }
     ]
    },
@@ -37866,8 +37843,7 @@
     "values": [
      {
       "startLocal": "2019-10-01T00:00:00",
-      "endLocal": "2020-01-01T00:00:00",
-      "grain": "quarter"
+      "endLocal": "2020-01-01T00:00:00"
      }
     ]
    },

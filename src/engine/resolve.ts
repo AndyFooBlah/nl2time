@@ -641,8 +641,8 @@ function resolveDate(date: PartialDate, ctx: TimeContext, anchor: ZInterval | un
   }
 
   if (date.month !== undefined && date.day !== undefined) {
-    // "May 29" with no year → this year's occurrence plus the adjacent year,
-    // ordered under bias (Recognizers-style past+future candidates).
+    // "May 29" with no year → the most recent occurrence starting on-or-
+    // before today, then the following one ("past + future" pairing).
     const mk = (yearDelta: number): ZInterval => {
       const day = ref
         .add({ years: yearDelta })
@@ -650,6 +650,11 @@ function resolveDate(date: PartialDate, ctx: TimeContext, anchor: ZInterval | un
         .startOfDay();
       return { start: day, end: day.add({ days: 1 }), grain: 'day' };
     };
+    if (ctx.bias === 'none') {
+      const today = floorTo(ctx.zonedNow, 'day', ctx.weekStart);
+      const base = Temporal_compare(mk(0).start, today) <= 0 ? 0 : -1;
+      return [mk(base), mk(base + 1)];
+    }
     return orderByBias(mk(0), mk, ctx, 'years');
   }
 
@@ -662,11 +667,16 @@ function resolveDate(date: PartialDate, ctx: TimeContext, anchor: ZInterval | un
   }
 
   if (date.day !== undefined) {
-    // "the 3rd" → this month's occurrence plus the adjacent month.
+    // "the 3rd" → most recent occurrence on-or-before today, then the next.
     const mk = (monthDelta: number): ZInterval => {
       const day = ref.add({ months: monthDelta }).with({ day: date.day }).startOfDay();
       return { start: day, end: day.add({ days: 1 }), grain: 'day' };
     };
+    if (ctx.bias === 'none') {
+      const today = floorTo(ctx.zonedNow, 'day', ctx.weekStart);
+      const base = Temporal_compare(mk(0).start, today) <= 0 ? 0 : -1;
+      return [mk(base), mk(base + 1)];
+    }
     return orderByBias(mk(0), mk, ctx, 'months');
   }
 
@@ -708,10 +718,10 @@ function orderByBias(
     const dPrev = Math.abs(calendarDaysBetween(prev.start, now));
     return dFut <= dPrev ? [current, prev] : [prev, current];
   }
-  // now falls inside the current occurrence: still offer the next one
-  // ("September" said mid-September may mean next year's). Bias 'past' and
-  // 'future' were fully handled above, so this is the 'none' path.
-  return [current, mk(1)];
+  // now falls inside the current occurrence: pair it with the previous one
+  // ("from Sep to Nov" said mid-September offers last year's too). Bias
+  // 'past'/'future' were handled above, so this is the 'none' path.
+  return [current, mk(-1)];
 }
 
 function resolveTime(time: PartialTime, day: ZInterval): ZInterval[] {
