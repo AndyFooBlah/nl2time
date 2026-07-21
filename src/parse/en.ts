@@ -87,7 +87,23 @@ function readNumber(tokens: Token[], i: number): NumRead | undefined {
   const w = word(t);
   if (w === undefined) return undefined;
   if (/^\d+\.\d+$/.test(w)) return { value: Number(w), consumed: 1 };
-  if (w in ONES) return { value: ONES[w]!, consumed: 1 };
+  if (w in ONES) {
+    // "two thousand [and] thirty two"
+    if (word(tokens[i + 1]) === 'thousand') {
+      let at = i + 2;
+      let value = ONES[w]! * 1000;
+      if (word(tokens[at]) === 'and') at += 1;
+      const rest = word(tokens[at]);
+      if (rest !== undefined && (rest in TENS || rest in ONES)) {
+        const rn = readNumber(tokens, at);
+        if (rn && rn.value < 1000) {
+          return { value: value + rn.value, consumed: at + rn.consumed - i };
+        }
+      }
+      return { value, consumed: 2 };
+    }
+    return { value: ONES[w]!, consumed: 1 };
+  }
   if (w in TENS) {
     // "twenty nine" / "twenty and four"
     let at = i + 1;
@@ -116,6 +132,15 @@ function unitField(unit: Unit): string {
 /** Calendar amount for n units — quarters scale to months. */
 function amountFor(unit: Unit, n: number): Record<string, number> {
   return unit === 'quarter' ? { months: 3 * n } : { [`${unit}s`]: n };
+}
+
+/** A year as digits or words ("2032", "two thousand and thirty two"). */
+function readYear(tokens: Token[], i: number): NumRead | undefined {
+  const y = yearAt(tokens, i);
+  if (y !== undefined) return { value: y, consumed: 1 };
+  const n = readNumber(tokens, i);
+  if (n && Number.isInteger(n.value) && n.value >= 1500 && n.value <= 2199) return n;
+  return undefined;
 }
 
 function yearAt(tokens: Token[], i: number): number | undefined {
@@ -538,6 +563,14 @@ function buildRange(
   }
 
   if (a.kind === 'date' && b.kind === 'date') {
+    // Past deictic ends are inclusive: "…to yesterday" runs through
+    // yesterday ("…to today/tomorrow" stays exclusive at that day's start).
+    if (
+      b.expr.op === 'snap' && b.expr.unit === 'day' && b.expr.edge === undefined &&
+      b.expr.base.op === 'offset' && b.expr.base.amount < 0
+    ) {
+      b = { kind: 'date', expr: { op: 'snap', base: b.expr, unit: 'day', edge: 'end' } };
+    }
     // "Friday-Jun-15": the weekday is redundant next to a full date.
     if (a.expr.op === 'seek' && a.expr.target.kind === 'weekday' && b.expr.op === 'literal' && b.expr.date?.day !== undefined) {
       return b.expr;
@@ -762,7 +795,9 @@ const ruleEndOf: Rule = (tokens, i, ctx) => {
   if (word(tokens[i + 1]) !== 'of') return undefined;
   let at = i + 2;
   if (word(tokens[at]) === 'the') at += 1;
-  // Bare units: "end of day" (a point), "end of month/year/week" (late part).
+  // Bare units: "end of day" (a point), "end of month/year/week" (late part
+  // as a fixed split: week from +3d, month from the 16th, year from July —
+  // deliberately NOT reference-clamped, unlike "later this month").
   const bareUnit = UNIT_WORDS[word(tokens[at]) ?? ''];
   if (bareUnit && word(tokens[at]) !== 'night') {
     if (bareUnit === 'day') {
@@ -774,12 +809,20 @@ const ruleEndOf: Rule = (tokens, i, ctx) => {
       };
     }
     if (bareUnit === 'week' || bareUnit === 'month' || bareUnit === 'year' || bareUnit === 'quarter') {
-      return {
-        expr: { ...snapNow(bareUnit), mod: isEnd ? 'end' : isMid ? 'mid' : 'start' },
-        consumed: at + 1 - i,
-        confidence: 0.9,
-        role: 'date',
-      };
+      const startPoint: TimeExpr = { op: 'snap', base: NOW, unit: bareUnit, edge: 'start' };
+      const endPoint: TimeExpr = { op: 'snap', base: NOW, unit: bareUnit, edge: 'end' };
+      const midOffset: TimeExpr =
+        bareUnit === 'week'
+          ? { op: 'offset', base: startPoint, amount: 3, unit: 'day' }
+          : bareUnit === 'month'
+            ? { op: 'offset', base: startPoint, amount: 15, unit: 'day' }
+            : bareUnit === 'year'
+              ? { op: 'offset', base: startPoint, amount: 6, unit: 'month' }
+              : { op: 'offset', base: startPoint, amount: 45, unit: 'day' };
+      const expr2: TimeExpr = isEnd
+        ? { op: 'between', start: midOffset, end: endPoint }
+        : { op: 'between', start: startPoint, end: midOffset };
+      return { expr: expr2, consumed: at + 1 - i, confidence: 0.9, role: 'date' };
     }
   }
 
@@ -839,7 +882,18 @@ const ruleLastThisNext: Rule = (tokens, i, ctx) => {
   // "this calendar year" — 'calendar' is transparent.
   const skip = word(tokens[i + 1]) === 'calendar' ? 1 : 0;
   const nextWord = word(tokens[i + 1 + skip]);
-  if (nextWord === undefined) return undefined;
+  if (nextWord === undefined) {
+    // "this 5/12" / "next 5/19" (numdate token follows).
+    const dated = ruleCalendarDate(tokens, i + 1, ctx);
+    if (dated && dated.expr.op === 'literal' && dated.expr.date?.day !== undefined && dated.expr.date.year === undefined) {
+      const expr2: TimeExpr =
+        w === 'this'
+          ? dated.expr
+          : { op: 'offset', base: dated.expr, amount: w === 'next' ? 1 : -1, unit: 'year' };
+      return { expr: expr2, consumed: 1 + dated.consumed, confidence: 0.95, role: 'date' };
+    }
+    return undefined;
+  }
   if (skip) {
     const unit = UNIT_WORDS[nextWord];
     if (unit && unit !== 'day') {
@@ -910,8 +964,8 @@ const ruleLastThisNext: Rule = (tokens, i, ctx) => {
   }
 
   if (nextWord === 'fortnight') {
-    // "the next fortnight" = the coming two whole weeks (week-aligned).
-    const weekDelta = w === 'last' ? -2 : w === 'next' ? 1 : 0;
+    // "the next fortnight" = the two whole weeks after the current one.
+    const weekDelta = w === 'last' ? -2 : w === 'next' ? 2 : 0;
     return {
       expr: {
         op: 'span',
@@ -1111,11 +1165,11 @@ const ruleTheUnit: Rule = (tokens, i) => {
   }
   const uw = word(tokens[i + 1]);
   if (uw === 'fortnight') {
-    // Week-aligned: the previous two whole weeks.
+    // Week-aligned: the current and following week.
     return {
       expr: {
         op: 'span',
-        anchor: { op: 'snap', base: { op: 'offset', base: NOW, amount: -1, unit: 'week' }, unit: 'week', edge: 'start' },
+        anchor: { op: 'snap', base: NOW, unit: 'week', edge: 'start' },
         amount: { days: 14 },
       },
       consumed: 2,
@@ -1434,11 +1488,11 @@ const ruleWeekdayAlone: Rule = (tokens, i) => {
   }
   const weekday = w !== undefined ? WEEKDAY_WORDS[w] : undefined;
   if (!weekday) return undefined;
-  // Short forms that collide with verbs ("sat") need a preposition.
-  if (
-    (w === 'sat' || w === 'sun' || w === 'mon') &&
-    !['on', 'for', 'until', 'till', 'by'].includes(prev ?? '')
-  ) {
+  // Abbreviated forms ("sat", "tue") are too collision-prone without a
+  // preposition ("(Tue)" annotations, "sat down", …).
+  const isAbbrev = w !== undefined && w.length <= 5 && WEEKDAY_WORDS[w] !== undefined &&
+    !['monday','tuesday','wednesday','thursday','friday','saturday','sunday'].includes(w);
+  if (isAbbrev && !['on', 'for', 'until', 'till', 'by', 'next', 'last', 'this'].includes(prev ?? '')) {
     return undefined;
   }
   return {
@@ -1451,13 +1505,13 @@ const ruleWeekdayAlone: Rule = (tokens, i) => {
 
 /** A bare year after a temporal preposition: "in 2150", "since 1990". */
 const ruleBareYear: Rule = (tokens, i) => {
-  const year = yearAt(tokens, i);
-  if (year === undefined || year < 1500 || year > 2199) return undefined;
+  const y = readYear(tokens, i);
+  if (!y || y.value < 1500 || y.value > 2199) return undefined;
   const prev = word(tokens[i - 1]);
   if (prev === undefined || !['in', 'since', 'by', 'until', 'during', 'year', 'of'].includes(prev)) {
     return undefined;
   }
-  return { expr: { op: 'literal', date: { year } }, consumed: 1, confidence: 0.85, role: 'date' };
+  return { expr: { op: 'literal', date: { year: y.value } }, consumed: y.consumed, confidence: 0.85, role: 'date' };
 };
 
 /** Decades ("1990s", "the 90s") and centuries ("21st century"). */
@@ -1502,6 +1556,25 @@ const ruleDecadeCentury: Rule = (tokens, i) => {
 const ruleCalendarDate: Rule = (tokens, i, ctx) => {
   const w = word(tokens[i]);
 
+  const hLead = w?.match(/^h([12])$/);
+  if (hLead) {
+    let yAt = i + 1;
+    if (word(tokens[yAt]) === 'of') yAt += 1;
+    const year = yearAt(tokens, yAt);
+    if (year !== undefined) {
+      return {
+        expr: {
+          op: 'span',
+          anchor: { op: 'literal', date: { year, month: hLead[1] === '1' ? 1 : 7 } },
+          amount: { months: 6 },
+        },
+        consumed: yAt + 1 - i,
+        confidence: 1,
+        role: 'date',
+      };
+    }
+  }
+
   if (w && /^q[1-4]$/.test(w)) {
     const q = Number(w[1]);
     // "q1 2017" / "q1 of 2017"
@@ -1524,6 +1597,19 @@ const ruleCalendarDate: Rule = (tokens, i, ctx) => {
     const m = MONTH_WORDS[word(tokens[i + 1]) ?? ''];
     if (m !== undefined) {
       return { expr: { op: 'literal', date: { year: yr, month: m } }, consumed: 2, confidence: 1, role: 'date' };
+    }
+    const hw = word(tokens[i + 1])?.match(/^h([12])$/);
+    if (hw) {
+      return {
+        expr: {
+          op: 'span',
+          anchor: { op: 'literal', date: { year: yr, month: hw[1] === '1' ? 1 : 7 } },
+          amount: { months: 6 },
+        },
+        consumed: 2,
+        confidence: 1,
+        role: 'date',
+      };
     }
     const qw = word(tokens[i + 1])?.match(/^q([1-4])$/);
     if (qw) {
@@ -1605,6 +1691,17 @@ const ruleCalendarDate: Rule = (tokens, i, ctx) => {
     }
   }
 
+  // "22/Jan/2019"
+  const dmy = w?.match(/^(\d{1,2})\/([a-z]{3,9})\/(\d{4})$/);
+  if (dmy && MONTH_WORDS[dmy[2]!] !== undefined) {
+    return {
+      expr: { op: 'literal', date: { year: Number(dmy[3]), month: MONTH_WORDS[dmy[2]!]!, day: Number(dmy[1]) } },
+      consumed: 1,
+      confidence: 0.95,
+      role: 'date',
+    };
+  }
+
   // "oct/2", "mar4", "mar.4"
   // "Dec/2018" → month+year
   const attachedYear = w?.match(/^([a-z]{3,9})\/(\d{4})$/);
@@ -1676,12 +1773,12 @@ const ruleCalendarDate: Rule = (tokens, i, ctx) => {
       }
     }
     if (day !== undefined) {
-      const year = yearAt(tokens, i + 1 + dayConsumed);
+      const yearRead = readYear(tokens, i + 1 + dayConsumed);
       const date: { month: number; day: number; year?: number } = { month, day };
-      if (year !== undefined) date.year = year;
+      if (yearRead) date.year = yearRead.value;
       return {
         expr: { op: 'literal', date },
-        consumed: 1 + dayConsumed + (year !== undefined ? 1 : 0),
+        consumed: 1 + dayConsumed + (yearRead ? yearRead.consumed : 0),
         confidence: 1,
         role: 'date',
       };
@@ -1889,10 +1986,14 @@ const ruleClockTime: Rule = (tokens, i, ctx) => {
     }
   }
 
-  // "eoy": the later part of the year (a range, unlike the point-like eod).
+  // "eoy": the later half of the year (a range, unlike the point-like eod).
   if (w === 'eoy') {
     return {
-      expr: { op: 'snap', base: NOW, unit: 'year', mod: 'end' },
+      expr: {
+        op: 'between',
+        start: { op: 'offset', base: { op: 'snap', base: NOW, unit: 'year', edge: 'start' }, amount: 6, unit: 'month' },
+        end: { op: 'snap', base: NOW, unit: 'year', edge: 'end' },
+      },
       consumed: 1,
       confidence: 0.9,
       role: 'date',
@@ -1957,11 +2058,22 @@ const ruleClockTime: Rule = (tokens, i, ctx) => {
     if (after === "o'clock" || after === 'oclock') {
       return withPeriodSuffix({ hour: hn.value, meridiem: 'unknown' }, hn.consumed + 1);
     }
-    const ps = readPeriodSuffix(tokens, i + hn.consumed);
+    const ps = readPeriodSuffix(tokens, i + hn.consumed + mc);
     if (ps) {
+      const time: PartialTime = { hour: hn.value, meridiem: meridiemFor(ps.period) };
+      if (minute !== undefined) time.minute = minute;
       return {
-        expr: { op: 'literal', time: { hour: hn.value, meridiem: meridiemFor(ps.period) } },
-        consumed: hn.consumed + ps.consumed,
+        expr: { op: 'literal', time },
+        consumed: hn.consumed + mc + ps.consumed,
+        confidence: 0.95,
+        role: 'time',
+      };
+    }
+    // An explicit compound like "three thirty" is a confident bare time.
+    if (minute !== undefined) {
+      return {
+        expr: { op: 'literal', time: { hour: hn.value, minute, meridiem: 'unknown' } },
+        consumed: hn.consumed + mc,
         confidence: 0.95,
         role: 'time',
       };
@@ -2157,6 +2269,36 @@ function unitSeconds(unit: Unit): number {
   }
 }
 
+/** "within 5 minutes", "within the next day and 5 hours" → forward span. */
+const ruleWithin: Rule = (tokens, i) => {
+  if (word(tokens[i]) !== 'within') return undefined;
+  let at = i + 1;
+  if (word(tokens[at]) === 'the') at += 1;
+  if (word(tokens[at]) === 'next') at += 1;
+  const amount: Record<string, number> = {};
+  let any = false;
+  while (true) {
+    if (any && word(tokens[at]) === 'and') at += 1;
+    const n = readNumber(tokens, at);
+    const nVal = n && Number.isInteger(n.value) ? n.value : 1;
+    const uAt = at + (n ? n.consumed : 0);
+    const unit = UNIT_WORDS[word(tokens[uAt]) ?? ''];
+    if (!unit || (!n && any)) break;
+    if (!n && !any && word(tokens[uAt]) === undefined) break;
+    const f = unitField(unit);
+    amount[f] = (amount[f] ?? 0) + (unit === 'quarter' ? 3 * nVal : nVal);
+    any = true;
+    at = uAt + 1;
+  }
+  if (!any) return undefined;
+  return {
+    expr: { op: 'span', anchor: NOW, amount },
+    consumed: at - i,
+    confidence: 0.95,
+    role: 'datetime',
+  };
+};
+
 /** Rules in priority order (first match at a position wins ties by length then order). */
 export const EN_RULES: readonly Rule[] = [
   ruleRange,
@@ -2168,6 +2310,7 @@ export const EN_RULES: readonly Rule[] = [
   ruleEarlyLate,
   ruleEndOf,
   ruleDeicticDay,
+  ruleWithin,
   ruleNAfterDate,
   ruleUnitAfterNext,
   rulePastN,
