@@ -15,12 +15,17 @@ const HOUR_MERIDIEM_RE = /^(\d{1,2})(am|pm)$/;
 const ORDINAL_RE = /^(\d{1,2})(st|nd|rd|th)$/;
 const NUMDATE_RE = /^(\d{1,4})([/\-.])(\d{1,2})(?:\2(\d{1,4}))?$/;
 const NUMBER_RE = /^\d{1,4}$/;
-const RAW_TOKEN_RE = /[a-z0-9:/\-.']+/gi;
+const RAW_TOKEN_RE = /[a-z0-9:/\-.'~]+/gi;
 
 export function tokenize(text: string): Token[] {
   const tokens: Token[] = [];
   for (const m of text.matchAll(RAW_TOKEN_RE)) {
-    const raw = m[0].toLowerCase().replace(/[.]+$/, '');
+    let raw = m[0]
+      .toLowerCase()
+      .replace(/[.]+$/, '')
+      .replace(/[''`]s$/, '') // "fortnight's" → fortnight
+      .replace(/^a\.m$/, 'am')
+      .replace(/^p\.m$/, 'pm');
     if (raw === '') continue;
     const start = m.index;
     const end = start + m[0].length;

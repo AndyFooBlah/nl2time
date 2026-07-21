@@ -27,7 +27,7 @@ interface Positioned extends RuleMatch {
   tokenEnd: number; // exclusive
 }
 
-const CONNECTORS = ['at', 'on', 'in', 'of', 'the'];
+const CONNECTORS = ['at', 'on', 'in', 'of', 'the', 'for'];
 
 export function parse(text: string, ctx: TimeContext): ParseResult {
   const tokens = tokenize(text);
@@ -51,7 +51,13 @@ export function parse(text: string, ctx: TimeContext): ParseResult {
     }
   }
 
-  const merged = mergeAdjacent(raw, tokens);
+  // Merge to fixpoint: [date, duration, time] needs two passes.
+  let merged = mergeAdjacent(raw, tokens);
+  for (let pass = 0; pass < 2; pass += 1) {
+    const again = mergeAdjacent(merged, tokens);
+    if (again.length === merged.length) break;
+    merged = again;
+  }
   const matches: ParseMatch[] = merged
     .filter((m) => m.confidence >= 0.5)
     .map((m) => {
@@ -80,10 +86,35 @@ function mergeAdjacent(matches: Positioned[], tokens: Token[]): Positioned[] {
   while (k < matches.length) {
     const cur = matches[k]!;
     const next = matches[k + 1];
+    // Anchored span: time + duration ("from 2pm for 2 hours") or duration +
+    // time ("for 2.5 hours from 9") → span(anchor, amount).
+    const spanPair =
+      next &&
+      ((isTimeish(cur.role) && next.role === 'duration' && connectedBy(cur, next, tokens, ['for'])) ||
+        (cur.role === 'duration' && isTimeish(next.role) && connectedBy(cur, next, tokens, ['from', 'starting', 'at'])));
+    if (next && spanPair) {
+      const [anchorPart, durPart] = cur.role === 'duration' ? [next, cur] : [cur, next];
+      const amount = amountOf(durPart.expr);
+      if (amount) {
+        out.push({
+          expr: { op: 'span', anchor: anchorPart.expr, amount },
+          consumed: next.tokenEnd - cur.tokenStart,
+          confidence: Math.max(cur.confidence, next.confidence),
+          // A span anchored at a time-of-day is still time-of-day-ish: it can
+          // merge with an adjacent date ("14th Feb from 9:30am for 7 hours").
+          role: anchorPart.role,
+          tokenStart: cur.tokenStart,
+          tokenEnd: next.tokenEnd,
+        });
+        k += 2;
+        continue;
+      }
+    }
     if (next && canMerge(cur, next) && isAdjacent(cur, next, tokens)) {
-      const [datePart, timePart] = cur.role === 'date' ? [cur, next] : [next, cur];
+      const [datePart, timePart] = cur.role === 'time' ? [next, cur] : [cur, next];
+      const timeExpr = inferMeridiem(datePart.expr, timePart.expr);
       out.push({
-        expr: { op: 'intersect', parts: [datePart.expr, timePart.expr] },
+        expr: { op: 'intersect', parts: [datePart.expr, timeExpr] },
         consumed: next.tokenEnd - cur.tokenStart,
         confidence: Math.max(cur.confidence, next.confidence),
         role: 'datetime',
@@ -100,7 +131,59 @@ function mergeAdjacent(matches: Positioned[], tokens: Token[]): Positioned[] {
 }
 
 function canMerge(a: Positioned, b: Positioned): boolean {
-  return (a.role === 'date' && b.role === 'time') || (a.role === 'time' && b.role === 'date');
+  const dateish = (r: string): boolean => r === 'date' || r === 'datetime';
+  return (dateish(a.role) && b.role === 'time') || (a.role === 'time' && dateish(b.role));
+}
+
+function isTimeish(role: string): boolean {
+  return role === 'time' || role === 'datetime';
+}
+
+function connectedBy(a: Positioned, b: Positioned, tokens: Token[], words: string[]): boolean {
+  const between = tokens.slice(a.tokenEnd, b.tokenStart);
+  if (between.length > 2) return false;
+  return between.every((t) => t.type === 'word' && (words.includes(t.value) || t.value === 'the'));
+}
+
+/** Extract a calendar amount from a duration-role expression. */
+function amountOf(expr: TimeExpr): Record<string, number> | undefined {
+  if (expr.op === 'amount') return { ...expr.amount } as Record<string, number>;
+  if (expr.op === 'duration') {
+    const m = expr.iso.match(/^PT(\d+)S$/);
+    if (m) return { seconds: Number(m[1]) };
+  }
+  return undefined;
+}
+
+/**
+ * "tonight at 10": a day part that carries a day period narrows an ambiguous
+ * clock reading (night/evening/afternoon → pm, morning → am).
+ */
+function inferMeridiem(dateExpr: TimeExpr, timeExpr: TimeExpr): TimeExpr {
+  if (timeExpr.op !== 'literal' || timeExpr.time?.meridiem !== 'unknown') return timeExpr;
+  const period = findDayPeriod(dateExpr);
+  if (!period) return timeExpr;
+  const hour = timeExpr.time.hour ?? 12;
+  // "tonight around 3" is 3am (small hours belong to the night); "tonight at
+  // 10" is 10pm.
+  const meridiem =
+    period === 'morning' ? 'am' : (period === 'night' || period === 'evening') && hour <= 5 ? 'am' : 'pm';
+  return {
+    ...timeExpr,
+    time: { ...timeExpr.time, meridiem },
+  };
+}
+
+function findDayPeriod(expr: TimeExpr): string | undefined {
+  if (expr.op === 'literal' && expr.dayPeriod) return expr.dayPeriod;
+  if (expr.op === 'intersect') {
+    for (const p of expr.parts) {
+      const found = findDayPeriod(p);
+      if (found) return found;
+    }
+  }
+  if (expr.op === 'seek' && expr.target.kind === 'dayPeriod') return expr.target.period;
+  return undefined;
 }
 
 function isAdjacent(a: Positioned, b: Positioned, tokens: Token[]): boolean {

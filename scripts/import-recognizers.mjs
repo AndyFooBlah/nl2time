@@ -100,7 +100,24 @@ for (const [i, spec] of specs.entries()) {
 
   const refDateTime = spec.Context?.ReferenceDateTime ?? '2016-11-07T00:00:00';
   const refDate = refDateTime.slice(0, 10);
-  const ctx = { now: `${refDateTime}Z`, timeZone: 'UTC', locale: 'en-US' };
+  // The context encodes the upstream system's conventions so its expectations
+  // resolve correctly: ISO Monday weeks, complete-period "next/last N days",
+  // and Recognizers' fixed day-period boundaries (morning 8–12, afternoon
+  // 12–16, evening 16–20, night 20–24).
+  const ctx = {
+    now: `${refDateTime}Z`,
+    timeZone: 'UTC',
+    locale: 'en-US',
+    weekStart: 'mon',
+    partialPeriod: 'exclude',
+    nextWeekday: 'week-after',
+    dayPeriods: [
+      { period: 'morning', from: 8, before: 12 },
+      { period: 'afternoon', from: 12, before: 16 },
+      { period: 'evening', from: 16, before: 20 },
+      { period: 'night', from: 20, before: 24 },
+    ],
+  };
 
   let expect;
   if (kind === 'duration') {

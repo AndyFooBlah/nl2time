@@ -102,6 +102,20 @@ function normLocal(s: string): string {
   return s.length === 16 ? `${s}:00` : s;
 }
 
+/**
+ * Equality with inclusive-end tolerance: some upstream corpora express
+ * interval ends as the last included second ("23:59:59"); our half-open
+ * convention lands one second later ("00:00:00" next day). Accept both.
+ */
+function localEq(actual: string, expected: string): boolean {
+  if (actual === expected) return true;
+  if (!expected.endsWith(':59:59') && !expected.endsWith(':59')) return false;
+  const bumped = Temporal.PlainDateTime.from(expected).add({ seconds: 1 }).toString({
+    smallestUnit: 'second',
+  });
+  return actual === bumped;
+}
+
 const AMOUNT_SECONDS: Record<string, number> = {
   years: 31536000,
   months: 2592000,
@@ -140,9 +154,9 @@ function matchesInterval(v: TimeValue, spec: IntervalExpect, timeZone: string): 
   if (spec.grain !== undefined && spec.grain !== null && v.grain !== spec.grain) return false;
   if (spec.start !== undefined && v.start.toString() !== spec.start) return false;
   if (spec.end !== undefined && v.end.toString() !== spec.end) return false;
-  if (spec.startLocal !== undefined && localString(v.start, timeZone) !== normLocal(spec.startLocal)) return false;
-  if (spec.endLocal !== undefined && localString(v.end, timeZone) !== normLocal(spec.endLocal)) return false;
-  if (spec.pointLocal !== undefined && localString(v.start, timeZone) !== normLocal(spec.pointLocal)) return false;
+  if (spec.startLocal !== undefined && !localEq(localString(v.start, timeZone), normLocal(spec.startLocal))) return false;
+  if (spec.endLocal !== undefined && !localEq(localString(v.end, timeZone), normLocal(spec.endLocal))) return false;
+  if (spec.pointLocal !== undefined && !localEq(localString(v.start, timeZone), normLocal(spec.pointLocal))) return false;
   return true;
 }
 

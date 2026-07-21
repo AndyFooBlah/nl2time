@@ -6,6 +6,7 @@ import {
   type Instant,
   type Zoned,
 } from './clock/index.js';
+import type { DayPeriodRule } from './data/dayPeriods.js';
 import { firstDayForRegion } from './data/weekData.js';
 import type { Weekday } from './ir/types.js';
 
@@ -39,6 +40,8 @@ export interface TimeContextOptions {
   bias?: Bias;
   nextWeekday?: NextWeekdayPolicy;
   partialPeriod?: PartialPeriodPolicy;
+  /** Override the locale's day-period boundaries (e.g. to match another system's conventions). */
+  dayPeriods?: DayPeriodRule[];
 }
 
 const MDY_REGIONS = ['US', 'PH', 'UM', 'VI', 'GU', 'AS', 'PR'];
@@ -55,6 +58,7 @@ export class TimeContext {
   readonly bias: Bias;
   readonly nextWeekday: NextWeekdayPolicy;
   readonly partialPeriod: PartialPeriodPolicy;
+  readonly dayPeriods: DayPeriodRule[] | undefined;
 
   private constructor(opts: TimeContextOptions) {
     const rawNow = opts.now ?? systemNow();
@@ -89,6 +93,7 @@ export class TimeContext {
     this.bias = opts.bias ?? 'none';
     this.nextWeekday = opts.nextWeekday ?? 'nearest';
     this.partialPeriod = opts.partialPeriod ?? 'include';
+    this.dayPeriods = opts.dayPeriods;
 
     // Validate the timezone eagerly so failures surface at construction.
     try {

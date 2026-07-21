@@ -67,7 +67,7 @@ function finerGrain(a: Grain, b: Grain): Grain {
   return GRAIN_ORDER.indexOf(a) <= GRAIN_ORDER.indexOf(b) ? a : b;
 }
 
-const MAX_CANDIDATES = 4;
+const MAX_CANDIDATES = 8;
 
 export function resolve(expr: TimeExpr, ctx: TimeContext): Resolution {
   const cands = evalExpr(expr, ctx, undefined).slice(0, MAX_CANDIDATES);
@@ -104,6 +104,73 @@ function toValue(c: Cand): TimeValue {
  * against tomorrow, not today).
  */
 function evalExpr(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | undefined): Cand[] {
+  const cands = evalExprInner(expr, ctx, anchor);
+  // mod 'start'/'end' narrow an interval to its first/second half ("early
+  // July", "later this week"). Mid-points floor to the day for week+ grains
+  // (month/year to coarser boundaries), and when the reference day falls
+  // inside the interval it tightens the bound ("earlier this year" ends
+  // today, not at midyear).
+  if (expr.mod === 'start' || expr.mod === 'end') {
+    return intervalMap(cands, (zi) => {
+      if (zi.grain === 'instant') return zi;
+      const totalMs = zi.end.epochMilliseconds - zi.start.epochMilliseconds;
+      let mid = zi.start.add({ milliseconds: Math.floor(totalMs / 2) });
+      const gi = GRAIN_ORDER.indexOf(zi.grain);
+      if (zi.grain === 'year') mid = floorTo(mid, 'month', ctx.weekStart);
+      else if (gi > GRAIN_ORDER.indexOf('day')) mid = floorTo(mid, 'day', ctx.weekStart);
+
+      let bound = mid;
+      if (gi > GRAIN_ORDER.indexOf('day')) {
+        const refDay = floorTo(ctx.zonedNow, 'day', ctx.weekStart);
+        const inRange =
+          Temporal_compare(refDay, zi.start) > 0 && Temporal_compare(refDay, zi.end) < 0;
+        if (inRange) {
+          bound =
+            expr.mod === 'start'
+              ? Temporal_compare(refDay, mid) < 0
+                ? refDay
+                : mid
+              : Temporal_compare(refDay, mid) > 0
+                ? refDay
+                : mid;
+        }
+      }
+      const narrowed =
+        expr.mod === 'start'
+          ? { start: zi.start, end: bound, grain: zi.grain }
+          : { start: bound, end: zi.end, grain: zi.grain };
+      // A degenerate clamp (bound at an edge) falls back to the plain half.
+      if (Temporal_compare(narrowed.start, narrowed.end) >= 0) {
+        return expr.mod === 'start'
+          ? { start: zi.start, end: mid, grain: zi.grain }
+          : { start: mid, end: zi.end, grain: zi.grain };
+      }
+      return narrowed;
+    });
+  }
+  // mod 'mid': the middle stretch. Conventions follow common usage: mid-month
+  // = the 10th through the 20th; mid-day = 10:00–14:00; otherwise the middle
+  // half of the interval.
+  if (expr.mod === 'mid') {
+    return intervalMap(cands, (zi) => {
+      if (zi.grain === 'month') {
+        return { start: zi.start.add({ days: 9 }), end: zi.start.add({ days: 20 }), grain: 'day' };
+      }
+      if (zi.grain === 'day') {
+        return { start: zi.start.add({ hours: 10 }), end: zi.start.add({ hours: 14 }), grain: 'hour' };
+      }
+      const totalMs = zi.end.epochMilliseconds - zi.start.epochMilliseconds;
+      return {
+        start: zi.start.add({ milliseconds: Math.floor(totalMs / 4) }),
+        end: zi.start.add({ milliseconds: Math.floor((3 * totalMs) / 4) }),
+        grain: zi.grain,
+      };
+    });
+  }
+  return cands;
+}
+
+function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | undefined): Cand[] {
   switch (expr.op) {
     case 'now':
       return [{ type: 'interval', zi: pointInterval(ctx.zonedNow) }];
@@ -133,17 +200,22 @@ function evalExpr(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | undefine
 
     case 'between': {
       const starts = evalExpr(expr.start, ctx, anchor);
-      const ends = evalExpr(expr.end, ctx, anchor);
       const out: Cand[] = [];
       for (const s of starts) {
-        for (const e of ends) {
-          if (s.type !== 'interval' || e.type !== 'interval') continue;
-          if (Temporal_compare(s.zi.start, e.zi.end) >= 0) continue;
+        if (s.type !== 'interval') continue;
+        // The end operand resolves anchored to the start (shared context:
+        // "between 3 and 12 of Sept" — the 3 anchors to September).
+        for (const e of evalExpr(expr.end, ctx, s.zi)) {
+          if (e.type !== 'interval') continue;
+          // Non-point ends are exclusive at their *start* ("May 2 to May 7"
+          // ends at May 7 00:00); point ends are used directly.
+          const endPoint = Temporal_compare(e.zi.start, e.zi.end) === 0 ? e.zi.end : e.zi.start;
+          if (Temporal_compare(s.zi.start, endPoint) >= 0) continue;
           out.push({
             type: 'interval',
             zi: {
               start: s.zi.start,
-              end: e.zi.end,
+              end: endPoint,
               grain: finerGrain(s.zi.grain, e.zi.grain),
             },
           });
@@ -252,13 +324,15 @@ function evalSpan(anchorZi: ZInterval, amount: CalendarAmount, ctx: TimeContext)
   const coarse = GRAIN_ORDER.indexOf(unit) >= GRAIN_ORDER.indexOf('day');
 
   let anchorPoint = negative ? anchorZi.end : anchorZi.start;
-  // "the last 3 days" excluding today: anchor at today's start instead of now.
+  // Complete-periods policy: "the last 3 days" ends at today's start; "the
+  // next 3 days" begins at tomorrow's start.
   if (
     ctx.partialPeriod === 'exclude' &&
     anchorZi.grain === 'instant' &&
     coarse
   ) {
     anchorPoint = floorTo(anchorPoint, 'day', ctx.weekStart);
+    if (!negative) anchorPoint = anchorPoint.add({ days: 1 });
   }
 
   const other = addAmount(anchorPoint, amount, 1);
@@ -280,6 +354,21 @@ function evalSeek(
   const out: Cand[] = [];
   for (const b of bases) {
     if (b.type !== 'interval') continue;
+    // A bare weekday ("Friday", dir nearest, from a point) is genuinely
+    // ambiguous: produce both directions, bias-ordered.
+    if (
+      expr.dir === 'nearest' &&
+      expr.target.kind === 'weekday' &&
+      (b.zi.grain === 'instant' || b.zi.grain === 'day')
+    ) {
+      // Strict adjacent occurrences (n: 1) — the dialect policy is for
+      // explicit "next X"/"last X", not for a bare weekday.
+      const fwd = seekFrom(b.zi, { ...expr, dir: 'next', n: 1 }, ctx);
+      const back = seekFrom(b.zi, { ...expr, dir: 'prev', n: 1 }, ctx);
+      const ordered = ctx.bias === 'past' ? [back, fwd] : [fwd, back];
+      for (const zi of ordered) if (zi) out.push({ type: 'interval', zi });
+      continue;
+    }
     const zi = seekFrom(b.zi, expr, ctx);
     if (zi) out.push({ type: 'interval', zi });
   }
@@ -308,8 +397,11 @@ function seekFrom(
       const today = floorTo(base.start, 'day', ctx.weekStart);
       const dow = today.dayOfWeek;
       let day: Zoned;
+      // The nextWeekday dialect policy applies only to bare "next/last
+      // <weekday>"; an explicit n means strict occurrence counting.
+      const usePolicy = ctx.nextWeekday === 'week-after' && expr.n === undefined;
       if (expr.dir === 'next') {
-        if (ctx.nextWeekday === 'week-after') {
+        if (usePolicy) {
           const weekStartDay = floorTo(today.add({ days: 7 }), 'week', ctx.weekStart);
           const delta = (target - weekStartDay.dayOfWeek + 7) % 7;
           day = weekStartDay.add({ days: delta });
@@ -318,8 +410,15 @@ function seekFrom(
           day = today.add({ days: delta + 7 * (n - 1) });
         }
       } else if (expr.dir === 'prev') {
-        const delta = ((dow - target + 6) % 7) + 1; // strictly before today
-        day = today.subtract({ days: delta + 7 * (n - 1) });
+        if (usePolicy) {
+          // Symmetric dialect: "last Tuesday" = Tuesday of the previous week.
+          const weekStartDay = floorTo(today.subtract({ days: 7 }), 'week', ctx.weekStart);
+          const delta = (target - weekStartDay.dayOfWeek + 7) % 7;
+          day = weekStartDay.add({ days: delta });
+        } else {
+          const delta = ((dow - target + 6) % 7) + 1; // strictly before today
+          day = today.subtract({ days: delta + 7 * (n - 1) });
+        }
       } else {
         // 'nearest': bias decides; 'none' behaves like future ("Friday" usually
         // means the upcoming one in conversation).
@@ -363,7 +462,8 @@ export function dayPeriodInterval(
   period: DayPeriod,
   ctx: TimeContext,
 ): ZInterval | undefined {
-  const rule = dayPeriodRules(ctx.language).find((r) => r.period === period);
+  const rules = ctx.dayPeriods ?? dayPeriodRules(ctx.language);
+  const rule = rules.find((r) => r.period === period);
   if (!rule) return undefined;
   const day = floorTo(base.start, 'day', ctx.weekStart);
   const start = day.add({ hours: rule.from });
