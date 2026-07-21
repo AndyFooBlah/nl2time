@@ -17,6 +17,7 @@
         { "$ref": "#/$defs/Intersect" },
         { "$ref": "#/$defs/Duration" },
         { "$ref": "#/$defs/Amount" },
+        { "$ref": "#/$defs/Holiday" },
         { "$ref": "#/$defs/Recur" }
       ]
     },
@@ -204,6 +205,21 @@
         "mod": { "$ref": "#/$defs/Mod" }
       },
       "required": ["op", "amount"],
+      "additionalProperties": false
+    },
+    "Holiday": {
+      "type": "object",
+      "description": "A named holiday resolved by the engine's table (fixed-date, nth-weekday, or computed — Easter). Without a year: candidate occurrences around the reference, ordered by bias; dir forces the strictly previous/next occurrence.",
+      "properties": {
+        "op": { "const": "holiday" },
+        "name": {
+          "enum": ["new-year", "new-year-eve", "valentines", "easter", "halloween", "thanksgiving", "christmas", "christmas-eve", "independence-day", "labor-day", "memorial-day", "mothers-day", "fathers-day"]
+        },
+        "year": { "type": "integer" },
+        "dir": { "enum": ["prev", "next"] },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "name"],
       "additionalProperties": false
     },
     "Recur": {

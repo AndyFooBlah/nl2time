@@ -27,7 +27,7 @@ interface Positioned extends RuleMatch {
   tokenEnd: number; // exclusive
 }
 
-const CONNECTORS = ['at', 'on', 'in', 'of', 'the', 'for'];
+const CONNECTORS = ['at', 'on', 'in', 'of', 'the', 'for', 'from', 'around', 'about', '-'];
 
 export function parse(text: string, ctx: TimeContext): ParseResult {
   const tokens = tokenize(text);
@@ -91,7 +91,9 @@ function mergeAdjacent(matches: Positioned[], tokens: Token[]): Positioned[] {
     const spanPair =
       next &&
       ((isTimeish(cur.role) && next.role === 'duration' && connectedBy(cur, next, tokens, ['for'])) ||
-        (cur.role === 'duration' && isTimeish(next.role) && connectedBy(cur, next, tokens, ['from', 'starting', 'at'])));
+        (cur.role === 'duration' && isTimeish(next.role) && connectedBy(cur, next, tokens, ['from', 'starting', 'at'])) ||
+        // "for a week starting tomorrow"
+        (cur.role === 'duration' && next.role === 'date' && connectedBy(cur, next, tokens, ['starting', 'from'])));
     if (next && spanPair) {
       const [anchorPart, durPart] = cur.role === 'duration' ? [next, cur] : [cur, next];
       const amount = amountOf(durPart.expr);
@@ -110,11 +112,45 @@ function mergeAdjacent(matches: Positioned[], tokens: Token[]): Positioned[] {
         continue;
       }
     }
+    // Week + weekday: "previous week - Monday" → that weekday within the week.
+    if (
+      next &&
+      isWeekExpr(cur.expr) &&
+      next.expr.op === 'seek' &&
+      next.expr.target.kind === 'weekday' &&
+      isAdjacent(cur, next, tokens)
+    ) {
+      out.push({
+        expr: { op: 'seek', base: cur.expr, dir: 'next', target: next.expr.target, n: 1 },
+        consumed: next.tokenEnd - cur.tokenStart,
+        confidence: Math.max(cur.confidence, next.confidence),
+        role: 'date',
+        tokenStart: cur.tokenStart,
+        tokenEnd: next.tokenEnd,
+      });
+      k += 2;
+      continue;
+    }
     if (next && canMerge(cur, next) && isAdjacent(cur, next, tokens)) {
       const [datePart, timePart] = cur.role === 'time' ? [next, cur] : [cur, next];
-      const timeExpr = inferMeridiem(datePart.expr, timePart.expr);
+      let dateExpr = datePart.expr;
+      let timeExpr = inferMeridiem(dateExpr, timePart.expr);
+      // A day-period on the date side pushes its meridiem into an explicit
+      // time range and then steps aside: "Monday morning 6-8" is Monday
+      // 06:00–08:00, not clipped to the morning boundaries.
+      if (timeExpr.op === 'between') {
+        const period = findDayPeriod(dateExpr);
+        if (period) {
+          timeExpr = {
+            ...timeExpr,
+            start: forceMeridiem(timeExpr.start, period),
+            end: forceMeridiem(timeExpr.end, period),
+          };
+          dateExpr = stripDayPeriod(dateExpr) ?? dateExpr;
+        }
+      }
       out.push({
-        expr: { op: 'intersect', parts: [datePart.expr, timeExpr] },
+        expr: { op: 'intersect', parts: [dateExpr, timeExpr] },
         consumed: next.tokenEnd - cur.tokenStart,
         confidence: Math.max(cur.confidence, next.confidence),
         role: 'datetime',
@@ -137,6 +173,10 @@ function canMerge(a: Positioned, b: Positioned): boolean {
 
 function isTimeish(role: string): boolean {
   return role === 'time' || role === 'datetime';
+}
+
+function isWeekExpr(expr: TimeExpr): boolean {
+  return expr.op === 'snap' && expr.unit === 'week';
 }
 
 function connectedBy(a: Positioned, b: Positioned, tokens: Token[], words: string[]): boolean {
@@ -172,6 +212,28 @@ function inferMeridiem(dateExpr: TimeExpr, timeExpr: TimeExpr): TimeExpr {
     ...timeExpr,
     time: { ...timeExpr.time, meridiem },
   };
+}
+
+function forceMeridiem(expr: TimeExpr, period: string): TimeExpr {
+  if (expr.op !== 'literal' || !expr.time || (expr.time.meridiem && expr.time.meridiem !== 'unknown')) {
+    return expr;
+  }
+  const hour = expr.time.hour ?? 12;
+  const meridiem =
+    period === 'morning' ? 'am' : (period === 'night' || period === 'evening') && hour <= 5 ? 'am' : 'pm';
+  return { ...expr, time: { ...expr.time, meridiem } };
+}
+
+/** Remove day-period literals from an intersect; undefined if nothing remains. */
+function stripDayPeriod(expr: TimeExpr): TimeExpr | undefined {
+  if (expr.op === 'literal' && expr.dayPeriod && !expr.date && !expr.time) return undefined;
+  if (expr.op === 'intersect') {
+    const parts = expr.parts.map(stripDayPeriod).filter((p): p is TimeExpr => p !== undefined);
+    if (parts.length === 0) return undefined;
+    if (parts.length === 1) return parts[0];
+    return { ...expr, parts };
+  }
+  return expr;
 }
 
 function findDayPeriod(expr: TimeExpr): string | undefined {

@@ -109,10 +109,37 @@ export type TimeExprBody =
   /** A calendar amount as a value in its own right ("2 months"). */
   | { op: 'amount'; amount: CalendarAmount }
   /**
+   * A named holiday, resolved by the engine's holiday table (fixed-date,
+   * nth-weekday, or computed — Easter). Without a year: candidate occurrences
+   * around the reference, ordered by bias/dir.
+   */
+  | { op: 'holiday'; name: HolidayName; year?: number; dir?: 'prev' | 'next' }
+  /**
    * Recurrence — representable and serializable in v1, resolvable in v2.
    * "every Tuesday" = { every: 'week', filter: seek weekday tue }.
    */
   | { op: 'recur'; every: Unit; filter?: TimeExpr };
+
+export type HolidayName =
+  | 'new-year'
+  | 'new-year-eve'
+  | 'valentines'
+  | 'easter'
+  | 'halloween'
+  | 'thanksgiving'
+  | 'christmas'
+  | 'christmas-eve'
+  | 'independence-day'
+  | 'labor-day'
+  | 'memorial-day'
+  | 'mothers-day'
+  | 'fathers-day';
+
+export const HOLIDAY_NAMES: readonly HolidayName[] = [
+  'new-year', 'new-year-eve', 'valentines', 'easter', 'halloween',
+  'thanksgiving', 'christmas', 'christmas-eve', 'independence-day',
+  'labor-day', 'memorial-day', 'mothers-day', 'fathers-day',
+];
 
 /** Current IR schema version, embedded when serializing. */
 export const IR_VERSION = 1;

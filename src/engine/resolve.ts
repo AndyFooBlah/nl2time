@@ -209,8 +209,15 @@ function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | und
           if (e.type !== 'interval') continue;
           // Non-point ends are exclusive at their *start* ("May 2 to May 7"
           // ends at May 7 00:00); point ends are used directly.
-          const endPoint = Temporal_compare(e.zi.start, e.zi.end) === 0 ? e.zi.end : e.zi.start;
-          if (Temporal_compare(s.zi.start, endPoint) >= 0) continue;
+          let endPoint = Temporal_compare(e.zi.start, e.zi.end) === 0 ? e.zi.end : e.zi.start;
+          const timeGrained = GRAIN_ORDER.indexOf(e.zi.grain) < GRAIN_ORDER.indexOf('day');
+          if (Temporal_compare(s.zi.start, endPoint) >= 0) {
+            // A clock-time range wrapping midnight ("9:30pm to 7:30am") rolls
+            // the end into the next day; date ranges just drop.
+            if (!timeGrained) continue;
+            endPoint = endPoint.add({ days: 1 });
+            if (Temporal_compare(s.zi.start, endPoint) >= 0) continue;
+          }
           out.push({
             type: 'interval',
             zi: {
@@ -236,10 +243,17 @@ function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | und
       // intersection.
       let acc = evalExpr(expr.parts[0]!, ctx, anchor);
       for (const part of expr.parts.slice(1)) {
-        const composes = isTimeOfDayPart(part);
+        const partIsTimeOfDay = isTimeOfDayPart(part);
         const next: Cand[] = [];
         for (const a of acc) {
           if (a.type !== 'interval') continue;
+          // Clock times always compose onto the anchor's day ("tonight at
+          // 1am" escapes the night window). Day-period parts compose only
+          // onto day-or-coarser anchors; onto an already time-refined
+          // interval ("10am to 12pm Monday morning") they constrain.
+          const composes =
+            partIsTimeOfDay &&
+            (isClockPart(part) || GRAIN_ORDER.indexOf(a.zi.grain) >= GRAIN_ORDER.indexOf('day'));
           for (const b of evalExpr(part, ctx, a.zi)) {
             if (b.type !== 'interval') continue;
             if (composes) {
@@ -261,11 +275,19 @@ function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | und
     case 'amount':
       return [{ type: 'amount', amount: expr.amount }];
 
+    case 'holiday':
+      return evalHoliday(expr, ctx);
+
     case 'recur':
       throw new NotResolvableError(
         'recurrence expressions are representable in v1 but not yet resolvable (planned for v2)',
       );
   }
+}
+
+/** A literal clock reading (no date of its own). */
+function isClockPart(expr: TimeExpr): boolean {
+  return expr.op === 'literal' && expr.date === undefined && expr.time !== undefined;
 }
 
 /** A part that names a time within a day rather than a day: composes onto its anchor. */
@@ -325,10 +347,13 @@ function evalSpan(anchorZi: ZInterval, amount: CalendarAmount, ctx: TimeContext)
 
   let anchorPoint = negative ? anchorZi.end : anchorZi.start;
   // Complete-periods policy: "the last 3 days" ends at today's start; "the
-  // next 3 days" begins at tomorrow's start.
+  // next 3 days" begins at tomorrow's start. Applies only to spans anchored
+  // at the reference instant itself — an explicit anchor point ("the week
+  // starting Monday") is exact.
   if (
     ctx.partialPeriod === 'exclude' &&
     anchorZi.grain === 'instant' &&
+    Temporal_compare(anchorPoint, ctx.zonedNow) === 0 &&
     coarse
   ) {
     anchorPoint = floorTo(anchorPoint, 'day', ctx.weekStart);
@@ -475,6 +500,97 @@ export function dayPeriodInterval(
 }
 
 // ---------------------------------------------------------------------------
+// holidays
+// ---------------------------------------------------------------------------
+
+type HolidayDef =
+  | { kind: 'fixed'; month: number; day: number }
+  | { kind: 'nth-weekday'; month: number; weekday: number; n: number }
+  | { kind: 'last-weekday'; month: number; weekday: number }
+  | { kind: 'easter' };
+
+const HOLIDAYS: Record<string, HolidayDef> = {
+  'new-year': { kind: 'fixed', month: 1, day: 1 },
+  'new-year-eve': { kind: 'fixed', month: 12, day: 31 },
+  valentines: { kind: 'fixed', month: 2, day: 14 },
+  halloween: { kind: 'fixed', month: 10, day: 31 },
+  christmas: { kind: 'fixed', month: 12, day: 25 },
+  'christmas-eve': { kind: 'fixed', month: 12, day: 24 },
+  'independence-day': { kind: 'fixed', month: 7, day: 4 },
+  thanksgiving: { kind: 'nth-weekday', month: 11, weekday: 4, n: 4 },
+  'labor-day': { kind: 'nth-weekday', month: 9, weekday: 1, n: 1 },
+  'mothers-day': { kind: 'nth-weekday', month: 5, weekday: 7, n: 2 },
+  'fathers-day': { kind: 'nth-weekday', month: 6, weekday: 7, n: 3 },
+  'memorial-day': { kind: 'last-weekday', month: 5, weekday: 1 },
+  easter: { kind: 'easter' },
+};
+
+/** Anonymous Gregorian computus. */
+function easterDate(year: number): { month: number; day: number } {
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return { month, day };
+}
+
+function holidayDay(name: string, year: number, ctx: TimeContext): Zoned {
+  const def = HOLIDAYS[name]!;
+  const base = ctx.zonedNow.with({ year, month: 1, day: 1 }).startOfDay();
+  if (def.kind === 'fixed') {
+    return base.with({ month: def.month, day: def.day });
+  }
+  if (def.kind === 'easter') {
+    const { month, day } = easterDate(year);
+    return base.with({ month, day });
+  }
+  const monthStart = base.with({ month: def.month, day: 1 });
+  if (def.kind === 'nth-weekday') {
+    const delta = (def.weekday - monthStart.dayOfWeek + 7) % 7;
+    return monthStart.add({ days: delta + 7 * (def.n - 1) });
+  }
+  // last-weekday
+  const monthEnd = monthStart.add({ months: 1 }).subtract({ days: 1 });
+  const back = (monthEnd.dayOfWeek - def.weekday + 7) % 7;
+  return monthEnd.subtract({ days: back });
+}
+
+function evalHoliday(
+  expr: Extract<TimeExpr, { op: 'holiday' }>,
+  ctx: TimeContext,
+): Cand[] {
+  const mk = (year: number): ZInterval => {
+    const day = holidayDay(expr.name, year, ctx);
+    return { start: day, end: day.add({ days: 1 }), grain: 'day' };
+  };
+  if (expr.year !== undefined) {
+    return [{ type: 'interval', zi: mk(expr.year) }];
+  }
+  const refYear = ctx.zonedNow.year;
+  const now = ctx.zonedNow;
+  if (expr.dir === 'prev') {
+    const cur = mk(refYear);
+    return [{ type: 'interval', zi: Temporal_compare(cur.end, now) <= 0 ? cur : mk(refYear - 1) }];
+  }
+  if (expr.dir === 'next') {
+    const cur = mk(refYear);
+    return [{ type: 'interval', zi: Temporal_compare(cur.start, now) > 0 ? cur : mk(refYear + 1) }];
+  }
+  const ordered = orderByBias(mk(0 + refYear), (d) => mk(refYear + d), ctx, 'years');
+  return ordered.map((zi) => ({ type: 'interval', zi }));
+}
+
+// ---------------------------------------------------------------------------
 // literal
 // ---------------------------------------------------------------------------
 
@@ -592,7 +708,10 @@ function orderByBias(
     const dPrev = Math.abs(calendarDaysBetween(prev.start, now));
     return dFut <= dPrev ? [current, prev] : [prev, current];
   }
-  return [current];
+  // now falls inside the current occurrence: still offer the next one
+  // ("September" said mid-September may mean next year's). Bias 'past' and
+  // 'future' were fully handled above, so this is the 'none' path.
+  return [current, mk(1)];
 }
 
 function resolveTime(time: PartialTime, day: ZInterval): ZInterval[] {

@@ -1,5 +1,6 @@
 import {
   DAY_PERIODS,
+  HOLIDAY_NAMES,
   UNITS,
   WEEKDAYS,
   type TimeExpr,
@@ -94,6 +95,16 @@ export function validateExpr(input: unknown, path = '$'): TimeExpr {
     }
     case 'amount': {
       validateAmount(obj.amount, `${path}.amount`);
+      return obj as unknown as TimeExpr;
+    }
+    case 'holiday': {
+      if (!HOLIDAY_NAMES.includes(obj.name as never)) {
+        throw new IRValidationError(`unknown holiday ${JSON.stringify(obj.name)}`, `${path}.name`);
+      }
+      if (obj.year !== undefined) requireInt(obj.year, `${path}.year`);
+      if (obj.dir !== undefined && obj.dir !== 'prev' && obj.dir !== 'next') {
+        throw new IRValidationError('dir must be prev|next', `${path}.dir`);
+      }
       return obj as unknown as TimeExpr;
     }
     case 'recur': {
