@@ -10,7 +10,7 @@ export type Token =
   | { type: 'clock'; hour: number; minute: number; explicitMinute: boolean; second?: number; meridiem?: 'am' | 'pm'; start: number; end: number }
   | { type: 'numdate'; parts: number[]; sep: string; start: number; end: number };
 
-const CLOCK_RE = /^(\d{1,2}):(\d{2})(?::(\d{2}))?(am|pm)?$/;
+const CLOCK_RE = /^(\d{1,2}):(\d{2})(?::(\d{2}))?(am|pm|a|p)?$/;
 const HOUR_MERIDIEM_RE = /^(\d{1,2})(am|pm|a|p)$/;
 const ORDINAL_RE = /^(\d{1,2})(st|nd|rd|th)$/;
 const NUMDATE_RE = /^(\d{1,4})([/\-.])(\d{1,2})(?:\2(\d{1,4}))?$/;
@@ -22,10 +22,12 @@ export function tokenize(text: string): Token[] {
   for (const m of text.matchAll(RAW_TOKEN_RE)) {
     const raw = m[0]
       .toLowerCase()
+      .replace(/^-(?=\d)/, '') // "(Tue)-11:30" → clock token after paren split
       .replace(/[.]+$/, '')
       .replace(/[''`]s$/, '') // "fortnight's" → fortnight
       .replace(/^a\.m$/, 'am')
-      .replace(/^p\.m$/, 'pm');
+      .replace(/^p\.m$/, 'pm')
+      .replace(/^(\d{1,2}(?::\d{2})?)\.(am|pm|a|p)$/, '$1$2'); // "9.am" → 9am
     if (raw === '') continue;
     const start = m.index;
     const end = start + m[0].length;
@@ -70,7 +72,7 @@ function pushToken(tokens: Token[], raw: string, start: number, end: number): vo
       end,
     };
     if (match[3] !== undefined) token.second = Number(match[3]);
-    if (match[4]) token.meridiem = match[4] as 'am' | 'pm';
+    if (match[4]) token.meridiem = match[4].startsWith('a') ? 'am' : 'pm';
     tokens.push(token);
     return;
   }

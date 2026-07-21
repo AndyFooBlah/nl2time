@@ -41,7 +41,7 @@ Anchored extent. Signed `amount` fields: negative extends backward from `anchor.
 ### `seek {base, dir, target, n?}`
 Directed navigation:
 
-- `weekday` from a point/day base: `next` = strictly after the base day (`nextWeekday:'week-after'` instead targets the weekday within the following week); `prev` = strictly before; `nearest` = forward unless `bias:'past'`. Result: that day, grain `day`.
+- `weekday` from a point/day base: `next` = strictly after the base day (`nextWeekday:'week-after'` instead targets the weekday within the following/previous week — the dialect policy applies only when `n` is absent; an explicit `n` means strict occurrence counting); `prev` = strictly before; `nearest` = both directions as candidates (strict, `n:1`), ordered future-first unless `bias:'past'`. Result: that day, grain `day`.
 - `weekday` from a coarser base interval: the `n`-th occurrence **within** the interval (empty if it overflows).
 - `month`: that calendar month, moving ±1 year if `dir` demands strict order relative to the base.
 - `dayPeriod`: the period within the base's day.
@@ -52,6 +52,9 @@ Left-to-right composition; each part evaluates with the accumulated interval as 
 
 ### `duration {iso}` / `amount {amount}`
 Pass-through values: exact ISO-8601 duration; unit-preserving calendar amount.
+
+### `holiday {name, year?, dir?}`
+A named holiday resolved by the engine's table: fixed-date (christmas, halloween, …), nth-weekday (thanksgiving = 4th Thursday of November, memorial-day = last Monday of May), or computed (easter, Anonymous Gregorian computus). With `year`: that occurrence. Without: the most recent occurrence on-or-before the reference plus the following one, bias-ordered; `dir` forces the strictly previous/next single occurrence.
 
 ### `recur {every, filter?}`
 Representable and serializable in v1; resolution throws `NotResolvableError` (v2 lands occurrence enumeration against a range).

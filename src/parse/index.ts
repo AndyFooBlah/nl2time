@@ -248,8 +248,17 @@ function findDayPeriod(expr: TimeExpr): string | undefined {
   return undefined;
 }
 
+const REDUNDANT_BETWEEN = new Set([
+  'mon', 'tue', 'tues', 'wed', 'weds', 'thu', 'thur', 'thurs', 'fri', 'sat', 'sun',
+  'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday',
+]);
+
 function isAdjacent(a: Positioned, b: Positioned, tokens: Token[]): boolean {
   const between = tokens.slice(a.tokenEnd, b.tokenStart);
   if (between.length > 2) return false;
-  return between.every((t) => t.type === 'word' && CONNECTORS.includes(t.value));
+  // A parenthesized weekday between date and time ("May/22 (Tue) 11:30") is
+  // redundant with the date and doesn't block the merge.
+  return between.every(
+    (t) => t.type === 'word' && (CONNECTORS.includes(t.value) || REDUNDANT_BETWEEN.has(t.value)),
+  );
 }

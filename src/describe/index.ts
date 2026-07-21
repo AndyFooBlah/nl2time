@@ -117,10 +117,7 @@ function describeCoarse(z: Zoned, unit: Unit, ctx: TimeContext): Description {
   if (unit === 'month') {
     const sameYear = z.year === now.year;
     const text = sameYear ? fmt(z, ctx, { month: 'long' }) : fmt(z, ctx, { month: 'long', year: 'numeric' });
-    const expr: TimeExpr = {
-      op: 'literal',
-      date: sameYear ? { month: z.month } : { month: z.month, year: z.year },
-    };
+    const expr: TimeExpr = { op: 'literal', date: { month: z.month, year: z.year } };
     return { text, expr, grain: 'month', framing: 'calendar' };
   }
 
@@ -172,9 +169,10 @@ function describeFarDay(z: Zoned, ctx: TimeContext): Description {
   const text = sameYear
     ? fmt(z, ctx, { month: 'long', day: 'numeric' })
     : fmt(z, ctx, { month: 'long', day: 'numeric', year: 'numeric' });
-  const date = sameYear
-    ? { month: z.month, day: z.day }
-    : { year: z.year, month: z.month, day: z.day };
+  // The emitted IR always carries the year (the text may omit it): a bare
+  // month+day literal resolves past-first, which would break the round-trip
+  // for future dates.
+  const date = { year: z.year, month: z.month, day: z.day };
   return { text, expr: { op: 'literal', date }, grain: 'day', framing: 'calendar' };
 }
 
