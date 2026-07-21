@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AndyFooBlah/nl2time/schema/timeexpr.schema.json",
+  "title": "nl2time TimeExpr v1",
+  "description": "Language-neutral intermediate representation for temporal expressions. A TimeExpr is a small operator tree over timeline intervals, resolved deterministically against a reference context (now, timeZone, locale, week policy).",
+  "$ref": "#/$defs/TimeExpr",
+  "$defs": {
+    "TimeExpr": {
+      "oneOf": [
+        { "$ref": "#/$defs/Now" },
+        { "$ref": "#/$defs/Literal" },
+        { "$ref": "#/$defs/Offset" },
+        { "$ref": "#/$defs/Snap" },
+        { "$ref": "#/$defs/Span" },
+        { "$ref": "#/$defs/Between" },
+        { "$ref": "#/$defs/Seek" },
+        { "$ref": "#/$defs/Intersect" },
+        { "$ref": "#/$defs/Duration" },
+        { "$ref": "#/$defs/Amount" },
+        { "$ref": "#/$defs/Recur" }
+      ]
+    },
+    "Unit": {
+      "enum": ["second", "minute", "hour", "day", "week", "month", "quarter", "year"]
+    },
+    "Weekday": { "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] },
+    "DayPeriod": { "enum": ["morning", "afternoon", "evening", "night"] },
+    "Mod": { "enum": ["approx", "start", "mid", "end"] },
+    "CalendarAmount": {
+      "type": "object",
+      "description": "Unit-preserving calendar amount; fields may be negative.",
+      "properties": {
+        "years": { "type": "integer" },
+        "months": { "type": "integer" },
+        "weeks": { "type": "integer" },
+        "days": { "type": "integer" },
+        "hours": { "type": "integer" },
+        "minutes": { "type": "integer" },
+        "seconds": { "type": "integer" }
+      },
+      "additionalProperties": false,
+      "minProperties": 1
+    },
+    "Target": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": { "kind": { "const": "weekday" }, "weekday": { "$ref": "#/$defs/Weekday" } },
+          "required": ["kind", "weekday"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": { "kind": { "const": "month" }, "month": { "type": "integer", "minimum": 1, "maximum": 12 } },
+          "required": ["kind", "month"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": { "kind": { "const": "dayPeriod" }, "period": { "$ref": "#/$defs/DayPeriod" } },
+          "required": ["kind", "period"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": { "kind": { "const": "unit" }, "unit": { "$ref": "#/$defs/Unit" } },
+          "required": ["kind", "unit"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Now": {
+      "type": "object",
+      "description": "The reference instant supplied by the resolution context.",
+      "properties": { "op": { "const": "now" }, "mod": { "$ref": "#/$defs/Mod" } },
+      "required": ["op"],
+      "additionalProperties": false
+    },
+    "Literal": {
+      "type": "object",
+      "description": "Civil components asserted by the source text. Missing components are completed at resolution time under context policy (bias past/future); a time with meridiem 'unknown' produces AM and PM candidates.",
+      "properties": {
+        "op": { "const": "literal" },
+        "date": {
+          "type": "object",
+          "properties": {
+            "year": { "type": "integer" },
+            "month": { "type": "integer", "minimum": 1, "maximum": 12 },
+            "day": { "type": "integer", "minimum": 1, "maximum": 31 }
+          },
+          "additionalProperties": false
+        },
+        "time": {
+          "type": "object",
+          "properties": {
+            "hour": { "type": "integer", "minimum": 0, "maximum": 23 },
+            "minute": { "type": "integer", "minimum": 0, "maximum": 59 },
+            "second": { "type": "integer", "minimum": 0, "maximum": 59 },
+            "meridiem": { "enum": ["am", "pm", "unknown"] }
+          },
+          "additionalProperties": false
+        },
+        "dayPeriod": { "$ref": "#/$defs/DayPeriod" },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op"],
+      "additionalProperties": false
+    },
+    "Offset": {
+      "type": "object",
+      "description": "Calendar offset: offset(now, -1, week) is one week before now. Day-and-coarser offsets preserve wall-clock time across DST transitions.",
+      "properties": {
+        "op": { "const": "offset" },
+        "base": { "$ref": "#/$defs/TimeExpr" },
+        "amount": { "type": "integer" },
+        "unit": { "$ref": "#/$defs/Unit" },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "base", "amount", "unit"],
+      "additionalProperties": false
+    },
+    "Snap": {
+      "type": "object",
+      "description": "The containing unit interval of the base ('last week' = snap(offset(now,-1,week), week)). Weeks honor the context week start. edge collapses the interval to its start or end point.",
+      "properties": {
+        "op": { "const": "snap" },
+        "base": { "$ref": "#/$defs/TimeExpr" },
+        "unit": { "$ref": "#/$defs/Unit" },
+        "edge": { "enum": ["start", "end"] },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "base", "unit"],
+      "additionalProperties": false
+    },
+    "Span": {
+      "type": "object",
+      "description": "Anchored span: span(now, {days:-3}) is the 3 days ending at now ('the last 3 days'). Subject to the context partial-period policy.",
+      "properties": {
+        "op": { "const": "span" },
+        "anchor": { "$ref": "#/$defs/TimeExpr" },
+        "amount": { "$ref": "#/$defs/CalendarAmount" },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "anchor", "amount"],
+      "additionalProperties": false
+    },
+    "Between": {
+      "type": "object",
+      "properties": {
+        "op": { "const": "between" },
+        "start": { "$ref": "#/$defs/TimeExpr" },
+        "end": { "$ref": "#/$defs/TimeExpr" },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "start", "end"],
+      "additionalProperties": false
+    },
+    "Seek": {
+      "type": "object",
+      "description": "Directed calendar navigation: seek(now, next, weekday tue) is 'next Tuesday' (exact semantics owned by the context nextWeekday policy); with n, the nth occurrence within the base interval ('the 2nd Monday of March').",
+      "properties": {
+        "op": { "const": "seek" },
+        "base": { "$ref": "#/$defs/TimeExpr" },
+        "dir": { "enum": ["next", "prev", "nearest"] },
+        "target": { "$ref": "#/$defs/Target" },
+        "n": { "type": "integer", "minimum": 1 },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "base", "dir", "target"],
+      "additionalProperties": false
+    },
+    "Intersect": {
+      "type": "object",
+      "description": "Constraint intersection, evaluated left to right with each part anchored to the accumulated interval: 'tomorrow at 4' = intersect(tomorrow, 4 o'clock).",
+      "properties": {
+        "op": { "const": "intersect" },
+        "parts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/TimeExpr" },
+          "minItems": 2
+        },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "parts"],
+      "additionalProperties": false
+    },
+    "Duration": {
+      "type": "object",
+      "description": "An exact elapsed duration as an ISO-8601 duration string.",
+      "properties": {
+        "op": { "const": "duration" },
+        "iso": { "type": "string", "pattern": "^-?P" },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "iso"],
+      "additionalProperties": false
+    },
+    "Amount": {
+      "type": "object",
+      "description": "A calendar amount as a value ('2 months').",
+      "properties": {
+        "op": { "const": "amount" },
+        "amount": { "$ref": "#/$defs/CalendarAmount" },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "amount"],
+      "additionalProperties": false
+    },
+    "Recur": {
+      "type": "object",
+      "description": "Recurrence ('every Tuesday' = recur every week, filter seek weekday tue). Representable and serializable in v1; resolution ships in v2.",
+      "properties": {
+        "op": { "const": "recur" },
+        "every": { "$ref": "#/$defs/Unit" },
+        "filter": { "$ref": "#/$defs/TimeExpr" },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "every"],
+      "additionalProperties": false
+    }
+  }
+}

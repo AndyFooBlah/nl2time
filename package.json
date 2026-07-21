@@ -1,0 +1,46 @@
+{
+  "name": "nl2time",
+  "version": "0.1.0",
+  "description": "Bidirectional natural language ⇄ date/time: parse expressions like 'last week' into concrete intervals, and describe instants as '9pm last night' — deterministic core, optional LLM assist.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./llm": "./dist/llm/index.js"
+  },
+  "files": [
+    "dist",
+    "schema"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "date",
+    "time",
+    "natural-language",
+    "parser",
+    "humanize",
+    "relative-time",
+    "temporal",
+    "llm",
+    "timezone",
+    "locale"
+  ],
+  "dependencies": {
+    "temporal-polyfill": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,64 @@
+# TimeExpr IR — semantics (v1)
+
+Normative companion to [`schema/timeexpr.schema.json`](../schema/timeexpr.schema.json). Ports must implement these semantics and reproduce the conformance fixtures exactly, including candidate ordering.
+
+## Model
+
+- **Values are half-open intervals `[start, end)` with a `grain`** (`instant`…`year`). A point is an interval with `start == end` and grain `instant`. Durations (`{op:'duration'}`, exact) and calendar amounts (`{op:'amount'}`, unit-preserving) are separate value kinds.
+- **Resolution** is a pure function `resolve(expr, context) → ordered candidates`. Same expr + same context ⇒ same candidates, always.
+- **Context** supplies: `now` (reference instant), `timeZone` (IANA), `locale` (language + region), `weekStart`, `dateOrder`, `bias` (`past|future|none`), `nextWeekday` (`nearest|week-after`), `partialPeriod` (`include|exclude`). All civil arithmetic happens in `timeZone`.
+- Ambiguity produces **multiple candidates, ordered best-first** (cap: 4). Unresolvable ops throw (`recur` in v1); empty candidate lists are legal (e.g. "5th Monday of February").
+
+## Operators
+
+### `now`
+The context reference instant as a point interval.
+
+### `literal {date?, time?, dayPeriod?}`
+Civil components **asserted by the source text only** — missing components are completed at resolution:
+
+- `year+month+day` → that day. `year+month` → that month. `year` → that year.
+- `month+day` (no year) → the occurrence in the reference year AND the adjacent year, ordered by policy (below). `month` alone → same at month granularity. `day` alone → occurrence in reference month AND adjacent month.
+- `time`: applied to the anchor day (the intersect anchor, else the reference day). Grain = finest given component (hour if only hour, etc.). `meridiem:'unknown'` with hour 1–12 yields **both readings**: pm-first for hours 1–6 and 12, am-first for 7–11.
+- `dayPeriod`: the locale day-period interval of the anchor day; periods may wrap midnight (en `night` = 21:00 → 06:00 next day), grain `hour`.
+- Hour 12 special cases: `12am` → 00:00, `12pm` → 12:00.
+- Nonexistent civil times (DST gap) resolve with Temporal-`'compatible'` disambiguation (shift forward by the gap); repeated times take the earlier offset.
+
+**Ordering for underspecified dates** (`month+day`, `month`, `day`): let *current* be the reference-period occurrence and *alt* the adjacent one in the bias direction. `bias:'future'` → soonest non-past first; `'past'` → most recent non-future first; `'none'` → nearest by calendar distance first. If *current* contains `now`, it is the only mandatory candidate.
+
+### `offset {base, amount, unit}`
+Shift both endpoints by `amount` calendar units. Day-and-coarser units preserve wall-clock time across DST (a "day" may be 23/25h); `hour|minute|second` are exact. Month/year arithmetic clamps day-of-month (Jan 31 + 1 month = Feb 28/29). Grain unchanged.
+
+### `snap {base, unit, edge?}`
+The containing `unit` interval of `base.start`: floor to the unit boundary, extend one unit; grain = `unit`. `week` floors to `context.weekStart`; `quarter` to calendar quarters. `edge:'start'|'end'` collapses to the corresponding boundary point (grain `instant`).
+
+### `span {anchor, amount}`
+Anchored extent. Signed `amount` fields: negative extends backward from `anchor.end`, positive forward from `anchor.start`. Grain = smallest unit present in `amount`. If the anchor is a point (grain `instant`), the amount's smallest unit is day-or-coarser, and `partialPeriod:'exclude'`, the anchor first floors to its day start (complete periods only).
+
+### `between {start, end}`
+`[start.start, end.end)`, cartesian over candidates, dropping pairs where start ≥ end. Grain = finer of the two.
+
+### `seek {base, dir, target, n?}`
+Directed navigation:
+
+- `weekday` from a point/day base: `next` = strictly after the base day (`nextWeekday:'week-after'` instead targets the weekday within the following week); `prev` = strictly before; `nearest` = forward unless `bias:'past'`. Result: that day, grain `day`.
+- `weekday` from a coarser base interval: the `n`-th occurrence **within** the interval (empty if it overflows).
+- `month`: that calendar month, moving ±1 year if `dir` demands strict order relative to the base.
+- `dayPeriod`: the period within the base's day.
+- `unit`: the `dir`-adjacent containing unit interval (`next`/`prev` shift by `n`, `nearest` = containing).
+
+### `intersect {parts}`
+Left-to-right composition; each part evaluates with the accumulated interval as its **anchor**. Parts that name a time-of-day (a `literal` with time/dayPeriod but no date, or a `seek` with a dayPeriod target) **compose onto** the anchor day — they may extend past its end (wrap-around night). All other parts **constrain**: interval intersection, dropping empty results. Candidates: cartesian, order-preserving (first part outermost).
+
+### `duration {iso}` / `amount {amount}`
+Pass-through values: exact ISO-8601 duration; unit-preserving calendar amount.
+
+### `recur {every, filter?}`
+Representable and serializable in v1; resolution throws `NotResolvableError` (v2 lands occurrence enumeration against a range).
+
+### `mod` (any node)
+`approx | start | mid | end` — carried through resolution untouched in v1 (renderers may hedge); semantic narrowing (e.g. `start` of month = first ~10 days) is future work.
+
+## Versioning
+
+Schema id + `IR_VERSION = 1`. Additive evolution only (new ops, new optional fields); breaking changes bump the major version and the schema id.

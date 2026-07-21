@@ -1,0 +1,90 @@
+{
+  "description": "English describe conformance cases. Text comparisons normalize NBSP/NNBSP to plain spaces (ICU inserts U+202F before AM/PM).",
+  "defaults": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+  },
+  "cases": [
+    {
+      "instant": "2026-07-20T04:00:00Z",
+      "opts": { "style": "casual" },
+      "text": "9pm last night",
+      "framing": "calendar",
+      "note": "THE motivating example: stored 4am UTC Jul 20, user in Pacific, now Jul 20"
+    },
+    {
+      "instant": "2026-07-20T04:00:00Z",
+      "text": "yesterday at 9:00 PM",
+      "framing": "calendar"
+    },
+    {
+      "instant": "2026-07-20T04:00:00Z",
+      "ctx": { "now": "2026-07-22T17:00:00Z" },
+      "text": "last Sunday at 9:00 PM",
+      "framing": "calendar",
+      "note": "same event two days later: names the weekday"
+    },
+    {
+      "instant": "2026-07-20T04:00:00Z",
+      "opts": { "framing": "elapsed" },
+      "text": "13 hours ago",
+      "framing": "elapsed"
+    },
+    {
+      "instant": "2026-07-20T04:00:00Z",
+      "ctx": { "now": "2026-09-25T17:00:00Z" },
+      "text": "July 19 at 9:00 PM",
+      "framing": "calendar",
+      "note": "beyond a week: absolute date, year omitted within the same year"
+    },
+    {
+      "instant": "2026-07-20T16:30:00Z",
+      "text": "today at 9:30 AM",
+      "framing": "calendar"
+    },
+    {
+      "instant": "2026-07-20T16:30:00Z",
+      "opts": { "style": "casual" },
+      "text": "9:30am this morning",
+      "framing": "calendar"
+    },
+    {
+      "instant": "2026-07-22T02:00:00Z",
+      "opts": { "style": "casual" },
+      "text": "7pm tomorrow evening",
+      "framing": "calendar",
+      "note": "02:00Z Jul 22 = 19:00 PDT Jul 21"
+    },
+    {
+      "interval": { "start": "2026-07-12T07:00:00Z", "end": "2026-07-19T07:00:00Z", "grain": "week" },
+      "text": "last week",
+      "framing": "calendar"
+    },
+    {
+      "interval": { "start": "2026-07-19T07:00:00Z", "end": "2026-07-20T07:00:00Z", "grain": "day" },
+      "text": "yesterday",
+      "framing": "calendar"
+    },
+    {
+      "interval": { "start": "2026-06-01T07:00:00Z", "end": "2026-07-01T07:00:00Z", "grain": "month" },
+      "text": "last month",
+      "framing": "calendar"
+    },
+    {
+      "interval": { "start": "2026-03-01T08:00:00Z", "end": "2026-04-01T07:00:00Z", "grain": "month" },
+      "text": "March",
+      "framing": "calendar"
+    },
+    {
+      "interval": { "start": "2025-03-01T08:00:00Z", "end": "2025-04-01T07:00:00Z", "grain": "month" },
+      "text": "March 2025",
+      "framing": "calendar"
+    },
+    {
+      "interval": { "start": "2026-07-01T07:00:00Z", "end": "2026-10-01T07:00:00Z", "grain": "quarter" },
+      "text": "this quarter",
+      "framing": "calendar"
+    }
+  ]
+}
