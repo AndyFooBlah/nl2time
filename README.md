@@ -75,9 +75,10 @@ Cultural/ambiguous semantics are explicit `TimeContext` knobs with CLDR-derived 
 
 ## Install
 
+[![npm](https://img.shields.io/npm/v/nl2time)](https://www.npmjs.com/package/nl2time)
+
 ```
-npm install nl2time            # once published
-npm i github:AndyFooBlah/nl2time   # directly from the repo (builds on install)
+npm install nl2time
 ```
 
 ## Status
