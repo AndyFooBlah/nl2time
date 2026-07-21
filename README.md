@@ -75,7 +75,9 @@ Cultural/ambiguous semantics are explicit `TimeContext` knobs with CLDR-derived 
 
 ## Status
 
-v0.1 — English parsing, en-* describe, core engine with a DST/edge-case battery. Recurrence (`every Tuesday`) is representable in the IR but resolves in v2. See [docs/evals.md](docs/evals.md) for the conformance-corpus plan (Recognizers-Text, Duckling, dateparser imports) and [docs/porting.md](docs/porting.md) for the Python port strategy.
+v0.1 — English parsing, en-* describe, core engine with a DST/edge-case battery. Recurrence (`every Tuesday`) is representable in the IR but resolves in v2.
+
+**Corpus** ([corpus/](corpus/), runner exported as `nl2time/corpus`): a bidirectional golden set with per-case license provenance — 41 hand-authored NL→time cases (all passing), a 65-case datetime→NL golden set (all passing; to our knowledge the first published eval set for humanized time generation), and 693 cases imported from Microsoft Recognizers-Text (MIT) of which 12.6% currently pass — the honest coverage baseline the parser climbs against (`npm run eval`, `npm run baselines`). See [corpus/ATTRIBUTIONS.md](corpus/ATTRIBUTIONS.md) and [docs/porting.md](docs/porting.md).
 
 ## Development
 

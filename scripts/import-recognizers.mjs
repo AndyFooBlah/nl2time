@@ -1,0 +1,146 @@
+#!/usr/bin/env node
+/**
+ * Convert vendored microsoft/Recognizers-Text DateTime specs (MIT) into
+ * unified forward corpus cases (corpus/forward/imported-recognizers-en.json).
+ *
+ * Mapping notes (see corpus/README.md):
+ * - Spec values are civil-local; imported cases run with timeZone UTC and use
+ *   *Local expectations.
+ * - Multiple resolution values (past+future, am+pm) become unordered `values`
+ *   expectations — every expected value must appear among our candidates.
+ * - Skipped (counted below): multi-span utterances (runner grades one span),
+ *   sets (recur resolves in v2, issue #5), timezone results, open-ended
+ *   ranges (mod since/before — not yet in the IR), null-typed results.
+ */
+import { readFileSync, writeFileSync } from 'node:fs';
+
+const COMMIT = 'da7edcff59f669b2a460ab9d400e36298f0d658e';
+const SPEC_PATH = 'Specs/DateTime/English/DateTimeModel.json';
+const raw = readFileSync(new URL('../corpus/vendor/recognizers-text/DateTimeModel.json', import.meta.url), 'utf8');
+const specs = JSON.parse(raw.replace(/^﻿/, ''));
+
+const GRAIN_BY_TIMEX_DURATION = {
+  P1D: 'day',
+  P1W: 'week',
+  P1M: 'month',
+  P3M: 'quarter',
+  P1Y: 'year',
+};
+
+const skip = { multiResult: 0, set: 0, timezone: 0, openRange: 0, nullType: 0, noValues: 0, unmappable: 0 };
+const cases = [];
+
+function pad(dt) {
+  // "2019-01-04" → date only; "16:12:00" time only; "2016-11-07 16:12:00" → T
+  return dt.replace(' ', 'T');
+}
+
+function datePlus1(dateStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d + 1));
+  return dt.toISOString().slice(0, 10);
+}
+
+function mapValue(val, refDate) {
+  const type = val.type;
+  if (type === 'date') {
+    if (!val.value || !/^\d{4}-\d{2}-\d{2}$/.test(val.value)) return undefined;
+    return { startLocal: `${val.value}T00:00:00`, endLocal: `${datePlus1(val.value)}T00:00:00`, grain: 'day' };
+  }
+  if (type === 'daterange' || type === 'datetimerange' || type === 'timerange') {
+    if (!val.start || !val.end) {
+      skip.openRange += 1;
+      return null; // marks whole case as skipped
+    }
+    if (type === 'daterange' && !/^\d{4}-\d{2}-\d{2}$/.test(val.start)) return undefined;
+    const grain = type === 'daterange' ? (GRAIN_BY_TIMEX_DURATION[val.timex?.match(/,(P[^)]+)\)$/)?.[1]] ?? null) : null;
+    const startLocal = type === 'timerange' ? `${refDate}T${val.start}` : pad(val.start) + (type === 'daterange' ? 'T00:00:00' : '');
+    const endLocal = type === 'timerange' ? `${refDate}T${val.end}` : pad(val.end) + (type === 'daterange' ? 'T00:00:00' : '');
+    const spec = { startLocal, endLocal };
+    if (grain) spec.grain = grain;
+    return spec;
+  }
+  if (type === 'datetime') {
+    if (!val.value) return undefined;
+    return { pointLocal: pad(val.value) };
+  }
+  if (type === 'time') {
+    if (!val.value) return undefined;
+    return { pointLocal: `${refDate}T${val.value}` };
+  }
+  return undefined;
+}
+
+for (const [i, spec] of specs.entries()) {
+  const results = spec.Results ?? [];
+  if (results.length !== 1) {
+    skip.multiResult += 1;
+    continue;
+  }
+  const r = results[0];
+  const typeName = r.TypeName ?? '';
+  if (!typeName.startsWith('datetimeV2.')) {
+    skip.nullType += 1;
+    continue;
+  }
+  const kind = typeName.slice('datetimeV2.'.length);
+  if (kind === 'set') {
+    skip.set += 1;
+    continue;
+  }
+  if (kind === 'timezone') {
+    skip.timezone += 1;
+    continue;
+  }
+  const values = r.Resolution?.values ?? [];
+  if (values.length === 0) {
+    skip.noValues += 1;
+    continue;
+  }
+
+  const refDateTime = spec.Context?.ReferenceDateTime ?? '2016-11-07T00:00:00';
+  const refDate = refDateTime.slice(0, 10);
+  const ctx = { now: `${refDateTime}Z`, timeZone: 'UTC', locale: 'en-US' };
+
+  let expect;
+  if (kind === 'duration') {
+    const secs = Number(values[0].value);
+    if (!Number.isFinite(secs)) {
+      skip.unmappable += 1;
+      continue;
+    }
+    expect = { durationSeconds: secs };
+  } else {
+    const mapped = values.map((v) => mapValue(v, refDate));
+    if (mapped.includes(null) || mapped.some((m) => m === undefined)) {
+      if (!mapped.includes(null)) skip.unmappable += 1;
+      continue;
+    }
+    expect = { values: mapped };
+  }
+
+  cases.push({
+    id: `rt-dtm-${String(i).padStart(4, '0')}`,
+    text: spec.Input,
+    ctx,
+    expect,
+    level: 'aspirational',
+    source: {
+      name: 'microsoft/Recognizers-Text',
+      license: 'MIT',
+      url: 'https://github.com/microsoft/Recognizers-Text',
+      path: SPEC_PATH,
+      commit: COMMIT,
+      index: i,
+    },
+    tags: ['imported', `rt:${kind}`],
+  });
+}
+
+const out = {
+  description:
+    'Imported from microsoft/Recognizers-Text English DateTimeModel specs (MIT). Civil-local expectations under UTC contexts; unordered `values` semantics. Regenerate with scripts/import-recognizers.mjs.',
+  cases,
+};
+writeFileSync(new URL('../corpus/forward/imported-recognizers-en.json', import.meta.url), JSON.stringify(out, null, 1) + '\n');
+console.log(`imported: ${cases.length} cases; skipped:`, skip);
