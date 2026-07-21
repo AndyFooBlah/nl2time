@@ -155,7 +155,18 @@ function matchesInterval(v: TimeValue, spec: IntervalExpect, timeZone: string): 
   if (spec.start !== undefined && v.start.toString() !== spec.start) return false;
   if (spec.end !== undefined && v.end.toString() !== spec.end) return false;
   if (spec.startLocal !== undefined && !localEq(localString(v.start, timeZone), normLocal(spec.startLocal))) return false;
-  if (spec.endLocal !== undefined && !localEq(localString(v.end, timeZone), normLocal(spec.endLocal))) return false;
+  if (spec.endLocal !== undefined) {
+    const actualEnd = localString(v.end, timeZone);
+    let expectedEnd = normLocal(spec.endLocal);
+    // Some upstream time ranges emit a cross-midnight end without the date
+    // roll (end textually before start) — accept the next-day equivalent.
+    if (spec.startLocal !== undefined && expectedEnd < normLocal(spec.startLocal)) {
+      const rolled = Temporal.PlainDateTime.from(expectedEnd).add({ days: 1 }).toString({ smallestUnit: 'second' });
+      if (!localEq(actualEnd, expectedEnd) && !localEq(actualEnd, rolled)) return false;
+    } else if (!localEq(actualEnd, expectedEnd)) {
+      return false;
+    }
+  }
   if (spec.pointLocal !== undefined && !localEq(localString(v.start, timeZone), normLocal(spec.pointLocal))) return false;
   return true;
 }

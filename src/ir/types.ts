@@ -121,6 +121,7 @@ export type TimeExprBody =
   | { op: 'recur'; every: Unit; filter?: TimeExpr };
 
 export type HolidayName =
+  | 'black-friday'
   | 'earth-day'
   | 'st-patricks'
   | 'workers-day'
@@ -139,7 +140,7 @@ export type HolidayName =
   | 'fathers-day';
 
 export const HOLIDAY_NAMES: readonly HolidayName[] = [
-  'earth-day', 'st-patricks', 'workers-day',
+  'black-friday', 'earth-day', 'st-patricks', 'workers-day',
   'new-year', 'new-year-eve', 'valentines', 'easter', 'halloween',
   'thanksgiving', 'christmas', 'christmas-eve', 'independence-day',
   'labor-day', 'memorial-day', 'mothers-day', 'fathers-day',

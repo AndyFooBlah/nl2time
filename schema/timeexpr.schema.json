@@ -214,7 +214,7 @@
       "properties": {
         "op": { "const": "holiday" },
         "name": {
-          "enum": ["earth-day", "st-patricks", "workers-day", "new-year", "new-year-eve", "valentines", "easter", "halloween", "thanksgiving", "christmas", "christmas-eve", "independence-day", "labor-day", "memorial-day", "mothers-day", "fathers-day"]
+          "enum": ["black-friday", "earth-day", "st-patricks", "workers-day", "new-year", "new-year-eve", "valentines", "easter", "halloween", "thanksgiving", "christmas", "christmas-eve", "independence-day", "labor-day", "memorial-day", "mothers-day", "fathers-day"]
         },
         "year": { "type": "integer" },
         "dir": { "enum": ["prev", "next"] },

@@ -15,7 +15,7 @@ const HOUR_MERIDIEM_RE = /^(\d{1,2})(am|pm|a|p)$/;
 const ORDINAL_RE = /^(\d{1,2})(st|nd|rd|th)$/;
 const NUMDATE_RE = /^(\d{1,4})([/\-.])(\d{1,2})(?:\2(\d{1,4}))?$/;
 const NUMBER_RE = /^\d{1,4}$/;
-const RAW_TOKEN_RE = /[a-z0-9:/\-.'~]+/gi;
+const RAW_TOKEN_RE = /[a-z0-9:/\-.'~\u00bc\u00bd\u00be]+/gi;
 
 export function tokenize(text: string): Token[] {
   const tokens: Token[] = [];
@@ -25,6 +25,7 @@ export function tokenize(text: string): Token[] {
       .replace(/^-(?=\d)/, '') // "(Tue)-11:30" → clock token after paren split
       .replace(/[.]+$/, '')
       .replace(/[''`]s$/, '') // "fortnight's" → fortnight
+      .replace(/['']+$/, '') // "workers'" → workers
       .replace(/^a\.m$/, 'am')
       .replace(/^p\.m$/, 'pm')
       .replace(/^(\d{1,2}(?::\d{2})?)\.(am|pm|a|p)$/, '$1$2'); // "9.am" → 9am

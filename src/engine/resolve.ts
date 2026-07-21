@@ -570,6 +570,9 @@ function easterDate(year: number): { month: number; day: number } {
 }
 
 function holidayDay(name: string, year: number, ctx: TimeContext): Zoned {
+  if (name === 'black-friday') {
+    return holidayDay('thanksgiving', year, ctx).add({ days: 1 });
+  }
   const def = HOLIDAYS[name]!;
   const base = ctx.zonedNow.with({ year, month: 1, day: 1 }).startOfDay();
   if (def.kind === 'fixed') {
