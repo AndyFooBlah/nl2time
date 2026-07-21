@@ -94,7 +94,7 @@ export type TimeExprBody =
    * Anchored span: span(now, {days: -3}) is the 3 days ending at now.
    * Positive amounts extend forward from the anchor start.
    */
-  | { op: 'span'; anchor: TimeExpr; amount: CalendarAmount }
+  | { op: 'span'; anchor: TimeExpr; amount: CalendarAmount; business?: boolean }
   | { op: 'between'; start: TimeExpr; end: TimeExpr }
   /**
    * Directed calendar navigation: seek(now, 'next', weekday tue) is "next
@@ -121,6 +121,9 @@ export type TimeExprBody =
   | { op: 'recur'; every: Unit; filter?: TimeExpr };
 
 export type HolidayName =
+  | 'earth-day'
+  | 'st-patricks'
+  | 'workers-day'
   | 'new-year'
   | 'new-year-eve'
   | 'valentines'
@@ -136,6 +139,7 @@ export type HolidayName =
   | 'fathers-day';
 
 export const HOLIDAY_NAMES: readonly HolidayName[] = [
+  'earth-day', 'st-patricks', 'workers-day',
   'new-year', 'new-year-eve', 'valentines', 'easter', 'halloween',
   'thanksgiving', 'christmas', 'christmas-eve', 'independence-day',
   'labor-day', 'memorial-day', 'mothers-day', 'fathers-day',

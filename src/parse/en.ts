@@ -176,7 +176,7 @@ const ruleDeicticDay: Rule = (tokens, i) => {
   if (w === 'tomorrow' || w === 'tmrw' || w === 'tmr') {
     return { expr: snapOffset(1, 'day'), consumed: 1, confidence: 1, role: 'date' };
   }
-  if (w === 'tonight') {
+  if (w === 'tonight' || w === 'tonite') {
     return {
       expr: { op: 'intersect', parts: [snapNow('day'), { op: 'literal', dayPeriod: 'night' }] },
       consumed: 1,
@@ -194,9 +194,12 @@ const ruleDeicticDay: Rule = (tokens, i) => {
     if (rel === 'after' && target === 'tomorrow') {
       return { expr: snapOffset(2, 'day'), consumed: at + 3 - i, confidence: 1, role: 'date' };
     }
-    // Trailing "the day after?" — the following day.
+    // Trailing "the day after?" / "the day before" — adjacent days.
     if (rel === 'after' && target === undefined && w === 'the') {
       return { expr: snapOffset(1, 'day'), consumed: at + 2 - i, confidence: 0.8, role: 'date' };
+    }
+    if (rel === 'before' && target === undefined && w === 'the') {
+      return { expr: snapOffset(-1, 'day'), consumed: at + 2 - i, confidence: 0.8, role: 'date' };
     }
   }
   return undefined;
@@ -722,12 +725,25 @@ const ruleEarlyLate: Rule = (tokens, i, ctx) => {
   if (word(tokens[at]) === 'in') at += 1;
   if (word(tokens[at]) === 'of') at += 1;
   if (word(tokens[at]) === 'the') at += 1;
-  // "mid today", "mid November"
+  // "mid today", "mid November", "mid 1989"
   if (isMid) {
     const month = MONTH_WORDS[word(tokens[at]) ?? ''];
     if (month !== undefined) {
       return {
         expr: { op: 'literal', date: { month }, mod: 'mid' },
+        consumed: at + 1 - i,
+        confidence: 0.95,
+        role: 'date',
+      };
+    }
+    const midYear = yearAt(tokens, at);
+    if (midYear !== undefined) {
+      return {
+        expr: {
+          op: 'span',
+          anchor: { op: 'literal', date: { year: midYear, month: 5 } },
+          amount: { months: 4 },
+        },
         consumed: at + 1 - i,
         confidence: 0.95,
         role: 'date',
@@ -909,7 +925,7 @@ const ruleLastThisNext: Rule = (tokens, i, ctx) => {
     return { expr: weekendExpr(dir), consumed: 2, confidence: 1, role: 'date' };
   }
 
-  if (nextWord === 'workweek' || (nextWord === 'work' && word(tokens[i + 2]) === 'week')) {
+  if (nextWord === 'workweek' || ((nextWord === 'work' || nextWord === 'working') && word(tokens[i + 2]) === 'week')) {
     // Monday 00:00 → Saturday 00:00 of the relevant week.
     const delta = w === 'last' ? -1 : w === 'next' ? 1 : 0;
     const weekExpr = delta === 0 ? snapNow('week') : snapOffset(delta, 'week');
@@ -1103,11 +1119,20 @@ const rulePastN: Rule = (tokens, i) => {
   if (w !== 'last' && w !== 'past' && w !== 'previous' && w !== 'prior') return undefined;
   const n = readNumber(tokens, i + 1);
   if (n && Number.isInteger(n.value)) {
-    const unit = UNIT_WORDS[word(tokens[i + 1 + n.consumed]) ?? ''];
+    let uAt = i + 1 + n.consumed;
+    const biz = word(tokens[uAt]) === 'business' || word(tokens[uAt]) === 'working';
+    if (biz) uAt += 1;
+    const unit = UNIT_WORDS[word(tokens[uAt]) ?? ''];
     if (unit) {
+      if (biz && unit !== 'day') return undefined;
       return {
-        expr: { op: 'span', anchor: NOW, amount: amountFor(unit, -n.value) },
-        consumed: 2 + n.consumed,
+        expr: {
+          op: 'span',
+          anchor: NOW,
+          amount: amountFor(unit, -n.value),
+          ...(biz ? { business: true } : {}),
+        },
+        consumed: uAt + 1 - i,
         confidence: 1,
         role: 'date',
       };
@@ -1139,13 +1164,17 @@ const ruleNextN: Rule = (tokens, i) => {
   const n = readNumber(tokens, i + 1);
   if (!n || !Number.isInteger(n.value)) return undefined;
   let at = i + 1 + n.consumed;
-  // "next 4 business days" — business days are calendar-filtered; approximate
-  // by plain days is wrong, so skip (tracked for the recurrence engine).
-  if (word(tokens[at]) === 'business') return undefined;
+  const biz = word(tokens[at]) === 'business' || word(tokens[at]) === 'working';
+  if (biz) at += 1;
   const unit = UNIT_WORDS[word(tokens[at]) ?? ''];
-  if (!unit) return undefined;
+  if (!unit || (biz && unit !== 'day')) return undefined;
   return {
-    expr: { op: 'span', anchor: NOW, amount: amountFor(unit, n.value) },
+    expr: {
+      op: 'span',
+      anchor: NOW,
+      amount: amountFor(unit, n.value),
+      ...(biz ? { business: true } : {}),
+    },
     consumed: at + 1 - i,
     confidence: 1,
     role: 'date',
@@ -1270,6 +1299,12 @@ const ruleHoliday: Rule = (tokens, i) => {
   } else if (w === 'valentine' || w === 'valentines') {
     name = 'valentines';
     if (next === 'day') consumed = 2;
+  } else if ((w === 'saint' || w === 'st') && (next === 'patrick' || next === 'patricks')) {
+    name = 'st-patricks';
+    consumed = word(tokens[i + 2]) === 'day' ? 3 : 2;
+  } else if (w === 'international' && next === 'workers' && word(tokens[i + 2]) === 'day') {
+    name = 'workers-day';
+    consumed = 3;
   } else if (next === 'day') {
     const twoWord: Record<string, HolidayName> = {
       independence: 'independence-day',
@@ -1279,6 +1314,9 @@ const ruleHoliday: Rule = (tokens, i) => {
       mothers: 'mothers-day',
       father: 'fathers-day',
       fathers: 'fathers-day',
+      earth: 'earth-day',
+      workers: 'workers-day',
+      may: 'workers-day',
     };
     if (twoWord[w]) { name = twoWord[w]; consumed = 2; }
   }
@@ -1508,7 +1546,7 @@ const ruleBareYear: Rule = (tokens, i) => {
   const y = readYear(tokens, i);
   if (!y || y.value < 1500 || y.value > 2199) return undefined;
   const prev = word(tokens[i - 1]);
-  if (prev === undefined || !['in', 'since', 'by', 'until', 'during', 'year', 'of'].includes(prev)) {
+  if (prev !== undefined && !['in', 'since', 'by', 'until', 'during', 'year', 'of', 'from'].includes(prev)) {
     return undefined;
   }
   return { expr: { op: 'literal', date: { year: y.value } }, consumed: y.consumed, confidence: 0.85, role: 'date' };
@@ -1626,6 +1664,35 @@ const ruleCalendarDate: Rule = (tokens, i, ctx) => {
     }
   }
 
+  // "2019-h2" joined
+  const yh = w?.match(/^(\d{4})-h([12])$/);
+  if (yh) {
+    return {
+      expr: {
+        op: 'span',
+        anchor: { op: 'literal', date: { year: Number(yh[1]), month: yh[2] === '1' ? 1 : 7 } },
+        amount: { months: 6 },
+      },
+      consumed: 1,
+      confidence: 1,
+      role: 'date',
+    };
+  }
+  // "q1-2019" joined
+  const qy = w?.match(/^q([1-4])-(\d{4})$/);
+  if (qy) {
+    return {
+      expr: {
+        op: 'snap',
+        base: { op: 'literal', date: { year: Number(qy[2]), month: (Number(qy[1]) - 1) * 3 + 1 } },
+        unit: 'quarter',
+      },
+      consumed: 1,
+      confidence: 1,
+      role: 'date',
+    };
+  }
+
   // "2017-q1" joined, "cy 2008", "cy18"
   const yq = w?.match(/^(\d{4})-q([1-4])$/);
   if (yq) {
@@ -1689,6 +1756,17 @@ const ruleCalendarDate: Rule = (tokens, i, ctx) => {
         return { expr: { op: 'literal', date }, consumed: 1, confidence: 0.85, role: 'date' };
       }
     }
+  }
+
+  // "2019/aug/01"
+  const ymd2 = w?.match(/^(\d{4})\/([a-z]{3,9})\/(\d{1,2})$/);
+  if (ymd2 && MONTH_WORDS[ymd2[2]!] !== undefined) {
+    return {
+      expr: { op: 'literal', date: { year: Number(ymd2[1]), month: MONTH_WORDS[ymd2[2]!]!, day: Number(ymd2[3]) } },
+      consumed: 1,
+      confidence: 0.95,
+      role: 'date',
+    };
   }
 
   // "22/Jan/2019"
@@ -1905,15 +1983,21 @@ const ruleClockTime: Rule = (tokens, i, ctx) => {
     }
   }
 
-  // "at 6.45" — dot as minute separator after a time preposition.
+  // "at 6.45" / "8.10 pm" — dot as minute separator.
   const dottedTime = w?.match(/^(\d{1,2})\.(\d{2})$/);
-  if (dottedTime && ['at', 'around', 'about'].includes(word(tokens[i - 1]) ?? '')) {
-    const h = Number(dottedTime[1]);
-    const min = Number(dottedTime[2]);
-    if (h >= 1 && h <= 23 && min <= 59) {
-      const time: PartialTime = { hour: h, minute: min };
-      if (h <= 12) time.meridiem = 'unknown';
-      return { expr: { op: 'literal', time }, consumed: 1, confidence: 0.9, role: 'time' };
+  if (dottedTime) {
+    const after = word(tokens[i + 1]);
+    const prevOk = ['at', 'around', 'about'].includes(word(tokens[i - 1]) ?? '');
+    const merAfter = after === 'am' || after === 'pm' ? after : undefined;
+    if (prevOk || merAfter) {
+      const h = Number(dottedTime[1]);
+      const min = Number(dottedTime[2]);
+      if (h >= 1 && h <= 23 && min <= 59) {
+        const time: PartialTime = { hour: h, minute: min };
+        if (merAfter) time.meridiem = merAfter;
+        else if (h <= 12) time.meridiem = 'unknown';
+        return { expr: { op: 'literal', time }, consumed: merAfter ? 2 : 1, confidence: 0.9, role: 'time' };
+      }
     }
   }
 
@@ -2010,6 +2094,12 @@ const ruleClockTime: Rule = (tokens, i, ctx) => {
     };
   }
 
+  if (w === 'dinner' || w === 'dinnertime') {
+    const prevOk = ['around', 'at', 'about', 'before', 'after'].includes(word(tokens[i - 1]) ?? '');
+    if (prevOk) {
+      return { expr: { op: 'literal', dayPeriod: 'evening' }, consumed: 1, confidence: 0.85, role: 'time' };
+    }
+  }
   if (w === 'lunchtime') {
     return {
       expr: {
@@ -2116,7 +2206,7 @@ const rulePeriodAlone: Rule = (tokens, i) => {
   };
 };
 
-const DURATION_TRIGGERS = ['for', 'lasts', 'last', 'lasting', 'takes', 'take', 'than'];
+const DURATION_TRIGGERS = ['for', 'lasts', 'last', 'lasting', 'takes', 'take', 'than', 'over'];
 
 /** Trigger-less fractional durations: "one and a half hour(s)", "one hour and half". */
 const ruleFractionDuration: Rule = (tokens, i) => {
@@ -2189,9 +2279,11 @@ const ruleDuration: Rule = (tokens, i) => {
     return undefined;
   }
   // Compact: "3h", "45min" as a single token.
-  const compact = word(tokens[at])?.match(/^(\d+(?:\.\d+)?)(s|m|h|d|w)$/);
+  const compact = word(tokens[at])?.match(/^(\d+(?:\.\d+)?)(years?|yrs?|months?|weeks?|wks?|days?|hours?|hrs?|minutes?|mins?|seconds?|secs?|s|m|h|d|w)$/);
   if (compact) {
-    const secs = round2(Number(compact[1]) * unitSeconds(COMPACT_DUR[compact[2]!]!));
+    const cUnit = COMPACT_DUR[compact[2]!] ?? UNIT_WORDS[compact[2]!];
+    if (!cUnit) return undefined;
+    const secs = round2(Number(compact[1]) * unitSeconds(cUnit));
     return { expr: { op: 'duration', iso: `PT${secs}S` }, consumed: at + 1 - i, confidence: 0.95, role: 'duration' };
   }
 
@@ -2299,6 +2391,14 @@ const ruleWithin: Rule = (tokens, i) => {
   };
 };
 
+/** "all week"/"all day" without a trigger word → a one-unit duration. */
+const ruleAllUnit: Rule = (tokens, i) => {
+  if (word(tokens[i]) !== 'all') return undefined;
+  const unit = UNIT_WORDS[word(tokens[i + 1]) ?? ''];
+  if (!unit || word(tokens[i + 1]) === 'night') return undefined;
+  return { expr: { op: 'amount', amount: amountFor(unit, 1) }, consumed: 2, confidence: 0.9, role: 'duration' };
+};
+
 /** Rules in priority order (first match at a position wins ties by length then order). */
 export const EN_RULES: readonly Rule[] = [
   ruleRange,
@@ -2321,6 +2421,7 @@ export const EN_RULES: readonly Rule[] = [
   ruleAgoIn,
   ruleDuration,
   ruleFractionDuration,
+  ruleAllUnit,
   ruleDecadeCentury,
   ruleBareYear,
   ruleCalendarDate,

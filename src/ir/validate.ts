@@ -64,6 +64,9 @@ export function validateExpr(input: unknown, path = '$'): TimeExpr {
     case 'span': {
       validateExpr(obj.anchor, `${path}.anchor`);
       validateAmount(obj.amount, `${path}.amount`);
+      if (obj.business !== undefined && typeof obj.business !== 'boolean') {
+        throw new IRValidationError('business must be boolean', `${path}.business`);
+      }
       return obj as unknown as TimeExpr;
     }
     case 'between': {

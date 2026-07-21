@@ -195,7 +195,7 @@ function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | und
 
     case 'span':
       return intervalMap(evalExpr(expr.anchor, ctx, anchor), (zi) =>
-        evalSpan(zi, expr.amount, ctx),
+        expr.business ? evalBusinessSpan(zi, expr.amount, ctx) : evalSpan(zi, expr.amount, ctx),
       );
 
     case 'between': {
@@ -366,6 +366,28 @@ function evalSpan(anchorZi: ZInterval, amount: CalendarAmount, ctx: TimeContext)
   return { start, end, grain: unit };
 }
 
+/** Business-day span: counts weekdays only, from the day after/before the anchor. */
+function evalBusinessSpan(anchorZi: ZInterval, amount: CalendarAmount, ctx: TimeContext): ZInterval {
+  const n = amount.days ?? 0;
+  const negative = n < 0;
+  let day = floorTo(negative ? anchorZi.end : anchorZi.start, 'day', ctx.weekStart);
+  const step = negative ? -1 : 1;
+  let first: Zoned | undefined;
+  let last: Zoned | undefined;
+  let remaining = Math.abs(n);
+  while (remaining > 0) {
+    day = day.add({ days: step });
+    if (day.dayOfWeek >= 6) continue;
+    if (!first) first = day;
+    last = day;
+    remaining -= 1;
+  }
+  const [start, end] = negative
+    ? [last!, first!.add({ days: 1 })]
+    : [first!, last!.add({ days: 1 })];
+  return { start, end, grain: 'day' };
+}
+
 // ---------------------------------------------------------------------------
 // seek
 // ---------------------------------------------------------------------------
@@ -510,6 +532,9 @@ type HolidayDef =
   | { kind: 'easter' };
 
 const HOLIDAYS: Record<string, HolidayDef> = {
+  'earth-day': { kind: 'fixed', month: 4, day: 22 },
+  'st-patricks': { kind: 'fixed', month: 3, day: 17 },
+  'workers-day': { kind: 'fixed', month: 5, day: 1 },
   'new-year': { kind: 'fixed', month: 1, day: 1 },
   'new-year-eve': { kind: 'fixed', month: 12, day: 31 },
   valentines: { kind: 'fixed', month: 2, day: 14 },

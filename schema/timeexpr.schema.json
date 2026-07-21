@@ -140,6 +140,7 @@
         "op": { "const": "span" },
         "anchor": { "$ref": "#/$defs/TimeExpr" },
         "amount": { "$ref": "#/$defs/CalendarAmount" },
+        "business": { "type": "boolean", "description": "Count weekdays only (business-day spans)." },
         "mod": { "$ref": "#/$defs/Mod" }
       },
       "required": ["op", "anchor", "amount"],
@@ -213,7 +214,7 @@
       "properties": {
         "op": { "const": "holiday" },
         "name": {
-          "enum": ["new-year", "new-year-eve", "valentines", "easter", "halloween", "thanksgiving", "christmas", "christmas-eve", "independence-day", "labor-day", "memorial-day", "mothers-day", "fathers-day"]
+          "enum": ["earth-day", "st-patricks", "workers-day", "new-year", "new-year-eve", "valentines", "easter", "halloween", "thanksgiving", "christmas", "christmas-eve", "independence-day", "labor-day", "memorial-day", "mothers-day", "fathers-day"]
         },
         "year": { "type": "integer" },
         "dir": { "enum": ["prev", "next"] },
