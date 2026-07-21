@@ -15,8 +15,14 @@
     "dist",
     "schema"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndyFooBlah/nl2time.git"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run typecheck && npm test",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
