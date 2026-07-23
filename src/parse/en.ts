@@ -153,11 +153,20 @@ function yearAt(tokens: Token[], i: number): number | undefined {
     : undefined;
 }
 
-/** "in the morning" / "at night" / "tonight" lookahead. Returns period + consumed. */
-function readPeriodSuffix(tokens: Token[], i: number): { period: DayPeriod; consumed: number } | undefined {
+/** "in the morning" / "at night" / "this morning" / "tonight" lookahead.
+ * Returns period + consumed. "this <period>" binds a preceding bare hour
+ * exactly like "in the <period>" ("8 this morning" → 8am): the period
+ * supplies the meridiem, and the reference day is the anchor either way.
+ * Deliberately NOT "last night": that also shifts the day, which a
+ * meridiem-only suffix can't express (#9). */
+function readPeriodSuffix(
+  tokens: Token[],
+  i: number,
+  allowThis = true,
+): { period: DayPeriod; consumed: number } | undefined {
   let at = i;
   if (word(tokens[at]) === 'in' || word(tokens[at]) === 'at') at += 1;
-  if (word(tokens[at]) === 'the') at += 1;
+  if (word(tokens[at]) === 'the' || (allowThis && word(tokens[at]) === 'this')) at += 1;
   const w = word(tokens[at]);
   if (w === 'tonight') return { period: 'night', consumed: at + 1 - i };
   const period = w !== undefined ? PERIOD_WORDS[w] : undefined;
@@ -168,6 +177,13 @@ function readPeriodSuffix(tokens: Token[], i: number): { period: DayPeriod; cons
 function meridiemFor(period: DayPeriod): 'am' | 'pm' {
   return period === 'morning' ? 'am' : 'pm';
 }
+
+/** Words that license a following bare number as a clock time
+ * ("at 8 this morning", "by 5 this afternoon"). */
+const TIME_PREPOSITIONS = new Set([
+  'at', 'around', 'about', 'by', 'from', 'until', 'till', 'to',
+  'before', 'after', 'since',
+]);
 
 // --- rules -----------------------------------------------------------------
 
@@ -2345,7 +2361,18 @@ const ruleClockTime: Rule = (tokens, i, ctx) => {
     if (after === "o'clock" || after === 'oclock') {
       return withPeriodSuffix({ hour: hn.value, meridiem: 'unknown' }, hn.consumed + 1);
     }
-    const ps = readPeriodSuffix(tokens, i + hn.consumed + mc);
+    // A BARE number before "this <period>" is only a clock time when the
+    // number isn't already bound by a preceding noun — "8 this morning"
+    // is 8am, but in "building 4 this afternoon" the 4 is a building
+    // number and the period keeps its range reading (Recognizers
+    // rt-dtm-0523). Utterance start or a time-preposition before the
+    // number licenses the binding; an arbitrary preceding word does not.
+    // The in/at forms ("4 in the afternoon") are explicit enough to bind
+    // regardless, as before.
+    const prevWord = word(tokens[i - 1]);
+    const allowThis =
+      i === 0 || prevWord === undefined || TIME_PREPOSITIONS.has(prevWord);
+    const ps = readPeriodSuffix(tokens, i + hn.consumed + mc, allowThis);
     if (ps) {
       const time: PartialTime = { hour: hn.value, meridiem: meridiemFor(ps.period) };
       if (minute !== undefined) time.minute = minute;

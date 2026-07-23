@@ -891,6 +891,106 @@
     "name": "nl2time",
     "license": "MIT"
    }
+  },
+  {
+   "id": "fw-0042",
+   "text": "8 this morning",
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2026-07-20T08:00:00",
+      "endLocal": "2026-07-20T09:00:00"
+     }
+    ]
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "issue-9"
+   ]
+  },
+  {
+   "id": "fw-0043",
+   "text": "the gardener aerated the lawn at 8 this morning",
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2026-07-20T08:00:00",
+      "endLocal": "2026-07-20T09:00:00"
+     }
+    ]
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "issue-9"
+   ]
+  },
+  {
+   "id": "fw-0044",
+   "text": "5 this afternoon",
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2026-07-20T17:00:00",
+      "endLocal": "2026-07-20T18:00:00"
+     }
+    ]
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "issue-9"
+   ]
+  },
+  {
+   "id": "fw-0045",
+   "text": "coffee at building 4 this afternoon",
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2026-07-20T12:00:00",
+      "endLocal": "2026-07-20T18:00:00"
+     }
+    ]
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "issue-9"
+   ]
   }
  ]
 }
