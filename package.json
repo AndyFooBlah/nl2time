@@ -1,6 +1,6 @@
 {
   "name": "nl2time",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Bidirectional natural language ⇄ date/time: parse expressions like 'last week' into concrete intervals, and describe instants as '9pm last night' — deterministic core, optional LLM assist.",
   "license": "MIT",
   "type": "module",
