@@ -17,27 +17,14 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const COMMIT = 'da7edcff59f669b2a460ab9d400e36298f0d658e';
 
 const FILES = [
-  {
-    vendored: 'DateTimeModel.json',
-    specPath: 'Specs/DateTime/English/DateTimeModel.json',
-    locale: 'en-US',
-    prefix: 'rt-dtm',
-    tag: 'rt-en',
-  },
-  {
-    vendored: 'DateTimeModel.EnglishOthers.json',
-    specPath: 'Specs/DateTime/EnglishOthers/DateTimeModel.json',
-    locale: 'en-GB',
-    prefix: 'rt-gb',
-    tag: 'rt-en-gb',
-  },
-  {
-    vendored: 'DateTimeModelComplexCalendar.json',
-    specPath: 'Specs/DateTime/English/DateTimeModelComplexCalendar.json',
-    locale: 'en-US',
-    prefix: 'rt-cc',
-    tag: 'rt-complex',
-  },
+  { vendored: 'DateTimeModel.json', specPath: 'Specs/DateTime/English/DateTimeModel.json', locale: 'en-US', prefix: 'rt-dtm', tag: 'rt-en', out: 'en' },
+  { vendored: 'DateTimeModel.EnglishOthers.json', specPath: 'Specs/DateTime/EnglishOthers/DateTimeModel.json', locale: 'en-GB', prefix: 'rt-gb', tag: 'rt-en-gb', out: 'en' },
+  { vendored: 'DateTimeModelComplexCalendar.json', specPath: 'Specs/DateTime/English/DateTimeModelComplexCalendar.json', locale: 'en-US', prefix: 'rt-cc', tag: 'rt-complex', out: 'en' },
+  { vendored: 'DateTimeModel.Spanish.json', specPath: 'Specs/DateTime/Spanish/DateTimeModel.json', locale: 'es-ES', prefix: 'rt-es', tag: 'rt-es', out: 'es' },
+  { vendored: 'DateTimeModel.French.json', specPath: 'Specs/DateTime/French/DateTimeModel.json', locale: 'fr-FR', prefix: 'rt-fr', tag: 'rt-fr', out: 'fr' },
+  { vendored: 'DateTimeModel.German.json', specPath: 'Specs/DateTime/German/DateTimeModel.json', locale: 'de-DE', prefix: 'rt-de', tag: 'rt-de', out: 'de' },
+  { vendored: 'DateTimeModel.Japanese.json', specPath: 'Specs/DateTime/Japanese/DateTimeModel.json', locale: 'ja-JP', prefix: 'rt-ja', tag: 'rt-ja', out: 'ja' },
+  { vendored: 'DateTimeModel.Chinese.json', specPath: 'Specs/DateTime/Chinese/DateTimeModel.json', locale: 'zh-CN', prefix: 'rt-zh', tag: 'rt-zh', out: 'zh' },
 ];
 
 const GRAIN_BY_TIMEX_DURATION = {
@@ -48,7 +35,7 @@ const GRAIN_BY_TIMEX_DURATION = {
 };
 
 const skip = { multiResult: 0, set: 0, timezone: 0, openRange: 0, nullType: 0, noValues: 0, unmappable: 0 };
-const cases = [];
+const casesByOut = new Map();
 
 function pad(dt) {
   // "2019-01-04" → date only; "16:12:00" time only; "2016-11-07 16:12:00" → T
@@ -97,6 +84,8 @@ for (const fileDef of FILES) {
     'utf8',
   );
   const specs = JSON.parse(raw.replace(/^\ufeff/, ''));
+  if (!casesByOut.has(fileDef.out)) casesByOut.set(fileDef.out, []);
+  const cases = casesByOut.get(fileDef.out);
   for (const [i, spec] of specs.entries()) {
   const results = spec.Results ?? [];
   if (results.length !== 1) {
@@ -181,10 +170,16 @@ for (const fileDef of FILES) {
   }
 }
 
-const out = {
-  description:
-    'Imported from microsoft/Recognizers-Text English DateTimeModel specs (MIT). Civil-local expectations under UTC contexts; unordered `values` semantics. Regenerate with scripts/import-recognizers.mjs.',
-  cases,
-};
-writeFileSync(new URL('../corpus/forward/imported-recognizers-en.json', import.meta.url), JSON.stringify(out, null, 1) + '\n');
-console.log(`imported: ${cases.length} cases; skipped:`, skip);
+for (const [lang, cases] of casesByOut) {
+  const out = {
+    description:
+      'Imported from microsoft/Recognizers-Text DateTimeModel specs (MIT). Civil-local expectations under UTC contexts; unordered `values` semantics. Regenerate with scripts/import-recognizers.mjs.',
+    cases,
+  };
+  writeFileSync(
+    new URL(`../corpus/forward/imported-recognizers-${lang}.json`, import.meta.url),
+    JSON.stringify(out, null, 1) + '\n',
+  );
+  console.log(`${lang}: ${cases.length} cases`);
+}
+console.log('skipped:', skip);

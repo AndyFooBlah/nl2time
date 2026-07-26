@@ -1,5 +1,5 @@
 {
- "description": "Imported from microsoft/Recognizers-Text English DateTimeModel specs (MIT). Civil-local expectations under UTC contexts; unordered `values` semantics. Regenerate with scripts/import-recognizers.mjs.",
+ "description": "Imported from microsoft/Recognizers-Text DateTimeModel specs (MIT). Civil-local expectations under UTC contexts; unordered `values` semantics. Regenerate with scripts/import-recognizers.mjs.",
  "cases": [
   {
    "id": "rt-dtm-0000",

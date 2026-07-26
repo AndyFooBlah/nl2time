@@ -6,7 +6,8 @@
 import type { TimeContext } from '../context.js';
 import type { TimeExpr } from '../ir/types.js';
 import { compilePack, type DomainPack } from '../packs/index.js';
-import { EN_RULE_ENTRIES, type Rule, type RuleMatch } from './en.js';
+import { type Rule, type RuleMatch } from './en.js';
+import { languageDef } from './languages.js';
 import { tokenize, type Token } from './tokenizer.js';
 
 export interface ParseMatch {
@@ -28,8 +29,6 @@ interface Positioned extends RuleMatch {
   tokenEnd: number; // exclusive
 }
 
-const CONNECTORS = ['at', 'on', 'in', 'of', 'the', 'for', 'from', 'around', 'about', '-'];
-
 export interface ParseOptions {
   /** Declarative domain packs (docs/extending.md); their rules run first. */
   packs?: DomainPack[];
@@ -39,28 +38,37 @@ export interface ParseOptions {
   disable?: string[];
 }
 
-function buildRules(opts: ParseOptions | undefined): readonly Rule[] {
+function buildRules(opts: ParseOptions | undefined, language: string): readonly Rule[] {
+  const base = languageDef(language).ruleEntries;
   if (!opts || (!opts.packs?.length && !opts.rules?.length && !opts.disable?.length)) {
-    return EN_RULE_ENTRIES.map((e) => e.rule);
+    return base.map((e) => e.rule);
   }
   const disabled = new Set([...(opts.disable ?? []), ...(opts.packs ?? []).flatMap((p) => p.disable ?? [])]);
   return [
     ...(opts.packs ?? []).map(compilePack),
     ...(opts.rules ?? []),
-    ...EN_RULE_ENTRIES.filter((e) => !disabled.has(e.name)).map((e) => e.rule),
+    ...base.filter((e) => !disabled.has(e.name)).map((e) => e.rule),
   ];
 }
 
 /**
- * Precompiled parser for hot paths — compiles packs once instead of per call.
+ * Precompiled parser for hot paths — compiles packs/rule lists once per
+ * language instead of per call.
  */
 export function createParser(opts: ParseOptions = {}): (text: string, ctx: TimeContext) => ParseResult {
-  const rules = buildRules(opts);
-  return (text, ctx) => parseWithRules(text, ctx, rules);
+  const cache = new Map<string, readonly Rule[]>();
+  return (text, ctx) => {
+    let rules = cache.get(ctx.language);
+    if (!rules) {
+      rules = buildRules(opts, ctx.language);
+      cache.set(ctx.language, rules);
+    }
+    return parseWithRules(text, ctx, rules);
+  };
 }
 
 export function parse(text: string, ctx: TimeContext, opts?: ParseOptions): ParseResult {
-  return parseWithRules(text, ctx, buildRules(opts));
+  return parseWithRules(text, ctx, buildRules(opts, ctx.language));
 }
 
 function parseWithRules(text: string, ctx: TimeContext, rules: readonly Rule[]): ParseResult {
@@ -86,9 +94,10 @@ function parseWithRules(text: string, ctx: TimeContext, rules: readonly Rule[]):
   }
 
   // Merge to fixpoint: [date, duration, time] needs two passes.
-  let merged = mergeAdjacent(raw, tokens);
+  const connectors = languageDef(ctx.language).connectors;
+  let merged = mergeAdjacent(raw, tokens, connectors);
   for (let pass = 0; pass < 2; pass += 1) {
-    const again = mergeAdjacent(merged, tokens);
+    const again = mergeAdjacent(merged, tokens, connectors);
     if (again.length === merged.length) break;
     merged = again;
   }
@@ -114,7 +123,7 @@ function parseWithRules(text: string, ctx: TimeContext, rules: readonly Rule[]):
  * separated by a connector token) into intersect(date, time) — "yesterday at
  * 9pm", "next Tuesday morning", "May 29 at noon".
  */
-function mergeAdjacent(matches: Positioned[], tokens: Token[]): Positioned[] {
+function mergeAdjacent(matches: Positioned[], tokens: Token[], connectors: readonly string[]): Positioned[] {
   const out: Positioned[] = [];
   let k = 0;
   while (k < matches.length) {
@@ -152,7 +161,7 @@ function mergeAdjacent(matches: Positioned[], tokens: Token[]): Positioned[] {
       isWeekExpr(cur.expr) &&
       next.expr.op === 'seek' &&
       next.expr.target.kind === 'weekday' &&
-      isAdjacent(cur, next, tokens)
+      isAdjacent(cur, next, tokens, connectors)
     ) {
       out.push({
         expr: { op: 'seek', base: cur.expr, dir: 'next', target: next.expr.target, n: 1 },
@@ -165,7 +174,7 @@ function mergeAdjacent(matches: Positioned[], tokens: Token[]): Positioned[] {
       k += 2;
       continue;
     }
-    if (next && canMerge(cur, next) && isAdjacent(cur, next, tokens)) {
+    if (next && canMerge(cur, next) && isAdjacent(cur, next, tokens, connectors)) {
       const [datePart, timePart] = cur.role === 'time' ? [next, cur] : [cur, next];
       let dateExpr = datePart.expr;
       let timeExpr = inferMeridiem(dateExpr, timePart.expr);
@@ -287,12 +296,17 @@ const REDUNDANT_BETWEEN = new Set([
   'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday',
 ]);
 
-function isAdjacent(a: Positioned, b: Positioned, tokens: Token[]): boolean {
+function isAdjacent(
+  a: Positioned,
+  b: Positioned,
+  tokens: Token[],
+  connectors: readonly string[],
+): boolean {
   const between = tokens.slice(a.tokenEnd, b.tokenStart);
   if (between.length > 2) return false;
   // A parenthesized weekday between date and time ("May/22 (Tue) 11:30") is
   // redundant with the date and doesn't block the merge.
   return between.every(
-    (t) => t.type === 'word' && (CONNECTORS.includes(t.value) || REDUNDANT_BETWEEN.has(t.value)),
+    (t) => t.type === 'word' && (connectors.includes(t.value) || REDUNDANT_BETWEEN.has(t.value)),
   );
 }

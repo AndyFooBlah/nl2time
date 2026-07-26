@@ -46,16 +46,21 @@ for (const file of ['corpus/reverse/golden-en.json', 'corpus/reverse/inverted-ha
   });
 }
 
-suite('corpus: imported baseline (regression gate)', () => {
-  const { cases } = load<{ cases: ForwardCase[] }>('corpus/forward/imported-recognizers-en.json');
-  const baseline = load<{ passingIds: string[] }>('corpus/baselines/forward-imported.json');
-  const byId = new Map(cases.map((c) => [c.id, c]));
-  test(`all ${baseline.passingIds.length} baselined cases still pass`, () => {
-    const regressions: string[] = [];
-    for (const id of baseline.passingIds) {
-      const c = byId.get(id);
-      if (!c || !runForwardCase(c).pass) regressions.push(id);
-    }
-    expect(regressions, `regressions: ${regressions.slice(0, 10).join(', ')}`).toHaveLength(0);
+for (const lang of ['en', 'es', 'fr', 'de', 'ja', 'zh']) {
+  suite(`corpus: imported baseline (regression gate, ${lang})`, () => {
+    const { cases } = load<{ cases: ForwardCase[] }>(
+      `corpus/forward/imported-recognizers-${lang}.json`,
+    );
+    const baselineName = lang === 'en' ? 'forward-imported.json' : `forward-imported-${lang}.json`;
+    const baseline = load<{ passingIds: string[] }>(`corpus/baselines/${baselineName}`);
+    const byId = new Map(cases.map((c) => [c.id, c]));
+    test(`all ${baseline.passingIds.length} baselined ${lang} cases still pass`, () => {
+      const regressions: string[] = [];
+      for (const id of baseline.passingIds) {
+        const c = byId.get(id);
+        if (!c || !runForwardCase(c).pass) regressions.push(id);
+      }
+      expect(regressions, `regressions: ${regressions.slice(0, 10).join(', ')}`).toHaveLength(0);
+    });
   });
-});
+}

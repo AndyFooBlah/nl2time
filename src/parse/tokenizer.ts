@@ -15,13 +15,19 @@ const HOUR_MERIDIEM_RE = /^(\d{1,2})(am|pm|a|p)$/;
 const ORDINAL_RE = /^(\d{1,2})(st|nd|rd|th)$/;
 const NUMDATE_RE = /^(\d{1,4})([/\-.])(\d{1,2})(?:\2(\d{1,4}))?$/;
 const NUMBER_RE = /^\d{1,4}$/;
-const RAW_TOKEN_RE = /[a-z0-9:/\-.'~\u00bc\u00bd\u00be]+/gi;
+// Latin letters incl. accents (\u00c0-\u024f), CJK ideographs, kana, and
+// fullwidth forms. CJK runs are split into per-character word tokens below.
+const RAW_TOKEN_RE = /[a-z0-9:/\-.'~\u00bc\u00bd\u00be\u00c0-\u024f\u3040-\u30ff\u3400-\u9fff\uff10-\uff19\uff1a]+/gi;
+const CJK_RE = /[\u3040-\u30ff\u3400-\u9fff]/;
 
 export function tokenize(text: string): Token[] {
   const tokens: Token[] = [];
   for (const m of text.matchAll(RAW_TOKEN_RE)) {
     const raw = m[0]
       .toLowerCase()
+      // Fullwidth digits/colon → ASCII (Japanese/Chinese text).
+      .replace(/[\uff10-\uff19]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
+      .replace(/\uff1a/g, ':')
       .replace(/^-(?=\d)/, '') // "(Tue)-11:30" → clock token after paren split
       .replace(/[.]+$/, '')
       .replace(/[''`]s$/, '') // "fortnight's" → fortnight
@@ -32,6 +38,28 @@ export function tokenize(text: string): Token[] {
     if (raw === '') continue;
     const start = m.index;
     const end = start + m[0].length;
+
+    // CJK text has no spaces: emit each CJK character as its own word token,
+    // with ASCII runs between them tokenized normally ("昨日の3時" →
+    // 昨, 日, の?, 3, 時 — の is outside the token class and acts as a gap).
+    if (CJK_RE.test(raw)) {
+      let asciiRun = '';
+      let cursor = start;
+      for (const ch of raw) {
+        if (CJK_RE.test(ch)) {
+          if (asciiRun) {
+            pushToken(tokens, asciiRun, cursor, cursor + asciiRun.length);
+            asciiRun = '';
+          }
+          tokens.push({ type: 'word', value: ch, start: cursor, end: cursor + ch.length });
+        } else {
+          asciiRun += ch;
+        }
+        cursor += ch.length;
+      }
+      if (asciiRun) pushToken(tokens, asciiRun, cursor - asciiRun.length, cursor);
+      continue;
+    }
 
     // Split dash-joined mixed tokens ("18-dec", "nov-feb", "friday-jun-15")
     // into parts with explicit "-" connectors so the range machinery sees

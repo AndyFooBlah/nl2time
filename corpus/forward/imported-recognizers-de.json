@@ -1,0 +1,9029 @@
+{
+ "description": "Imported from microsoft/Recognizers-Text DateTimeModel specs (MIT). Civil-local expectations under UTC contexts; unordered `values` semantics. Regenerate with scripts/import-recognizers.mjs.",
+ "cases": [
+  {
+   "id": "rt-de-0000",
+   "text": "Ich komme am 2. Oktober zurück.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-10-02T00:00:00",
+      "endLocal": "2016-10-03T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-10-02T00:00:00",
+      "endLocal": "2017-10-03T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 0
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0001",
+   "text": "Ich komme am 22.04 zurück",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-04-22T00:00:00",
+      "endLocal": "2016-04-23T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-04-22T00:00:00",
+      "endLocal": "2017-04-23T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 1
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0002",
+   "text": "Ich komme am 22.04. zurück",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-04-22T00:00:00",
+      "endLocal": "2016-04-23T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-04-22T00:00:00",
+      "endLocal": "2017-04-23T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 2
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0003",
+   "text": "Ich komme am neunundzwanzigsten Mai zurück",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-05-29T00:00:00",
+      "endLocal": "2016-05-30T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-05-29T00:00:00",
+      "endLocal": "2017-05-30T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 3
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0004",
+   "text": "Ich komme am zweiten Mai zurück",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-05-02T00:00:00",
+      "endLocal": "2016-05-03T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-05-02T00:00:00",
+      "endLocal": "2017-05-03T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 4
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0005",
+   "text": "Ich komme am 2. Mai zurück",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-05-02T00:00:00",
+      "endLocal": "2016-05-03T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-05-02T00:00:00",
+      "endLocal": "2017-05-03T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 5
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0006",
+   "text": "Ich komme am Freitag zurück",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-04T00:00:00",
+      "endLocal": "2016-11-05T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2016-11-11T00:00:00",
+      "endLocal": "2016-11-12T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 6
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0007",
+   "text": "Ich bin nächsten Monat vom 4. bis zum 23. weg",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-12-04T00:00:00",
+      "endLocal": "2016-12-23T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 7
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0008",
+   "text": "Ich bin zwischen dem 3. und dem 12. September nicht da",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-09-03T00:00:00",
+      "endLocal": "2016-09-12T00:00:00"
+     },
+     {
+      "startLocal": "2017-09-03T00:00:00",
+      "endLocal": "2017-09-12T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 8
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0009",
+   "text": "Diesen September fahre ich in den Urlaub.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-09-01T00:00:00",
+      "endLocal": "2016-10-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 9
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0010",
+   "text": "Ich bin vom 12. Januar 2016 bis zum 22.01.2016 weg.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-01-12T00:00:00",
+      "endLocal": "2016-01-22T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 10
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0011",
+   "text": "Ich bin für die nächsten 3 Tage weg",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-08T00:00:00",
+      "endLocal": "2016-11-11T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 11
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0012",
+   "text": "Das wäre dann in der letzten Woche im Juli",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-07-25T00:00:00",
+      "endLocal": "2016-08-01T00:00:00"
+     },
+     {
+      "startLocal": "2017-07-24T00:00:00",
+      "endLocal": "2017-07-31T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 12
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0013",
+   "text": "Ich geh jetzt zurück",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2016-11-07T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 13
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0014",
+   "text": "Am 14. Oktober um 8:00:31 ist es dann so weit.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2016-10-14T08:00:31"
+     },
+     {
+      "pointLocal": "2017-10-14T08:00:31"
+     },
+     {
+      "pointLocal": "2016-10-14T20:00:31"
+     },
+     {
+      "pointLocal": "2017-10-14T20:00:31"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 14
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0015",
+   "text": "Ich werde am 22. April von 5 bis 6 Nachmittags nicht im Büro sein",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-04-22T17:00:00",
+      "endLocal": "2016-04-22T18:00:00"
+     },
+     {
+      "startLocal": "2017-04-22T17:00:00",
+      "endLocal": "2017-04-22T18:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 15
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetimerange"
+   ]
+  },
+  {
+   "id": "rt-de-0016",
+   "text": "Ich werde am 22. April von 5 bis 6 Uhr Nachmittags nicht im Büro sein",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-04-22T17:00:00",
+      "endLocal": "2016-04-22T18:00:00"
+     },
+     {
+      "startLocal": "2017-04-22T17:00:00",
+      "endLocal": "2017-04-22T18:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 16
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetimerange"
+   ]
+  },
+  {
+   "id": "rt-de-0017",
+   "text": "Dieser Abend wird schön.",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-07T16:00:00",
+      "endLocal": "2016-11-07T20:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 17
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetimerange"
+   ]
+  },
+  {
+   "id": "rt-de-0018",
+   "text": "Das ist dann nächsten Montag Nachmittag.",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-14T12:00:00",
+      "endLocal": "2016-11-14T16:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 18
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetimerange"
+   ]
+  },
+  {
+   "id": "rt-de-0019",
+   "text": "Das ist dann nächsten Montagnachmittag.",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-14T12:00:00",
+      "endLocal": "2016-11-14T16:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 19
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetimerange"
+   ]
+  },
+  {
+   "id": "rt-de-0020",
+   "text": "Ich gehe dann Dienstag Morgen zurück.",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-01T08:00:00",
+      "endLocal": "2016-11-01T12:00:00"
+     },
+     {
+      "startLocal": "2016-11-08T08:00:00",
+      "endLocal": "2016-11-08T12:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 20
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetimerange"
+   ]
+  },
+  {
+   "id": "rt-de-0021",
+   "text": "Ich gehe dann Dienstagmorgen zurück.",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-01T08:00:00",
+      "endLocal": "2016-11-01T12:00:00"
+     },
+     {
+      "startLocal": "2016-11-08T08:00:00",
+      "endLocal": "2016-11-08T12:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 21
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetimerange"
+   ]
+  },
+  {
+   "id": "rt-de-0022",
+   "text": "Ich bin für 3 Stunden weg",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "durationSeconds": 10800
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 22
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:duration"
+   ]
+  },
+  {
+   "id": "rt-de-0023",
+   "text": "Ich werde für 3,5 Jahre weg sein.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "durationSeconds": 110376000
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 23
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:duration"
+   ]
+  },
+  {
+   "id": "rt-de-0024",
+   "text": "Das dauert nur 3 Minuten",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "durationSeconds": 180
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 24
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:duration"
+   ]
+  },
+  {
+   "id": "rt-de-0025",
+   "text": "Das waren 123,45 sek",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "durationSeconds": 123.45
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 25
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:duration"
+   ]
+  },
+  {
+   "id": "rt-de-0026",
+   "text": "Ich bin den ganzen Tag weg",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "durationSeconds": 86400
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 26
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:duration"
+   ]
+  },
+  {
+   "id": "rt-de-0034",
+   "text": "Es ist halb 8.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2016-11-07T07:30:00"
+     },
+     {
+      "pointLocal": "2016-11-07T19:30:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 34
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0035",
+   "text": "Viertel nach 8 Abends",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2016-11-07T20:15:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 35
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0036",
+   "text": "Ich bin von 17 bis 18 Uhr weg",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-07T17:00:00",
+      "endLocal": "2016-11-07T18:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 36
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:timerange"
+   ]
+  },
+  {
+   "id": "rt-de-0037",
+   "text": "Ich bin dann morgens von 5 bis sieben weg.",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-07T05:00:00",
+      "endLocal": "2016-11-07T07:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 37
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:timerange"
+   ]
+  },
+  {
+   "id": "rt-de-0038",
+   "text": "Ich bin von 5 Uhr Nachmittags bis 6 Uhr Nachmittags weg",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-07T17:00:00",
+      "endLocal": "2016-11-07T18:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 38
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:timerange"
+   ]
+  },
+  {
+   "id": "rt-de-0039",
+   "text": "Ich bin zwischen 4 und 7 Uhr nicht hier",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-07T04:00:00",
+      "endLocal": "2016-11-07T07:00:00"
+     },
+     {
+      "startLocal": "2016-11-07T16:00:00",
+      "endLocal": "2016-11-07T19:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 39
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:timerange"
+   ]
+  },
+  {
+   "id": "rt-de-0040",
+   "text": "Lass uns mal gegen Abend treffen",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-07T16:00:00",
+      "endLocal": "2016-11-07T20:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 40
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:timerange"
+   ]
+  },
+  {
+   "id": "rt-de-0041",
+   "text": "Eigentlich ist das jetzt schon",
+   "ctx": {
+    "now": "2017-09-28T14:11:10.9626841Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2017-09-28T14:11:10"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 41
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0042",
+   "text": "Ich bin in 5 Minuten zurück",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2016-11-07T00:05:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 42
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0043",
+   "text": "in 5 minuten",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2016-11-07T00:05:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 43
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0045",
+   "text": "Kommen Sie in der übernächsten Woche am Donnerstag zwischen 4 und 6 Uhr nachmittags",
+   "ctx": {
+    "now": "2020-07-29T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-08-13T16:00:00",
+      "endLocal": "2020-08-13T18:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 45
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetimerange"
+   ]
+  },
+  {
+   "id": "rt-de-0046",
+   "text": "Wie sieht es übernächste Woche aus?",
+   "ctx": {
+    "now": "2020-07-29T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-08-10T00:00:00",
+      "endLocal": "2020-08-17T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 46
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0047",
+   "text": "Der Euro ist im harten Handel heute um 15% gegenüber dem US-Dollar gefallen.",
+   "ctx": {
+    "now": "2017-12-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2017-12-04T00:00:00",
+      "endLocal": "2017-12-05T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 47
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0049",
+   "text": "Lass uns um 18:12 einen Kaffee trinken gehen",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-05T18:12:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 49
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0050",
+   "text": "Lass uns um 18 uhr 12 einen Kaffee trinken gehen",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-05T18:12:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 50
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0051",
+   "text": "Lass uns um 18 uhr und 12 einen Kaffee trinken gehen",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-05T18:12:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 51
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0052",
+   "text": "Lass uns um 18.12 uhr einen Kaffee trinken gehen",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-05T18:12:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 52
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0053",
+   "text": "Es ist zehn Uhr.",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-05T10:00:00"
+     },
+     {
+      "pointLocal": "2019-08-05T22:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 53
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0055",
+   "text": "Am Wochenende bin ich nicht hier",
+   "ctx": {
+    "now": "2019-08-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-08-10T00:00:00",
+      "endLocal": "2019-08-12T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 55
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0056",
+   "text": "Unter der woche bin ich nicht hier",
+   "ctx": {
+    "now": "2019-08-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-08-05T00:00:00",
+      "endLocal": "2019-08-10T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 56
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0058",
+   "text": "Ich gehe um viertel nach drei",
+   "ctx": {
+    "now": "2019-08-27T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-27T03:15:00"
+     },
+     {
+      "pointLocal": "2019-08-27T15:15:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 58
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0059",
+   "text": "Wie wird das Wetter nächsten Donnerstag bis Samstag in Genf",
+   "ctx": {
+    "now": "2019-09-03T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-09-12T00:00:00",
+      "endLocal": "2019-09-14T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 59
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0060",
+   "text": "Setze Timer auf eine Viertelstunde.",
+   "ctx": {
+    "now": "2019-09-03T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "durationSeconds": 900
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 60
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:duration"
+   ]
+  },
+  {
+   "id": "rt-de-0061",
+   "text": "Setze Timer auf ein Dreiviertelstunde",
+   "ctx": {
+    "now": "2019-09-03T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "durationSeconds": 2700
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 61
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:duration"
+   ]
+  },
+  {
+   "id": "rt-de-0062",
+   "text": "eine halbe Stunde",
+   "ctx": {
+    "now": "2019-09-03T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "durationSeconds": 1800
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 62
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:duration"
+   ]
+  },
+  {
+   "id": "rt-de-0067",
+   "text": "Was wird das wetter in den nächsten beiden Tage?",
+   "ctx": {
+    "now": "2019-09-19T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-09-20T00:00:00",
+      "endLocal": "2019-09-22T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 67
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0068",
+   "text": "sende eine geburtstagsabfrage für morgen",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-12-03T00:00:00",
+      "endLocal": "2019-12-04T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 68
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0069",
+   "text": "send eine geburtstagsabfrage für den 28.10.",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-10-28T00:00:00",
+      "endLocal": "2019-10-29T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2020-10-28T00:00:00",
+      "endLocal": "2020-10-29T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 69
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0070",
+   "text": "send eine geburtstagsabfrage für den 28.Oktober",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-10-28T00:00:00",
+      "endLocal": "2019-10-29T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2020-10-28T00:00:00",
+      "endLocal": "2020-10-29T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 70
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0071",
+   "text": "send eine geburtstagsabfrage für den 28. Oktober",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-10-28T00:00:00",
+      "endLocal": "2019-10-29T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2020-10-28T00:00:00",
+      "endLocal": "2020-10-29T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 71
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0072",
+   "text": "send eine geburtstagsabfrage für 28.10.",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-10-28T00:00:00",
+      "endLocal": "2019-10-29T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2020-10-28T00:00:00",
+      "endLocal": "2020-10-29T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 72
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0073",
+   "text": "send eine geburtstagsabfrage für 28.Oktober",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-10-28T00:00:00",
+      "endLocal": "2019-10-29T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2020-10-28T00:00:00",
+      "endLocal": "2020-10-29T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 73
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0074",
+   "text": "Am Ende des Monats",
+   "ctx": {
+    "now": "2020-04-30T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-04-16T00:00:00",
+      "endLocal": "2020-05-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 74
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0077",
+   "text": "28. Dezember 2012 wurde das Geschäft der Land Rover Private Unlimited Company auf die Jaguar Cars Limited übertragen und im Zuge dessen auf Jaguar Land Rover Limited umfirmiert",
+   "ctx": {
+    "now": "2020-04-30T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2012-12-28T00:00:00",
+      "endLocal": "2012-12-29T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 77
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0079",
+   "text": "10/1-11/2/2017",
+   "ctx": {
+    "now": "2018-10-24T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2017-01-10T00:00:00",
+      "endLocal": "2017-02-11T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 79
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0080",
+   "text": "dienstag 11:00 uhr",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2016-11-01T11:00:00"
+     },
+     {
+      "pointLocal": "2016-11-08T11:00:00"
+     },
+     {
+      "pointLocal": "2016-11-01T23:00:00"
+     },
+     {
+      "pointLocal": "2016-11-08T23:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 80
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0081",
+   "text": "Ich werde da sein am Mittwoch 4:00.",
+   "ctx": {
+    "now": "2019-04-15T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-04-10T04:00:00"
+     },
+     {
+      "pointLocal": "2019-04-17T04:00:00"
+     },
+     {
+      "pointLocal": "2019-04-10T16:00:00"
+     },
+     {
+      "pointLocal": "2019-04-17T16:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 81
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0082",
+   "text": "aktuelle Uhrzeit in Berlin",
+   "ctx": {
+    "now": "2018-10-24T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2018-10-24T12:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 82
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0083",
+   "text": "Es ist dreiviertel 8.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2016-11-07T07:45:00"
+     },
+     {
+      "pointLocal": "2016-11-07T19:45:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 83
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0084",
+   "text": "Es ist viertel 8.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2016-11-07T07:15:00"
+     },
+     {
+      "pointLocal": "2016-11-07T19:15:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 84
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0085",
+   "text": "Spule anderthalb Stunden vor",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-06T22:30:00",
+      "endLocal": "2016-11-07T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 85
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetimerange"
+   ]
+  },
+  {
+   "id": "rt-de-0086",
+   "text": "Spring zweieinhalb Stunden nach vorne",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "durationSeconds": 9000
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 86
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:duration"
+   ]
+  },
+  {
+   "id": "rt-de-0087",
+   "text": "Wir haben anderthalb Stunden gewartet.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "durationSeconds": 5400
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 87
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:duration"
+   ]
+  },
+  {
+   "id": "rt-de-0088",
+   "text": "Wir haben fünfeinhalb Stunden gewartet.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "durationSeconds": 19800
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 88
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:duration"
+   ]
+  },
+  {
+   "id": "rt-de-0089",
+   "text": "Es wird unter der woche passieren",
+   "ctx": {
+    "now": "2019-08-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-08-05T00:00:00",
+      "endLocal": "2019-08-10T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 89
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0090",
+   "text": "Es wird nächste arbeitswoche passieren",
+   "ctx": {
+    "now": "2019-08-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-08-12T00:00:00",
+      "endLocal": "2019-08-17T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 90
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0091",
+   "text": "Es ist letzte werktags passiert",
+   "ctx": {
+    "now": "2019-08-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-07-29T00:00:00",
+      "endLocal": "2019-08-03T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 91
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0092",
+   "text": "was läuft am morgen",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-07T08:00:00",
+      "endLocal": "2016-11-07T12:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 92
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:timerange"
+   ]
+  },
+  {
+   "id": "rt-de-0094",
+   "text": "gehe zur Mittagszeit",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2016-11-07T12:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 94
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0095",
+   "text": "gehe auf Spätabends",
+   "ctx": {
+    "now": "2019-08-01T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-08-01T18:00:00",
+      "endLocal": "2019-08-01T20:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 95
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:timerange"
+   ]
+  },
+  {
+   "id": "rt-de-0096",
+   "text": "gehe auf Spätnachmittags",
+   "ctx": {
+    "now": "2019-08-01T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-08-01T14:00:00",
+      "endLocal": "2019-08-01T16:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 96
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:timerange"
+   ]
+  },
+  {
+   "id": "rt-de-0099",
+   "text": "gehe um Mitternacht",
+   "ctx": {
+    "now": "2018-09-07T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2018-09-07T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 99
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0100",
+   "text": "Was kommt in drei Wochen auf ARD",
+   "ctx": {
+    "now": "2019-08-12T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-09-02T00:00:00",
+      "endLocal": "2019-09-03T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 100
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0101",
+   "text": "Was kommt in 3 Wochen auf ARD",
+   "ctx": {
+    "now": "2019-08-12T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-09-02T00:00:00",
+      "endLocal": "2019-09-03T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 101
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0102",
+   "text": "Erinnere mich um 12 Uhr nachts aufzustehen",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-05T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 102
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0103",
+   "text": "Erinnere mich um 12 Uhr abends aufzustehen",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-05T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 103
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0104",
+   "text": "Erinnere mich um 12 nachts aufzustehen",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-05T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 104
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0105",
+   "text": "Erinnere mich um 12 abends aufzustehen",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-05T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 105
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0110",
+   "text": "Wir hätten einen Termin für dieses Jahr vereinbaren können.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2018-01-01T00:00:00",
+      "endLocal": "2019-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 110
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0111",
+   "text": "Wir hätten einen Termin für diesen Jahr vereinbaren können.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2018-01-01T00:00:00",
+      "endLocal": "2019-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 111
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0112",
+   "text": "Wir hätten einen Termin für diesem Jahr vereinbaren können.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2018-01-01T00:00:00",
+      "endLocal": "2019-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 112
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0113",
+   "text": "Wir hätten einen Termin für diese Jahr vereinbaren können.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2018-01-01T00:00:00",
+      "endLocal": "2019-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 113
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0114",
+   "text": "Wir hätten einen Termin für letztes Jahr vereinbaren können.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2017-01-01T00:00:00",
+      "endLocal": "2018-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 114
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0115",
+   "text": "Wir hätten einen Termin für letzten Jahr vereinbaren können.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2017-01-01T00:00:00",
+      "endLocal": "2018-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 115
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0116",
+   "text": "Wir hätten einen Termin für letzte Jahr vereinbaren können.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2017-01-01T00:00:00",
+      "endLocal": "2018-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 116
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0117",
+   "text": "Wir hätten einen Termin für vorletztes Jahr vereinbaren können.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-01-01T00:00:00",
+      "endLocal": "2017-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 117
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0118",
+   "text": "Wir hätten einen Termin für vorletzten Jahr vereinbaren können.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-01-01T00:00:00",
+      "endLocal": "2017-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 118
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0119",
+   "text": "Wir hätten einen Termin für vorletztem Jahr vereinbaren können.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-01-01T00:00:00",
+      "endLocal": "2017-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 119
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0120",
+   "text": "Ich komme nächstes Jahr wieder.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-01-01T00:00:00",
+      "endLocal": "2020-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 120
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0121",
+   "text": "29/2",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-02-29T00:00:00",
+      "endLocal": "2016-03-01T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2020-02-29T00:00:00",
+      "endLocal": "2020-03-01T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 121
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0122",
+   "text": "29/2",
+   "ctx": {
+    "now": "2019-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-02-29T00:00:00",
+      "endLocal": "2016-03-01T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2020-02-29T00:00:00",
+      "endLocal": "2020-03-01T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 122
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0123",
+   "text": "29/2",
+   "ctx": {
+    "now": "2020-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-02-29T00:00:00",
+      "endLocal": "2020-03-01T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2024-02-29T00:00:00",
+      "endLocal": "2024-03-01T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 123
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0126",
+   "text": "29/2/2020",
+   "ctx": {
+    "now": "2020-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-02-29T00:00:00",
+      "endLocal": "2020-03-01T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 126
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0127",
+   "text": "28/2-1/3",
+   "ctx": {
+    "now": "2019-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-02-28T00:00:00",
+      "endLocal": "2019-03-01T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2020-02-28T00:00:00",
+      "endLocal": "2020-03-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 127
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0128",
+   "text": "29/2-1/3",
+   "ctx": {
+    "now": "2019-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-02-29T00:00:00",
+      "endLocal": "2016-03-01T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2020-02-29T00:00:00",
+      "endLocal": "2020-03-01T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 128
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0130",
+   "text": "Meine Temperatur war 37,1 am Morgen",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-07T08:00:00",
+      "endLocal": "2016-11-07T12:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 130
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:timerange"
+   ]
+  },
+  {
+   "id": "rt-de-0131",
+   "text": "Ich werde am Sep-23-2020.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-09-23T00:00:00",
+      "endLocal": "2020-09-24T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 131
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0132",
+   "text": "Ich werde am September-2020-23.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-09-23T00:00:00",
+      "endLocal": "2020-09-24T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 132
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0133",
+   "text": "Ich werde am 2020/23/Sep.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-09-23T00:00:00",
+      "endLocal": "2020-09-24T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 133
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0134",
+   "text": "Ich werde am 2020/Sep/23",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-09-23T00:00:00",
+      "endLocal": "2020-09-24T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 134
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0135",
+   "text": "Ich werde am 23/Sep/2020",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-09-23T00:00:00",
+      "endLocal": "2020-09-24T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 135
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0136",
+   "text": "Ich werde am 23-2020-September",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-09-23T00:00:00",
+      "endLocal": "2020-09-24T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 136
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0137",
+   "text": "Ich besuche dich an Palmsonntag 2019",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-04-14T00:00:00",
+      "endLocal": "2019-04-15T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 137
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0138",
+   "text": "Ich besuche dich an Karsamstag",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-03-26T00:00:00",
+      "endLocal": "2016-03-27T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-04-15T00:00:00",
+      "endLocal": "2017-04-16T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 138
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0139",
+   "text": "Ich besuche dich an Fastnachtssamstag",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-02-06T00:00:00",
+      "endLocal": "2016-02-07T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-02-25T00:00:00",
+      "endLocal": "2017-02-26T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 139
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0140",
+   "text": "Ich besuche dich an Fastnachtssonntag im nächsten Jahr",
+   "ctx": {
+    "now": "2017-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2018-02-11T00:00:00",
+      "endLocal": "2018-02-12T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 140
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0141",
+   "text": "Ich besuche dich an Heilige Drei Könige im Jahr 2020",
+   "ctx": {
+    "now": "2017-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-01-06T00:00:00",
+      "endLocal": "2020-01-07T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 141
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0142",
+   "text": "Ich besuche dich an Barbaratag",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2017-12-04T00:00:00",
+      "endLocal": "2017-12-05T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2018-12-04T00:00:00",
+      "endLocal": "2018-12-05T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 142
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0143",
+   "text": "Ich besuche dich an Weltkindertag 2019",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-06-01T00:00:00",
+      "endLocal": "2019-06-02T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 143
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0144",
+   "text": "Ich besuche dich an Augsburger Friedensfest letzten Jahres",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2017-08-08T00:00:00",
+      "endLocal": "2017-08-09T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 144
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0145",
+   "text": "Ich besuche dich an Johannistag",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2018-06-24T00:00:00",
+      "endLocal": "2018-06-25T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2019-06-24T00:00:00",
+      "endLocal": "2019-06-25T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 145
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0146",
+   "text": "Ich besuche dich an Peter und Paul ",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2018-06-29T00:00:00",
+      "endLocal": "2018-06-30T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2019-06-29T00:00:00",
+      "endLocal": "2019-06-30T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 146
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0147",
+   "text": "Ich besuche dich an Allerheiligen",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2018-11-01T00:00:00",
+      "endLocal": "2018-11-02T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2019-11-01T00:00:00",
+      "endLocal": "2019-11-02T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 147
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0149",
+   "text": "Ich besuche dich an So 27.02.2022",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2022-02-27T00:00:00",
+      "endLocal": "2022-02-28T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 149
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0150",
+   "text": "Ich besuche dich in 15 Tg.",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2018-11-22T00:00:00",
+      "endLocal": "2018-11-23T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 150
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0151",
+   "text": "Die ukrainische Heidelbeersaison könnte dieses Jahr später beginnen.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2018-07-01T00:00:00",
+      "endLocal": "2019-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 151
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0152",
+   "text": "Lagerhaltung für Butter dieses Jahr früher begonnen.",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2018-01-01T00:00:00",
+      "endLocal": "2018-07-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 152
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0153",
+   "text": "Mein nächstes Gehalt ist Dienstag, der 25..",
+   "ctx": {
+    "now": "2021-05-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2021-05-25T00:00:00",
+      "endLocal": "2021-05-26T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 153
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0155",
+   "text": "von Montag 7 Uhr bis Freitag 15 Uhr.",
+   "ctx": {
+    "now": "2021-05-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2021-05-03T07:00:00",
+      "endLocal": "2021-05-07T15:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 155
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetimerange"
+   ]
+  },
+  {
+   "id": "rt-de-0156",
+   "text": "Am Erntedankfest sind viele Kirchen kunstvoll mit Feldfrüchten verziert",
+   "ctx": {
+    "now": "2021-05-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-10-04T00:00:00",
+      "endLocal": "2020-10-05T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2021-10-03T00:00:00",
+      "endLocal": "2021-10-04T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 156
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0157",
+   "text": "Wann ist Pfingsten 2022?",
+   "ctx": {
+    "now": "2021-05-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2022-06-05T00:00:00",
+      "endLocal": "2022-06-06T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 157
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0158",
+   "text": "Selbst mitternachts hat das Schnellrestaurant geöffnet.",
+   "ctx": {
+    "now": "2021-06-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2021-06-18T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 158
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0166",
+   "text": "Ich bin geboren in dem Jahr.",
+   "ctx": {
+    "now": "2019-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-01-01T00:00:00",
+      "endLocal": "2020-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 166
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0167",
+   "text": "Das Jahr hatte Höhen und Tiefen.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-01-01T00:00:00",
+      "endLocal": "2017-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 167
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0168",
+   "text": "Mit dem Jahr 2009 war ich zufrieden.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2009-01-01T00:00:00",
+      "endLocal": "2010-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 168
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0169",
+   "text": "Publikationen aus dem Jahr 2012.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2012-01-01T00:00:00",
+      "endLocal": "2013-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 169
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0171",
+   "text": "für das jahr 2010 sind wieder verschiedene ausstellungen und projekte geplant.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2010-01-01T00:00:00",
+      "endLocal": "2011-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 171
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0172",
+   "text": "Es wurde zum Film des Jahres gekürt.",
+   "ctx": {
+    "now": "2021-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2021-01-01T00:00:00",
+      "endLocal": "2022-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 172
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0175",
+   "text": "In Deutschland gibt es unter anderem den meteorologischen und kalendarischen Herbstanfang.",
+   "ctx": {
+    "now": "2020-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-09-22T00:00:00",
+      "endLocal": "2020-09-23T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2021-09-22T00:00:00",
+      "endLocal": "2021-09-23T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 175
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0176",
+   "text": "Mit dem Ewigkeitssonntag endet das Kirchenjahr.",
+   "ctx": {
+    "now": "2020-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2019-11-24T00:00:00",
+      "endLocal": "2019-11-25T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2020-11-22T00:00:00",
+      "endLocal": "2020-11-23T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 176
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0177",
+   "text": "nächstem Jahr.",
+   "ctx": {
+    "now": "2021-11-01T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2022-01-01T00:00:00",
+      "endLocal": "2023-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 177
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0178",
+   "text": "letztem Jahr.",
+   "ctx": {
+    "now": "2021-11-01T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2020-01-01T00:00:00",
+      "endLocal": "2021-01-01T00:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 178
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0179",
+   "text": "Was morgens um 7 Uhr machen?",
+   "ctx": {
+    "now": "2017-12-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2017-12-04T07:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 179
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0180",
+   "text": "Die Feier beginnt um 9 Uhr morgens",
+   "ctx": {
+    "now": "2017-12-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2017-12-04T09:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 180
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0181",
+   "text": "Nehmen Sie abends um 8 Uhr einen Tropfen",
+   "ctx": {
+    "now": "2017-12-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2017-12-04T20:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 181
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:time"
+   ]
+  },
+  {
+   "id": "rt-de-0183",
+   "text": "Die Veranstaltung beginnt am sonntag frühmorgens um 8:00",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-04T08:00:00"
+     },
+     {
+      "pointLocal": "2019-08-11T08:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 183
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0184",
+   "text": "Die Veranstaltung beginnt am mittwochfrühmorgens um 8:00",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-07-31T08:00:00"
+     },
+     {
+      "pointLocal": "2019-08-07T08:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 184
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0186",
+   "text": "Die Veranstaltung beginnt am sonntag um 8:00 frühmorgens",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-04T08:00:00"
+     },
+     {
+      "pointLocal": "2019-08-11T08:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 186
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0187",
+   "text": "Die Veranstaltung beginnt am sonntag spätabend um 10:00",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "pointLocal": "2019-08-04T22:00:00"
+     },
+     {
+      "pointLocal": "2019-08-11T22:00:00"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 187
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:datetime"
+   ]
+  },
+  {
+   "id": "rt-de-0189",
+   "text": "Ich bin November 19-20 unterwegs",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2015-11-19T00:00:00",
+      "endLocal": "2015-11-20T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2016-11-19T00:00:00",
+      "endLocal": "2016-11-20T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 189
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:daterange"
+   ]
+  },
+  {
+   "id": "rt-de-0191",
+   "text": "Ich komme am siebter 4. zurück.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-04-07T00:00:00",
+      "endLocal": "2016-04-08T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-04-07T00:00:00",
+      "endLocal": "2017-04-08T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 191
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0192",
+   "text": "Ich komme am 7. vierter zurück.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-04-07T00:00:00",
+      "endLocal": "2016-04-08T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-04-07T00:00:00",
+      "endLocal": "2017-04-08T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 192
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0194",
+   "text": "Ich komme am Donnerstag siebter 4. zurück.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-04-07T00:00:00",
+      "endLocal": "2016-04-08T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-04-07T00:00:00",
+      "endLocal": "2017-04-08T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 194
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0195",
+   "text": "Ich komme am Donnerstag 7. vierter zurück.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-04-07T00:00:00",
+      "endLocal": "2016-04-08T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-04-07T00:00:00",
+      "endLocal": "2017-04-08T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 195
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0196",
+   "text": "Das treffen ist Donnerstag 7. vierter 2016.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-04-07T00:00:00",
+      "endLocal": "2016-04-08T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 196
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0197",
+   "text": "Das treffen ist am 27. 11.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2015-11-27T00:00:00",
+      "endLocal": "2015-11-28T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2016-11-27T00:00:00",
+      "endLocal": "2016-11-28T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 197
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0198",
+   "text": "Das treffen ist am dritter/11.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-11-03T00:00:00",
+      "endLocal": "2016-11-04T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-11-03T00:00:00",
+      "endLocal": "2017-11-04T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 198
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0199",
+   "text": "Das treffen ist Montag zwölfter fünfter.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-05-12T00:00:00",
+      "endLocal": "2016-05-13T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-05-12T00:00:00",
+      "endLocal": "2017-05-13T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 199
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0200",
+   "text": "Ich komme am Donnerstag, den siebten vierten zurück.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2016-04-07T00:00:00",
+      "endLocal": "2016-04-08T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2017-04-07T00:00:00",
+      "endLocal": "2017-04-08T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 200
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  },
+  {
+   "id": "rt-de-0201",
+   "text": "Ich komme am Donnerstag, den siebenundzwanzigsten zwölften zurück.",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2015-12-27T00:00:00",
+      "endLocal": "2015-12-28T00:00:00",
+      "grain": "day"
+     },
+     {
+      "startLocal": "2016-12-27T00:00:00",
+      "endLocal": "2016-12-28T00:00:00",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "aspirational",
+   "source": {
+    "name": "microsoft/Recognizers-Text",
+    "license": "MIT",
+    "url": "https://github.com/microsoft/Recognizers-Text",
+    "path": "Specs/DateTime/German/DateTimeModel.json",
+    "commit": "da7edcff59f669b2a460ab9d400e36298f0d658e",
+    "index": 201
+   },
+   "tags": [
+    "imported",
+    "rt-de",
+    "rt:date"
+   ]
+  }
+ ]
+}

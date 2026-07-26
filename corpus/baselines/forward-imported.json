@@ -1,5 +1,5 @@
 {
- "corpus": "forward/imported-recognizers-en.json",
+ "corpus": "corpus/forward/imported-recognizers-en.json",
  "total": 1031,
  "passing": 869,
  "passingIds": [
