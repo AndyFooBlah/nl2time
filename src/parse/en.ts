@@ -2401,6 +2401,26 @@ const ruleClockTime: Rule = (tokens, i, ctx) => {
         role: 'time',
       };
     }
+    // Day-shifting period phrases: "10 last night", "8 yesterday morning",
+    // "5 tomorrow afternoon" (#10). Emit the bare hour with meridiem
+    // 'unknown' and stop — the following day-part matches separately and the
+    // refiner merges them, with the period supplying the meridiem and the
+    // deictic supplying the day shift. Same noun-guard as "this <period>":
+    // "the count was 4 last night" keeps the period's range reading.
+    const relNext = word(tokens[i + hn.consumed]);
+    const isDayShifter =
+      relNext !== undefined &&
+      (REL_SYNONYMS[relNext] !== undefined ||
+        relNext === 'yesterday' || relNext === 'tomorrow' || relNext === 'today');
+    const relPeriodWord = isDayShifter ? word(tokens[i + hn.consumed + 1]) : undefined;
+    if (allowThis && relPeriodWord !== undefined && PERIOD_WORDS[relPeriodWord]) {
+      return {
+        expr: { op: 'literal', time: { hour: hn.value, meridiem: 'unknown' } },
+        consumed: hn.consumed,
+        confidence: 0.95,
+        role: 'time',
+      };
+    }
     if (['at', 'from', 'around', 'about'].includes(word(tokens[i - 1]) ?? '')) {
       return {
         expr: { op: 'literal', time: { hour: hn.value, meridiem: 'unknown' } },

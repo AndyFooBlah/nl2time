@@ -991,6 +991,134 @@
    "tags": [
     "issue-9"
    ]
+  },
+  {
+   "id": "fw-0046",
+   "text": "10 last night",
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2026-07-19T22:00:00",
+      "endLocal": "2026-07-19T23:00:00"
+     }
+    ]
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "issue-10"
+   ],
+   "note": "day-shifted period supplies meridiem (pm) AND the day shift"
+  },
+  {
+   "id": "fw-0047",
+   "text": "8 yesterday morning",
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2026-07-19T08:00:00",
+      "endLocal": "2026-07-19T09:00:00"
+     }
+    ]
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "issue-10"
+   ]
+  },
+  {
+   "id": "fw-0048",
+   "text": "5 tomorrow afternoon",
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2026-07-21T17:00:00",
+      "endLocal": "2026-07-21T18:00:00"
+     }
+    ]
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "issue-10"
+   ]
+  },
+  {
+   "id": "fw-0049",
+   "text": "3 last night",
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2026-07-19T03:00:00",
+      "endLocal": "2026-07-19T04:00:00"
+     }
+    ]
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "issue-10"
+   ],
+   "note": "small hours belong to the night: am reading"
+  },
+  {
+   "id": "fw-0050",
+   "text": "the count was 4 last night",
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "expect": {
+    "values": [
+     {
+      "startLocal": "2026-07-19T21:00:00",
+      "endLocal": "2026-07-20T06:00:00"
+     }
+    ]
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "issue-10"
+   ],
+   "note": "noun-guard: unlicensed bare number keeps the period's range reading"
   }
  ]
 }
