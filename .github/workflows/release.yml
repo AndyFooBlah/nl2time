@@ -1,0 +1,68 @@
+name: Release
+# Trusted-publishing releases (docs/RELEASING.md): no stored registry secrets.
+# Publishing a GitHub release with tag v*  → npm  (JS package, repo root)
+# Publishing a GitHub release with tag py-v* → PyPI (python/ package)
+# Both registries authenticate via OIDC trusted publishers registered against
+# THIS workflow filename (release.yml) and the environments below.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  npm:
+    if: startsWith(github.event.release.tag_name, 'v')
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write # OIDC for npm trusted publishing (provenance automatic)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      # npm trusted publishing requires npm >= 11.5.1
+      - run: npm install -g npm@latest && npm --version
+      - name: Guard - tag matches package.json version
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          PKG="v$(node -p "require('./package.json').version")"
+          if [ "$TAG" != "$PKG" ]; then
+            echo "Tag $TAG does not match package version $PKG" >&2
+            exit 1
+          fi
+      - run: npm ci
+      - run: npm run typecheck && npm test && npm run build
+      - run: npm publish
+
+  pypi:
+    if: startsWith(github.event.release.tag_name, 'py-v')
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write # OIDC for PyPI trusted publishing
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Guard - tag matches pyproject version
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          PKG="py-v$(python3 -c 'import tomllib;print(tomllib.load(open("python/pyproject.toml","rb"))["project"]["version"])')"
+          if [ "$TAG" != "$PKG" ]; then
+            echo "Tag $TAG does not match python package version $PKG" >&2
+            exit 1
+          fi
+      - name: Test
+        run: uv run --project python --extra dev pytest python/tests -q
+      - name: Build
+        run: uv build python
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: python/dist

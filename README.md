@@ -124,7 +124,7 @@ The Python engine port lives in [`python/`](python/) (`whenever`-based time mode
 
 ## Release history
 
-See **[CHANGELOG.md](CHANGELOG.md)** and [GitHub releases](https://github.com/AndyFooBlah/nl2time/releases). Current: v0.3.0 (multilingual parsing).
+See **[CHANGELOG.md](CHANGELOG.md)** and [GitHub releases](https://github.com/AndyFooBlah/nl2time/releases). Current: v0.3.0 (JS, multilingual parsing) · py-v0.1.0 (Python engine). Releases publish to npm/PyPI automatically via OIDC trusted publishing — see [docs/RELEASING.md](docs/RELEASING.md).
 
 ## Development
 
