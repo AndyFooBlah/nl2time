@@ -1,5 +1,9 @@
 # Changelog
 
+## Python 0.1.0 (PyPI) — 2026-07-26
+
+First Python release: the language-neutral engine — IR validation, `TimeContext`, deterministic `resolve()` — at 100% bit-exact parity with the JS reference (2,760 fixtures). `pip install nl2time`. Parsers/describe not yet ported.
+
 ## 0.3.0 — 2026-07-26
 
 **Multilingual parsing.** Six languages, corpus-first, each with a CI-gated conformance baseline against imported [Microsoft Recognizers-Text](https://github.com/microsoft/Recognizers-Text) specs:
