@@ -96,7 +96,7 @@ Parsing is multilingual, dispatched by the context's locale. Each language climb
 | Japanese | 393 | 96% |
 | Chinese (Simplified) | 175 | 95% |
 | French | 406 | 90% |
-| Spanish | 579 | climbing |
+| Spanish | 579 | 96% |
 
 Latin-script languages share a parameterized rule factory (`makeLatinRules` + a lexicon); CJK languages use per-character tokenization with bespoke rule modules. `describe()` output is currently English; localized rendering is on the roadmap. Remaining failure mass is dominated by documented upstream divergences (e.g. issue #14).
 
