@@ -21,7 +21,7 @@ const FILES = [
   { vendored: 'DateTimeModel.EnglishOthers.json', specPath: 'Specs/DateTime/EnglishOthers/DateTimeModel.json', locale: 'en-GB', prefix: 'rt-gb', tag: 'rt-en-gb', out: 'en' },
   { vendored: 'DateTimeModelComplexCalendar.json', specPath: 'Specs/DateTime/English/DateTimeModelComplexCalendar.json', locale: 'en-US', prefix: 'rt-cc', tag: 'rt-complex', out: 'en' },
   { vendored: 'DateTimeModel.Spanish.json', specPath: 'Specs/DateTime/Spanish/DateTimeModel.json', locale: 'es-ES', prefix: 'rt-es', tag: 'rt-es', out: 'es' },
-  { vendored: 'DateTimeModel.French.json', specPath: 'Specs/DateTime/French/DateTimeModel.json', locale: 'fr-FR', prefix: 'rt-fr', tag: 'rt-fr', out: 'fr' },
+  { vendored: 'DateTimeModel.French.json', specPath: 'Specs/DateTime/French/DateTimeModel.json', locale: 'fr-FR', prefix: 'rt-fr', tag: 'rt-fr', out: 'fr', refSuspect: true },
   { vendored: 'DateTimeModel.German.json', specPath: 'Specs/DateTime/German/DateTimeModel.json', locale: 'de-DE', prefix: 'rt-de', tag: 'rt-de', out: 'de' },
   { vendored: 'DateTimeModel.Japanese.json', specPath: 'Specs/DateTime/Japanese/DateTimeModel.json', locale: 'ja-JP', prefix: 'rt-ja', tag: 'rt-ja', out: 'ja' },
   { vendored: 'DateTimeModel.Chinese.json', specPath: 'Specs/DateTime/Chinese/DateTimeModel.json', locale: 'zh-CN', prefix: 'rt-zh', tag: 'rt-zh', out: 'zh' },
@@ -34,7 +34,7 @@ const GRAIN_BY_TIMEX_DURATION = {
   P1Y: 'year',
 };
 
-const skip = { multiResult: 0, set: 0, timezone: 0, openRange: 0, nullType: 0, noValues: 0, unmappable: 0 };
+const skip = { multiResult: 0, set: 0, timezone: 0, openRange: 0, nullType: 0, noValues: 0, unmappable: 0, refMismatch: 0 };
 const casesByOut = new Map();
 
 function pad(dt) {
@@ -149,6 +149,25 @@ for (const fileDef of FILES) {
       continue;
     }
     expect = { values: mapped };
+  }
+
+  // Some upstream spec files carry a stale Context.ReferenceDateTime: the
+  // expectations were computed against a different "now" (French specs).
+  // Cases where every expected value is ≥2 years from the stated reference
+  // and the input names no explicit year are ungradeable — skip, counted.
+  if (fileDef.refSuspect && expect.values) {
+    const refYear = Number(refDateTime.slice(0, 4));
+    const years = expect.values.flatMap((v) =>
+      ['startLocal', 'endLocal', 'pointLocal']
+        .map((k) => v[k])
+        .filter(Boolean)
+        .map((s) => Number(s.slice(0, 4))),
+    );
+    const hasExplicitYear = /\d{4}/.test(spec.Input);
+    if (years.length > 0 && !hasExplicitYear && years.every((y) => Math.abs(y - refYear) >= 2)) {
+      skip.refMismatch += 1;
+      continue;
+    }
   }
 
   cases.push({
