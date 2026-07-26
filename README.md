@@ -60,6 +60,10 @@ const result = await parseWithFallback(text, ctx, async (text, ctxSummary) => {
 
 See [docs/agents.md](docs/agents.md) for reference architectures (analytics agents, tool-calling, deferred resolution).
 
+## Domain adaptation
+
+Domains with conflicting or novel vocabulary ("FY26", "EOD means 5pm", "swing shift") extend the parser **without forking** via declarative JSON packs — phrase→IR templates with integer/year captures that compete with (and can shadow) the built-in rules, plus a `disable` list and a code-level `Rule` escape hatch. Packs ship their own golden cases, runnable with `nl2time/corpus`. See [docs/extending.md](docs/extending.md) and the worked [fiscal-calendar example](examples/fiscal-july/).
+
 ## Policy, not guesses
 
 Cultural/ambiguous semantics are explicit `TimeContext` knobs with CLDR-derived defaults:

@@ -11,6 +11,7 @@ import { TimeContext, type TimeContextOptions } from '../context.js';
 import { describe, type DescribeOptions } from '../describe/index.js';
 import { resolve, type TimeValue } from '../engine/resolve.js';
 import type { CalendarAmount, Grain } from '../ir/types.js';
+import type { DomainPack } from '../packs/index.js';
 import { parse } from '../parse/index.js';
 
 export interface SourceInfo {
@@ -51,6 +52,8 @@ export interface ForwardCase {
   text: string;
   ctx: TimeContextOptions;
   expect: ForwardExpect;
+  /** Domain packs to activate for this case (docs/extending.md). */
+  packs?: DomainPack[];
   /** Default: 'core'. */
   level?: 'core' | 'aspirational';
   source?: SourceInfo;
@@ -184,7 +187,7 @@ export function runForwardCase(c: ForwardCase): CaseOutcome {
   } catch (e) {
     return { id: c.id, pass: false, detail: `context: ${String(e)}` };
   }
-  const { matches } = parse(c.text, ctx);
+  const { matches } = parse(c.text, ctx, c.packs ? { packs: c.packs } : undefined);
 
   if (c.expect.noMatch) {
     return matches.length === 0

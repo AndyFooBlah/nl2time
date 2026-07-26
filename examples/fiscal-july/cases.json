@@ -1,0 +1,59 @@
+{
+  "description": "Golden cases for the fiscal-july example pack (FY starts July 1, labeled by ending calendar year). Reference: Monday 2026-07-20T10:00 America/Los_Angeles — i.e., 20 days into FY27.",
+  "defaults": { "now": "2026-07-20T17:00:00Z", "timeZone": "America/Los_Angeles", "locale": "en-US" },
+  "cases": [
+    {
+      "id": "fj-0001",
+      "text": "FY26",
+      "expect": { "values": [{ "startLocal": "2025-07-01T00:00:00", "endLocal": "2026-07-01T00:00:00" }] }
+    },
+    {
+      "id": "fj-0002",
+      "text": "revenue for fiscal year 2024",
+      "expect": { "values": [{ "startLocal": "2023-07-01T00:00:00", "endLocal": "2024-07-01T00:00:00" }] }
+    },
+    {
+      "id": "fj-0003",
+      "text": "Q1 FY26",
+      "expect": { "values": [{ "startLocal": "2025-07-01T00:00:00", "endLocal": "2025-10-01T00:00:00" }] }
+    },
+    {
+      "id": "fj-0004",
+      "text": "q3 fy2026",
+      "expect": { "values": [{ "startLocal": "2026-01-01T00:00:00", "endLocal": "2026-04-01T00:00:00" }] }
+    },
+    {
+      "id": "fj-0005",
+      "text": "FYTD",
+      "expect": { "values": [{ "startLocal": "2026-07-01T00:00:00", "endLocal": "2026-07-20T00:00:00" }] },
+      "note": "current FY started July 1 2026; today (partial) excluded"
+    },
+    {
+      "id": "fj-0006",
+      "text": "spend fiscal year to date",
+      "expect": { "values": [{ "startLocal": "2026-07-01T00:00:00", "endLocal": "2026-07-20T00:00:00" }] }
+    },
+    {
+      "id": "fj-0007",
+      "text": "this fiscal year",
+      "expect": { "values": [{ "startLocal": "2026-07-01T00:00:00", "endLocal": "2027-07-01T00:00:00" }] }
+    },
+    {
+      "id": "fj-0008",
+      "text": "last fiscal year",
+      "expect": { "values": [{ "startLocal": "2025-07-01T00:00:00", "endLocal": "2026-07-01T00:00:00" }] }
+    },
+    {
+      "id": "fj-0009",
+      "text": "the report is due by EOD",
+      "expect": { "values": [{ "startLocal": "2026-07-20T17:00:00", "endLocal": "2026-07-20T18:00:00" }] },
+      "note": "pack SHADOWS the built-in eod (end-of-day point): finance EOD is 5pm"
+    },
+    {
+      "id": "fj-0010",
+      "text": "this year",
+      "expect": { "values": [{ "startLocal": "2026-01-01T00:00:00", "endLocal": "2027-01-01T00:00:00" }] },
+      "note": "counter-case: calendar vocabulary is untouched by the pack"
+    }
+  ]
+}

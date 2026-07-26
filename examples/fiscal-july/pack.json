@@ -1,0 +1,97 @@
+{
+  "name": "fiscal-july",
+  "context": {
+    "note": "Suggested TimeContext options for this domain; merge into TimeContext.make() yourself.",
+    "weekStart": "mon"
+  },
+  "vocabulary": [
+    {
+      "phrases": ["fy{yr}", "fiscal year {yr}", "fiscal {yr}"],
+      "expr": {
+        "op": "span",
+        "anchor": { "op": "literal", "date": { "year": { "$": "yr", "offset": -1 }, "month": 7 } },
+        "amount": { "months": 12 }
+      }
+    },
+    {
+      "phrases": ["q{n} fy{yr}", "fy{yr} q{n}", "q{n} of fy{yr}"],
+      "expr": {
+        "op": "span",
+        "anchor": {
+          "op": "offset",
+          "base": { "op": "literal", "date": { "year": { "$": "yr", "offset": -1 }, "month": 7 } },
+          "amount": { "$": "n", "scale": 3, "offset": -3 },
+          "unit": "month"
+        },
+        "amount": { "months": 3 }
+      }
+    },
+    {
+      "phrases": ["fytd", "fiscal year to date", "fiscal ytd"],
+      "expr": {
+        "op": "between",
+        "start": {
+          "op": "snap",
+          "base": { "op": "seek", "base": { "op": "now" }, "dir": "prev", "target": { "kind": "month", "month": 7 } },
+          "unit": "month",
+          "edge": "start"
+        },
+        "end": { "op": "snap", "base": { "op": "now" }, "unit": "day", "edge": "start" }
+      }
+    },
+    {
+      "phrases": ["this fiscal year", "current fiscal year"],
+      "expr": {
+        "op": "span",
+        "anchor": {
+          "op": "snap",
+          "base": { "op": "seek", "base": { "op": "now" }, "dir": "prev", "target": { "kind": "month", "month": 7 } },
+          "unit": "month",
+          "edge": "start"
+        },
+        "amount": { "months": 12 }
+      }
+    },
+    {
+      "phrases": ["last fiscal year", "previous fiscal year"],
+      "expr": {
+        "op": "span",
+        "anchor": {
+          "op": "offset",
+          "base": {
+            "op": "snap",
+            "base": { "op": "seek", "base": { "op": "now" }, "dir": "prev", "target": { "kind": "month", "month": 7 } },
+            "unit": "month",
+            "edge": "start"
+          },
+          "amount": -12,
+          "unit": "month"
+        },
+        "amount": { "months": 12 }
+      }
+    },
+    {
+      "phrases": ["next fiscal year"],
+      "expr": {
+        "op": "span",
+        "anchor": {
+          "op": "offset",
+          "base": {
+            "op": "snap",
+            "base": { "op": "seek", "base": { "op": "now" }, "dir": "prev", "target": { "kind": "month", "month": 7 } },
+            "unit": "month",
+            "edge": "start"
+          },
+          "amount": 12,
+          "unit": "month"
+        },
+        "amount": { "months": 12 }
+      }
+    },
+    {
+      "phrases": ["eod", "close of business", "cob"],
+      "expr": { "op": "literal", "time": { "hour": 5, "meridiem": "pm" } },
+      "role": "time"
+    }
+  ]
+}

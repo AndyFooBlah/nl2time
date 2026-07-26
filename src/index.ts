@@ -32,7 +32,21 @@ export {
   type Resolution,
 } from './engine/resolve.js';
 
-export { parse, type ParseResult, type ParseMatch } from './parse/index.js';
+export {
+  parse,
+  createParser,
+  type ParseResult,
+  type ParseMatch,
+  type ParseOptions,
+} from './parse/index.js';
+export { EN_RULE_ENTRIES, type Rule, type RuleMatch } from './parse/en.js';
+export {
+  compilePack,
+  validatePack,
+  PackError,
+  type DomainPack,
+  type VocabEntry,
+} from './packs/index.js';
 
 export {
   describe,

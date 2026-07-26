@@ -5,7 +5,8 @@
  */
 import type { TimeContext } from '../context.js';
 import type { TimeExpr } from '../ir/types.js';
-import { EN_RULES, type RuleMatch } from './en.js';
+import { compilePack, type DomainPack } from '../packs/index.js';
+import { EN_RULE_ENTRIES, type Rule, type RuleMatch } from './en.js';
 import { tokenize, type Token } from './tokenizer.js';
 
 export interface ParseMatch {
@@ -29,14 +30,47 @@ interface Positioned extends RuleMatch {
 
 const CONNECTORS = ['at', 'on', 'in', 'of', 'the', 'for', 'from', 'around', 'about', '-'];
 
-export function parse(text: string, ctx: TimeContext): ParseResult {
+export interface ParseOptions {
+  /** Declarative domain packs (docs/extending.md); their rules run first. */
+  packs?: DomainPack[];
+  /** Extra code-level rules; run after packs, before built-ins. */
+  rules?: Rule[];
+  /** Built-in rule names to disable (see EN_RULE_ENTRIES). */
+  disable?: string[];
+}
+
+function buildRules(opts: ParseOptions | undefined): readonly Rule[] {
+  if (!opts || (!opts.packs?.length && !opts.rules?.length && !opts.disable?.length)) {
+    return EN_RULE_ENTRIES.map((e) => e.rule);
+  }
+  const disabled = new Set([...(opts.disable ?? []), ...(opts.packs ?? []).flatMap((p) => p.disable ?? [])]);
+  return [
+    ...(opts.packs ?? []).map(compilePack),
+    ...(opts.rules ?? []),
+    ...EN_RULE_ENTRIES.filter((e) => !disabled.has(e.name)).map((e) => e.rule),
+  ];
+}
+
+/**
+ * Precompiled parser for hot paths — compiles packs once instead of per call.
+ */
+export function createParser(opts: ParseOptions = {}): (text: string, ctx: TimeContext) => ParseResult {
+  const rules = buildRules(opts);
+  return (text, ctx) => parseWithRules(text, ctx, rules);
+}
+
+export function parse(text: string, ctx: TimeContext, opts?: ParseOptions): ParseResult {
+  return parseWithRules(text, ctx, buildRules(opts));
+}
+
+function parseWithRules(text: string, ctx: TimeContext, rules: readonly Rule[]): ParseResult {
   const tokens = tokenize(text);
   const raw: Positioned[] = [];
 
   let i = 0;
   while (i < tokens.length) {
     let best: Positioned | undefined;
-    for (const rule of EN_RULES) {
+    for (const rule of rules) {
       const m = rule(tokens, i, ctx);
       if (!m) continue;
       if (!best || m.consumed > best.consumed || (m.consumed === best.consumed && m.confidence > best.confidence)) {
