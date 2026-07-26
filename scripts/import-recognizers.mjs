@@ -15,9 +15,30 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const COMMIT = 'da7edcff59f669b2a460ab9d400e36298f0d658e';
-const SPEC_PATH = 'Specs/DateTime/English/DateTimeModel.json';
-const raw = readFileSync(new URL('../corpus/vendor/recognizers-text/DateTimeModel.json', import.meta.url), 'utf8');
-const specs = JSON.parse(raw.replace(/^﻿/, ''));
+
+const FILES = [
+  {
+    vendored: 'DateTimeModel.json',
+    specPath: 'Specs/DateTime/English/DateTimeModel.json',
+    locale: 'en-US',
+    prefix: 'rt-dtm',
+    tag: 'rt-en',
+  },
+  {
+    vendored: 'DateTimeModel.EnglishOthers.json',
+    specPath: 'Specs/DateTime/EnglishOthers/DateTimeModel.json',
+    locale: 'en-GB',
+    prefix: 'rt-gb',
+    tag: 'rt-en-gb',
+  },
+  {
+    vendored: 'DateTimeModelComplexCalendar.json',
+    specPath: 'Specs/DateTime/English/DateTimeModelComplexCalendar.json',
+    locale: 'en-US',
+    prefix: 'rt-cc',
+    tag: 'rt-complex',
+  },
+];
 
 const GRAIN_BY_TIMEX_DURATION = {
   P1D: 'day',
@@ -70,7 +91,13 @@ function mapValue(val, refDate) {
   return undefined;
 }
 
-for (const [i, spec] of specs.entries()) {
+for (const fileDef of FILES) {
+  const raw = readFileSync(
+    new URL(`../corpus/vendor/recognizers-text/${fileDef.vendored}`, import.meta.url),
+    'utf8',
+  );
+  const specs = JSON.parse(raw.replace(/^\ufeff/, ''));
+  for (const [i, spec] of specs.entries()) {
   const results = spec.Results ?? [];
   if (results.length !== 1) {
     skip.multiResult += 1;
@@ -106,7 +133,7 @@ for (const [i, spec] of specs.entries()) {
   const ctx = {
     now: `${refDateTime}Z`,
     timeZone: 'UTC',
-    locale: 'en-US',
+    locale: fileDef.locale,
     weekStart: 'mon',
     partialPeriod: 'exclude',
     nextWeekday: 'week-after',
@@ -136,7 +163,7 @@ for (const [i, spec] of specs.entries()) {
   }
 
   cases.push({
-    id: `rt-dtm-${String(i).padStart(4, '0')}`,
+    id: `${fileDef.prefix}-${String(i).padStart(4, '0')}`,
     text: spec.Input,
     ctx,
     expect,
@@ -145,12 +172,13 @@ for (const [i, spec] of specs.entries()) {
       name: 'microsoft/Recognizers-Text',
       license: 'MIT',
       url: 'https://github.com/microsoft/Recognizers-Text',
-      path: SPEC_PATH,
+      path: fileDef.specPath,
       commit: COMMIT,
       index: i,
     },
-    tags: ['imported', `rt:${kind}`],
+    tags: ['imported', fileDef.tag, `rt:${kind}`],
   });
+  }
 }
 
 const out = {
