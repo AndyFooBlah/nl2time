@@ -35,12 +35,15 @@ Language-specific rules (selected by `ctx.locale`) each try to match at every po
 
 ### Step 3 — Refine: merge adjacent fragments
 
-The refiner sees date-ish and time-ish neighbors and combines them. Crucially, the *afternoon* day-period **supplies the missing meridiem** for the ambiguous 3:
+The refiner sees date-ish and time-ish neighbors and combines them into nested intersections — the day, the ambiguous clock reading, and the day-period all stay explicit:
 
 ```jsonc
 { "op": "intersect", "parts": [
-    { "op": "snap", "base": { "op": "offset", "base": {"op":"now"}, "amount": -1, "unit": "day" }, "unit": "day" },
-    { "op": "literal", "time": { "hour": 3, "meridiem": "pm" } }   // pm inferred from "afternoon"
+    { "op": "intersect", "parts": [
+        { "op": "snap", "base": { "op": "offset", "base": {"op":"now"}, "amount": -1, "unit": "day" }, "unit": "day" },
+        { "op": "literal", "time": { "hour": 3, "meridiem": "unknown" } }    // still honest: could be am or pm
+    ]},
+    { "op": "literal", "dayPeriod": "afternoon" }
 ]}
 ```
 
@@ -53,7 +56,8 @@ This JSON tree is the **IR** (`TimeExpr`) — the parser's entire output. Note w
 1. `now` → the instant 2026-07-25T21:00 PDT.
 2. `offset −1 day` → July 24, 21:00 (calendar arithmetic: across a DST change this preserves wall-clock time — a "day" is not 86,400 seconds).
 3. `snap day` → the containing civil day **[Jul 24 00:00, Jul 25 00:00) PDT** — snapping happens in the user's timezone, and a week-snap here would consult the locale's week start.
-4. `intersect` with the 3pm literal → the time composes onto that day: **[Jul 24 15:00, Jul 24 16:00) PDT**.
+4. Inner `intersect` with the ambiguous clock literal → **two candidates** on that day, 3pm-first (plausibility-ordered): [15:00, 16:00) and [03:00, 04:00).
+5. Outer `intersect` with the *afternoon* period (12:00–18:00) constrains the candidates — only the 3pm reading survives: **[Jul 24 15:00, Jul 24 16:00) PDT**. The ambiguity was carried, then *eliminated by evidence*, never guessed away.
 
 ### Step 5 — The answer, with honesty attached
 
@@ -102,7 +106,7 @@ With `style: 'casual'`, 22:30 falls in the *night* day-period of the previous da
 "yesterday at 10:30 PM"     (neutral — clock text via Intl, locale-correct)
 ```
 
-Same instant, different context, different truth: a user in London (`Europe/London`) gets **"6:30am this morning"** — the library recomputed the calendar day, the framing, and the day-period from *their* context. That is why weatherbot routes every timestamp through this path instead of letting a model verbalize raw UTC.
+Same instant, different context, different truth: a user in London (`Europe/London`) gets **"6:30am yesterday morning"** — at this moment it's already early on July 26 in London, so 06:30 BST on the 25th is *their* yesterday. The library recomputed the calendar day, the framing, and the day-period from their context. That is why weatherbot routes every timestamp through this path instead of letting a model verbalize raw UTC.
 
 ---
 
