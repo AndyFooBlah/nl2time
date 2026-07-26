@@ -1,0 +1,9797 @@
+{
+ "description": "MACHINE-GENERATED engine-parity fixtures: (expr, ctx) → candidates from the JS reference implementation. Ports must reproduce candidates exactly (values, grains, order). Regenerate with scripts/generate-ir-fixtures.mjs; never hand-edit.",
+ "source": "corpus/forward/imported-recognizers-zh.json",
+ "cases": [
+  {
+   "id": "rt-zh-0000",
+   "ctx": {
+    "now": "2018-01-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-12-29T00:00:00Z",
+     "end": "2017-12-30T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-01-29T00:00:00Z",
+     "end": "2018-01-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0001",
+   "ctx": {
+    "now": "2016-01-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2015-12-29T00:00:00Z",
+     "end": "2015-12-30T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-01-29T00:00:00Z",
+     "end": "2016-01-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0002",
+   "ctx": {
+    "now": "2018-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-02-28T00:00:00Z",
+     "end": "2018-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-03-29T00:00:00Z",
+     "end": "2018-03-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0003",
+   "ctx": {
+    "now": "2016-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-02-29T00:00:00Z",
+     "end": "2016-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-03-29T00:00:00Z",
+     "end": "2016-03-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0004",
+   "ctx": {
+    "now": "2016-02-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-01-29T00:00:00Z",
+     "end": "2016-01-30T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-02-29T00:00:00Z",
+     "end": "2016-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0005",
+   "ctx": {
+    "now": "2018-02-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-01-29T00:00:00Z",
+     "end": "2018-01-30T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-02-28T00:00:00Z",
+     "end": "2018-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0006",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2009
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2009-01-01T00:00:00Z",
+     "end": "2010-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0007",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2010,
+     "month": 1,
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2010-01-29T00:00:00Z",
+     "end": "2010-01-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0008",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2015,
+     "month": 10,
+     "day": 1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2015-10-01T00:00:00Z",
+     "end": "2015-10-02T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0009",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 1,
+     "day": 30
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-01-30T00:00:00Z",
+     "end": "2017-01-31T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-01-30T00:00:00Z",
+     "end": "2018-01-31T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0010",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 10,
+     "day": 12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-10-12T00:00:00Z",
+     "end": "2016-10-13T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-10-12T00:00:00Z",
+     "end": "2017-10-13T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0011",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T00:00:00Z",
+     "end": "2017-03-23T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0013",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2004,
+     "month": 8,
+     "day": 15
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2004-08-15T00:00:00Z",
+     "end": "2004-08-16T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0014",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "snap",
+      "base": {
+       "op": "now"
+      },
+      "unit": "month"
+     },
+     {
+      "op": "literal",
+      "date": {
+       "day": 10
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-10T00:00:00Z",
+     "end": "2017-03-11T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0015",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 1,
+      "day": 10
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "day": 12,
+      "month": 1
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-01-10T00:00:00Z",
+     "end": "2017-01-12T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-01-10T00:00:00Z",
+     "end": "2018-01-12T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-01-10T00:00:00Z",
+     "end": "2018-01-12T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0016",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2016,
+      "month": 1,
+      "day": 10
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "day": 12,
+      "month": 1,
+      "year": 2016
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-01-10T00:00:00Z",
+     "end": "2016-01-12T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0017",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 1,
+      "day": 10
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "day": 20,
+      "month": 1
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-01-10T00:00:00Z",
+     "end": "2017-01-20T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-01-10T00:00:00Z",
+     "end": "2018-01-20T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-01-10T00:00:00Z",
+     "end": "2018-01-20T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0018",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 1,
+     "unit": "year"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-01-01T00:00:00Z",
+     "end": "2019-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0019",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "literal",
+       "date": {
+        "month": 10
+       }
+      },
+      "unit": "month",
+      "edge": "start"
+     },
+     "amount": 3,
+     "unit": "day"
+    },
+    "unit": "week"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-10-03T00:00:00Z",
+     "end": "2016-10-10T00:00:00Z",
+     "grain": "week"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-10-02T00:00:00Z",
+     "end": "2017-10-09T00:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0020",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "day",
+     "edge": "start"
+    },
+    "amount": {
+     "weeks": -1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-15T00:00:00Z",
+     "end": "2017-03-22T00:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0021",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "seek",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": 2,
+       "unit": "week"
+      },
+      "unit": "week"
+     },
+     "dir": "next",
+     "target": {
+      "kind": "weekday",
+      "weekday": "sat"
+     },
+     "n": 1
+    },
+    "amount": {
+     "days": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-04-08T00:00:00Z",
+     "end": "2017-04-10T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0022",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 2,
+     "unit": "week"
+    },
+    "unit": "week"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-04-03T00:00:00Z",
+     "end": "2017-04-10T00:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0023",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 2,
+     "unit": "week"
+    },
+    "unit": "week"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-04-03T00:00:00Z",
+     "end": "2017-04-10T00:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0024",
+   "ctx": {
+    "now": "2024-11-15T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -2,
+     "unit": "week"
+    },
+    "unit": "week"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2024-10-28T00:00:00Z",
+     "end": "2024-11-04T00:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0025",
+   "ctx": {
+    "now": "2024-11-15T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "seek",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": -2,
+       "unit": "week"
+      },
+      "unit": "week"
+     },
+     "dir": "next",
+     "target": {
+      "kind": "weekday",
+      "weekday": "sat"
+     },
+     "n": 1
+    },
+    "amount": {
+     "days": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2024-11-02T00:00:00Z",
+     "end": "2024-11-04T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0026",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "now"
+      },
+      "amount": 1,
+      "unit": "day"
+     },
+     "unit": "day",
+     "edge": "start"
+    },
+    "amount": {
+     "years": 1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-23T00:00:00Z",
+     "end": "2018-03-23T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0028",
+   "ctx": {
+    "now": "2016-11-07T14:07:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "year": 2010,
+       "month": 1,
+       "day": 29
+      }
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 6,
+       "meridiem": "pm"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2010-01-29T18:00:00Z",
+     "end": "2010-01-29T19:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0029",
+   "ctx": {
+    "now": "2016-11-07T14:07:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "year": 1987,
+       "month": 1,
+       "day": 11
+      }
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 8,
+       "meridiem": "unknown"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1987-01-11T08:00:00Z",
+     "end": "1987-01-11T09:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "1987-01-11T20:00:00Z",
+     "end": "1987-01-11T21:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0030",
+   "ctx": {
+    "now": "2016-11-07T14:07:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "year": 2015,
+       "month": 10,
+       "day": 1
+      }
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 9,
+       "minute": 20,
+       "meridiem": "am"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2015-10-01T09:20:00Z",
+     "end": "2015-10-01T09:21:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0031",
+   "ctx": {
+    "now": "2016-11-07T14:07:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "month": 1,
+       "day": 19
+      }
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 5,
+       "minute": 0,
+       "meridiem": "pm"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-01-19T17:00:00Z",
+     "end": "2016-01-19T17:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-01-19T17:00:00Z",
+     "end": "2017-01-19T17:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0032",
+   "ctx": {
+    "now": "2016-11-07T14:07:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": 1,
+       "unit": "day"
+      },
+      "unit": "day"
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 5,
+       "minute": 0,
+       "meridiem": "pm"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-08T17:00:00Z",
+     "end": "2016-11-08T17:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0033",
+   "ctx": {
+    "now": "2016-11-07T14:07:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "intersect",
+      "parts": [
+       {
+        "op": "snap",
+        "base": {
+         "op": "now"
+        },
+        "unit": "day"
+       },
+       {
+        "op": "literal",
+        "dayPeriod": "evening"
+       }
+      ]
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 6,
+       "meridiem": "pm"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T18:00:00Z",
+     "end": "2016-11-07T19:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0034",
+   "ctx": {
+    "now": "2016-11-07T14:07:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "intersect",
+      "parts": [
+       {
+        "op": "snap",
+        "base": {
+         "op": "now"
+        },
+        "unit": "day"
+       },
+       {
+        "op": "literal",
+        "dayPeriod": "morning"
+       }
+      ]
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 5,
+       "meridiem": "am"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T05:00:00Z",
+     "end": "2016-11-07T06:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0035",
+   "ctx": {
+    "now": "2016-11-07T14:07:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "intersect",
+      "parts": [
+       {
+        "op": "snap",
+        "base": {
+         "op": "now"
+        },
+        "unit": "day"
+       },
+       {
+        "op": "literal",
+        "dayPeriod": "morning"
+       }
+      ]
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 8,
+       "minute": 15,
+       "meridiem": "am"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T08:15:00Z",
+     "end": "2016-11-07T08:16:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0036",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "intersect",
+     "parts": [
+      {
+       "op": "snap",
+       "base": {
+        "op": "offset",
+        "base": {
+         "op": "now"
+        },
+        "amount": -1,
+        "unit": "day"
+       },
+       "unit": "day"
+      },
+      {
+       "op": "literal",
+       "time": {
+        "hour": 2,
+        "meridiem": "pm"
+       }
+      }
+     ]
+    },
+    "end": {
+     "op": "intersect",
+     "parts": [
+      {
+       "op": "snap",
+       "base": {
+        "op": "offset",
+        "base": {
+         "op": "now"
+        },
+        "amount": 1,
+        "unit": "day"
+       },
+       "unit": "day"
+      },
+      {
+       "op": "literal",
+       "time": {
+        "hour": 4
+       }
+      }
+     ]
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-06T14:00:00Z",
+     "end": "2016-11-08T04:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0037",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": -1,
+       "unit": "day"
+      },
+      "unit": "day"
+     },
+     {
+      "op": "between",
+      "start": {
+       "op": "literal",
+       "time": {
+        "hour": 5,
+        "minute": 0,
+        "meridiem": "unknown"
+       }
+      },
+      "end": {
+       "op": "literal",
+       "time": {
+        "hour": 6,
+        "minute": 0,
+        "meridiem": "unknown"
+       }
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-06T17:00:00Z",
+     "end": "2016-11-06T18:00:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-06T17:00:00Z",
+     "end": "2016-11-07T00:00:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-06T05:00:00Z",
+     "end": "2016-11-06T18:00:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-06T05:00:00Z",
+     "end": "2016-11-06T06:00:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0038",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "intersect",
+     "parts": [
+      {
+       "op": "literal",
+       "date": {
+        "month": 1,
+        "day": 15
+       }
+      },
+      {
+       "op": "literal",
+       "time": {
+        "hour": 4
+       }
+      }
+     ]
+    },
+    "end": {
+     "op": "intersect",
+     "parts": [
+      {
+       "op": "literal",
+       "date": {
+        "month": 2,
+        "day": 3
+       }
+      },
+      {
+       "op": "literal",
+       "time": {
+        "hour": 9
+       }
+      }
+     ]
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-01-15T04:00:00Z",
+     "end": "2016-02-03T09:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-01-15T04:00:00Z",
+     "end": "2017-02-03T09:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-01-15T04:00:00Z",
+     "end": "2017-02-03T09:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0039",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": -1,
+       "unit": "day"
+      },
+      "unit": "day"
+     },
+     {
+      "op": "literal",
+      "dayPeriod": "evening"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-06T16:00:00Z",
+     "end": "2016-11-06T20:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0040",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": 1,
+       "unit": "day"
+      },
+      "unit": "day"
+     },
+     {
+      "op": "literal",
+      "dayPeriod": "morning"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-08T08:00:00Z",
+     "end": "2016-11-08T12:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0041",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "now"
+    },
+    "amount": {
+     "hours": -1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T15:12:00Z",
+     "end": "2016-11-07T16:12:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0042",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "now"
+    },
+    "amount": {
+     "minutes": 5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T16:12:00Z",
+     "end": "2016-11-07T16:17:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0043",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "now"
+    },
+    "amount": {
+     "hours": -3
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T13:12:00Z",
+     "end": "2016-11-07T16:12:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0044",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "years": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "years": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0045",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "days": 6
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "days": 6
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0046",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "weeks": 7
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "weeks": 7
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0047",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "hours": 5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "hours": 5
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0056",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 5,
+     "minute": 0,
+     "meridiem": "pm"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T17:00:00Z",
+     "end": "2017-03-22T17:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0057",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 9,
+     "minute": 30,
+     "meridiem": "pm"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T21:30:00Z",
+     "end": "2017-03-22T21:31:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0058",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 19,
+     "minute": 30
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T19:30:00Z",
+     "end": "2017-03-22T19:31:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0059",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 10,
+     "meridiem": "unknown"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T10:00:00Z",
+     "end": "2017-03-22T11:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-03-22T22:00:00Z",
+     "end": "2017-03-22T23:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0060",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 10,
+     "meridiem": "pm"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T22:00:00Z",
+     "end": "2017-03-22T23:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0061",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 2,
+     "minute": 30,
+     "meridiem": "am"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T02:30:00Z",
+     "end": "2017-03-22T02:31:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0062",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 0
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T00:00:00Z",
+     "end": "2017-03-22T01:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0063",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 0,
+     "minute": 0
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T00:00:00Z",
+     "end": "2017-03-22T00:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0064",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 5,
+      "minute": 15,
+      "meridiem": "pm"
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 6,
+      "meridiem": "pm"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T17:15:00Z",
+     "end": "2017-03-22T18:00:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0065",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 17,
+      "minute": 55,
+      "second": 23
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 18,
+      "minute": 33,
+      "second": 2
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T17:55:23Z",
+     "end": "2017-03-22T18:33:02Z",
+     "grain": "second"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0066",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 17,
+      "minute": 55,
+      "second": 23
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 18,
+      "minute": 33,
+      "second": 2
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T17:55:23Z",
+     "end": "2017-03-22T18:33:02Z",
+     "grain": "second"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0067",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 5,
+      "meridiem": "am"
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 6,
+      "meridiem": "am"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T05:00:00Z",
+     "end": "2017-03-22T06:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0068",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 5,
+      "meridiem": "pm"
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 7,
+      "minute": 30,
+      "meridiem": "pm"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T17:00:00Z",
+     "end": "2017-03-22T19:30:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0069",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 5,
+      "minute": 0,
+      "meridiem": "pm"
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 3,
+      "minute": 0,
+      "meridiem": "am"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T17:00:00Z",
+     "end": "2017-03-23T03:00:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0070",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 5,
+      "minute": 0,
+      "meridiem": "pm"
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 6,
+      "minute": 0,
+      "meridiem": "pm"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T17:00:00Z",
+     "end": "2017-03-22T18:00:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0071",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 5,
+      "minute": 0,
+      "meridiem": "unknown"
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 6,
+      "minute": 0,
+      "meridiem": "unknown"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T17:00:00Z",
+     "end": "2017-03-22T18:00:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-03-22T17:00:00Z",
+     "end": "2017-03-23T06:00:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-03-22T05:00:00Z",
+     "end": "2017-03-22T18:00:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-03-22T05:00:00Z",
+     "end": "2017-03-22T06:00:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0080",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2008
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2008-01-01T00:00:00Z",
+     "end": "2009-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0081",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2008
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2008-01-01T00:00:00Z",
+     "end": "2009-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0082",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2008
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2008-01-01T00:00:00Z",
+     "end": "2009-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0083",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 1995
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "year": 1997
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1995-01-01T00:00:00Z",
+     "end": "1997-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0084",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 1995
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "year": 1997
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1995-01-01T00:00:00Z",
+     "end": "1997-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0085",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 1995
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "year": 1997
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1995-01-01T00:00:00Z",
+     "end": "1997-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0086",
+   "ctx": {
+    "now": "2018-07-16T16:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "year",
+     "edge": "start"
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "day",
+     "edge": "start"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-01-01T00:00:00Z",
+     "end": "2018-07-16T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0087",
+   "ctx": {
+    "now": "2018-07-24T16:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "day",
+     "edge": "start"
+    },
+    "amount": {
+     "years": -10
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2008-07-24T00:00:00Z",
+     "end": "2018-07-24T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0088",
+   "ctx": {
+    "now": "2018-07-30T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -1,
+     "unit": "day"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-07-29T00:00:00Z",
+     "end": "2018-07-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0090",
+   "ctx": {
+    "now": "2018-08-30T14:16:03Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "offset",
+    "base": {
+     "op": "now"
+    },
+    "amount": -10,
+    "unit": "minute"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-08-30T14:06:03Z",
+     "end": "2018-08-30T14:06:03Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0091",
+   "ctx": {
+    "now": "2018-08-30T14:16:03Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "offset",
+    "base": {
+     "op": "now"
+    },
+    "amount": 2,
+    "unit": "hour"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-08-30T16:16:03Z",
+     "end": "2018-08-30T16:16:03Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0092",
+   "ctx": {
+    "now": "2018-08-30T14:16:03Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -5,
+     "unit": "year"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2013-08-30T00:00:00Z",
+     "end": "2013-08-31T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0094",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "nearest",
+    "target": {
+     "kind": "weekday",
+     "weekday": "mon"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-09-24T00:00:00Z",
+     "end": "2018-09-25T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-09-17T00:00:00Z",
+     "end": "2018-09-18T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0095",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 2,
+     "unit": "day"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-09-20T00:00:00Z",
+     "end": "2018-09-21T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0096",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "nearest",
+    "target": {
+     "kind": "weekday",
+     "weekday": "wed"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-09-19T00:00:00Z",
+     "end": "2018-09-20T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-09-12T00:00:00Z",
+     "end": "2018-09-13T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0097",
+   "ctx": {
+    "now": "2024-11-15T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "snap",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "now"
+      },
+      "amount": 2,
+      "unit": "week"
+     },
+     "unit": "week"
+    },
+    "dir": "next",
+    "target": {
+     "kind": "weekday",
+     "weekday": "sun"
+    },
+    "n": 1
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2024-12-01T00:00:00Z",
+     "end": "2024-12-02T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0098",
+   "ctx": {
+    "now": "2024-11-15T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "snap",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "now"
+      },
+      "amount": -2,
+      "unit": "week"
+     },
+     "unit": "week"
+    },
+    "dir": "next",
+    "target": {
+     "kind": "weekday",
+     "weekday": "wed"
+    },
+    "n": 1
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2024-10-30T00:00:00Z",
+     "end": "2024-10-31T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0100",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2015
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "year": 2018
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2015-01-01T00:00:00Z",
+     "end": "2018-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0102",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2016
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "year": 2018
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-01-01T00:00:00Z",
+     "end": "2018-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0103",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 3
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 5
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-03-01T00:00:00Z",
+     "end": "2019-05-01T00:00:00Z",
+     "grain": "month"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-03-01T00:00:00Z",
+     "end": "2018-05-01T00:00:00Z",
+     "grain": "month"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-03-01T00:00:00Z",
+     "end": "2019-05-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0104",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 3
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 9
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-03-01T00:00:00Z",
+     "end": "2019-09-01T00:00:00Z",
+     "grain": "month"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-03-01T00:00:00Z",
+     "end": "2018-09-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0105",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 5
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 10
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-05-01T00:00:00Z",
+     "end": "2018-10-01T00:00:00Z",
+     "grain": "month"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-05-01T00:00:00Z",
+     "end": "2019-10-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0106",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 8
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 2
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-08-01T00:00:00Z",
+     "end": "2019-02-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0107",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 10
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 11
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-10-01T00:00:00Z",
+     "end": "2018-11-01T00:00:00Z",
+     "grain": "month"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-10-01T00:00:00Z",
+     "end": "2018-11-01T00:00:00Z",
+     "grain": "month"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-10-01T00:00:00Z",
+     "end": "2017-11-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0108",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 10
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 5
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-10-01T00:00:00Z",
+     "end": "2019-05-01T00:00:00Z",
+     "grain": "month"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-10-01T00:00:00Z",
+     "end": "2018-05-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0110",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 2,
+     "minute": 0,
+     "meridiem": "pm"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-09-18T14:00:00Z",
+     "end": "2018-09-18T14:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0111",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 8,
+     "minute": 0,
+     "meridiem": "am"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-09-18T08:00:00Z",
+     "end": "2018-09-18T08:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0112",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 8,
+     "minute": 0,
+     "meridiem": "unknown"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-09-18T08:00:00Z",
+     "end": "2018-09-18T08:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-09-18T20:00:00Z",
+     "end": "2018-09-18T20:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0113",
+   "ctx": {
+    "now": "2018-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 11,
+     "minute": 30,
+     "second": 10,
+     "meridiem": "pm"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-09-18T23:30:10Z",
+     "end": "2018-09-18T23:30:11Z",
+     "grain": "second"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0114",
+   "ctx": {
+    "now": "2018-10-11T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "dayPeriod": "morning"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-10-11T08:00:00Z",
+     "end": "2018-10-11T12:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0115",
+   "ctx": {
+    "now": "2018-10-11T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "dayPeriod": "afternoon"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-10-11T12:00:00Z",
+     "end": "2018-10-11T16:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0116",
+   "ctx": {
+    "now": "2018-10-11T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "dayPeriod": "evening"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-10-11T16:00:00Z",
+     "end": "2018-10-11T20:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0117",
+   "ctx": {
+    "now": "2018-12-14T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "hours": 0.5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "hours": 0.5
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0118",
+   "ctx": {
+    "now": "2018-12-14T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "months": 0.5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "months": 0.5
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0119",
+   "ctx": {
+    "now": "2018-12-14T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "years": 0.5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "years": 0.5
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0120",
+   "ctx": {
+    "now": "2018-12-14T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "hours": 1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "hours": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0121",
+   "ctx": {
+    "now": "2018-12-14T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "hours": 0.5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "hours": 0.5
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0122",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2018,
+     "month": 10
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-10-01T00:00:00Z",
+     "end": "2018-11-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0123",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2018,
+     "month": 12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-12-01T00:00:00Z",
+     "end": "2019-01-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0124",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2018,
+     "month": 12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-12-01T00:00:00Z",
+     "end": "2019-01-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0125",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2018,
+     "month": 12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-12-01T00:00:00Z",
+     "end": "2019-01-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0126",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2018,
+     "month": 12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-12-01T00:00:00Z",
+     "end": "2019-01-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0132",
+   "ctx": {
+    "now": "2019-07-01T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2019
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-01-01T00:00:00Z",
+     "end": "2020-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0133",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2018,
+      "month": 10,
+      "day": 1
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "year": 2019,
+      "month": 2,
+      "day": 3
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-10-01T00:00:00Z",
+     "end": "2019-02-03T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0134",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2019,
+      "month": 6,
+      "day": 1
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 6,
+      "day": 30,
+      "year": 2019
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-06-01T00:00:00Z",
+     "end": "2019-06-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0135",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2016,
+      "month": 6,
+      "day": 1
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 6,
+      "day": 30,
+      "year": 2016
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-06-01T00:00:00Z",
+     "end": "2016-06-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0136",
+   "ctx": {
+    "now": "2019-07-30T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "seek",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "literal",
+       "date": {
+        "month": 4
+       }
+      },
+      "unit": "month",
+      "edge": "end"
+     },
+     "dir": "prev",
+     "target": {
+      "kind": "weekday",
+      "weekday": "mon"
+     },
+     "n": 1
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 10,
+      "day": 1
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-04-29T00:00:00Z",
+     "end": "2019-10-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-04-27T00:00:00Z",
+     "end": "2020-10-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0137",
+   "ctx": {
+    "now": "2019-08-28T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-28T00:00:00Z",
+     "end": "2019-08-29T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0138",
+   "ctx": {
+    "now": "2019-08-28T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-28T00:00:00Z",
+     "end": "2019-08-29T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0139",
+   "ctx": {
+    "now": "2019-08-28T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 1,
+     "unit": "day"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-29T00:00:00Z",
+     "end": "2019-08-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0140",
+   "ctx": {
+    "now": "2019-08-28T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 1,
+     "unit": "day"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-29T00:00:00Z",
+     "end": "2019-08-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0141",
+   "ctx": {
+    "now": "2019-09-02T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": -1,
+       "unit": "year"
+      },
+      "unit": "year"
+     },
+     "unit": "year",
+     "edge": "start"
+    },
+    "amount": {
+     "months": 6
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-01-01T00:00:00Z",
+     "end": "2018-07-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0142",
+   "ctx": {
+    "now": "2019-09-02T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "now"
+      },
+      "unit": "year"
+     },
+     "unit": "year",
+     "edge": "start"
+    },
+    "amount": {
+     "months": 6
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-01-01T00:00:00Z",
+     "end": "2019-07-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0143",
+   "ctx": {
+    "now": "2019-09-02T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "offset",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "offset",
+        "base": {
+         "op": "now"
+        },
+        "amount": 1,
+        "unit": "year"
+       },
+       "unit": "year"
+      },
+      "unit": "year",
+      "edge": "start"
+     },
+     "amount": 6,
+     "unit": "month"
+    },
+    "amount": {
+     "months": 6
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-07-01T00:00:00Z",
+     "end": "2021-01-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0144",
+   "ctx": {
+    "now": "2019-09-02T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "literal",
+      "date": {
+       "year": 2017
+      }
+     },
+     "unit": "year",
+     "edge": "start"
+    },
+    "amount": {
+     "months": 6
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-01-01T00:00:00Z",
+     "end": "2017-07-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0145",
+   "ctx": {
+    "now": "2019-09-02T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "offset",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "literal",
+       "date": {
+        "year": 2017
+       }
+      },
+      "unit": "year",
+      "edge": "start"
+     },
+     "amount": 6,
+     "unit": "month"
+    },
+    "amount": {
+     "months": 6
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-07-01T00:00:00Z",
+     "end": "2018-01-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0146",
+   "ctx": {
+    "now": "2019-09-03T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "month",
+     "edge": "start"
+    },
+    "amount": {
+     "days": 15
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-09-01T00:00:00Z",
+     "end": "2019-09-16T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0147",
+   "ctx": {
+    "now": "2019-09-03T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "offset",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "now"
+      },
+      "unit": "week",
+      "edge": "start"
+     },
+     "amount": 3,
+     "unit": "day"
+    },
+    "amount": {
+     "days": 4
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-09-05T00:00:00Z",
+     "end": "2019-09-09T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0148",
+   "ctx": {
+    "now": "2019-09-03T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "year",
+     "edge": "start"
+    },
+    "amount": {
+     "months": 6
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-01-01T00:00:00Z",
+     "end": "2019-07-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0149",
+   "ctx": {
+    "now": "2019-09-03T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "literal",
+      "date": {
+       "year": 2018
+      }
+     },
+     "unit": "year",
+     "edge": "start"
+    },
+    "amount": {
+     "months": 6
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-01-01T00:00:00Z",
+     "end": "2018-07-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0150",
+   "ctx": {
+    "now": "2019-09-03T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "offset",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "now"
+       },
+       "unit": "year"
+      },
+      "unit": "year",
+      "edge": "start"
+     },
+     "amount": 6,
+     "unit": "month"
+    },
+    "amount": {
+     "months": 6
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-07-01T00:00:00Z",
+     "end": "2020-01-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0151",
+   "ctx": {
+    "now": "2019-09-03T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "year": 2019,
+       "month": 7,
+       "day": 25
+      }
+     },
+     {
+      "op": "literal",
+      "dayPeriod": "morning"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-07-25T08:00:00Z",
+     "end": "2019-07-25T12:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0152",
+   "ctx": {
+    "now": "2019-09-03T08:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "month": 7,
+       "day": 25
+      }
+     },
+     {
+      "op": "literal",
+      "dayPeriod": "morning"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-07-25T08:00:00Z",
+     "end": "2019-07-25T12:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-07-25T08:00:00Z",
+     "end": "2020-07-25T12:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0154",
+   "ctx": {
+    "now": "2018-08-30T14:16:03Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -5,
+     "unit": "day"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-08-25T00:00:00Z",
+     "end": "2018-08-26T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0209",
+   "ctx": {
+    "now": "2018-10-24T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2017,
+      "month": 1,
+      "day": 10
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "year": 2017,
+      "month": 2,
+      "day": 11
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-01-10T00:00:00Z",
+     "end": "2017-02-11T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0211",
+   "ctx": {
+    "now": "2020-10-20T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "years": 3.5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "years": 3.5
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0213",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 705,
+     "month": 11
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "0705-11-01T00:00:00Z",
+     "end": "0705-12-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0214",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 1664,
+     "month": 5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1664-05-01T00:00:00Z",
+     "end": "1664-06-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0215",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 1681,
+     "month": 9
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1681-09-01T00:00:00Z",
+     "end": "1681-10-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0216",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 1681,
+     "month": 9
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1681-09-01T00:00:00Z",
+     "end": "1681-10-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0217",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 1914
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1914-01-01T00:00:00Z",
+     "end": "1915-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0218",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 1738
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1738-01-01T00:00:00Z",
+     "end": "1739-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0219",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 1745,
+     "month": 12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1745-12-01T00:00:00Z",
+     "end": "1746-01-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0220",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 706,
+     "month": 1,
+     "day": 1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "0706-01-01T00:00:00Z",
+     "end": "0706-01-02T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0221",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 1726,
+     "month": 1,
+     "day": 30
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1726-01-30T00:00:00Z",
+     "end": "1726-01-31T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0222",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "days": 8,
+     "hours": 20
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "days": 8,
+      "hours": 20
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0223",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "days": 8,
+     "hours": 20
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "days": 8,
+      "hours": 20
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0224",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "days": 8,
+     "hours": 20
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "days": 8,
+      "hours": 20
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0225",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "years": 1,
+     "months": 3,
+     "days": 20,
+     "hours": 8,
+     "minutes": 50,
+     "seconds": 20
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "years": 1,
+      "months": 3,
+      "days": 20,
+      "hours": 8,
+      "minutes": 50,
+      "seconds": 20
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0226",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "weeks": 5,
+     "hours": 3
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "weeks": 5,
+      "hours": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0227",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "years": 1,
+     "months": 1,
+     "days": 21
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "years": 1,
+      "months": 1,
+      "days": 21
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0228",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "days": 2,
+     "months": 1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "days": 2,
+      "months": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0229",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "weeks": 1,
+     "days": 3
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "weeks": 1,
+      "days": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0230",
+   "ctx": {
+    "now": "2020-12-15T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 12,
+     "day": 1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-12-01T00:00:00Z",
+     "end": "2020-12-02T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2021-12-01T00:00:00Z",
+     "end": "2021-12-02T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0231",
+   "ctx": {
+    "now": "2020-12-15T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2020,
+     "month": 12,
+     "day": 1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-12-01T00:00:00Z",
+     "end": "2020-12-02T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0232",
+   "ctx": {
+    "now": "2020-12-15T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2020,
+     "month": 2,
+     "day": 1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-02-01T00:00:00Z",
+     "end": "2020-02-02T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0233",
+   "ctx": {
+    "now": "2018-10-24T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2018,
+      "month": 1,
+      "day": 10
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "year": 2018,
+      "month": 7,
+      "day": 10
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-01-10T00:00:00Z",
+     "end": "2018-07-10T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0234",
+   "ctx": {
+    "now": "2020-12-15T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2012,
+     "month": 11,
+     "day": 10
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2012-11-10T00:00:00Z",
+     "end": "2012-11-11T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0235",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "literal",
+     "date": {
+      "year": 1870
+     }
+    },
+    "amount": {
+     "years": 10
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "1870-01-01T00:00:00Z",
+     "end": "1880-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0236",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "years": 90
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "years": 90
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0237",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 2,
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-02-28T00:00:00Z",
+     "end": "2017-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-02-28T00:00:00Z",
+     "end": "2018-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0238",
+   "ctx": {
+    "now": "2019-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 2,
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-02-28T00:00:00Z",
+     "end": "2019-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-02-29T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0239",
+   "ctx": {
+    "now": "2020-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 2,
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-02-29T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2021-02-28T00:00:00Z",
+     "end": "2021-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0240",
+   "ctx": {
+    "now": "2020-01-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 2,
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-02-28T00:00:00Z",
+     "end": "2019-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-02-29T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0243",
+   "ctx": {
+    "now": "2020-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2020,
+     "month": 2,
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-02-29T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0244",
+   "ctx": {
+    "now": "2019-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 2,
+      "day": 28
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 3,
+      "day": 1
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-02-28T00:00:00Z",
+     "end": "2019-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-02-28T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-02-28T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0245",
+   "ctx": {
+    "now": "2019-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 2,
+      "day": 29
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 3,
+      "day": 1
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-02-28T00:00:00Z",
+     "end": "2019-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-02-28T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-02-29T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0247",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 13
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T13:00:00Z",
+     "end": "2017-03-22T14:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0248",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 15,
+     "minute": 20
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T15:20:00Z",
+     "end": "2017-03-22T15:21:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0249",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 16,
+     "minute": 40,
+     "second": 50
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T16:40:50Z",
+     "end": "2017-03-22T16:40:51Z",
+     "grain": "second"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0250",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 9,
+     "meridiem": "unknown"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-03-22T09:00:00Z",
+     "end": "2017-03-22T10:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-03-22T21:00:00Z",
+     "end": "2017-03-22T22:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0251",
+   "ctx": {
+    "now": "2018-11-29T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "literal",
+       "date": {
+        "year": 2021
+       }
+      },
+      "unit": "year",
+      "edge": "start"
+     },
+     "amount": 3,
+     "unit": "day"
+    },
+    "unit": "week"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2021-01-04T00:00:00Z",
+     "end": "2021-01-11T00:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0252",
+   "ctx": {
+    "now": "2018-11-29T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "offset",
+    "base": {
+     "op": "snap",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "literal",
+        "date": {
+         "year": 2021
+        }
+       },
+       "unit": "year",
+       "edge": "start"
+      },
+      "amount": 3,
+      "unit": "day"
+     },
+     "unit": "week"
+    },
+    "amount": 1,
+    "unit": "week"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2021-01-11T00:00:00Z",
+     "end": "2021-01-18T00:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0253",
+   "ctx": {
+    "now": "2018-11-29T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2021,
+     "month": 3
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2021-03-01T00:00:00Z",
+     "end": "2021-04-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0254",
+   "ctx": {
+    "now": "2021-11-29T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": 1,
+       "unit": "year"
+      },
+      "unit": "year"
+     },
+     {
+      "op": "literal",
+      "date": {
+       "month": 9
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2022-09-01T00:00:00Z",
+     "end": "2022-10-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0255",
+   "ctx": {
+    "now": "2018-11-29T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "literal",
+        "date": {
+         "year": 2021
+        }
+       },
+       "unit": "year",
+       "edge": "start"
+      },
+      "amount": 3,
+      "unit": "day"
+     },
+     "unit": "week",
+     "edge": "start"
+    },
+    "amount": {
+     "weeks": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2021-01-04T00:00:00Z",
+     "end": "2021-01-18T00:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0256",
+   "ctx": {
+    "now": "2019-11-29T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "snap",
+        "base": {
+         "op": "now"
+        },
+        "unit": "year"
+       },
+       "unit": "year",
+       "edge": "end"
+      },
+      "amount": -4,
+      "unit": "day"
+     },
+     "unit": "week",
+     "edge": "end"
+    },
+    "amount": {
+     "weeks": -3
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-12-09T00:00:00Z",
+     "end": "2019-12-30T00:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0257",
+   "ctx": {
+    "now": "2018-11-29T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "literal",
+      "date": {
+       "year": 2021
+      }
+     },
+     "unit": "year",
+     "edge": "end"
+    },
+    "amount": {
+     "months": -4
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2021-09-01T00:00:00Z",
+     "end": "2022-01-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0258",
+   "ctx": {
+    "now": "2021-11-29T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": -1,
+       "unit": "year"
+      },
+      "unit": "year"
+     },
+     "unit": "year",
+     "edge": "start"
+    },
+    "amount": {
+     "days": 10
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-01-01T00:00:00Z",
+     "end": "2020-01-11T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0260",
+   "ctx": {
+    "now": "2016-11-07T10:20:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "intersect",
+     "parts": [
+      {
+       "op": "literal",
+       "date": {
+        "year": 2016,
+        "month": 12,
+        "day": 15
+       }
+      },
+      {
+       "op": "literal",
+       "time": {
+        "hour": 7,
+        "minute": 0,
+        "meridiem": "pm"
+       }
+      }
+     ]
+    },
+    "end": {
+     "op": "intersect",
+     "parts": [
+      {
+       "op": "literal",
+       "date": {
+        "year": 2016,
+        "month": 12,
+        "day": 15
+       }
+      },
+      {
+       "op": "literal",
+       "time": {
+        "hour": 8,
+        "minute": 0,
+        "meridiem": "pm"
+       }
+      }
+     ]
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-12-15T19:00:00Z",
+     "end": "2016-12-15T20:00:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0261",
+   "ctx": {
+    "now": "2018-11-01T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "seek",
+      "base": {
+       "op": "now"
+      },
+      "dir": "nearest",
+      "target": {
+       "kind": "weekday",
+       "weekday": "mon"
+      }
+     },
+     {
+      "op": "between",
+      "start": {
+       "op": "literal",
+       "time": {
+        "hour": 10,
+        "meridiem": "am"
+       }
+      },
+      "end": {
+       "op": "literal",
+       "time": {
+        "hour": 12
+       }
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-11-05T10:00:00Z",
+     "end": "2018-11-05T12:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-10-29T10:00:00Z",
+     "end": "2018-10-29T12:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0262",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "now"
+    },
+    "amount": {
+     "minutes": 5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T16:12:00Z",
+     "end": "2016-11-07T16:17:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-zh-0263",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "zh-CN",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "now"
+    },
+    "amount": {
+     "hours": 3
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T16:12:00Z",
+     "end": "2016-11-07T19:12:00Z",
+     "grain": "hour"
+    }
+   ]
+  }
+ ]
+}

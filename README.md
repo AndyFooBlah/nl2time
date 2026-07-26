@@ -24,6 +24,8 @@ describe(Temporal.Instant.from('2026-07-20T04:00:00Z'), ctx).text;
 // 'yesterday at 9:00 PM'
 ```
 
+> **New here?** Read the **[step-by-step walkthrough](docs/walkthrough.md)** — two fully-traced examples showing exactly what happens at each stage in both directions (tokens → rules → IR → deterministic resolution, and instant → framing → IR → rendered speech).
+
 ## Why another date library?
 
 Existing tools do one direction, half-way:
@@ -102,9 +104,17 @@ Latin-script languages share a parameterized rule factory (`makeLatinRules` + a 
 
 ## Status
 
-v0.2+ — multilingual parsing (6 locales), en-* describe, core engine with a DST/edge-case battery, holidays (fixed-date, nth-weekday, computed Easter), business-day spans, domain packs. Recurrence (`every Tuesday`) is representable in the IR but resolves in v2.
+v0.3 — multilingual parsing (6 locales), en-* describe, core engine with a DST/edge-case battery, holidays (fixed-date, nth-weekday, computed Easter), business-day spans, domain packs. Recurrence (`every Tuesday`) is representable in the IR but resolves in v2.
 
 **Corpus** ([corpus/](corpus/), runner exported as `nl2time/corpus`): bidirectional golden sets with per-case license provenance — hand-authored forward + reverse sets (100% passing, including the machine-inverted reverse set), and ~2,700 gradeable imported cases across six languages with per-language CI regression baselines (`npm run eval`, `npm run baselines`). See [corpus/ATTRIBUTIONS.md](corpus/ATTRIBUTIONS.md) and [docs/porting.md](docs/porting.md).
+
+## Test-data provenance
+
+Every imported conformance case carries machine-readable provenance (upstream project, license, file path, pinned commit, index), and upstream licenses are vendored verbatim beside the data. **[corpus/ATTRIBUTIONS.md](corpus/ATTRIBUTIONS.md)** is the authoritative record: what is vendored (Microsoft Recognizers-Text, MIT), what is original (the hand-authored and machine-inverted golden sets), what is used eval-only and never redistributed (TempEval-3 Platinum, WikiWars), what was deliberately excluded on license grounds (GPL/LDC/ODbL sources), and the academic lineage (TimeML/TIMEX3, SCATE, TempEval-3, and the LLM date-arithmetic benchmarks that motivated the deterministic-IR design). Known upstream data defects are documented there too, with the exclusion rules applied at import.
+
+## Release history
+
+See **[CHANGELOG.md](CHANGELOG.md)** and [GitHub releases](https://github.com/AndyFooBlah/nl2time/releases). Current: v0.3.0 (multilingual parsing).
 
 ## Development
 

@@ -1,0 +1,8615 @@
+{
+ "description": "MACHINE-GENERATED engine-parity fixtures: (expr, ctx) → candidates from the JS reference implementation. Ports must reproduce candidates exactly (values, grains, order). Regenerate with scripts/generate-ir-fixtures.mjs; never hand-edit.",
+ "source": "corpus/forward/imported-recognizers-de.json",
+ "cases": [
+  {
+   "id": "rt-de-0000",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 10,
+     "day": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-10-02T00:00:00Z",
+     "end": "2016-10-03T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-10-02T00:00:00Z",
+     "end": "2017-10-03T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0001",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 4,
+     "day": 22
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-04-22T00:00:00Z",
+     "end": "2016-04-23T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-04-22T00:00:00Z",
+     "end": "2017-04-23T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0002",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 4,
+     "day": 22
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-04-22T00:00:00Z",
+     "end": "2016-04-23T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-04-22T00:00:00Z",
+     "end": "2017-04-23T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0003",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 5,
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-05-29T00:00:00Z",
+     "end": "2016-05-30T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-05-29T00:00:00Z",
+     "end": "2017-05-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0004",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 5,
+     "day": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-05-02T00:00:00Z",
+     "end": "2016-05-03T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-05-02T00:00:00Z",
+     "end": "2017-05-03T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0005",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 5,
+     "day": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-05-02T00:00:00Z",
+     "end": "2016-05-03T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-05-02T00:00:00Z",
+     "end": "2017-05-03T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0006",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "nearest",
+    "target": {
+     "kind": "weekday",
+     "weekday": "fri"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-11T00:00:00Z",
+     "end": "2016-11-12T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-04T00:00:00Z",
+     "end": "2016-11-05T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0007",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 1,
+     "unit": "month"
+    },
+    "unit": "month"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-12-01T00:00:00Z",
+     "end": "2017-01-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0008",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "day": 3,
+      "month": 9
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "day": 12,
+      "month": 9
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-09-03T00:00:00Z",
+     "end": "2016-09-12T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-09-03T00:00:00Z",
+     "end": "2017-09-12T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-09-03T00:00:00Z",
+     "end": "2017-09-12T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0009",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 9
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-09-01T00:00:00Z",
+     "end": "2016-10-01T00:00:00Z",
+     "grain": "month"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-09-01T00:00:00Z",
+     "end": "2017-10-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0010",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "day": 12,
+      "month": 1,
+      "year": 2016
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "day": 22,
+      "month": 1,
+      "year": 2016
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-01-12T00:00:00Z",
+     "end": "2016-01-22T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0011",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "now"
+    },
+    "amount": {
+     "days": 3
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-08T00:00:00Z",
+     "end": "2016-11-11T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0012",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "seek",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "literal",
+        "date": {
+         "month": 7
+        }
+       },
+       "unit": "month",
+       "edge": "end"
+      },
+      "amount": -6,
+      "unit": "day"
+     },
+     "dir": "prev",
+     "target": {
+      "kind": "weekday",
+      "weekday": "mon"
+     },
+     "n": 1
+    },
+    "amount": {
+     "days": 7
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-07-25T00:00:00Z",
+     "end": "2016-08-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-07-24T00:00:00Z",
+     "end": "2017-07-31T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0013",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "now"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T00:00:00Z",
+     "end": "2016-11-07T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0014",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "month": 10,
+       "day": 14
+      }
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 8,
+       "minute": 0,
+       "second": 31,
+       "meridiem": "unknown"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-10-14T08:00:31Z",
+     "end": "2016-10-14T08:00:32Z",
+     "grain": "second"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-10-14T20:00:31Z",
+     "end": "2016-10-14T20:00:32Z",
+     "grain": "second"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-10-14T08:00:31Z",
+     "end": "2017-10-14T08:00:32Z",
+     "grain": "second"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-10-14T20:00:31Z",
+     "end": "2017-10-14T20:00:32Z",
+     "grain": "second"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0015",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "month": 4,
+       "day": 22
+      }
+     },
+     {
+      "op": "between",
+      "start": {
+       "op": "literal",
+       "time": {
+        "hour": 5,
+        "meridiem": "pm"
+       }
+      },
+      "end": {
+       "op": "literal",
+       "time": {
+        "hour": 6,
+        "meridiem": "pm"
+       }
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-04-22T17:00:00Z",
+     "end": "2016-04-22T18:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-04-22T17:00:00Z",
+     "end": "2017-04-22T18:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0016",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "month": 4,
+       "day": 22
+      }
+     },
+     {
+      "op": "between",
+      "start": {
+       "op": "literal",
+       "time": {
+        "hour": 5,
+        "meridiem": "pm"
+       }
+      },
+      "end": {
+       "op": "literal",
+       "time": {
+        "hour": 6,
+        "meridiem": "pm"
+       }
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-04-22T17:00:00Z",
+     "end": "2016-04-22T18:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-04-22T17:00:00Z",
+     "end": "2017-04-22T18:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0017",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "snap",
+      "base": {
+       "op": "now"
+      },
+      "unit": "day"
+     },
+     {
+      "op": "literal",
+      "dayPeriod": "evening"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T16:00:00Z",
+     "end": "2016-11-07T20:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0018",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "seek",
+      "base": {
+       "op": "now"
+      },
+      "dir": "next",
+      "target": {
+       "kind": "weekday",
+       "weekday": "mon"
+      }
+     },
+     {
+      "op": "literal",
+      "dayPeriod": "afternoon"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-14T12:00:00Z",
+     "end": "2016-11-14T16:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0019",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "seek",
+      "base": {
+       "op": "now"
+      },
+      "dir": "nearest",
+      "target": {
+       "kind": "weekday",
+       "weekday": "mon"
+      }
+     },
+     {
+      "op": "literal",
+      "dayPeriod": "afternoon"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-14T12:00:00Z",
+     "end": "2016-11-14T16:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-10-31T12:00:00Z",
+     "end": "2016-10-31T16:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0020",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "seek",
+      "base": {
+       "op": "now"
+      },
+      "dir": "nearest",
+      "target": {
+       "kind": "weekday",
+       "weekday": "tue"
+      }
+     },
+     {
+      "op": "literal",
+      "dayPeriod": "morning"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-08T08:00:00Z",
+     "end": "2016-11-08T12:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-01T08:00:00Z",
+     "end": "2016-11-01T12:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0021",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "seek",
+      "base": {
+       "op": "now"
+      },
+      "dir": "nearest",
+      "target": {
+       "kind": "weekday",
+       "weekday": "tue"
+      }
+     },
+     {
+      "op": "literal",
+      "dayPeriod": "morning"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-08T08:00:00Z",
+     "end": "2016-11-08T12:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-01T08:00:00Z",
+     "end": "2016-11-01T12:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0022",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "hours": 3
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "hours": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0023",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "duration",
+    "iso": "PT110376000S"
+   },
+   "candidates": [
+    {
+     "kind": "duration",
+     "iso": "PT110376000S"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0024",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "minutes": 3
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "minutes": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0025",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "duration",
+    "iso": "PT123.45S"
+   },
+   "candidates": [
+    {
+     "kind": "duration",
+     "iso": "PT123.45S"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0026",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "amount",
+    "amount": {
+     "days": 1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "amount",
+     "amount": {
+      "days": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0034",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 7,
+     "minute": 30,
+     "meridiem": "unknown"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T07:30:00Z",
+     "end": "2016-11-07T07:31:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-07T19:30:00Z",
+     "end": "2016-11-07T19:31:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0035",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 8,
+     "minute": 15,
+     "meridiem": "pm"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T20:15:00Z",
+     "end": "2016-11-07T20:16:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0036",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 17
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 18
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T17:00:00Z",
+     "end": "2016-11-07T18:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0037",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "dayPeriod": "morning"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T08:00:00Z",
+     "end": "2016-11-07T12:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0038",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 5,
+      "meridiem": "pm"
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 6,
+      "meridiem": "pm"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T17:00:00Z",
+     "end": "2016-11-07T18:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0039",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 4,
+      "meridiem": "unknown"
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 7,
+      "meridiem": "unknown"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T16:00:00Z",
+     "end": "2016-11-08T07:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-07T16:00:00Z",
+     "end": "2016-11-07T19:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-07T04:00:00Z",
+     "end": "2016-11-07T07:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-07T04:00:00Z",
+     "end": "2016-11-07T19:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0040",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "dayPeriod": "evening"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T16:00:00Z",
+     "end": "2016-11-07T20:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0041",
+   "ctx": {
+    "now": "2017-09-28T14:11:10.9626841Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "now"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-09-28T14:11:10.9626841Z",
+     "end": "2017-09-28T14:11:10.9626841Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0042",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "offset",
+    "base": {
+     "op": "now"
+    },
+    "amount": 5,
+    "unit": "minute"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T00:05:00Z",
+     "end": "2016-11-07T00:05:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0043",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "offset",
+    "base": {
+     "op": "now"
+    },
+    "amount": 5,
+    "unit": "minute"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T00:05:00Z",
+     "end": "2016-11-07T00:05:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0045",
+   "ctx": {
+    "now": "2020-07-29T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "seek",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "offset",
+        "base": {
+         "op": "now"
+        },
+        "amount": 2,
+        "unit": "week"
+       },
+       "unit": "week"
+      },
+      "dir": "next",
+      "target": {
+       "kind": "weekday",
+       "weekday": "thu"
+      },
+      "n": 1
+     },
+     {
+      "op": "between",
+      "start": {
+       "op": "literal",
+       "time": {
+        "hour": 4,
+        "meridiem": "pm"
+       }
+      },
+      "end": {
+       "op": "literal",
+       "time": {
+        "hour": 6,
+        "meridiem": "pm"
+       }
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-08-13T16:00:00Z",
+     "end": "2020-08-13T18:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0046",
+   "ctx": {
+    "now": "2020-07-29T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 2,
+     "unit": "week"
+    },
+    "unit": "week"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-08-10T00:00:00Z",
+     "end": "2020-08-17T00:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0047",
+   "ctx": {
+    "now": "2017-12-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-12-04T00:00:00Z",
+     "end": "2017-12-05T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0049",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 18,
+     "minute": 12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-05T18:12:00Z",
+     "end": "2019-08-05T18:13:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0050",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 18,
+     "minute": 12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-05T18:12:00Z",
+     "end": "2019-08-05T18:13:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0051",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 18,
+     "minute": 12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-05T18:12:00Z",
+     "end": "2019-08-05T18:13:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0052",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 18,
+     "minute": 12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-05T18:12:00Z",
+     "end": "2019-08-05T18:13:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0053",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 10,
+     "meridiem": "unknown"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-05T10:00:00Z",
+     "end": "2019-08-05T11:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-08-05T22:00:00Z",
+     "end": "2019-08-05T23:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0055",
+   "ctx": {
+    "now": "2019-08-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "seek",
+     "base": {
+      "op": "now"
+     },
+     "dir": "nearest",
+     "target": {
+      "kind": "weekday",
+      "weekday": "sat"
+     }
+    },
+    "amount": {
+     "days": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-10T00:00:00Z",
+     "end": "2019-08-12T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-08-03T00:00:00Z",
+     "end": "2019-08-05T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0056",
+   "ctx": {
+    "now": "2019-08-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "week"
+    },
+    "amount": {
+     "days": 5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-05T00:00:00Z",
+     "end": "2019-08-10T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0058",
+   "ctx": {
+    "now": "2019-08-27T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 3,
+     "minute": 15,
+     "meridiem": "unknown"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-27T15:15:00Z",
+     "end": "2019-08-27T15:16:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-08-27T03:15:00Z",
+     "end": "2019-08-27T03:16:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0059",
+   "ctx": {
+    "now": "2019-09-03T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "seek",
+     "base": {
+      "op": "now"
+     },
+     "dir": "next",
+     "target": {
+      "kind": "weekday",
+      "weekday": "thu"
+     }
+    },
+    "end": {
+     "op": "seek",
+     "base": {
+      "op": "now"
+     },
+     "dir": "next",
+     "target": {
+      "kind": "weekday",
+      "weekday": "sat"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-09-12T00:00:00Z",
+     "end": "2019-09-14T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0060",
+   "ctx": {
+    "now": "2019-09-03T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "duration",
+    "iso": "PT15M"
+   },
+   "candidates": [
+    {
+     "kind": "duration",
+     "iso": "PT15M"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0061",
+   "ctx": {
+    "now": "2019-09-03T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "duration",
+    "iso": "PT45M"
+   },
+   "candidates": [
+    {
+     "kind": "duration",
+     "iso": "PT45M"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0062",
+   "ctx": {
+    "now": "2019-09-03T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "duration",
+    "iso": "PT30M"
+   },
+   "candidates": [
+    {
+     "kind": "duration",
+     "iso": "PT30M"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0067",
+   "ctx": {
+    "now": "2019-09-19T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "now"
+    },
+    "amount": {
+     "days": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-09-20T00:00:00Z",
+     "end": "2019-09-22T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0068",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 1,
+     "unit": "day"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-12-03T00:00:00Z",
+     "end": "2019-12-04T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0069",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 10,
+     "day": 28
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-10-28T00:00:00Z",
+     "end": "2019-10-29T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-10-28T00:00:00Z",
+     "end": "2020-10-29T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0070",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 10,
+     "day": 28
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-10-28T00:00:00Z",
+     "end": "2019-10-29T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-10-28T00:00:00Z",
+     "end": "2020-10-29T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0071",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 10,
+     "day": 28
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-10-28T00:00:00Z",
+     "end": "2019-10-29T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-10-28T00:00:00Z",
+     "end": "2020-10-29T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0072",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 10,
+     "day": 28
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-10-28T00:00:00Z",
+     "end": "2019-10-29T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-10-28T00:00:00Z",
+     "end": "2020-10-29T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0073",
+   "ctx": {
+    "now": "2019-12-02T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 10,
+     "day": 28
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-10-28T00:00:00Z",
+     "end": "2019-10-29T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-10-28T00:00:00Z",
+     "end": "2020-10-29T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0074",
+   "ctx": {
+    "now": "2020-04-30T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "month",
+     "edge": "end"
+    },
+    "amount": {
+     "days": -15
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-04-16T00:00:00Z",
+     "end": "2020-05-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0077",
+   "ctx": {
+    "now": "2020-04-30T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 12,
+     "day": 28,
+     "year": 2012
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2012-12-28T00:00:00Z",
+     "end": "2012-12-29T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0079",
+   "ctx": {
+    "now": "2018-10-24T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 1,
+      "day": 10,
+      "year": 2017
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 2,
+      "day": 11,
+      "year": 2017
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-01-10T00:00:00Z",
+     "end": "2017-02-11T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0080",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "seek",
+      "base": {
+       "op": "now"
+      },
+      "dir": "nearest",
+      "target": {
+       "kind": "weekday",
+       "weekday": "tue"
+      }
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 11,
+       "minute": 0,
+       "meridiem": "unknown"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-08T11:00:00Z",
+     "end": "2016-11-08T11:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-08T23:00:00Z",
+     "end": "2016-11-08T23:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-01T11:00:00Z",
+     "end": "2016-11-01T11:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-01T23:00:00Z",
+     "end": "2016-11-01T23:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0081",
+   "ctx": {
+    "now": "2019-04-15T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "seek",
+      "base": {
+       "op": "now"
+      },
+      "dir": "nearest",
+      "target": {
+       "kind": "weekday",
+       "weekday": "wed"
+      }
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 4,
+       "minute": 0,
+       "meridiem": "unknown"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-04-17T16:00:00Z",
+     "end": "2019-04-17T16:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-04-17T04:00:00Z",
+     "end": "2019-04-17T04:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-04-10T16:00:00Z",
+     "end": "2019-04-10T16:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-04-10T04:00:00Z",
+     "end": "2019-04-10T04:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0082",
+   "ctx": {
+    "now": "2018-10-24T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "now"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-10-24T12:00:00Z",
+     "end": "2018-10-24T12:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0083",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 7,
+     "minute": 45,
+     "meridiem": "unknown"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T07:45:00Z",
+     "end": "2016-11-07T07:46:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-07T19:45:00Z",
+     "end": "2016-11-07T19:46:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0084",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 7,
+     "minute": 15,
+     "meridiem": "unknown"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T07:15:00Z",
+     "end": "2016-11-07T07:16:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-07T19:15:00Z",
+     "end": "2016-11-07T19:16:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0085",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "now"
+    },
+    "amount": {
+     "minutes": -90
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-06T22:30:00Z",
+     "end": "2016-11-07T00:00:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0086",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "duration",
+    "iso": "PT150M"
+   },
+   "candidates": [
+    {
+     "kind": "duration",
+     "iso": "PT150M"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0087",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "duration",
+    "iso": "PT90M"
+   },
+   "candidates": [
+    {
+     "kind": "duration",
+     "iso": "PT90M"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0088",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "duration",
+    "iso": "PT330M"
+   },
+   "candidates": [
+    {
+     "kind": "duration",
+     "iso": "PT330M"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0089",
+   "ctx": {
+    "now": "2019-08-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "week"
+    },
+    "amount": {
+     "days": 5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-05T00:00:00Z",
+     "end": "2019-08-10T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0090",
+   "ctx": {
+    "now": "2019-08-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "now"
+      },
+      "amount": 1,
+      "unit": "week"
+     },
+     "unit": "week"
+    },
+    "amount": {
+     "days": 5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-12T00:00:00Z",
+     "end": "2019-08-17T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0091",
+   "ctx": {
+    "now": "2019-08-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "now"
+      },
+      "amount": -1,
+      "unit": "week"
+     },
+     "unit": "week"
+    },
+    "amount": {
+     "days": 5
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-07-29T00:00:00Z",
+     "end": "2019-08-03T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0092",
+   "ctx": {
+    "now": "2016-11-07T16:12:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "dayPeriod": "morning"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T08:00:00Z",
+     "end": "2016-11-07T12:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0094",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 12,
+     "meridiem": "pm"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T12:00:00Z",
+     "end": "2016-11-07T13:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0095",
+   "ctx": {
+    "now": "2019-08-01T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "dayPeriod": "evening",
+    "mod": "end"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-01T18:00:00Z",
+     "end": "2019-08-01T20:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0096",
+   "ctx": {
+    "now": "2019-08-01T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "dayPeriod": "afternoon",
+    "mod": "end"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-01T14:00:00Z",
+     "end": "2019-08-01T16:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0099",
+   "ctx": {
+    "now": "2018-09-07T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 12,
+     "meridiem": "am"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-09-07T00:00:00Z",
+     "end": "2018-09-07T01:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0100",
+   "ctx": {
+    "now": "2019-08-12T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 3,
+     "unit": "week"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-09-02T00:00:00Z",
+     "end": "2019-09-03T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0101",
+   "ctx": {
+    "now": "2019-08-12T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 3,
+     "unit": "week"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-09-02T00:00:00Z",
+     "end": "2019-09-03T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0102",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 12,
+     "meridiem": "am"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-05T00:00:00Z",
+     "end": "2019-08-05T01:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0103",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 12,
+     "meridiem": "am"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-05T00:00:00Z",
+     "end": "2019-08-05T01:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0104",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 12,
+     "meridiem": "am"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-05T00:00:00Z",
+     "end": "2019-08-05T01:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0105",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 12,
+     "meridiem": "am"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-05T00:00:00Z",
+     "end": "2019-08-05T01:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0110",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-01-01T00:00:00Z",
+     "end": "2019-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0111",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-01-01T00:00:00Z",
+     "end": "2019-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0112",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-01-01T00:00:00Z",
+     "end": "2019-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0113",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-01-01T00:00:00Z",
+     "end": "2019-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0114",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -1,
+     "unit": "year"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-01-01T00:00:00Z",
+     "end": "2018-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0115",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -1,
+     "unit": "year"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-01-01T00:00:00Z",
+     "end": "2018-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0116",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -1,
+     "unit": "year"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-01-01T00:00:00Z",
+     "end": "2018-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0117",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -2,
+     "unit": "year"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-01-01T00:00:00Z",
+     "end": "2017-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0118",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -2,
+     "unit": "year"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-01-01T00:00:00Z",
+     "end": "2017-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0119",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -2,
+     "unit": "year"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-01-01T00:00:00Z",
+     "end": "2017-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0120",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 1,
+     "unit": "year"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-01-01T00:00:00Z",
+     "end": "2020-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0121",
+   "ctx": {
+    "now": "2017-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 2,
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-02-28T00:00:00Z",
+     "end": "2017-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-02-28T00:00:00Z",
+     "end": "2018-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0122",
+   "ctx": {
+    "now": "2019-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 2,
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-02-28T00:00:00Z",
+     "end": "2019-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-02-29T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0123",
+   "ctx": {
+    "now": "2020-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 2,
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-02-29T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2021-02-28T00:00:00Z",
+     "end": "2021-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0126",
+   "ctx": {
+    "now": "2020-03-22T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 2,
+     "day": 29,
+     "year": 2020
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-02-29T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0127",
+   "ctx": {
+    "now": "2019-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 2,
+      "day": 28
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 3,
+      "day": 1
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-02-28T00:00:00Z",
+     "end": "2019-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-02-28T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-02-28T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0128",
+   "ctx": {
+    "now": "2019-09-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 2,
+      "day": 29
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 3,
+      "day": 1
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-02-28T00:00:00Z",
+     "end": "2019-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-02-28T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-02-29T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0130",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "dayPeriod": "morning"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-07T08:00:00Z",
+     "end": "2016-11-07T12:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0131",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 9,
+     "day": 23,
+     "year": 2020
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-09-23T00:00:00Z",
+     "end": "2020-09-24T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0132",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 9,
+     "day": 23,
+     "year": 2020
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-09-23T00:00:00Z",
+     "end": "2020-09-24T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0133",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 9,
+     "day": 23,
+     "year": 2020
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-09-23T00:00:00Z",
+     "end": "2020-09-24T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0134",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 9,
+     "day": 23,
+     "year": 2020
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-09-23T00:00:00Z",
+     "end": "2020-09-24T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0135",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 9,
+     "day": 23,
+     "year": 2020
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-09-23T00:00:00Z",
+     "end": "2020-09-24T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0136",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 9,
+     "day": 23,
+     "year": 2020
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-09-23T00:00:00Z",
+     "end": "2020-09-24T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0137",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "offset",
+    "base": {
+     "op": "holiday",
+     "name": "easter",
+     "year": 2019
+    },
+    "amount": -7,
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-04-14T00:00:00Z",
+     "end": "2019-04-15T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0138",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "offset",
+    "base": {
+     "op": "holiday",
+     "name": "easter"
+    },
+    "amount": -1,
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-04-15T00:00:00Z",
+     "end": "2017-04-16T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-03-26T00:00:00Z",
+     "end": "2016-03-27T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0139",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "offset",
+    "base": {
+     "op": "holiday",
+     "name": "easter"
+    },
+    "amount": -50,
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-02-25T00:00:00Z",
+     "end": "2017-02-26T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-02-06T00:00:00Z",
+     "end": "2016-02-07T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0140",
+   "ctx": {
+    "now": "2017-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": 1,
+       "unit": "year"
+      },
+      "unit": "year"
+     },
+     {
+      "op": "offset",
+      "base": {
+       "op": "holiday",
+       "name": "easter"
+      },
+      "amount": -49,
+      "unit": "day"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-02-11T00:00:00Z",
+     "end": "2018-02-12T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0141",
+   "ctx": {
+    "now": "2017-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 1,
+     "day": 6,
+     "year": 2020
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-01-06T00:00:00Z",
+     "end": "2020-01-07T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0142",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 12,
+     "day": 4
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-12-04T00:00:00Z",
+     "end": "2017-12-05T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-12-04T00:00:00Z",
+     "end": "2018-12-05T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0143",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 6,
+     "day": 1,
+     "year": 2019
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-06-01T00:00:00Z",
+     "end": "2019-06-02T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0144",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": -1,
+       "unit": "year"
+      },
+      "unit": "year"
+     },
+     {
+      "op": "literal",
+      "date": {
+       "month": 8,
+       "day": 8
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-08-08T00:00:00Z",
+     "end": "2017-08-09T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0145",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 6,
+     "day": 24
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-06-24T00:00:00Z",
+     "end": "2018-06-25T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-06-24T00:00:00Z",
+     "end": "2019-06-25T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0146",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 6,
+     "day": 29
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-06-29T00:00:00Z",
+     "end": "2018-06-30T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-06-29T00:00:00Z",
+     "end": "2019-06-30T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0147",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 11,
+     "day": 1
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-11-01T00:00:00Z",
+     "end": "2018-11-02T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-11-01T00:00:00Z",
+     "end": "2019-11-02T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0149",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 2,
+     "day": 27,
+     "year": 2022
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2022-02-27T00:00:00Z",
+     "end": "2022-02-28T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0150",
+   "ctx": {
+    "now": "2018-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 15,
+     "unit": "day"
+    },
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-11-22T00:00:00Z",
+     "end": "2018-11-23T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0151",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "year",
+     "edge": "end"
+    },
+    "amount": {
+     "months": -6
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-07-01T00:00:00Z",
+     "end": "2019-01-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0152",
+   "ctx": {
+    "now": "2018-05-28T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "year"
+    },
+    "amount": {
+     "months": 6
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2018-01-01T00:00:00Z",
+     "end": "2018-07-01T00:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0153",
+   "ctx": {
+    "now": "2021-05-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "nearest",
+    "target": {
+     "kind": "weekday",
+     "weekday": "tue"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2021-05-11T00:00:00Z",
+     "end": "2021-05-12T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2021-04-27T00:00:00Z",
+     "end": "2021-04-28T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0155",
+   "ctx": {
+    "now": "2021-05-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "intersect",
+     "parts": [
+      {
+       "op": "seek",
+       "base": {
+        "op": "now"
+       },
+       "dir": "nearest",
+       "target": {
+        "kind": "weekday",
+        "weekday": "mon"
+       }
+      },
+      {
+       "op": "literal",
+       "time": {
+        "hour": 7,
+        "meridiem": "unknown"
+       }
+      }
+     ]
+    },
+    "end": {
+     "op": "intersect",
+     "parts": [
+      {
+       "op": "seek",
+       "base": {
+        "op": "now"
+       },
+       "dir": "nearest",
+       "target": {
+        "kind": "weekday",
+        "weekday": "fri"
+       }
+      },
+      {
+       "op": "literal",
+       "time": {
+        "hour": 15
+       }
+      }
+     ]
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2021-05-03T07:00:00Z",
+     "end": "2021-05-07T15:00:00Z",
+     "grain": "hour"
+    },
+    {
+     "kind": "interval",
+     "start": "2021-05-03T19:00:00Z",
+     "end": "2021-05-07T15:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0156",
+   "ctx": {
+    "now": "2021-05-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "literal",
+     "date": {
+      "month": 10
+     }
+    },
+    "dir": "next",
+    "target": {
+     "kind": "weekday",
+     "weekday": "sun"
+    },
+    "n": 1
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2021-10-03T00:00:00Z",
+     "end": "2021-10-04T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-10-04T00:00:00Z",
+     "end": "2020-10-05T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0157",
+   "ctx": {
+    "now": "2021-05-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "offset",
+    "base": {
+     "op": "holiday",
+     "name": "easter",
+     "year": 2022
+    },
+    "amount": 49,
+    "unit": "day"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2022-06-05T00:00:00Z",
+     "end": "2022-06-06T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0158",
+   "ctx": {
+    "now": "2021-06-18T18:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 12,
+     "meridiem": "am"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2021-06-18T00:00:00Z",
+     "end": "2021-06-18T01:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0166",
+   "ctx": {
+    "now": "2019-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-01-01T00:00:00Z",
+     "end": "2020-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0167",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-01-01T00:00:00Z",
+     "end": "2017-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0168",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2009
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2009-01-01T00:00:00Z",
+     "end": "2010-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0169",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2012
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2012-01-01T00:00:00Z",
+     "end": "2013-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0171",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2010
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2010-01-01T00:00:00Z",
+     "end": "2011-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0172",
+   "ctx": {
+    "now": "2021-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2021-01-01T00:00:00Z",
+     "end": "2022-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0175",
+   "ctx": {
+    "now": "2020-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 9,
+     "day": 22
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-09-22T00:00:00Z",
+     "end": "2020-09-23T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2021-09-22T00:00:00Z",
+     "end": "2021-09-23T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0176",
+   "ctx": {
+    "now": "2020-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "literal",
+     "date": {
+      "month": 11,
+      "day": 26
+     }
+    },
+    "dir": "prev",
+    "target": {
+     "kind": "weekday",
+     "weekday": "sun"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-11-24T00:00:00Z",
+     "end": "2019-11-25T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2020-11-22T00:00:00Z",
+     "end": "2020-11-23T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0177",
+   "ctx": {
+    "now": "2021-11-01T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": 1,
+     "unit": "year"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2022-01-01T00:00:00Z",
+     "end": "2023-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0178",
+   "ctx": {
+    "now": "2021-11-01T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -1,
+     "unit": "year"
+    },
+    "unit": "year"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2020-01-01T00:00:00Z",
+     "end": "2021-01-01T00:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0179",
+   "ctx": {
+    "now": "2017-12-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "dayPeriod": "morning"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-12-04T08:00:00Z",
+     "end": "2017-12-04T12:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0180",
+   "ctx": {
+    "now": "2017-12-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "time": {
+     "hour": 9,
+     "meridiem": "am"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-12-04T09:00:00Z",
+     "end": "2017-12-04T10:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0181",
+   "ctx": {
+    "now": "2017-12-04T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "dayPeriod": "evening"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2017-12-04T16:00:00Z",
+     "end": "2017-12-04T20:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0183",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "intersect",
+      "parts": [
+       {
+        "op": "seek",
+        "base": {
+         "op": "now"
+        },
+        "dir": "nearest",
+        "target": {
+         "kind": "weekday",
+         "weekday": "sun"
+        }
+       },
+       {
+        "op": "literal",
+        "dayPeriod": "morning"
+       }
+      ]
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 8,
+       "minute": 0,
+       "meridiem": "am"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-11T08:00:00Z",
+     "end": "2019-08-11T08:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-08-04T08:00:00Z",
+     "end": "2019-08-04T08:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0184",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "intersect",
+      "parts": [
+       {
+        "op": "seek",
+        "base": {
+         "op": "now"
+        },
+        "dir": "nearest",
+        "target": {
+         "kind": "weekday",
+         "weekday": "wed"
+        }
+       },
+       {
+        "op": "literal",
+        "dayPeriod": "morning"
+       }
+      ]
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 8,
+       "minute": 0,
+       "meridiem": "am"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-07T08:00:00Z",
+     "end": "2019-08-07T08:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-07-31T08:00:00Z",
+     "end": "2019-07-31T08:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0186",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "seek",
+      "base": {
+       "op": "now"
+      },
+      "dir": "nearest",
+      "target": {
+       "kind": "weekday",
+       "weekday": "sun"
+      }
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 8,
+       "minute": 0,
+       "meridiem": "am"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-11T08:00:00Z",
+     "end": "2019-08-11T08:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-08-04T08:00:00Z",
+     "end": "2019-08-04T08:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0187",
+   "ctx": {
+    "now": "2019-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "intersect",
+      "parts": [
+       {
+        "op": "seek",
+        "base": {
+         "op": "now"
+        },
+        "dir": "nearest",
+        "target": {
+         "kind": "weekday",
+         "weekday": "sun"
+        }
+       },
+       {
+        "op": "literal",
+        "dayPeriod": "evening"
+       }
+      ]
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 10,
+       "minute": 0,
+       "meridiem": "pm"
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2019-08-11T22:00:00Z",
+     "end": "2019-08-11T22:01:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-08-04T22:00:00Z",
+     "end": "2019-08-04T22:01:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0189",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 11,
+      "day": 19
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 11,
+      "day": 20
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2015-11-19T00:00:00Z",
+     "end": "2015-11-20T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2015-11-19T00:00:00Z",
+     "end": "2016-11-20T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-19T00:00:00Z",
+     "end": "2016-11-20T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0191",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 4,
+     "day": 7
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-04-07T00:00:00Z",
+     "end": "2016-04-08T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-04-07T00:00:00Z",
+     "end": "2017-04-08T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0192",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 4,
+     "day": 7
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-04-07T00:00:00Z",
+     "end": "2016-04-08T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-04-07T00:00:00Z",
+     "end": "2017-04-08T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0194",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "nearest",
+    "target": {
+     "kind": "weekday",
+     "weekday": "thu"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-10T00:00:00Z",
+     "end": "2016-11-11T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-03T00:00:00Z",
+     "end": "2016-11-04T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0195",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "nearest",
+    "target": {
+     "kind": "weekday",
+     "weekday": "thu"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-10T00:00:00Z",
+     "end": "2016-11-11T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-03T00:00:00Z",
+     "end": "2016-11-04T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0196",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "nearest",
+    "target": {
+     "kind": "weekday",
+     "weekday": "thu"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-10T00:00:00Z",
+     "end": "2016-11-11T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-03T00:00:00Z",
+     "end": "2016-11-04T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0197",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 11,
+     "day": 27
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2015-11-27T00:00:00Z",
+     "end": "2015-11-28T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-27T00:00:00Z",
+     "end": "2016-11-28T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0198",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "month": 11,
+     "day": 3
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-03T00:00:00Z",
+     "end": "2016-11-04T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2017-11-03T00:00:00Z",
+     "end": "2017-11-04T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0199",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "nearest",
+    "target": {
+     "kind": "weekday",
+     "weekday": "mon"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-14T00:00:00Z",
+     "end": "2016-11-15T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-10-31T00:00:00Z",
+     "end": "2016-11-01T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0200",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "nearest",
+    "target": {
+     "kind": "weekday",
+     "weekday": "thu"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-10T00:00:00Z",
+     "end": "2016-11-11T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-03T00:00:00Z",
+     "end": "2016-11-04T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "rt-de-0201",
+   "ctx": {
+    "now": "2016-11-07T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "de-DE",
+    "weekStart": "mon",
+    "partialPeriod": "exclude",
+    "nextWeekday": "week-after",
+    "dayPeriods": [
+     {
+      "period": "morning",
+      "from": 8,
+      "before": 12
+     },
+     {
+      "period": "afternoon",
+      "from": 12,
+      "before": 16
+     },
+     {
+      "period": "evening",
+      "from": 16,
+      "before": 20
+     },
+     {
+      "period": "night",
+      "from": 20,
+      "before": 24
+     }
+    ]
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "nearest",
+    "target": {
+     "kind": "weekday",
+     "weekday": "thu"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2016-11-10T00:00:00Z",
+     "end": "2016-11-11T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-03T00:00:00Z",
+     "end": "2016-11-04T00:00:00Z",
+     "grain": "day"
+    }
+   ]
+  }
+ ]
+}

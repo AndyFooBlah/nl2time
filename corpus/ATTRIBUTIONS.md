@@ -41,3 +41,28 @@ Tracked in [issue #2](https://github.com/AndyFooBlah/nl2time/issues/2); licenses
   external checks, never vendored into this repository.
 - SynTime tweets corpus (GPL-3.0) — incompatible with MIT vendoring; not used.
 - SCATE/THYME annotations (ODbL + data-use agreements) — schema ideas only, no data.
+
+## Academic lineage & references
+
+The corpus design and the deterministic-IR architecture draw on published work; these are the
+primary references for anyone auditing the methodology:
+
+- **TimeML / TIMEX3** — Pustejovsky et al., *TimeML: Robust Specification of Event and Temporal
+  Expressions in Text* (IWCS-5, 2003); the annotation standard behind most temporal corpora.
+  https://timeml.github.io/
+- **TempEval-3** — UzZaman et al., *SemEval-2013 Task 1: TempEval-3* (ACL S13-2001) — source of
+  the freely-available Platinum evaluation set we use eval-only.
+  https://aclanthology.org/S13-2001/
+- **SCATE** — Bethard & Parker, *A Semantically Compositional Annotation Scheme for Time
+  Normalization* (LREC 2016) — the compositional operator-algebra approach our IR generalizes.
+  https://aclanthology.org/L16-1599/
+- **Semantic parsing for time normalization with LLMs** — arXiv:2507.06450 (2025), LLMs emitting
+  executable SCATE programs; closest published precedent for the "LLM emits IR, engine computes"
+  split. https://arxiv.org/abs/2507.06450
+- **LLM date-arithmetic unreliability** (the motivation for a deterministic engine):
+  *Test of Time* (arXiv:2406.09170), *PRIMETIME* (arXiv:2504.16155), *Date Fragments*
+  (arXiv:2505.16088, tokenization-level failures), *DateLogicQA* (arXiv:2412.13377).
+- **Microsoft Recognizers-Text** — no paper; the project itself (MIT) and its datetimeV2/TIMEX
+  resolution model: https://github.com/microsoft/Recognizers-Text
+- Survey notes with the full dataset landscape (licenses, sizes, availability):
+  [docs/evals.md](../docs/evals.md).
