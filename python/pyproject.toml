@@ -1,0 +1,24 @@
+[project]
+name = "nl2time"
+version = "0.0.1"
+description = "Natural language to time intervals: language-neutral IR engine (Python port of the JS reference)"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "whenever>=0.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["nl2time"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
