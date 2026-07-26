@@ -26,7 +26,7 @@ What is deliberately **not** kept in sync mechanically: rule/parser *implementat
 ## Python implementation plan
 
 - **Time model**: [`whenever`](https://github.com/ariebovenberg/whenever) — Temporal/jiff-inspired, same semantics we rely on (DST-aware calendar arithmetic, `Instant`/`ZonedDateTime`/`Date` mapping per the table below).
-- **Order of work**: ① IR types + validator, `TimeContext`, engine `resolve` — gated by the parity fixtures; ② corpus runner; ③ English parser (climb `imported-recognizers-en.json`); ④ describe (needs Babel for CLDR rendering); ⑤ other languages.
+- **Order of work**: ① IR types + validator, `TimeContext`, engine `resolve` — **done, 100% parity (2,760/2,760 fixtures, `uv run --project python --extra dev pytest python/tests`)**; ② corpus runner; ③ English parser (climb `imported-recognizers-en.json`); ④ describe (needs Babel for CLDR rendering); ⑤ other languages.
 - **Packaging**: `python/pyproject.toml`, PyPI name `nl2time` (verified free). The sdist ships the library only; corpora stay repo-level (dev/test concern).
 
 | JS (Temporal) | Python (whenever) |

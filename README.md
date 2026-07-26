@@ -112,6 +112,10 @@ v0.3 — multilingual parsing (6 locales), en-* describe, core engine with a DST
 
 Every imported conformance case carries machine-readable provenance (upstream project, license, file path, pinned commit, index), and upstream licenses are vendored verbatim beside the data. **[corpus/ATTRIBUTIONS.md](corpus/ATTRIBUTIONS.md)** is the authoritative record: what is vendored (Microsoft Recognizers-Text, MIT), what is original (the hand-authored and machine-inverted golden sets), what is used eval-only and never redistributed (TempEval-3 Platinum, WikiWars), what was deliberately excluded on license grounds (GPL/LDC/ODbL sources), and the academic lineage (TimeML/TIMEX3, SCATE, TempEval-3, and the LLM date-arithmetic benchmarks that motivated the deterministic-IR design). Known upstream data defects are documented there too, with the exclusion rules applied at import.
 
+## Python
+
+A Python engine port lives in [`python/`](python/) (PyPI packaging prepared; `whenever`-based time model): IR validation, `TimeContext`, and the full deterministic resolver at **100% bit-exact parity** with the JS reference across all 2,760 engine-parity fixtures (`corpus/ir/`), enforced in CI on every push. Parsers and `describe()` are JS-only so far — [docs/porting.md](docs/porting.md) has the strategy and the divergence gates.
+
 ## Release history
 
 See **[CHANGELOG.md](CHANGELOG.md)** and [GitHub releases](https://github.com/AndyFooBlah/nl2time/releases). Current: v0.3.0 (multilingual parsing).
