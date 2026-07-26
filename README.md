@@ -85,11 +85,26 @@ Cultural/ambiguous semantics are explicit `TimeContext` knobs with CLDR-derived 
 npm install nl2time
 ```
 
+## Languages
+
+Parsing is multilingual, dispatched by the context's locale. Each language climbs its own imported conformance corpus (Microsoft Recognizers-Text specs, MIT) with a CI-gated baseline:
+
+| Language | Corpus cases | Passing |
+|---|---|---|
+| English (en-US / en-GB) | 1,031 | 84% |
+| German | 157 | 97% |
+| Japanese | 393 | 96% |
+| Chinese (Simplified) | 175 | 95% |
+| French | 406 | 90% |
+| Spanish | 579 | climbing |
+
+Latin-script languages share a parameterized rule factory (`makeLatinRules` + a lexicon); CJK languages use per-character tokenization with bespoke rule modules. `describe()` output is currently English; localized rendering is on the roadmap. Remaining failure mass is dominated by documented upstream divergences (e.g. issue #14).
+
 ## Status
 
-v0.1 — English parsing, en-* describe, core engine with a DST/edge-case battery, holidays (fixed-date, nth-weekday, computed Easter), business-day spans. Recurrence (`every Tuesday`) is representable in the IR but resolves in v2.
+v0.2+ — multilingual parsing (6 locales), en-* describe, core engine with a DST/edge-case battery, holidays (fixed-date, nth-weekday, computed Easter), business-day spans, domain packs. Recurrence (`every Tuesday`) is representable in the IR but resolves in v2.
 
-**Corpus** ([corpus/](corpus/), runner exported as `nl2time/corpus`): a bidirectional golden set with per-case license provenance — 41 hand-authored NL→time cases (100% passing), a 65-case datetime→NL golden set (100% passing; to our knowledge the first published eval set for humanized time generation), and 693 cases imported from Microsoft Recognizers-Text (MIT) of which **80.7% currently pass** — the coverage baseline the parser climbs against (`npm run eval`, `npm run baselines`; every previously-passing case is a CI regression gate). Most remaining failures are documented divergences from upstream idiosyncrasies rather than parser gaps. See [corpus/ATTRIBUTIONS.md](corpus/ATTRIBUTIONS.md) and [docs/porting.md](docs/porting.md).
+**Corpus** ([corpus/](corpus/), runner exported as `nl2time/corpus`): bidirectional golden sets with per-case license provenance — hand-authored forward + reverse sets (100% passing, including the machine-inverted reverse set), and ~2,700 gradeable imported cases across six languages with per-language CI regression baselines (`npm run eval`, `npm run baselines`). See [corpus/ATTRIBUTIONS.md](corpus/ATTRIBUTIONS.md) and [docs/porting.md](docs/porting.md).
 
 ## Development
 

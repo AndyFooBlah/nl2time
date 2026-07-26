@@ -40,6 +40,8 @@ export {
   type ParseOptions,
 } from './parse/index.js';
 export { EN_RULE_ENTRIES, type Rule, type RuleMatch } from './parse/en.js';
+export { SUPPORTED_LANGUAGES, languageDef } from './parse/languages.js';
+export { makeLatinRules, type LatinLexicon } from './parse/latin.js';
 export {
   compilePack,
   validatePack,

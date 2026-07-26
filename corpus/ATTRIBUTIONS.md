@@ -13,8 +13,11 @@ All corpus content is redistributable under licenses compatible with this reposi
 - **License**: MIT, Copyright (c) Microsoft Corporation. Full text vendored alongside the data at
   [`vendor/recognizers-text/LICENSE`](vendor/recognizers-text/LICENSE), satisfying the MIT
   notice-retention requirement.
-- Planned additional imports from the same source (other English spec files, `EnglishOthers`
-  en-GB variants) fall under the same terms.
+- Additional vendored files under the same terms: `EnglishOthers` (en-GB),
+  `DateTimeModelComplexCalendar`, and the Spanish/French/German/Japanese/Chinese
+  `DateTimeModel.json` specs (per-language corpora + baselines). Note: the French
+  spec file carries a stale reference datetime for a block of cases; provably
+  ungradeable cases are excluded at import and counted (`skip.refMismatch`).
 
 ## Hand-authored nl2time cases — MIT
 
