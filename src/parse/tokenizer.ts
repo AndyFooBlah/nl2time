@@ -17,8 +17,8 @@ const NUMDATE_RE = /^(\d{1,4})([/\-.])(\d{1,2})(?:\2(\d{1,4}))?$/;
 const NUMBER_RE = /^\d{1,4}$/;
 // Latin letters incl. accents (\u00c0-\u024f), CJK ideographs, kana, and
 // fullwidth forms. CJK runs are split into per-character word tokens below.
-const RAW_TOKEN_RE = /[a-z0-9:/\-.'~\u00bc\u00bd\u00be\u00c0-\u024f\u3040-\u30ff\u3400-\u9fff\uff10-\uff19\uff1a]+/gi;
-const CJK_RE = /[\u3040-\u30ff\u3400-\u9fff]/;
+const RAW_TOKEN_RE = /[a-z0-9:/\-.'~\u00bc\u00bd\u00be\u00c0-\u024f\u3040-\u30ff\u3400-\u9fff\u3007\uff10-\uff19\uff1a]+/gi;
+const CJK_RE = /[\u3040-\u30ff\u3400-\u9fff\u3007]/;
 
 export function tokenize(text: string): Token[] {
   const tokens: Token[] = [];
@@ -48,7 +48,7 @@ export function tokenize(text: string): Token[] {
       for (const ch of raw) {
         if (CJK_RE.test(ch)) {
           if (asciiRun) {
-            pushToken(tokens, asciiRun, cursor, cursor + asciiRun.length);
+            pushToken(tokens, asciiRun, cursor - asciiRun.length, cursor);
             asciiRun = '';
           }
           tokens.push({ type: 'word', value: ch, start: cursor, end: cursor + ch.length });

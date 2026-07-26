@@ -1,7 +1,7 @@
 {
  "corpus": "corpus/forward/imported-recognizers-ja.json",
  "total": 393,
- "passing": 375,
+ "passing": 376,
  "passingIds": [
   "rt-ja-0000",
   "rt-ja-0001",
@@ -259,6 +259,7 @@
   "rt-ja-0371",
   "rt-ja-0372",
   "rt-ja-0374",
+  "rt-ja-0376",
   "rt-ja-0377",
   "rt-ja-0380",
   "rt-ja-0384",
