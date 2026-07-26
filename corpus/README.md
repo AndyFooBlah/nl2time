@@ -6,12 +6,15 @@ Golden sets for **both directions**, in one JSON format, shared by tests, evals,
 
 ```
 corpus/
-  forward/handauthored-en.json          NL→time, hand-authored (all `core`)
-  forward/imported-recognizers-en.json  NL→time, generated from vendored Recognizers-Text specs
-  reverse/golden-en.json                time→NL, hand-authored (novel — no prior dataset exists)
-  reverse/inverted-handauthored-en.json time→NL, machine-inverted from forward cases (issue #12; regenerate, don't edit)
-  baselines/forward-imported.json       ids of imported cases that currently pass (regression gate)
-  vendor/recognizers-text/              vendored upstream spec + its MIT license (do not edit)
+  forward/handauthored-en.json               NL→time, hand-authored (all `core`)
+  forward/imported-recognizers-{lang}.json   NL→time, generated from vendored Recognizers-Text specs
+                                             (lang ∈ en, es, fr, de, ja, zh)
+  reverse/golden-en.json                     time→NL, hand-authored (novel — no prior dataset exists)
+  reverse/inverted-handauthored-en.json      time→NL, machine-inverted from forward cases (issue #12)
+  ir/resolved-*.json                         engine-parity fixtures: (expr, ctx) → candidates from the
+                                             JS reference (gates the Python port; regenerate, don't edit)
+  baselines/forward-imported[-{lang}].json   ids of imported cases that currently pass (CI regression gates)
+  vendor/recognizers-text/                   vendored upstream specs + their MIT license (do not edit)
 ```
 
 ## Case format

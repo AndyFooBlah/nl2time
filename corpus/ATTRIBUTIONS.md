@@ -19,6 +19,14 @@ All corpus content is redistributable under licenses compatible with this reposi
   spec file carries a stale reference datetime for a block of cases; provably
   ungradeable cases are excluded at import and counted (`skip.refMismatch`).
 
+## Unicode CLDR — Unicode License
+
+The locale data tables bundled in both implementations (`src/data/weekData.ts`,
+`src/data/dayPeriods.ts`, `python/nl2time/data.py`) are small slices of facts derived
+from the [Unicode CLDR](https://cldr.unicode.org/) supplemental data (per-territory
+first-day-of-week; day-period boundary rules), used under the
+[Unicode License](https://www.unicode.org/license.txt). Copyright © Unicode, Inc.
+
 ## Hand-authored nl2time cases — MIT
 
 `corpus/forward/handauthored-en.json` and `corpus/reverse/golden-en.json` are original works of

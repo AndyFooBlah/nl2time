@@ -1,12 +1,31 @@
 [project]
 name = "nl2time"
-version = "0.0.1"
-description = "Natural language to time intervals: language-neutral IR engine (Python port of the JS reference)"
+version = "0.1.0"
+description = "Deterministic temporal-expression IR engine — Python port of the nl2time natural language ⇄ date/time library"
+readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Andrew Brook" }]
+keywords = ["datetime", "natural-language", "timezone", "temporal", "parser", "llm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+]
 dependencies = [
     "whenever>=0.8",
 ]
+
+[project.urls]
+Homepage = "https://github.com/AndyFooBlah/nl2time"
+Repository = "https://github.com/AndyFooBlah/nl2time"
+Changelog = "https://github.com/AndyFooBlah/nl2time/blob/main/CHANGELOG.md"
+Issues = "https://github.com/AndyFooBlah/nl2time/issues"
 
 [project.optional-dependencies]
 dev = [

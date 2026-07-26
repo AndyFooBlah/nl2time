@@ -1,6 +1,6 @@
 # nl2time — design
 
-*(Condensed from the design review of 2026-07-21; survey of prior art summarized at the end.)*
+*(Condensed from the design review of 2026-07-21; survey of prior art summarized at the end. This is the historical design record — for current operator semantics see [ir-spec.md](ir-spec.md), for the multilingual architecture see the language registry in `src/parse/languages.ts`, and for the Python port strategy see [porting.md](porting.md).)*
 
 ## Goals
 
