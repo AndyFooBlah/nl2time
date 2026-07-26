@@ -1,0 +1,1237 @@
+{
+ "description": "MACHINE-GENERATED from corpus/forward/handauthored-en.json by scripts/invert-corpus.mjs (issue #12) — do not hand-edit; regenerate instead. primary pins current describe() output; accept carries the source temporal phrase (the acceptance class member that provably denotes this value).",
+ "cases": [
+  {
+   "id": "rev-inv-fw-0001",
+   "value": {
+    "interval": {
+     "start": "2026-07-12T07:00:00Z",
+     "end": "2026-07-19T07:00:00Z",
+     "grain": "week"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "last week",
+   "accept": [
+    "last week"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0001"
+   ],
+   "note": "inverted from forward case fw-0001: \"last week\""
+  },
+  {
+   "id": "rev-inv-fw-0002",
+   "value": {
+    "interval": {
+     "start": "2026-07-13T07:00:00Z",
+     "end": "2026-07-20T07:00:00Z",
+     "grain": "week"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-GB"
+   },
+   "primary": "last week",
+   "accept": [
+    "last week"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0002"
+   ],
+   "note": "inverted from forward case fw-0002: \"last week\""
+  },
+  {
+   "id": "rev-inv-fw-0003",
+   "value": {
+    "interval": {
+     "start": "2026-07-19T07:00:00Z",
+     "end": "2026-07-26T07:00:00Z",
+     "grain": "week"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "this week",
+   "accept": [
+    "this week"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0003"
+   ],
+   "note": "inverted from forward case fw-0003: \"this week\""
+  },
+  {
+   "id": "rev-inv-fw-0004",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T07:00:00Z",
+     "end": "2026-07-21T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "today",
+   "accept": [
+    "today"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0004"
+   ],
+   "note": "inverted from forward case fw-0004: \"today\""
+  },
+  {
+   "id": "rev-inv-fw-0005",
+   "value": {
+    "interval": {
+     "start": "2026-07-19T07:00:00Z",
+     "end": "2026-07-20T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "yesterday",
+   "accept": [
+    "yesterday"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0005"
+   ],
+   "note": "inverted from forward case fw-0005: \"yesterday\""
+  },
+  {
+   "id": "rev-inv-fw-0006",
+   "value": {
+    "interval": {
+     "start": "2026-07-21T07:00:00Z",
+     "end": "2026-07-22T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "tomorrow",
+   "accept": [
+    "tomorrow"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0006"
+   ],
+   "note": "inverted from forward case fw-0006: \"tomorrow\""
+  },
+  {
+   "id": "rev-inv-fw-0007",
+   "value": {
+    "interval": {
+     "start": "2026-07-18T07:00:00Z",
+     "end": "2026-07-19T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "last Saturday",
+   "accept": [
+    "the day before yesterday"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0007"
+   ],
+   "note": "inverted from forward case fw-0007: \"the day before yesterday\""
+  },
+  {
+   "id": "rev-inv-fw-0008",
+   "value": {
+    "interval": {
+     "start": "2026-07-17T07:00:00Z",
+     "end": "2026-07-18T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "last Friday",
+   "accept": [
+    "3 days ago"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0008"
+   ],
+   "note": "inverted from forward case fw-0008: \"3 days ago\""
+  },
+  {
+   "id": "rev-inv-fw-0009",
+   "value": {
+    "interval": {
+     "start": "2026-07-06T07:00:00Z",
+     "end": "2026-07-07T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "July 6",
+   "accept": [
+    "2 weeks ago"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0009"
+   ],
+   "note": "inverted from forward case fw-0009: \"2 weeks ago\""
+  },
+  {
+   "id": "rev-inv-fw-0010",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T19:00:00Z",
+     "end": "2026-07-20T19:00:00Z",
+     "grain": "instant"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "today at 12:00 PM",
+   "accept": [
+    "in 2 hours"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0010"
+   ],
+   "note": "inverted from forward case fw-0010: \"in 2 hours\""
+  },
+  {
+   "id": "rev-inv-fw-0011",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T16:00:00Z",
+     "end": "2026-07-20T16:00:00Z",
+     "grain": "instant"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "today at 9:00 AM",
+   "accept": [
+    "an hour ago"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0011"
+   ],
+   "note": "inverted from forward case fw-0011: \"an hour ago\""
+  },
+  {
+   "id": "rev-inv-fw-0013",
+   "value": {
+    "interval": {
+     "start": "2026-07-28T07:00:00Z",
+     "end": "2026-07-29T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US",
+    "nextWeekday": "week-after"
+   },
+   "primary": "July 28",
+   "accept": [
+    "next tuesday"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0013"
+   ],
+   "note": "inverted from forward case fw-0013: \"next tuesday\""
+  },
+  {
+   "id": "rev-inv-fw-0014",
+   "value": {
+    "interval": {
+     "start": "2026-07-14T07:00:00Z",
+     "end": "2026-07-15T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "last Tuesday",
+   "accept": [
+    "last tuesday"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0014"
+   ],
+   "note": "inverted from forward case fw-0014: \"last tuesday\""
+  },
+  {
+   "id": "rev-inv-fw-0015",
+   "value": {
+    "interval": {
+     "start": "2026-07-24T07:00:00Z",
+     "end": "2026-07-25T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "on Friday",
+   "accept": [
+    "friday"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0015"
+   ],
+   "note": "inverted from forward case fw-0015: \"friday\""
+  },
+  {
+   "id": "rev-inv-fw-0017",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T04:00:00Z",
+     "end": "2026-07-20T13:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "yesterday at 9:00 PM",
+   "accept": [
+    "last night"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0017"
+   ],
+   "note": "inverted from forward case fw-0017: \"last night\""
+  },
+  {
+   "id": "rev-inv-fw-0018",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T04:00:00Z",
+     "end": "2026-07-20T05:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "yesterday at 9:00 PM",
+   "accept": [
+    "yesterday at 9pm"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0018"
+   ],
+   "note": "inverted from forward case fw-0018: \"yesterday at 9pm\""
+  },
+  {
+   "id": "rev-inv-fw-0019",
+   "value": {
+    "interval": {
+     "start": "2026-07-21T13:00:00Z",
+     "end": "2026-07-21T19:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "tomorrow at 6:00 AM",
+   "accept": [
+    "tomorrow morning"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0019"
+   ],
+   "note": "inverted from forward case fw-0019: \"tomorrow morning\""
+  },
+  {
+   "id": "rev-inv-fw-0020",
+   "value": {
+    "interval": {
+     "start": "2026-07-21T04:00:00Z",
+     "end": "2026-07-21T13:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "today at 9:00 PM",
+   "accept": [
+    "tonight"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0020"
+   ],
+   "note": "inverted from forward case fw-0020: \"tonight\""
+  },
+  {
+   "id": "rev-inv-fw-0021",
+   "value": {
+    "interval": {
+     "start": "2026-07-21T23:00:00Z",
+     "end": "2026-07-22T00:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "tomorrow at 4:00 PM",
+   "accept": [
+    "next tuesday at 4pm"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0021"
+   ],
+   "note": "inverted from forward case fw-0021: \"next tuesday at 4pm\""
+  },
+  {
+   "id": "rev-inv-fw-0022",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T23:00:00Z",
+     "end": "2026-07-21T00:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "today at 4:00 PM",
+   "accept": [
+    "4"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0022"
+   ],
+   "note": "inverted from forward case fw-0022: \"at 4\""
+  },
+  {
+   "id": "rev-inv-fw-0023",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T16:00:00Z",
+     "end": "2026-07-20T17:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "today at 9:00 AM",
+   "accept": [
+    "9"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0023"
+   ],
+   "note": "inverted from forward case fw-0023: \"at 9\""
+  },
+  {
+   "id": "rev-inv-fw-0024",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T19:00:00Z",
+     "end": "2026-07-20T20:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "today at 12:00 PM",
+   "accept": [
+    "noon"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0024"
+   ],
+   "note": "inverted from forward case fw-0024: \"noon\""
+  },
+  {
+   "id": "rev-inv-fw-0025",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T07:00:00Z",
+     "end": "2026-07-20T08:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "today at 12:00 AM",
+   "accept": [
+    "midnight"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0025"
+   ],
+   "note": "inverted from forward case fw-0025: \"midnight\""
+  },
+  {
+   "id": "rev-inv-fw-0026",
+   "value": {
+    "interval": {
+     "start": "2026-05-29T07:00:00Z",
+     "end": "2026-05-30T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "May 29",
+   "accept": [
+    "may 29"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0026"
+   ],
+   "note": "inverted from forward case fw-0026: \"may 29\""
+  },
+  {
+   "id": "rev-inv-fw-0030",
+   "value": {
+    "interval": {
+     "start": "2026-05-29T07:00:00Z",
+     "end": "2026-05-30T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-GB"
+   },
+   "primary": "29 May",
+   "accept": [
+    "29/5/2026"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0030"
+   ],
+   "note": "inverted from forward case fw-0030: \"29/5/2026\""
+  },
+  {
+   "id": "rev-inv-fw-0032",
+   "value": {
+    "interval": {
+     "start": "2026-07-17T17:00:00Z",
+     "end": "2026-07-20T17:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "last Friday",
+   "accept": [
+    "last 3 days"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0032"
+   ],
+   "note": "inverted from forward case fw-0032: \"the last 3 days\""
+  },
+  {
+   "id": "rev-inv-fw-0033",
+   "value": {
+    "interval": {
+     "start": "2026-07-17T07:00:00Z",
+     "end": "2026-07-20T07:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US",
+    "partialPeriod": "exclude"
+   },
+   "primary": "last Friday",
+   "accept": [
+    "last 3 days"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0033"
+   ],
+   "note": "inverted from forward case fw-0033: \"the last 3 days\""
+  },
+  {
+   "id": "rev-inv-fw-0034",
+   "value": {
+    "interval": {
+     "start": "2026-07-13T17:00:00Z",
+     "end": "2026-07-20T17:00:00Z",
+     "grain": "week"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "last week",
+   "accept": [
+    "past week"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0034"
+   ],
+   "note": "inverted from forward case fw-0034: \"the past week\""
+  },
+  {
+   "id": "rev-inv-fw-0035",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T17:00:00Z",
+     "end": "2026-08-03T17:00:00Z",
+     "grain": "week"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "this week",
+   "accept": [
+    "next 2 weeks"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0035"
+   ],
+   "note": "inverted from forward case fw-0035: \"next 2 weeks\""
+  },
+  {
+   "id": "rev-inv-fw-0036",
+   "value": {
+    "interval": {
+     "start": "2026-06-01T07:00:00Z",
+     "end": "2026-07-01T07:00:00Z",
+     "grain": "month"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "last month",
+   "accept": [
+    "last month"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0036"
+   ],
+   "note": "inverted from forward case fw-0036: \"last month\""
+  },
+  {
+   "id": "rev-inv-fw-0037",
+   "value": {
+    "interval": {
+     "start": "2026-07-01T07:00:00Z",
+     "end": "2026-10-01T07:00:00Z",
+     "grain": "quarter"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "this quarter",
+   "accept": [
+    "q3"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0037"
+   ],
+   "note": "inverted from forward case fw-0037: \"q3\""
+  },
+  {
+   "id": "rev-inv-fw-0038",
+   "value": {
+    "interval": {
+     "start": "2027-01-01T08:00:00Z",
+     "end": "2027-04-01T07:00:00Z",
+     "grain": "quarter"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "Q1 2027",
+   "accept": [
+    "q1 2027"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0038"
+   ],
+   "note": "inverted from forward case fw-0038: \"q1 2027\""
+  },
+  {
+   "id": "rev-inv-fw-0039",
+   "value": {
+    "interval": {
+     "start": "2026-03-01T08:00:00Z",
+     "end": "2026-04-01T07:00:00Z",
+     "grain": "month"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "March",
+   "accept": [
+    "march"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0039"
+   ],
+   "note": "inverted from forward case fw-0039: \"march\""
+  },
+  {
+   "id": "rev-inv-fw-0042",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T15:00:00Z",
+     "end": "2026-07-20T16:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "today at 8:00 AM",
+   "accept": [
+    "8 this morning"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0042"
+   ],
+   "note": "inverted from forward case fw-0042: \"8 this morning\""
+  },
+  {
+   "id": "rev-inv-fw-0044",
+   "value": {
+    "interval": {
+     "start": "2026-07-21T00:00:00Z",
+     "end": "2026-07-21T01:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "today at 5:00 PM",
+   "accept": [
+    "5 this afternoon"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0044"
+   ],
+   "note": "inverted from forward case fw-0044: \"5 this afternoon\""
+  },
+  {
+   "id": "rev-inv-fw-0045",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T19:00:00Z",
+     "end": "2026-07-21T01:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "today",
+   "accept": [
+    "this afternoon"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0045"
+   ],
+   "note": "inverted from forward case fw-0045: \"coffee at building 4 this afternoon\""
+  },
+  {
+   "id": "rev-inv-fw-0046",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T05:00:00Z",
+     "end": "2026-07-20T06:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "yesterday at 10:00 PM",
+   "accept": [
+    "10 last night"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0046"
+   ],
+   "note": "inverted from forward case fw-0046: \"10 last night\""
+  },
+  {
+   "id": "rev-inv-fw-0047",
+   "value": {
+    "interval": {
+     "start": "2026-07-19T15:00:00Z",
+     "end": "2026-07-19T16:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "yesterday at 8:00 AM",
+   "accept": [
+    "8 yesterday morning"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0047"
+   ],
+   "note": "inverted from forward case fw-0047: \"8 yesterday morning\""
+  },
+  {
+   "id": "rev-inv-fw-0048",
+   "value": {
+    "interval": {
+     "start": "2026-07-22T00:00:00Z",
+     "end": "2026-07-22T01:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "tomorrow at 5:00 PM",
+   "accept": [
+    "5 tomorrow afternoon"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0048"
+   ],
+   "note": "inverted from forward case fw-0048: \"5 tomorrow afternoon\""
+  },
+  {
+   "id": "rev-inv-fw-0049",
+   "value": {
+    "interval": {
+     "start": "2026-07-19T10:00:00Z",
+     "end": "2026-07-19T11:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "yesterday at 3:00 AM",
+   "accept": [
+    "3 last night"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0049"
+   ],
+   "note": "inverted from forward case fw-0049: \"3 last night\""
+  },
+  {
+   "id": "rev-inv-fw-0050",
+   "value": {
+    "interval": {
+     "start": "2026-07-20T04:00:00Z",
+     "end": "2026-07-20T13:00:00Z",
+     "grain": "day"
+    }
+   },
+   "ctx": {
+    "now": "2026-07-20T17:00:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "primary": "yesterday",
+   "accept": [
+    "last night"
+   ],
+   "framing": "calendar",
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   },
+   "tags": [
+    "inverted",
+    "from:fw-0050"
+   ],
+   "note": "inverted from forward case fw-0050: \"the count was 4 last night\""
+  }
+ ]
+}

@@ -33,16 +33,18 @@ suite('corpus: forward hand-authored (core)', () => {
   }
 });
 
-suite('corpus: reverse golden (core)', () => {
-  const fixture = load<{ defaults: object; cases: ReverseCase[] }>('corpus/reverse/golden-en.json');
-  for (const raw of fixture.cases.filter((c) => c.level !== 'aspirational')) {
-    const c = { ...raw, ctx: { ...fixture.defaults, ...raw.ctx } };
-    test(`${c.id} → "${c.primary}"`, () => {
-      const r = runReverseCase(c);
-      expect(r.pass, r.detail).toBe(true);
-    });
-  }
-});
+for (const file of ['corpus/reverse/golden-en.json', 'corpus/reverse/inverted-handauthored-en.json']) {
+  suite(`corpus: reverse (core) — ${file.split('/').pop()}`, () => {
+    const fixture = load<{ defaults?: object; cases: ReverseCase[] }>(file);
+    for (const raw of fixture.cases.filter((c) => c.level !== 'aspirational')) {
+      const c = { ...raw, ctx: { ...(fixture.defaults ?? {}), ...raw.ctx } };
+      test(`${c.id} → "${c.primary}"`, () => {
+        const r = runReverseCase(c);
+        expect(r.pass, r.detail).toBe(true);
+      });
+    }
+  });
+}
 
 suite('corpus: imported baseline (regression gate)', () => {
   const { cases } = load<{ cases: ForwardCase[] }>('corpus/forward/imported-recognizers-en.json');

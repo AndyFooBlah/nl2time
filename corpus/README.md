@@ -9,6 +9,7 @@ corpus/
   forward/handauthored-en.json          NL→time, hand-authored (all `core`)
   forward/imported-recognizers-en.json  NL→time, generated from vendored Recognizers-Text specs
   reverse/golden-en.json                time→NL, hand-authored (novel — no prior dataset exists)
+  reverse/inverted-handauthored-en.json time→NL, machine-inverted from forward cases (issue #12; regenerate, don't edit)
   baselines/forward-imported.json       ids of imported cases that currently pass (regression gate)
   vendor/recognizers-text/              vendored upstream spec + its MIT license (do not edit)
 ```
@@ -64,5 +65,6 @@ Text comparison normalizes case, NBSP/NNBSP, whitespace, and trailing periods (`
 - `npm run eval` — full pass-rate report by corpus and tag; flags baseline regressions.
 - `npm run baselines` — promote newly-passing imported cases after a parser improvement.
 - `npm run import:recognizers` — regenerate the imported corpus from the vendored spec (deterministic; commit pinned).
+- `node scripts/invert-corpus.mjs` — regenerate the inverted reverse set from the hand-authored forward set: each clean forward case (text, ctx) → interval becomes a reverse case whose `primary` pins current `describe()` output and whose `accept` carries the source phrase (the acceptance-class member that provably denotes the value).
 
 Rendered `primary` strings are pinned to CLDR/ICU behavior of the CI Node version; a CLDR update that changes formatting is a legitimate corpus update, not a code bug (see Hyrum note in the design doc).
