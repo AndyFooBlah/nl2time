@@ -62,6 +62,23 @@ export interface LatinLexicon {
   /** noon / midnight words. */
   noonWords?: string[];
   midnightWords?: string[];
+  /** "mil" / "mille" / "tausend" for word-number years. */
+  thousandWords?: string[];
+  /** Range markers: desde/entre/de … hasta/a/y. */
+  rangeFrom?: string[][];
+  rangeTo?: string[][];
+  rangeAnd?: string[];
+  /** Duration trigger words: durante, pendant, für. */
+  durationTriggers?: string[];
+  /** Numeric-date order for numdate tokens (default 'DMY'). */
+  dateOrder?: 'DMY' | 'MDY';
+  /** Ordinal day words usable as day-of-month: primero 1, premier 1, erste 1. */
+  dayOrdinals?: Record<string, number>;
+  /** "end of" marker phrases: al final de, à la fin de, am Ende von. */
+  endOfMarkers?: string[][];
+  /** First/last adjectives for "última semana de julio" style scoped weeks. */
+  firstAdjs?: string[];
+  lastAdjs?: string[];
 }
 
 const NOW: TimeExpr = { op: 'now' };
@@ -104,11 +121,22 @@ export function makeLatinRules(
 
   const readNum = (tokens: Token[], i: number): { value: number; consumed: number } | undefined => {
     const t = tokens[i];
-    if (t?.type === 'number' && !t.ordinal) return { value: t.value, consumed: 1 };
-    if (t?.type === 'number' && t.ordinal) return { value: t.value, consumed: 1 };
+    if (t?.type === 'number') return { value: t.value, consumed: 1 };
     const w = word(t);
     if (w !== undefined && lex.smallNumbers[w] !== undefined) {
-      return { value: lex.smallNumbers[w]!, consumed: 1 };
+      const base = lex.smallNumbers[w]!;
+      // "dos mil dieciocho" → 2018
+      if ((lex.thousandWords ?? []).includes(word(tokens[i + 1]) ?? '')) {
+        let value = base * 1000;
+        let consumed = 2;
+        const rest = readNum(tokens, i + 2);
+        if (rest && rest.value < 1000) {
+          value += rest.value;
+          consumed += rest.consumed;
+        }
+        return { value, consumed };
+      }
+      return { value: base, consumed: 1 };
     }
     return undefined;
   };
@@ -383,21 +411,60 @@ export function makeLatinRules(
     const at = skipArticles(tokens, i);
     const sep = (k: number): number => {
       let c = k;
-      while (lex.dateSep.includes(word(tokens[c]) ?? '')) c += 1;
+      while (lex.dateSep.includes(word(tokens[c]) ?? '') || word(tokens[c]) === '-') c += 1;
       return c;
     };
-    const dayTok = tokens[at];
-    if (dayTok?.type === 'number' && dayTok.value >= 1 && dayTok.value <= 31) {
+    // Numeric dates: "27/11", "27/11/2019" (numdate tokens; DMY default).
+    const nd = tokens[at];
+    if (nd?.type === 'numdate') {
+      const [a, b, c] = nd.parts;
+      const order = lex.dateOrder ?? 'DMY';
+      let day = order === 'DMY' ? a! : b!;
+      let month = order === 'DMY' ? b! : a!;
+      if (month > 12 && day <= 12) [day, month] = [month, day];
+      if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+        const date: { month: number; day: number; year?: number } = { month, day };
+        if (c !== undefined) date.year = c < 100 ? 2000 + c : c;
+        return { expr: { op: 'literal', date }, consumed: at + 1 - i, confidence: 0.9, role: 'date' };
+      }
+    }
+
+    const ow = word(tokens[at]);
+    const ordDay = ow !== undefined ? (lex.dayOrdinals ?? {})[ow] : undefined;
+    if (ordDay !== undefined) {
       const mAt = sep(at + 1);
       const month = lex.months[word(tokens[mAt]) ?? ''];
       if (month !== undefined) {
         const yAt = sep(mAt + 1);
         const year = yearAt(tokens, yAt);
-        const date: { month: number; day: number; year?: number } = { month, day: dayTok.value };
+        const date: { month: number; day: number; year?: number } = { month, day: ordDay };
         if (year !== undefined) date.year = year;
         return {
           expr: { op: 'literal', date },
           consumed: (year !== undefined ? yAt + 1 : mAt + 1) - i,
+          confidence: 1,
+          role: 'date',
+        };
+      }
+    }
+
+    const dayN = readNum(tokens, at);
+    if (dayN && dayN.value >= 1 && dayN.value <= 31 && tokens[at]?.type !== 'word' || (dayN && word(tokens[at]) !== undefined && lex.smallNumbers[word(tokens[at])!] !== undefined)) {
+      const mAt = sep(at + (dayN?.consumed ?? 0));
+      const month = lex.months[word(tokens[mAt]) ?? ''];
+      if (month !== undefined && dayN && dayN.value >= 1 && dayN.value <= 31) {
+        const yAt = sep(mAt + 1);
+        const year = yearAt(tokens, yAt) ?? (() => {
+          const yn = readNum(tokens, yAt);
+          return yn && yn.value >= 1000 && yn.value <= 2199 ? yn.value : undefined;
+        })();
+        const yn = readNum(tokens, yAt);
+        const yearConsumed = yearAt(tokens, yAt) !== undefined ? 1 : yn && yn.value >= 1000 ? yn.consumed : 0;
+        const date: { month: number; day: number; year?: number } = { month, day: dayN.value };
+        if (year !== undefined) date.year = year;
+        return {
+          expr: { op: 'literal', date },
+          consumed: (year !== undefined ? yAt + yearConsumed : mAt + 1) - i,
           confidence: 1,
           role: 'date',
         };
@@ -465,23 +532,224 @@ export function makeLatinRules(
       if (hAt === undefined) continue;
       const t = tokens[hAt];
       if (t?.type === 'clock') {
-        const time: { hour: number; minute?: number; meridiem?: 'am' | 'pm' | 'unknown' } = { hour: t.hour };
+        const time: { hour: number; minute?: number; second?: number; meridiem?: 'am' | 'pm' | 'unknown' } = { hour: t.hour };
         if (t.explicitMinute) time.minute = t.minute;
+        if (t.second !== undefined) time.second = t.second;
         if (t.meridiem) time.meridiem = t.meridiem;
         else if (t.hour <= 12) time.meridiem = 'unknown';
-        return { expr: { op: 'literal', time }, consumed: hAt + 1 - i, confidence: 1, role: 'time' };
+        let consumed2 = hAt + 1 - i;
+        for (const marker of lex.periodMarkers) {
+          const pAt = matchPhrase(tokens, i + consumed2, marker);
+          if (pAt === undefined) continue;
+          const pw = word(tokens[pAt]);
+          const period = pw !== undefined ? lex.periods[pw] : undefined;
+          if (period !== undefined && (time.meridiem === undefined || time.meridiem === 'unknown')) {
+            time.meridiem = period === 'morning' ? 'am' : 'pm';
+            consumed2 = pAt + 1 - i;
+            break;
+          }
+        }
+        return { expr: { op: 'literal', time }, consumed: consumed2, confidence: 1, role: 'time' };
       }
-      if (t?.type === 'number' && !t.ordinal && t.value >= 0 && t.value <= 23) {
-        const time: { hour: number; meridiem?: 'am' | 'pm' | 'unknown' } = { hour: t.value };
-        if (t.value <= 12) time.meridiem = 'unknown';
-        return { expr: { op: 'literal', time }, consumed: hAt + 1 - i, confidence: 0.95, role: 'time' };
+      const hn = t?.type === 'number' && !t.ordinal ? { value: t.value, consumed: 1 } : readNum(tokens, hAt);
+      if (hn && hn.value >= 0 && hn.value <= 24) {
+        const hour = hn.value === 24 ? 0 : hn.value;
+        const time: { hour: number; meridiem?: 'am' | 'pm' | 'unknown' } = { hour };
+        if (hn.value !== 24 && hour <= 12) time.meridiem = 'unknown';
+        let consumed = hAt + hn.consumed - i;
+        // "a las siete de la tarde" — a trailing period marker fixes the meridiem.
+        for (const marker of lex.periodMarkers) {
+          const pAt = matchPhrase(tokens, i + consumed, marker);
+          if (pAt === undefined) continue;
+          const pw = word(tokens[pAt]);
+          const period = pw !== undefined ? lex.periods[pw] : undefined;
+          if (period !== undefined) {
+            time.meridiem = period === 'morning' ? 'am' : 'pm';
+            consumed = pAt + 1 - i;
+            break;
+          }
+        }
+        return { expr: { op: 'literal', time }, consumed, confidence: 0.95, role: 'time' };
       }
     }
     return undefined;
   };
 
+  /** Article skip that leaves number-words alone ("la una" keeps una=1). */
+  const skipArticlesSafe = (tokens: Token[], i: number): number => {
+    let at = i;
+    while (isArticle(word(tokens[at])) && lex.smallNumbers[word(tokens[at])!] === undefined) at += 1;
+    return at;
+  };
+
+  /** "desde la una hasta las tres" / "entre 2008 y 2011" / "entre el 1 de
+   * diciembre y el 4 de febrero" / "entre 3 y 12 de septiembre". */
+  const rangeRule: Rule = (tokens, i) => {
+    const froms = lex.rangeFrom ?? [];
+    type Operand =
+      | { kind: 'year' | 'time' | 'daynum'; value: number; consumed: number }
+      | { kind: 'date'; expr: TimeExpr; consumed: number };
+    const readOperand = (k0: number): Operand | undefined => {
+      const k = skipArticlesSafe(tokens, k0);
+      const md = monthDay(tokens, k, undefined as never);
+      if (md) return { kind: 'date', expr: md.expr, consumed: k + md.consumed - k0 };
+      const y = yearAt(tokens, k);
+      if (y !== undefined) return { kind: 'year', value: y, consumed: k + 1 - k0 };
+      const n = readNum(tokens, k);
+      if (n && n.value >= 1000 && n.value <= 2199) return { kind: 'year', value: n.value, consumed: k + n.consumed - k0 };
+      if (n && n.value >= 0 && n.value <= 24) return { kind: 'time', value: n.value, consumed: k + n.consumed - k0 };
+      return undefined;
+    };
+    for (const fromMarker of froms) {
+      const aAt0 = matchPhrase(tokens, i, fromMarker);
+      if (aAt0 === undefined) continue;
+      const a = readOperand(aAt0);
+      if (!a) continue;
+      const cAt = aAt0 + a.consumed;
+      let matchedConn: number | undefined;
+      for (const toMarker of lex.rangeTo ?? []) {
+        const end = matchPhrase(tokens, cAt, toMarker);
+        if (end !== undefined) {
+          matchedConn = end;
+          break;
+        }
+      }
+      if (matchedConn === undefined && (lex.rangeAnd ?? []).includes(word(tokens[cAt]) ?? '')) {
+        matchedConn = cAt + 1;
+      }
+      if (matchedConn === undefined) continue;
+      const b = readOperand(matchedConn);
+      if (!b) continue;
+
+      const mkTime = (v: number): TimeExpr => ({
+        op: 'literal',
+        time: { hour: v === 24 ? 0 : v, ...(v <= 12 && v !== 24 ? { meridiem: 'unknown' as const } : {}) },
+      });
+      let expr: TimeExpr | undefined;
+      if (a.kind === 'date' && b.kind === 'date') {
+        expr = { op: 'between', start: a.expr, end: b.expr };
+      } else if (a.kind === 'year' && b.kind === 'year') {
+        expr = {
+          op: 'between',
+          start: { op: 'literal', date: { year: a.value } },
+          end: { op: 'literal', date: { year: b.value } },
+        };
+      } else if ((a.kind === 'time' || a.kind === 'daynum') && b.kind === 'date') {
+        // "entre 3 y 12 de septiembre": A is a bare day sharing B's month.
+        if (b.expr.op === 'literal' && b.expr.date?.day !== undefined && b.expr.date.month !== undefined) {
+          const month = b.expr.date.month;
+          expr = {
+            op: 'intersect',
+            parts: [
+              { op: 'literal', date: { month, ...(b.expr.date.year !== undefined ? { year: b.expr.date.year } : {}) } },
+              {
+                op: 'between',
+                start: { op: 'literal', date: { day: (a as { value: number }).value } },
+                end: { op: 'literal', date: { day: b.expr.date.day } },
+              },
+            ],
+          };
+        }
+      } else if (a.kind === 'time' && b.kind === 'time') {
+        expr = { op: 'between', start: mkTime(a.value), end: mkTime(b.value) };
+      }
+      if (!expr) continue;
+      return {
+        expr,
+        consumed: matchedConn + b.consumed - i,
+        confidence: 0.95,
+        role: a.kind === 'time' && b.kind === 'time' ? 'time' : 'date',
+      };
+    }
+    return undefined;
+  };
+
+  /** "durará 30 minutos" / "pendant 2 heures" / "für 3 Stunden" → amount. */
+  const durationRule: Rule = (tokens, i) => {
+    if (!(lex.durationTriggers ?? []).includes(word(tokens[i]) ?? '')) return undefined;
+    const n = readNum(tokens, i + 1);
+    if (!n) return undefined;
+    const unit = lex.units[word(tokens[i + 1 + n.consumed]) ?? ''];
+    if (!unit) return undefined;
+    return {
+      expr: { op: 'amount', amount: amountFor(unit, n.value) },
+      consumed: n.consumed + 2,
+      confidence: 1,
+      role: 'duration',
+    };
+  };
+
+  /** "al final del domingo" / "à la fin de demain" → end-of-day point. */
+  const endOfRule: Rule = (tokens, i, ctx) => {
+    for (const marker of lex.endOfMarkers ?? []) {
+      const at = matchPhrase(tokens, i, marker);
+      if (at === undefined) continue;
+      const inner = deictic(tokens, at, ctx) ?? bareWeekday(tokens, at, ctx);
+      if (!inner) continue;
+      return {
+        expr: { op: 'snap', base: inner.expr, unit: 'day', edge: 'end' },
+        consumed: at + inner.consumed - i,
+        confidence: 0.95,
+        role: 'date',
+      };
+    }
+    return undefined;
+  };
+
+  /** "la última semana de julio" / "la primera semana de julio". */
+  const scopedWeek: Rule = (tokens, i) => {
+    const at = skipArticles(tokens, i);
+    const adj = word(tokens[at]);
+    if (adj === undefined) return undefined;
+    const isLast = (lex.lastAdjs ?? []).includes(adj);
+    const isFirst = (lex.firstAdjs ?? []).includes(adj);
+    if (!isLast && !isFirst) return undefined;
+    const unit = lex.units[word(tokens[at + 1]) ?? ''];
+    if (unit !== 'week') return undefined;
+    let mAt = at + 2;
+    while (lex.dateSep.includes(word(tokens[mAt]) ?? '')) mAt += 1;
+    const month = lex.months[word(tokens[mAt]) ?? ''];
+    if (month === undefined) return undefined;
+    const yAt = (() => {
+      let c = mAt + 1;
+      while (lex.dateSep.includes(word(tokens[c]) ?? '')) c += 1;
+      return c;
+    })();
+    const year = yearAt(tokens, yAt);
+    const scope: TimeExpr = {
+      op: 'literal',
+      date: { month, ...(year !== undefined ? { year } : {}) },
+    };
+    const expr: TimeExpr = isLast
+      ? {
+          op: 'snap',
+          base: {
+            op: 'offset',
+            base: { op: 'snap', base: scope, unit: 'month', edge: 'end' },
+            amount: -4,
+            unit: 'day',
+          },
+          unit: 'week',
+        }
+      : {
+          op: 'snap',
+          base: { op: 'snap', base: scope, unit: 'month', edge: 'start' },
+          unit: 'week',
+        };
+    return {
+      expr,
+      consumed: (year !== undefined ? yAt + 1 : mAt + 1) - i,
+      confidence: 1,
+      role: 'date',
+    };
+  };
+
   return [
     ...extras,
+    { name: 'scoped-week', rule: scopedWeek },
+    { name: 'end-of', rule: endOfRule },
+    { name: 'range', rule: rangeRule },
+    { name: 'duration', rule: durationRule },
     { name: 'special', rule: specials },
     { name: 'deictic-day', rule: deictic },
     { name: 'ago', rule: agoRule },
