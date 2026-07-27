@@ -180,7 +180,10 @@ function mergeAdjacent(matches: Positioned[], tokens: Token[], connectors: reado
       let timeExpr = inferMeridiem(dateExpr, timePart.expr);
       // A day-period on the date side pushes its meridiem into an explicit
       // time range and then steps aside: "Monday morning 6-8" is Monday
-      // 06:00–08:00, not clipped to the morning boundaries.
+      // 06:00–08:00, not clipped to the morning boundaries. A cross-midnight
+      // range ("last night between 11pm and 1am") keeps the period part:
+      // its window extends past midnight, so the range can roll into the
+      // next day instead of being clipped at the day anchor's end (#19).
       if (timeExpr.op === 'between') {
         const period = findDayPeriod(dateExpr);
         if (period) {
@@ -189,7 +192,10 @@ function mergeAdjacent(matches: Positioned[], tokens: Token[], connectors: reado
             start: forceMeridiem(timeExpr.start, period),
             end: forceMeridiem(timeExpr.end, period),
           };
-          dateExpr = stripDayPeriod(dateExpr) ?? dateExpr;
+          const sm = literalMinuteOfDay(timeExpr.start);
+          const em = literalMinuteOfDay(timeExpr.end);
+          const wraps = sm !== undefined && em !== undefined && em <= sm;
+          if (!wraps) dateExpr = stripDayPeriod(dateExpr) ?? dateExpr;
         }
       }
       out.push({
@@ -255,6 +261,16 @@ function inferMeridiem(dateExpr: TimeExpr, timeExpr: TimeExpr): TimeExpr {
     ...timeExpr,
     time: { ...timeExpr.time, meridiem },
   };
+}
+
+/** Minutes-since-midnight of a literal time with a known meridiem, if any. */
+function literalMinuteOfDay(expr: TimeExpr): number | undefined {
+  if (expr.op !== 'literal' || expr.time?.hour === undefined) return undefined;
+  const h = expr.time.hour % 12;
+  const min = expr.time.minute ?? 0;
+  if (expr.time.meridiem === 'am') return h * 60 + min;
+  if (expr.time.meridiem === 'pm') return (h + 12) * 60 + min;
+  return undefined;
 }
 
 function forceMeridiem(expr: TimeExpr, period: string): TimeExpr {

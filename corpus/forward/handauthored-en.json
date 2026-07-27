@@ -1163,6 +1163,28 @@
     "name": "nl2time",
     "license": "MIT"
    }
+  },
+  {
+   "id": "fw-0053",
+   "text": "last night between 11pm and 1am",
+   "ctx": {
+    "now": "2026-07-16T16:30:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "note": "cross-midnight clock range survives the day-shifting anchor: Wed 11pm through Thu 1am, not clipped at midnight (#19)",
+   "expect": {
+    "first": {
+     "start": "2026-07-16T06:00:00Z",
+     "end": "2026-07-16T08:00:00Z",
+     "grain": "hour"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
   }
  ]
 }
