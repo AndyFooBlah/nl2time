@@ -1519,15 +1519,53 @@ const ruleWeekendOf: Rule = (tokens, i, ctx) => {
   if (word(tokens[at]) === 'the') at += 1;
   if (word(tokens[at]) !== 'weekend' || word(tokens[at + 1]) !== 'of') return undefined;
   at += 2;
-  const inner = ruleHoliday(tokens, at, ctx) ?? ruleCalendarDate(tokens, at, ctx);
+  // Holidays keep the long-weekend reading: Saturday before through the end
+  // of the holiday ("Memorial Day weekend" = Sat–Mon).
+  const holiday = ruleHoliday(tokens, at, ctx);
+  if (holiday && holiday.role === 'date') {
+    return {
+      expr: {
+        op: 'between',
+        start: { op: 'seek', base: holiday.expr, dir: 'prev', target: { kind: 'weekday', weekday: 'sat' }, n: 1 },
+        end: { op: 'snap', base: holiday.expr, unit: 'day', edge: 'end' },
+      },
+      consumed: at + holiday.consumed - i,
+      confidence: 0.95,
+      role: 'date',
+    };
+  }
+  if (word(tokens[at]) === 'the') at += 1; // "the weekend of the 18th"
+  const inner = ruleCalendarDate(tokens, at, ctx);
   if (!inner || inner.role !== 'date') return undefined;
+  let consumed = at + inner.consumed - i;
+  // "the weekend of July 18th and 19th": the conjunct names the weekend's
+  // other day — absorb it (#22).
+  const andAt = at + inner.consumed;
+  if (word(tokens[andAt]) === 'and') {
+    const t = tokens[andAt + 1];
+    if (t?.type === 'number' && t.ordinal && t.value >= 1 && t.value <= 31) {
+      consumed = andAt + 2 - i;
+    } else {
+      const ord = readOrdinalDayWord(tokens, andAt + 1);
+      if (ord) consumed = andAt + 1 + ord.consumed - i;
+    }
+  }
+  // The Sat–Sun weekend containing the date, or the following one for a
+  // midweek date: the first Saturday on-or-after (date − 1 day), so a
+  // Sunday still maps back to its own weekend (#22).
   return {
     expr: {
-      op: 'between',
-      start: { op: 'seek', base: inner.expr, dir: 'prev', target: { kind: 'weekday', weekday: 'sat' }, n: 1 },
-      end: { op: 'snap', base: inner.expr, unit: 'day', edge: 'end' },
+      op: 'span',
+      anchor: {
+        op: 'seek',
+        base: { op: 'offset', base: inner.expr, amount: -2, unit: 'day' },
+        dir: 'next',
+        target: { kind: 'weekday', weekday: 'sat' },
+        n: 1,
+      },
+      amount: { days: 2 },
     },
-    consumed: at + inner.consumed - i,
+    consumed,
     confidence: 0.95,
     role: 'date',
   };

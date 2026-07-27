@@ -1314,6 +1314,72 @@
     "name": "nl2time",
     "license": "MIT"
    }
+  },
+  {
+   "id": "fw-0060",
+   "text": "the weekend of July 18th and 19th",
+   "ctx": {
+    "now": "2026-07-22T16:00:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "the named Sat-Sun weekend, conjunct day absorbed (#22): Jul 18-19, not an 8-day span",
+   "expect": {
+    "first": {
+     "start": "2026-07-18T04:00:00Z",
+     "end": "2026-07-20T04:00:00Z",
+     "grain": "day"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0061",
+   "text": "the weekend of July 15th",
+   "ctx": {
+    "now": "2026-07-22T16:00:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "midweek date (Wed) maps to the immediately following weekend (#22)",
+   "expect": {
+    "first": {
+     "start": "2026-07-18T04:00:00Z",
+     "end": "2026-07-20T04:00:00Z",
+     "grain": "day"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0062",
+   "text": "the weekend of July 19th",
+   "ctx": {
+    "now": "2026-07-22T16:00:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "a Sunday maps back to its own containing weekend (#22)",
+   "expect": {
+    "first": {
+     "start": "2026-07-18T04:00:00Z",
+     "end": "2026-07-20T04:00:00Z",
+     "grain": "day"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
   }
  ]
 }
