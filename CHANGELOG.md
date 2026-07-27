@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.3.1 — 2026-07-26
+
+**Benchmark fixes.** Seven conversational-phrase bugs found by the agent-time-bench benchmark ([#17](https://github.com/AndyFooBlah/nl2time/issues/17)–[#22](https://github.com/AndyFooBlah/nl2time/issues/22), [#24](https://github.com/AndyFooBlah/nl2time/issues/24)); no baseline drops in any language.
+
+Engine (semantics — mirrored in Python 0.1.1, parity fixtures regenerated):
+
+- `between` with a day-grain-or-coarser end operand resolves the conversational inclusive reading first ("between July 4th and July 10th" covers the 10th), keeping the strict exclusive-at-start reading as an alternative candidate (#17)
+- mod `start` ends at the start of the reference day when the reference falls inside the interval ("earlier this week" on a Thursday reaches through Wednesday), with the plain first half as an alternative (#20)
+
+Parser (English):
+
+- Open-range connectors: "since X" → [start(X), now]; "until / till / through / up to / by X" → [now, end(X)] (#18)
+- Cross-midnight clock ranges survive day-shifting anchors: "last night between 11pm and 1am" is Wed 11pm–Thu 1am, no longer clipped at midnight (#19)
+- "\<weekday\> before last" seeks two occurrences back; "the week before last" now parses (#21)
+- "the weekend of \<date\>" resolves to the actual Sat–Sun weekend (containing, or immediately following for a midweek date); "and \<ordinal\>" conjuncts absorbed (#22)
+- "the first/second half of \<period\>" → [start, mid) / [mid, end), a fixed non-reference-clamped split (#24)
+
+New hand-authored corpus cases fw-0051–fw-0065 pin every fixed phrase.
+
+## Python 0.1.1 (PyPI) — 2026-07-26
+
+Engine parity release for 0.3.1: ports the `between` inclusive-first end reading (#17) and the mod `start` reference-day bound (#20). 100% bit-exact parity with the regenerated JS fixtures (2,775 fixtures).
+
 ## Python 0.1.0 (PyPI) — 2026-07-26
 
 First Python release: the language-neutral engine — IR validation, `TimeContext`, deterministic `resolve()` — at 100% bit-exact parity with the JS reference (2,760 fixtures). `pip install nl2time`. Parsers/describe not yet ported.
