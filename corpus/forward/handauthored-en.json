@@ -1248,6 +1248,72 @@
     "name": "nl2time",
     "license": "MIT"
    }
+  },
+  {
+   "id": "fw-0057",
+   "text": "Friday before last",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "seek weekday n=2 into the past (#21): last Friday = Jul 24, before last = Jul 17",
+   "expect": {
+    "first": {
+     "start": "2026-07-17T04:00:00Z",
+     "end": "2026-07-18T04:00:00Z",
+     "grain": "day"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0058",
+   "text": "the Friday before last",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "article form of #21",
+   "expect": {
+    "first": {
+     "start": "2026-07-17T04:00:00Z",
+     "end": "2026-07-18T04:00:00Z",
+     "grain": "day"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0059",
+   "text": "the week before last",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "unit form of #21: en-US week (Sun-start) two back from Jul 26-Aug 1 is Jul 12-18",
+   "expect": {
+    "first": {
+     "start": "2026-07-12T04:00:00Z",
+     "end": "2026-07-19T04:00:00Z",
+     "grain": "week"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
   }
  ]
 }

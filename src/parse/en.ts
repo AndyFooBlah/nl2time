@@ -1252,6 +1252,31 @@ const ruleUnitAfterNext: Rule = (tokens, i) => {
   return { expr: snapOffset(2, unit), consumed: 3, confidence: 1, role: 'date' };
 };
 
+/** "[the] <weekday> before last" → two occurrences back; "the week before last" → two units back (#21). */
+const ruleBeforeLast: Rule = (tokens, i) => {
+  let at = i;
+  if (word(tokens[at]) === 'the') at += 1;
+  const w = word(tokens[at]);
+  if (w === undefined) return undefined;
+  if (word(tokens[at + 1]) !== 'before' || word(tokens[at + 2]) !== 'last') return undefined;
+  const consumed = at + 3 - i;
+  const weekday = WEEKDAY_WORDS[w];
+  if (weekday) {
+    // Strict occurrence counting: the second one strictly in the past.
+    return {
+      expr: { op: 'seek', base: NOW, dir: 'prev', target: { kind: 'weekday', weekday }, n: 2 },
+      consumed,
+      confidence: 1,
+      role: 'date',
+    };
+  }
+  const unit = w !== 'night' ? UNIT_WORDS[w] : undefined;
+  if (unit && unit !== 'second' && unit !== 'minute' && unit !== 'hour') {
+    return { expr: snapOffset(-2, unit), consumed, confidence: 1, role: 'date' };
+  }
+  return undefined;
+};
+
 /** "last/past/previous N units" → span backwards; "the past week" → trailing 7 days. */
 const rulePastN: Rule = (tokens, i) => {
   const w = word(tokens[i]);
@@ -2739,6 +2764,7 @@ export const EN_RULE_ENTRIES: readonly { name: string; rule: Rule }[] = [
   { name: 'within', rule: ruleWithin },
   { name: 'n-after-date', rule: ruleNAfterDate },
   { name: 'unit-after-next', rule: ruleUnitAfterNext },
+  { name: 'before-last', rule: ruleBeforeLast },
   { name: 'past-n', rule: rulePastN },
   { name: 'next-n', rule: ruleNextN },
   { name: 'the-n-past-next', rule: ruleTheNPastNext },
