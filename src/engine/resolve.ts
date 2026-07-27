@@ -207,10 +207,27 @@ function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | und
         // "between 3 and 12 of Sept" — the 3 anchors to September).
         for (const e of evalExpr(expr.end, ctx, s.zi)) {
           if (e.type !== 'interval') continue;
-          // Non-point ends are exclusive at their *start* ("May 2 to May 7"
-          // ends at May 7 00:00); point ends are used directly.
-          let endPoint = Temporal_compare(e.zi.start, e.zi.end) === 0 ? e.zi.end : e.zi.start;
+          const isPoint = Temporal_compare(e.zi.start, e.zi.end) === 0;
           const timeGrained = GRAIN_ORDER.indexOf(e.zi.grain) < GRAIN_ORDER.indexOf('day');
+          // Day-grain-or-coarser ends are conversationally inclusive:
+          // "between July 4th and July 10th" covers the 10th. Emit the
+          // inclusive reading (end operand contributes its END) first, with
+          // the strict exclusive-at-start reading as an alternative — the
+          // Recognizers-derived corpus pins the exclusive value, so both
+          // must remain candidates (#17).
+          if (!isPoint && !timeGrained) {
+            const grain = finerGrain(s.zi.grain, e.zi.grain);
+            if (Temporal_compare(s.zi.start, e.zi.end) < 0) {
+              out.push({ type: 'interval', zi: { start: s.zi.start, end: e.zi.end, grain } });
+            }
+            if (Temporal_compare(s.zi.start, e.zi.start) < 0) {
+              out.push({ type: 'interval', zi: { start: s.zi.start, end: e.zi.start, grain } });
+            }
+            continue;
+          }
+          // Non-point time ends are exclusive at their *start* ("9 to 5pm"
+          // ends at 17:00); point ends are used directly.
+          let endPoint = isPoint ? e.zi.end : e.zi.start;
           if (Temporal_compare(s.zi.start, endPoint) >= 0) {
             // A clock-time range wrapping midnight ("9:30pm to 7:30am") rolls
             // the end into the next day; date ranges just drop.

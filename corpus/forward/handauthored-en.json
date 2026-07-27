@@ -1119,6 +1119,28 @@
     "issue-10"
    ],
    "note": "noun-guard: unlicensed bare number keeps the period's range reading"
+  },
+  {
+   "id": "fw-0051",
+   "text": "between July 4th and July 10th",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "conversational 'between DATE and DATE' includes the named end day (#17): Jul 4 00:00 through Jul 11 00:00 ET; exclusive reading remains an alternative",
+   "expect": {
+    "first": {
+     "start": "2026-07-04T04:00:00Z",
+     "end": "2026-07-11T04:00:00Z",
+     "grain": "day"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
   }
  ]
 }

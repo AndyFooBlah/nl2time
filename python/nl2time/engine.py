@@ -244,12 +244,34 @@ def _eval_expr_inner(
                 if e["type"] != "interval":
                     continue
                 e_zi: ZInterval = e["zi"]
-                # Non-point ends are exclusive at their *start* ("May 2 to
-                # May 7" ends at May 7 00:00); point ends are used directly.
-                end_point = (
-                    e_zi.end if compare(e_zi.start, e_zi.end) == 0 else e_zi.start
-                )
+                is_point = compare(e_zi.start, e_zi.end) == 0
                 time_grained = _GI[e_zi.grain] < _DAY_I
+                # Day-grain-or-coarser ends are conversationally inclusive:
+                # "between July 4th and July 10th" covers the 10th. Emit the
+                # inclusive reading (end operand contributes its END) first,
+                # with the strict exclusive-at-start reading as an
+                # alternative — the Recognizers-derived corpus pins the
+                # exclusive value, so both must remain candidates (#17).
+                if not is_point and not time_grained:
+                    grain = _finer_grain(s_zi.grain, e_zi.grain)
+                    if compare(s_zi.start, e_zi.end) < 0:
+                        out.append(
+                            {
+                                "type": "interval",
+                                "zi": ZInterval(s_zi.start, e_zi.end, grain),
+                            }
+                        )
+                    if compare(s_zi.start, e_zi.start) < 0:
+                        out.append(
+                            {
+                                "type": "interval",
+                                "zi": ZInterval(s_zi.start, e_zi.start, grain),
+                            }
+                        )
+                    continue
+                # Non-point time ends are exclusive at their *start* ("9 to
+                # 5pm" ends at 17:00); point ends are used directly.
+                end_point = e_zi.end if is_point else e_zi.start
                 if compare(s_zi.start, end_point) >= 0:
                     # A clock-time range wrapping midnight ("9:30pm to
                     # 7:30am") rolls the end into the next day; date ranges
