@@ -670,6 +670,48 @@ function buildRange(
   return undefined;
 }
 
+/**
+ * Open-range connectors (#18): "since X" → [start(X), now]; "until X" /
+ * "till X" / "through X" / "up to X" / "by X" (deadline) → [now, end(X)].
+ * These only fire when the connector opens the range — "A until B" and
+ * "from A through B" are consumed earlier by the range rule.
+ */
+const ruleOpenRange: Rule = (tokens, i, ctx) => {
+  const w = word(tokens[i]);
+  let mode: 'since' | 'until' | undefined;
+  let at = i + 1;
+  if (w === 'since') mode = 'since';
+  else if (w === 'until' || w === 'till' || w === 'through' || w === 'thru' || w === 'by') {
+    mode = 'until';
+  } else if (w === 'up' && word(tokens[i + 1]) === 'to') {
+    mode = 'until';
+    at = i + 2;
+  }
+  if (!mode) return undefined;
+  // "by the 15th": a bare article only before an explicit calendar date —
+  // NOT "through the week"-style prose, which stays unmatched.
+  if (word(tokens[at]) === 'the' && ruleCalendarDate(tokens, at + 1, ctx)) at += 1;
+  const inner =
+    ruleDeicticDay(tokens, at, ctx) ??
+    ruleLastThisNext(tokens, at, ctx) ??
+    ruleHoliday(tokens, at, ctx) ??
+    ruleEndOf(tokens, at, ctx) ??
+    ruleWeekOf(tokens, at, ctx) ??
+    ruleBareYear(tokens, at, ctx) ??
+    ruleCalendarDate(tokens, at, ctx) ??
+    ruleClockTime(tokens, at, ctx) ??
+    ruleWeekdayAlone(tokens, at, ctx);
+  if (!inner || inner.role === 'duration') return undefined;
+  // Boundary points ("by EOD", "by the end of the month") keep their point
+  // reading — the deadline instant is the answer there, not a range.
+  if (inner.expr.op === 'snap' && inner.expr.edge !== undefined) return undefined;
+  const expr: TimeExpr =
+    mode === 'since'
+      ? { op: 'between', start: inner.expr, end: NOW }
+      : { op: 'between', start: NOW, end: inner.expr };
+  return { expr, consumed: at + inner.consumed - i, confidence: 0.9, role: 'datetime' };
+};
+
 /** "week of April 10th", "the first/last week of July", "the week starting on Feb 4". */
 const ruleWeekOf: Rule = (tokens, i, ctx) => {
   let at = i;
@@ -2685,6 +2727,7 @@ const ruleAllUnit: Rule = (tokens, i) => {
  */
 export const EN_RULE_ENTRIES: readonly { name: string; rule: Rule }[] = [
   { name: 'range', rule: ruleRange },
+  { name: 'open-range', rule: ruleOpenRange },
   { name: 'week-of', rule: ruleWeekOf },
   { name: 'nth-weekday-of', rule: ruleNthWeekdayOf },
   { name: 'day-of-scope', rule: ruleDayOfScope },

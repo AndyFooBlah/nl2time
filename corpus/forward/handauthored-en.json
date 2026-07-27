@@ -1185,6 +1185,69 @@
     "name": "nl2time",
     "license": "MIT"
    }
+  },
+  {
+   "id": "fw-0054",
+   "text": "since June 15th",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "open range (#18): 'since X' = [start(X), now], not the bare day",
+   "expect": {
+    "first": {
+     "start": "2026-06-15T04:00:00Z",
+     "end": "2026-07-26T12:15:00Z"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0055",
+   "text": "until July 10th",
+   "ctx": {
+    "now": "2026-07-06T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "open range (#18): 'until X' = [now, end(X)] inclusive of the named day",
+   "expect": {
+    "first": {
+     "start": "2026-07-06T12:15:00Z",
+     "end": "2026-07-11T04:00:00Z"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0056",
+   "text": "by Friday",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "deadline connector (#18): 'by <weekday>' = [now, end of that day]; Sun Jul 26 -> Fri Jul 31",
+   "expect": {
+    "first": {
+     "start": "2026-07-26T12:15:00Z",
+     "end": "2026-08-01T04:00:00Z"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
   }
  ]
 }
