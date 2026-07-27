@@ -1548,6 +1548,553 @@
      "grain": "week"
     }
    ]
+  },
+  {
+   "id": "fw-0053",
+   "ctx": {
+    "now": "2026-07-16T16:30:00Z",
+    "timeZone": "America/Los_Angeles",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "intersect",
+      "parts": [
+       {
+        "op": "snap",
+        "base": {
+         "op": "offset",
+         "base": {
+          "op": "now"
+         },
+         "amount": -1,
+         "unit": "day"
+        },
+        "unit": "day"
+       },
+       {
+        "op": "literal",
+        "dayPeriod": "night"
+       }
+      ]
+     },
+     {
+      "op": "between",
+      "start": {
+       "op": "literal",
+       "time": {
+        "hour": 11,
+        "meridiem": "pm"
+       }
+      },
+      "end": {
+       "op": "literal",
+       "time": {
+        "hour": 1,
+        "meridiem": "am"
+       }
+      }
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-16T06:00:00Z",
+     "end": "2026-07-16T08:00:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "fw-0054",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 6,
+      "day": 15
+     }
+    },
+    "end": {
+     "op": "now"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-06-15T04:00:00Z",
+     "end": "2026-07-26T12:15:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0055",
+   "ctx": {
+    "now": "2026-07-06T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 7,
+      "day": 10
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-06T12:15:00Z",
+     "end": "2026-07-11T04:00:00Z",
+     "grain": "instant"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-07-06T12:15:00Z",
+     "end": "2026-07-10T04:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0056",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "seek",
+     "base": {
+      "op": "now"
+     },
+     "dir": "nearest",
+     "target": {
+      "kind": "weekday",
+      "weekday": "fri"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-26T12:15:00Z",
+     "end": "2026-08-01T04:00:00Z",
+     "grain": "instant"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-07-26T12:15:00Z",
+     "end": "2026-07-31T04:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0057",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "prev",
+    "target": {
+     "kind": "weekday",
+     "weekday": "fri"
+    },
+    "n": 2
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-17T04:00:00Z",
+     "end": "2026-07-18T04:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0058",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "prev",
+    "target": {
+     "kind": "weekday",
+     "weekday": "fri"
+    },
+    "n": 2
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-17T04:00:00Z",
+     "end": "2026-07-18T04:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0059",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "offset",
+     "base": {
+      "op": "now"
+     },
+     "amount": -2,
+     "unit": "week"
+    },
+    "unit": "week"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-12T04:00:00Z",
+     "end": "2026-07-19T04:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "fw-0060",
+   "ctx": {
+    "now": "2026-07-22T16:00:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "seek",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "literal",
+       "date": {
+        "month": 7,
+        "day": 18
+       }
+      },
+      "amount": -2,
+      "unit": "day"
+     },
+     "dir": "next",
+     "target": {
+      "kind": "weekday",
+      "weekday": "sat"
+     },
+     "n": 1
+    },
+    "amount": {
+     "days": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-18T04:00:00Z",
+     "end": "2026-07-20T04:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2027-07-17T04:00:00Z",
+     "end": "2027-07-19T04:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0061",
+   "ctx": {
+    "now": "2026-07-22T16:00:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "seek",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "literal",
+       "date": {
+        "month": 7,
+        "day": 15
+       }
+      },
+      "amount": -2,
+      "unit": "day"
+     },
+     "dir": "next",
+     "target": {
+      "kind": "weekday",
+      "weekday": "sat"
+     },
+     "n": 1
+    },
+    "amount": {
+     "days": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-18T04:00:00Z",
+     "end": "2026-07-20T04:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2027-07-17T04:00:00Z",
+     "end": "2027-07-19T04:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0062",
+   "ctx": {
+    "now": "2026-07-22T16:00:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "seek",
+     "base": {
+      "op": "offset",
+      "base": {
+       "op": "literal",
+       "date": {
+        "month": 7,
+        "day": 19
+       }
+      },
+      "amount": -2,
+      "unit": "day"
+     },
+     "dir": "next",
+     "target": {
+      "kind": "weekday",
+      "weekday": "sat"
+     },
+     "n": 1
+    },
+    "amount": {
+     "days": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-18T04:00:00Z",
+     "end": "2026-07-20T04:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2027-07-24T04:00:00Z",
+     "end": "2027-07-26T04:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0063",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "snap",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "now"
+      },
+      "unit": "year"
+     },
+     "unit": "year",
+     "edge": "start"
+    },
+    "end": {
+     "op": "offset",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "now"
+       },
+       "unit": "year"
+      },
+      "unit": "year",
+      "edge": "start"
+     },
+     "amount": 6,
+     "unit": "month"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-01-01T05:00:00Z",
+     "end": "2026-07-01T04:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0064",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "offset",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "now"
+       },
+       "unit": "year"
+      },
+      "unit": "year",
+      "edge": "start"
+     },
+     "amount": 6,
+     "unit": "month"
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "now"
+      },
+      "unit": "year"
+     },
+     "unit": "year",
+     "edge": "end"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-01T04:00:00Z",
+     "end": "2027-01-01T05:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0065",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "snap",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": 1,
+       "unit": "month"
+      },
+      "unit": "month"
+     },
+     "unit": "month",
+     "edge": "start"
+    },
+    "end": {
+     "op": "offset",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "offset",
+        "base": {
+         "op": "now"
+        },
+        "amount": 1,
+        "unit": "month"
+       },
+       "unit": "month"
+      },
+      "unit": "month",
+      "edge": "start"
+     },
+     "amount": 15,
+     "unit": "day"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-01T04:00:00Z",
+     "end": "2026-08-16T04:00:00Z",
+     "grain": "instant"
+    }
+   ]
   }
  ]
 }

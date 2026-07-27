@@ -36,7 +36,11 @@ The containing `unit` interval of `base.start`: floor to the unit boundary, exte
 Anchored extent. Signed `amount` fields: negative extends backward from `anchor.end`, positive forward from `anchor.start`. Grain = smallest unit present in `amount`. If the anchor is the reference point itself (grain `instant`, equal to `now`), the amount's smallest unit is day-or-coarser, and `partialPeriod:'exclude'`, the span covers complete days only ("the last 3 days" ends at today's start; "the next 3 days" begins at tomorrow's start). `business: true` counts weekdays only, walking day by day from the anchor and skipping Saturday/Sunday.
 
 ### `between {start, end}`
-`[start.start, end.end)`, cartesian over candidates, dropping pairs where start ≥ end. Grain = finer of the two.
+Cartesian over candidates, dropping pairs where start ≥ end; grain = finer of the two. The end operand's contribution depends on its shape:
+
+- **Point ends** (grain `instant`, e.g. a `snap` edge or `now`) bound the range directly.
+- **Time-grained ends** (finer than day) are exclusive at their start ("9 to 5pm" ends at 17:00); a clock range wrapping midnight rolls the end into the next day.
+- **Day-grain-or-coarser ends** yield *two* candidates per pair: the conversational **inclusive** reading first — the end operand contributes its END, so "between July 4th and July 10th" covers the 10th — followed by the strict exclusive-at-start reading (`[start.start, end.start)`), which the Recognizers-Text corpora pin for date ranges.
 
 ### `seek {base, dir, target, n?}`
 Directed navigation:
@@ -60,7 +64,7 @@ A named holiday resolved by the engine's table: fixed-date (christmas, halloween
 Representable and serializable in v1; resolution throws `NotResolvableError` (v2 lands occurrence enumeration against a range).
 
 ### `mod` (any node)
-`approx | start | mid | end`. `approx` is carried through resolution untouched (renderers may hedge). `start`/`end` narrow the resolved interval to its earlier/later half ("early July", "later this week"): the midpoint floors to the day for week-and-coarser grains (to the month for years), and when the reference day falls strictly inside the interval it tightens the bound toward it ("earlier this year" ends today, not at midyear); a degenerate result falls back to the plain half. `mid` selects the middle stretch: the 10th–20th for months, 10:00–14:00 for days, the middle half otherwise. Fixed splits that must *not* reference-clamp ("end of year" = July onward regardless of today) are expressed structurally with `between`/`span` instead of `mod`.
+`approx | start | mid | end`. `approx` is carried through resolution untouched (renderers may hedge). `start`/`end` narrow the resolved interval to its earlier/later half ("early July", "later this week"): the midpoint floors to the day for week-and-coarser grains (to the month for years). When the reference day falls strictly inside a week-or-coarser interval, `start` ends at the start of the reference day ("earlier this week" on a Thursday reaches through Wednesday; "earlier this year" ends today, not at midyear) — and when that reaches beyond the midpoint, the plain first half follows as an alternative candidate; `end` starts at the reference day only once the midpoint has passed. A degenerate result falls back to the plain half. `mid` selects the middle stretch: the 10th–20th for months, 10:00–14:00 for days, the middle half otherwise. Fixed splits that must *not* reference-clamp ("end of year" = July onward regardless of today) are expressed structurally with `between`/`span` instead of `mod`.
 
 ## Versioning
 

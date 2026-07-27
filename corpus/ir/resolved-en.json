@@ -37494,18 +37494,60 @@
     ]
    },
    "expr": {
-    "op": "literal",
-    "time": {
-     "hour": 2,
-     "meridiem": "pm"
-    }
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "intersect",
+      "parts": [
+       {
+        "op": "between",
+        "start": {
+         "op": "now"
+        },
+        "end": {
+         "op": "snap",
+         "base": {
+          "op": "offset",
+          "base": {
+           "op": "now"
+          },
+          "amount": 1,
+          "unit": "day"
+         },
+         "unit": "day"
+        }
+       },
+       {
+        "op": "literal",
+        "time": {
+         "hour": 2,
+         "meridiem": "pm"
+        }
+       }
+      ]
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 4,
+       "minute": 30,
+       "meridiem": "pm"
+      }
+     }
+    ]
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2016-11-07T14:00:00Z",
-     "end": "2016-11-07T15:00:00Z",
-     "grain": "hour"
+     "start": "2016-11-07T16:30:00Z",
+     "end": "2016-11-07T16:31:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2016-11-07T16:30:00Z",
+     "end": "2016-11-07T16:31:00Z",
+     "grain": "minute"
     }
    ]
   },
