@@ -111,8 +111,13 @@ function evalExpr(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | undefine
   // inside the interval it tightens the bound ("earlier this year" ends
   // today, not at midyear).
   if (expr.mod === 'start' || expr.mod === 'end') {
-    return intervalMap(cands, (zi) => {
-      if (zi.grain === 'instant') return zi;
+    const out: Cand[] = [];
+    for (const c of cands) {
+      if (c.type !== 'interval' || c.zi.grain === 'instant') {
+        out.push(c);
+        continue;
+      }
+      const zi = c.zi;
       const totalMs = zi.end.epochMilliseconds - zi.start.epochMilliseconds;
       let mid = zi.start.add({ milliseconds: Math.floor(totalMs / 2) });
       const gi = GRAIN_ORDER.indexOf(zi.grain);
@@ -120,19 +125,26 @@ function evalExpr(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | undefine
       else if (gi > GRAIN_ORDER.indexOf('day')) mid = floorTo(mid, 'day', ctx.weekStart);
 
       let bound = mid;
+      let altHalf = false;
       if (gi > GRAIN_ORDER.indexOf('day')) {
         const refDay = floorTo(ctx.zonedNow, 'day', ctx.weekStart);
         const inRange =
           Temporal_compare(refDay, zi.start) > 0 && Temporal_compare(refDay, zi.end) < 0;
         if (inRange) {
+          // 'start' ("earlier this week/year") ends at the start of the
+          // reference day: on a Thursday, "earlier this week" reaches
+          // through Wednesday, not just past the midpoint (#20). When the
+          // reference sits beyond the midpoint the plain first half stays
+          // as an alternative (the Recognizers corpus pins it for "earlier
+          // this month"). 'end' ("later this week") starts at the
+          // reference day only once the midpoint has passed.
           bound =
             expr.mod === 'start'
-              ? Temporal_compare(refDay, mid) < 0
-                ? refDay
-                : mid
+              ? refDay
               : Temporal_compare(refDay, mid) > 0
                 ? refDay
                 : mid;
+          altHalf = expr.mod === 'start' && Temporal_compare(refDay, mid) > 0;
         }
       }
       const narrowed =
@@ -141,12 +153,21 @@ function evalExpr(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | undefine
           : { start: bound, end: zi.end, grain: zi.grain };
       // A degenerate clamp (bound at an edge) falls back to the plain half.
       if (Temporal_compare(narrowed.start, narrowed.end) >= 0) {
-        return expr.mod === 'start'
-          ? { start: zi.start, end: mid, grain: zi.grain }
-          : { start: mid, end: zi.end, grain: zi.grain };
+        out.push({
+          type: 'interval',
+          zi:
+            expr.mod === 'start'
+              ? { start: zi.start, end: mid, grain: zi.grain }
+              : { start: mid, end: zi.end, grain: zi.grain },
+        });
+        continue;
       }
-      return narrowed;
-    });
+      out.push({ type: 'interval', zi: narrowed });
+      if (altHalf && Temporal_compare(zi.start, mid) < 0) {
+        out.push({ type: 'interval', zi: { start: zi.start, end: mid, grain: zi.grain } });
+      }
+    }
+    return out;
   }
   // mod 'mid': the middle stretch. Conventions follow common usage: mid-month
   // = the 10th through the 20th; mid-day = 10:00–14:00; otherwise the middle

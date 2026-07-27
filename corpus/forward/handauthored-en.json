@@ -1141,6 +1141,28 @@
     "name": "nl2time",
     "license": "MIT"
    }
+  },
+  {
+   "id": "fw-0052",
+   "text": "earlier this week",
+   "ctx": {
+    "now": "2026-07-16T13:30:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "on a Thursday, 'earlier this week' reaches through yesterday: end = start of today, not the midpoint (#20)",
+   "expect": {
+    "first": {
+     "start": "2026-07-12T04:00:00Z",
+     "end": "2026-07-16T04:00:00Z",
+     "grain": "week"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
   }
  ]
 }

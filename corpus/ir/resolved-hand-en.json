@@ -1518,6 +1518,36 @@
      "grain": "day"
     }
    ]
+  },
+  {
+   "id": "fw-0052",
+   "ctx": {
+    "now": "2026-07-16T13:30:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "week",
+    "mod": "start"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-12T04:00:00Z",
+     "end": "2026-07-16T04:00:00Z",
+     "grain": "week"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-07-12T04:00:00Z",
+     "end": "2026-07-15T04:00:00Z",
+     "grain": "week"
+    }
+   ]
   }
  ]
 }

@@ -131,10 +131,12 @@ def _eval_expr(
     # (year to the month), and when the reference day falls inside the
     # interval it tightens the bound ("earlier this year" ends today).
     if mod in ("start", "end"):
-
-        def narrow(zi: ZInterval) -> ZInterval:
-            if zi.grain == "instant":
-                return zi
+        out: list[Cand] = []
+        for c in cands:
+            if c["type"] != "interval" or c["zi"].grain == "instant":
+                out.append(c)
+                continue
+            zi: ZInterval = c["zi"]
             total_ms = epoch_millis(zi.end) - epoch_millis(zi.start)
             mid = add_milliseconds(zi.start, total_ms // 2)
             gi = _GI[zi.grain]
@@ -144,12 +146,19 @@ def _eval_expr(
                 mid = floor_to(mid, "day", ctx.week_start)
 
             bound = mid
+            alt_half = False
             if gi > _DAY_I:
                 ref_day = floor_to(ctx.zoned_now, "day", ctx.week_start)
                 in_range = compare(ref_day, zi.start) > 0 and compare(ref_day, zi.end) < 0
                 if in_range:
+                    # 'start' ("earlier this week/year") ends at the start of
+                    # the reference day (#20); when the reference sits beyond
+                    # the midpoint the plain first half stays as an
+                    # alternative. 'end' starts at the reference day only
+                    # once the midpoint has passed.
                     if mod == "start":
-                        bound = ref_day if compare(ref_day, mid) < 0 else mid
+                        bound = ref_day
+                        alt_half = compare(ref_day, mid) > 0
                     else:
                         bound = ref_day if compare(ref_day, mid) > 0 else mid
             if mod == "start":
@@ -159,11 +168,14 @@ def _eval_expr(
             # A degenerate clamp (bound at an edge) falls back to the plain half.
             if compare(narrowed.start, narrowed.end) >= 0:
                 if mod == "start":
-                    return ZInterval(zi.start, mid, zi.grain)
-                return ZInterval(mid, zi.end, zi.grain)
-            return narrowed
-
-        return _interval_map(cands, narrow)
+                    out.append({"type": "interval", "zi": ZInterval(zi.start, mid, zi.grain)})
+                else:
+                    out.append({"type": "interval", "zi": ZInterval(mid, zi.end, zi.grain)})
+                continue
+            out.append({"type": "interval", "zi": narrowed})
+            if alt_half and compare(zi.start, mid) < 0:
+                out.append({"type": "interval", "zi": ZInterval(zi.start, mid, zi.grain)})
+        return out
     # mod 'mid': the middle stretch. mid-month = the 10th through the 20th;
     # mid-day = 10:00-14:00; otherwise the middle half of the interval.
     if mod == "mid":

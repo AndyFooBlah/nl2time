@@ -6711,6 +6711,12 @@
     {
      "kind": "interval",
      "start": "2018-05-01T00:00:00Z",
+     "end": "2018-05-28T00:00:00Z",
+     "grain": "month"
+    },
+    {
+     "kind": "interval",
+     "start": "2018-05-01T00:00:00Z",
      "end": "2018-05-16T00:00:00Z",
      "grain": "month"
     }
