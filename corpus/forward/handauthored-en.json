@@ -1380,6 +1380,69 @@
     "name": "nl2time",
     "license": "MIT"
    }
+  },
+  {
+   "id": "fw-0063",
+   "text": "the first half of the year",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "fixed half-split, not reference-clamped (#24): Jan 1 through Jul 1",
+   "expect": {
+    "first": {
+     "start": "2026-01-01T05:00:00Z",
+     "end": "2026-07-01T04:00:00Z"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0064",
+   "text": "the second half of the year",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "second half (#24): Jul 1 through next Jan 1",
+   "expect": {
+    "first": {
+     "start": "2026-07-01T04:00:00Z",
+     "end": "2027-01-01T05:00:00Z"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0065",
+   "text": "the first half of next month",
+   "ctx": {
+    "now": "2026-07-26T12:15:00Z",
+    "timeZone": "America/New_York",
+    "locale": "en-US"
+   },
+   "note": "month halves split at the 16th (#24)",
+   "expect": {
+    "first": {
+     "start": "2026-08-01T04:00:00Z",
+     "end": "2026-08-16T04:00:00Z"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
   }
  ]
 }

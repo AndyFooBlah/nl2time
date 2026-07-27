@@ -998,6 +998,85 @@ const ruleEndOf: Rule = (tokens, i, ctx) => {
   return { expr, consumed: at + inner.consumed - i, confidence: 0.95, role: 'date' };
 };
 
+/** The period unit a half-of scope denotes, if determinable. */
+function halfScopeUnit(expr: TimeExpr): Unit | undefined {
+  if (expr.op === 'snap') {
+    return expr.edge === undefined &&
+      (expr.unit === 'week' || expr.unit === 'month' || expr.unit === 'quarter' || expr.unit === 'year')
+      ? expr.unit
+      : undefined;
+  }
+  if (expr.op === 'literal' && expr.date !== undefined && expr.time === undefined) {
+    if (expr.date.day !== undefined) return undefined;
+    return expr.date.month !== undefined ? 'month' : 'year';
+  }
+  if (expr.op === 'seek' && expr.target.kind === 'month') return 'month';
+  return undefined;
+}
+
+/** "the first/second half of <period>" → [start, mid) / [mid, end) (#24). */
+const ruleHalfOf: Rule = (tokens, i, ctx) => {
+  let at = i;
+  if (word(tokens[at]) === 'the') at += 1;
+  const w = word(tokens[at]);
+  const t = tokens[at];
+  let which: 1 | 2 | undefined;
+  if (w === 'first') which = 1;
+  else if (w === 'second' || w === 'latter' || w === 'back') which = 2;
+  else if (t?.type === 'number' && t.ordinal && (t.value === 1 || t.value === 2)) {
+    which = t.value as 1 | 2;
+  }
+  if (which === undefined) return undefined;
+  if (word(tokens[at + 1]) !== 'half' || word(tokens[at + 2]) !== 'of') return undefined;
+  at += 3;
+  if (word(tokens[at]) === 'the') at += 1;
+
+  // Scope: a bare unit ("the year"), a relative period ("next month"), a
+  // month name, a quarter, or a year.
+  let scope: TimeExpr | undefined;
+  let unit: Unit | undefined;
+  let consumed = 0;
+  const uw = word(tokens[at]) !== 'night' ? UNIT_WORDS[word(tokens[at]) ?? ''] : undefined;
+  if (uw === 'week' || uw === 'month' || uw === 'quarter' || uw === 'year') {
+    scope = snapNow(uw);
+    unit = uw;
+    consumed = 1;
+  } else {
+    const inner =
+      ruleLastThisNext(tokens, at, ctx) ??
+      ruleBareYear(tokens, at, ctx) ??
+      ruleCalendarDate(tokens, at, ctx);
+    if (inner && inner.role === 'date') {
+      unit = halfScopeUnit(inner.expr);
+      if (unit) {
+        scope = inner.expr;
+        consumed = inner.consumed;
+      }
+    }
+  }
+  if (!scope || !unit) return undefined;
+
+  // Fixed split, deliberately not reference-clamped (unlike mod
+  // 'start'/'end'): "the first half of the year" is Jan–Jun regardless of
+  // today. Midpoints: year +6 months, quarter +45 days, month +15 days
+  // (the 16th), week +84 hours.
+  const startPoint: TimeExpr = { op: 'snap', base: scope, unit, edge: 'start' };
+  const endPoint: TimeExpr = { op: 'snap', base: scope, unit, edge: 'end' };
+  const mid: TimeExpr =
+    unit === 'year'
+      ? { op: 'offset', base: startPoint, amount: 6, unit: 'month' }
+      : unit === 'quarter'
+        ? { op: 'offset', base: startPoint, amount: 45, unit: 'day' }
+        : unit === 'month'
+          ? { op: 'offset', base: startPoint, amount: 15, unit: 'day' }
+          : { op: 'offset', base: startPoint, amount: 84, unit: 'hour' };
+  const expr: TimeExpr =
+    which === 1
+      ? { op: 'between', start: startPoint, end: mid }
+      : { op: 'between', start: mid, end: endPoint };
+  return { expr, consumed: at + consumed - i, confidence: 1, role: 'date' };
+};
+
 const REL_SYNONYMS: Record<string, 'last' | 'this' | 'next'> = {
   last: 'last', previous: 'last', prior: 'last',
   this: 'this', current: 'this', present: 'this', that: 'this',
@@ -2797,6 +2876,7 @@ export const EN_RULE_ENTRIES: readonly { name: string; rule: Rule }[] = [
   { name: 'weekend-of', rule: ruleWeekendOf },
   { name: 'holiday', rule: ruleHoliday },
   { name: 'early-late', rule: ruleEarlyLate },
+  { name: 'half-of', rule: ruleHalfOf },
   { name: 'end-of', rule: ruleEndOf },
   { name: 'deictic-day', rule: ruleDeicticDay },
   { name: 'within', rule: ruleWithin },
