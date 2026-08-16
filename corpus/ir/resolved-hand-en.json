@@ -2095,6 +2095,323 @@
      "grain": "instant"
     }
    ]
+  },
+  {
+   "id": "fw-0066",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "between",
+     "start": {
+      "op": "offset",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "now"
+       },
+       "unit": "year",
+       "edge": "start"
+      },
+      "amount": 6,
+      "unit": "month"
+     },
+     "end": {
+      "op": "snap",
+      "base": {
+       "op": "now"
+      },
+      "unit": "year",
+      "edge": "end"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-15T12:00:00Z",
+     "end": "2027-01-01T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0067",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "between",
+     "start": {
+      "op": "offset",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "now"
+       },
+       "unit": "month",
+       "edge": "start"
+      },
+      "amount": 15,
+      "unit": "day"
+     },
+     "end": {
+      "op": "snap",
+      "base": {
+       "op": "now"
+      },
+      "unit": "month",
+      "edge": "end"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-15T12:00:00Z",
+     "end": "2026-09-01T00:00:00Z",
+     "grain": "instant"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-08-15T12:00:00Z",
+     "end": "2026-08-16T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0068",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "between",
+     "start": {
+      "op": "offset",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "now"
+       },
+       "unit": "quarter",
+       "edge": "start"
+      },
+      "amount": 45,
+      "unit": "day"
+     },
+     "end": {
+      "op": "snap",
+      "base": {
+       "op": "now"
+      },
+      "unit": "quarter",
+      "edge": "end"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-15T12:00:00Z",
+     "end": "2026-10-01T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0069",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "between",
+     "start": {
+      "op": "offset",
+      "base": {
+       "op": "snap",
+       "base": {
+        "op": "now"
+       },
+       "unit": "week",
+       "edge": "start"
+      },
+      "amount": 3,
+      "unit": "day"
+     },
+     "end": {
+      "op": "snap",
+      "base": {
+       "op": "now"
+      },
+      "unit": "week",
+      "edge": "end"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-15T12:00:00Z",
+     "end": "2026-08-16T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0070",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "time": {
+      "hour": 9,
+      "minute": 30,
+      "meridiem": "pm"
+     }
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 7,
+      "minute": 30,
+      "meridiem": "am"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-15T21:30:00Z",
+     "end": "2026-08-16T07:30:00Z",
+     "grain": "minute"
+    }
+   ]
+  },
+  {
+   "id": "fw-0071",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "literal",
+     "time": {
+      "hour": 5,
+      "meridiem": "pm"
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-15T12:00:00Z",
+     "end": "2026-08-15T17:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0072",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "month": 7,
+      "day": 4
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "month": 7,
+      "day": 10
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-04T00:00:00Z",
+     "end": "2026-07-11T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-07-04T00:00:00Z",
+     "end": "2026-07-10T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-07-04T00:00:00Z",
+     "end": "2027-07-11T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-07-04T00:00:00Z",
+     "end": "2027-07-10T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2027-07-04T00:00:00Z",
+     "end": "2027-07-11T00:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2027-07-04T00:00:00Z",
+     "end": "2027-07-10T00:00:00Z",
+     "grain": "day"
+    }
+   ]
   }
  ]
 }

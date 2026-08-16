@@ -257,7 +257,14 @@ def _eval_expr_inner(
                     continue
                 e_zi: ZInterval = e["zi"]
                 is_point = compare(e_zi.start, e_zi.end) == 0
-                time_grained = _GI[e_zi.grain] < _DAY_I
+                # Clock-time semantics need a fine grain AND a sub-day extent:
+                # a multi-day interval whose edges are snap points ("end of
+                # year" = Jul 1 -> Jan 1) carries grain 'instant' but is a
+                # calendar period, not a time of day.
+                time_grained = _GI[e_zi.grain] < _DAY_I and (
+                    is_point
+                    or compare(add_calendar(e_zi.start, days=1), e_zi.end) > 0
+                )
                 # Day-grain-or-coarser ends are conversationally inclusive:
                 # "between July 4th and July 10th" covers the 10th. Emit the
                 # inclusive reading (end operand contributes its END) first,

@@ -1443,6 +1443,167 @@
     "name": "nl2time",
     "license": "MIT"
    }
+  },
+  {
+   "id": "fw-0066",
+   "text": "by end of year",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "note": "deadline over a multi-day fine-grained end (late-part split, Jul 1 → Jan 1): must take the calendar reading, not clock-time — previously resolved as \"by July 1\" and was dropped as past",
+   "expect": {
+    "first": {
+     "start": "2026-08-15T12:00:00Z",
+     "end": "2027-01-01T00:00:00Z",
+     "grain": "instant"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0067",
+   "text": "by end of month",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "note": "same path as fw-0066; previously resolved to the late-part START (the 16th) — silently wrong",
+   "expect": {
+    "first": {
+     "start": "2026-08-15T12:00:00Z",
+     "end": "2026-09-01T00:00:00Z",
+     "grain": "instant"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0068",
+   "text": "by end of quarter",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "note": "same path as fw-0066",
+   "expect": {
+    "first": {
+     "start": "2026-08-15T12:00:00Z",
+     "end": "2026-10-01T00:00:00Z",
+     "grain": "instant"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0069",
+   "text": "by end of week",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "note": "same path as fw-0066; en-US week ends Sunday midnight — previously zero candidates",
+   "expect": {
+    "first": {
+     "start": "2026-08-15T12:00:00Z",
+     "end": "2026-08-16T00:00:00Z",
+     "grain": "instant"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0070",
+   "text": "9:30pm to 7:30am",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "note": "guard for fw-0066..69: a sub-day fine-grained end keeps clock-time semantics and rolls past midnight",
+   "expect": {
+    "first": {
+     "start": "2026-08-15T21:30:00Z",
+     "end": "2026-08-16T07:30:00Z",
+     "grain": "minute"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0071",
+   "text": "by 5pm",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "note": "guard for fw-0066..69: a point end is used directly",
+   "expect": {
+    "first": {
+     "start": "2026-08-15T12:00:00Z",
+     "end": "2026-08-15T17:00:00Z",
+     "grain": "instant"
+    }
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
+  },
+  {
+   "id": "fw-0072",
+   "text": "between July 4th and July 10th",
+   "ctx": {
+    "now": "2026-08-15T12:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "note": "guard for fw-0066..69: day-grain ends keep the inclusive-then-exclusive candidate pair (#17)",
+   "expect": {
+    "candidates": [
+     {
+      "start": "2026-07-04T00:00:00Z",
+      "end": "2026-07-11T00:00:00Z",
+      "grain": "day"
+     },
+     {
+      "start": "2026-07-04T00:00:00Z",
+      "end": "2026-07-10T00:00:00Z",
+      "grain": "day"
+     }
+    ]
+   },
+   "level": "core",
+   "source": {
+    "name": "nl2time",
+    "license": "MIT"
+   }
   }
  ]
 }
