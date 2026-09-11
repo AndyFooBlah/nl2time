@@ -39,7 +39,7 @@ resolve(expr, ctx)["candidates"][0]
 ## Parity guarantee
 
 This engine reproduces the JS reference **bit-exactly** — instants, grains,
-and candidate order — across all 2,760 machine-generated engine-parity
+and candidate order — across all 2,782 machine-generated engine-parity
 fixtures derived from the project's six-language conformance corpora, enforced
 in CI on every commit. Spec: [ir-spec.md](https://github.com/AndyFooBlah/nl2time/blob/main/docs/ir-spec.md);
 strategy: [porting.md](https://github.com/AndyFooBlah/nl2time/blob/main/docs/porting.md);

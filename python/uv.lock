@@ -36,7 +36,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8" },
-    { name = "whenever", specifier = ">=0.8" },
+    { name = "whenever", specifier = ">=0.10" },
 ]
 provides-extras = ["dev"]
 

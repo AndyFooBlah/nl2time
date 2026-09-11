@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [20, 22, 24]
+        node: [22, 24]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -21,9 +21,44 @@ jobs:
       - run: npm test
       - run: npm run build
 
+  # Parity gate 3 (docs/porting.md): the engine-parity fixtures in corpus/ir
+  # must be exactly what the JS engine at this commit produces. A JS engine
+  # change that lands without `npm run fixtures` fails here instead of leaving
+  # the Python suite green against stale fixtures.
+  fixtures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run fixtures
+      - name: corpus/ir is in sync with the JS engine
+        run: git diff --exit-code corpus/ir
+
   python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: uv run --project python --extra dev pytest python/tests -q
+
+  # The declared dependency floor must actually work (pyproject.toml
+  # `whenever>=0.10`): resolve against the oldest allowed `whenever`.
+  python-floor:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
-      - run: uv run --project python --extra dev pytest python/tests -q
+        with:
+          python-version: "3.11"
+      - run: uv run --project python --extra dev --with 'whenever==0.10.0' pytest python/tests -q
+      - name: Installed whenever is the declared floor
+        run: uv run --project python --with 'whenever==0.10.0' python -c "import whenever, nl2time; print(whenever.__version__, nl2time.__version__); assert whenever.__version__ == '0.10.0'"

@@ -32,7 +32,8 @@
     "typecheck": "tsc --noEmit",
     "import:recognizers": "node scripts/import-recognizers.mjs",
     "baselines": "npm run build && node scripts/update-baselines.mjs",
-    "eval": "npm run build && node scripts/eval.mjs"
+    "eval": "npm run build && node scripts/eval.mjs",
+    "fixtures": "npm run build && node scripts/generate-ir-fixtures.mjs"
   },
   "keywords": [
     "date",
@@ -55,6 +56,6 @@
     "vitest": "^3.0.0"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   }
 }

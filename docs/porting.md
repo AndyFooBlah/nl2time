@@ -11,7 +11,7 @@ Both implementations live in this repository — JS at the root (npm `nl2time`),
 | IR JSON Schema | `schema/timeexpr.schema.json` | the wire format |
 | IR semantics | `docs/ir-spec.md` | prose semantics incl. candidate ordering |
 | Conformance corpora | `corpus/forward/`, `corpus/reverse/` | behavior spec: (text, ctx) → values; (value, ctx) → text |
-| **Engine-parity fixtures** | `corpus/ir/resolved-*.json` | machine-generated (expr, ctx) → candidates from the JS reference — **2,760 fixtures** |
+| **Engine-parity fixtures** | `corpus/ir/resolved-*.json` | machine-generated (expr, ctx) → candidates from the JS reference — **2,782 fixtures** |
 | Locale data | `src/data/` (JSON-able slices) | CLDR week data, day-period rules |
 | Domain-pack format | `docs/extending.md` + pack JSON | packs are data; they work unchanged on any port |
 
@@ -19,14 +19,14 @@ Both implementations live in this repository — JS at the root (npm `nl2time`),
 
 1. **Engine parity, exactly.** `scripts/generate-ir-fixtures.mjs` records, for every parseable corpus case, the resolved candidates from the JS reference. The Python engine must reproduce them **bit-for-bit** (instants, grains, candidate order) — its test suite fails otherwise. This decouples engine correctness from parser progress: Python's engine can be 100% conformant while its parsers are still growing.
 2. **Shared corpora as the parser spec.** When Python grows parsers, they climb the *same* per-language corpus files with their own baseline files (`corpus/baselines/py-*.json`), using a ported corpus runner with identical comparison semantics (including the documented tolerances). A case passing in one implementation and not the other is visible as a baseline diff, not a mystery.
-3. **CI runs both.** The workflow runs the JS suite and the Python suite on every push; the IR fixtures regenerate only via the script, so an engine-semantics change is a reviewed diff of `corpus/ir/`, and Python CI immediately reports whether the port followed.
+3. **CI runs both, and gates the fixtures.** The workflow runs the JS suite and the Python suite on every push, and a `fixtures` job regenerates `corpus/ir/` from the JS engine (`npm run fixtures`) and fails on any diff — so an engine-semantics change is a reviewed diff of `corpus/ir/` that cannot be skipped, and Python CI immediately reports whether the port followed.
 
 What is deliberately **not** kept in sync mechanically: rule/parser *implementations*. Grammar code is idiomatic per language runtime; behavior is what's pinned. (The Latin lexicons are near-pure data and may migrate to shared JSON later, which would shrink the Python parser work to the extras.)
 
 ## Python implementation plan
 
 - **Time model**: [`whenever`](https://github.com/ariebovenberg/whenever) — Temporal/jiff-inspired, same semantics we rely on (DST-aware calendar arithmetic, `Instant`/`ZonedDateTime`/`Date` mapping per the table below).
-- **Order of work**: ① IR types + validator, `TimeContext`, engine `resolve` — **done, 100% parity (2,760/2,760 fixtures, `uv run --project python --extra dev pytest python/tests`)**; ② corpus runner; ③ English parser (climb `imported-recognizers-en.json`); ④ describe (needs Babel for CLDR rendering); ⑤ other languages.
+- **Order of work**: ① IR types + validator, `TimeContext`, engine `resolve` — **done, 100% parity (2,782/2,782 fixtures, `uv run --project python --extra dev pytest python/tests`)**; ② corpus runner; ③ English parser (climb `imported-recognizers-en.json`); ④ describe (needs Babel for CLDR rendering); ⑤ other languages.
 - **Packaging**: `python/pyproject.toml`, PyPI name `nl2time` (verified free). The sdist ships the library only; corpora stay repo-level (dev/test concern).
 
 | JS (Temporal) | Python (whenever) |
