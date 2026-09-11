@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.3.2 — 2026-09-10
+
+Engine (semantics — mirrored in Python 0.1.2, parity fixtures regenerated):
+
+- `between`: a clock-time ("time-grained") end now also requires a sub-day extent. Multi-day intervals with point edges — "end of year" / "end of month" / "end of quarter" / "end of week" as late-part intervals — are calendar periods and contribute their **end**, so "by end of year" resolves to [now, Jan 1) instead of zero candidates and "by end of month" no longer lands on the wrong date. Fix by [@ariesclark](https://github.com/ariesclark) in [#25](https://github.com/AndyFooBlah/nl2time/pull/25); corpus cases fw-0066–fw-0072 pin the four reproductions and three guards (midnight roll, "by 5pm" point, #17 inclusive/exclusive pair). `docs/ir-spec.md` updated to match. Follow-up for the article forms ("by the end of the month", "before end of year") and the spurious second candidate on late-part deadlines: [#29](https://github.com/AndyFooBlah/nl2time/issues/29).
+
+Tooling & metadata ([#27](https://github.com/AndyFooBlah/nl2time/issues/27), [#28](https://github.com/AndyFooBlah/nl2time/issues/28)):
+
+- `npm run fixtures` regenerates `corpus/ir/`; CI now regenerates and fails on any diff, so JS engine changes can no longer land without the parity fixtures (and therefore the Python port) following
+- `engines.node` is now `>=22` (Node 20 is end-of-life); CI matrix 22/24
+- CONTRIBUTING.md (fixture-regeneration rule, parity expectations, running both suites) and SECURITY.md (private vulnerability reporting)
+- Fixture counts and release pointers in README/docs brought up to date (2,782 engine-parity fixtures)
+
+## Python 0.1.2 (PyPI) — 2026-09-10
+
+Engine parity release for 0.3.2: ports the `between` sub-day-extent rule for time-grained ends ([#25](https://github.com/AndyFooBlah/nl2time/pull/25), [@ariesclark](https://github.com/ariesclark)). 100% bit-exact parity with the regenerated JS fixtures (2,782 fixtures).
+
+- Dependency floor corrected to `whenever>=0.10` — the engine uses the 0.10 API (`Instant.parse_iso`, `format_iso`, `now_in_system_tz`) and failed at `TimeContext.make` on 0.8/0.9, which the previous `>=0.8` floor allowed; CI now tests the declared floor
+- `nl2time.__version__` is derived from package metadata (was hard-coded `0.0.1`)
+- Python 3.11–3.14 tested in CI; 3.14 classifier added
+
 ## 0.3.1 — 2026-07-26
 
 **Benchmark fixes.** Seven conversational-phrase bugs found by the agent-time-bench benchmark ([#17](https://github.com/AndyFooBlah/nl2time/issues/17)–[#22](https://github.com/AndyFooBlah/nl2time/issues/22), [#24](https://github.com/AndyFooBlah/nl2time/issues/24)); no baseline drops in any language.
@@ -47,7 +68,7 @@ First Python release: the language-neutral engine — IR validation, `TimeContex
 - Known engine gaps tracked in [#14](https://github.com/AndyFooBlah/nl2time/issues/14), [#15](https://github.com/AndyFooBlah/nl2time/issues/15)
 - `describe()` rendering remains English — localized rendering is the next milestone
 
-## 0.2.0 — 2026-07-26
+## 0.2.0 — 2026-07-26 (unpublished; folded into 0.3.0)
 
 **Domain packs & corpus tooling.**
 
@@ -55,7 +76,7 @@ First Python release: the language-neutral engine — IR validation, `TimeContex
 - Corpus inversion: reverse (time→NL) cases mechanically derived from forward cases (reverse corpus 65 → 106)
 - English corpus grown to 1,031 imported cases (en-GB + complex-calendar specs)
 
-## 0.1.2 — 2026-07-25
+## 0.1.2 — 2026-07-25 (unpublished; folded into 0.3.0)
 
 - Fix [#10](https://github.com/AndyFooBlah/nl2time/issues/10): bare hours bind to day-shifting period phrases — "10 last night" → 22:00 on the previous day (was silently dropping the hour)
 

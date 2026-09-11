@@ -39,7 +39,7 @@ Anchored extent. Signed `amount` fields: negative extends backward from `anchor.
 Cartesian over candidates, dropping pairs where start ≥ end; grain = finer of the two. The end operand's contribution depends on its shape:
 
 - **Point ends** (grain `instant`, e.g. a `snap` edge or `now`) bound the range directly.
-- **Time-grained ends** (finer than day) are exclusive at their start ("9 to 5pm" ends at 17:00); a clock range wrapping midnight rolls the end into the next day.
+- **Time-grained ends** (finer than day *and* shorter than one day; a multi-day interval with point edges, e.g. "end of year" as a late-part interval, is a calendar period and takes the rule below) are exclusive at their start ("9 to 5pm" ends at 17:00); a clock range wrapping midnight rolls the end into the next day.
 - **Day-grain-or-coarser ends** yield *two* candidates per pair: the conversational **inclusive** reading first — the end operand contributes its END, so "between July 4th and July 10th" covers the 10th — followed by the strict exclusive-at-start reading (`[start.start, end.start)`), which the Recognizers-Text corpora pin for date ranges.
 
 ### `seek {base, dir, target, n?}`
