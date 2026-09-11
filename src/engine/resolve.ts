@@ -229,7 +229,13 @@ function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | und
         for (const e of evalExpr(expr.end, ctx, s.zi)) {
           if (e.type !== 'interval') continue;
           const isPoint = Temporal_compare(e.zi.start, e.zi.end) === 0;
-          const timeGrained = GRAIN_ORDER.indexOf(e.zi.grain) < GRAIN_ORDER.indexOf('day');
+          // Clock-time semantics need a fine grain AND a sub-day extent: a
+          // multi-day interval whose edges are snap points ("end of year" =
+          // Jul 1 → Jan 1) carries grain 'instant' but is a calendar period,
+          // not a time of day.
+          const timeGrained =
+            GRAIN_ORDER.indexOf(e.zi.grain) < GRAIN_ORDER.indexOf('day') &&
+            (isPoint || Temporal_compare(e.zi.start.add({ days: 1 }), e.zi.end) > 0);
           // Day-grain-or-coarser ends are conversationally inclusive:
           // "between July 4th and July 10th" covers the 10th. Emit the
           // inclusive reading (end operand contributes its END) first, with

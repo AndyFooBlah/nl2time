@@ -170,3 +170,32 @@ suite('calendar edges', () => {
     ).toThrow(NotResolvableError);
   });
 });
+
+suite('between: multi-day fine-grained ends are calendar periods', () => {
+  // "end of year" parses to between(Jul 1, Jan 1) whose edges are snap
+  // points, so the interval carries grain 'instant' despite spanning six
+  // months. The between resolver must not read it as a clock-time range —
+  // that made "by end of year" resolve as "by July 1" and drop as past.
+  // Text-level coverage: corpus fw-0066..fw-0072.
+  test('between(now, late-part-of-year interval) keeps the period end', () => {
+    const ctx = TimeContext.make({ now: '2026-08-15T12:00:00Z', timeZone: 'UTC', locale: 'en-US' });
+    const expr: TimeExpr = {
+      op: 'between',
+      start: NOW,
+      end: {
+        op: 'between',
+        start: {
+          op: 'offset',
+          base: { op: 'snap', base: NOW, unit: 'year', edge: 'start' },
+          amount: 6,
+          unit: 'month',
+        },
+        end: { op: 'snap', base: NOW, unit: 'year', edge: 'end' },
+      },
+    };
+    expect(interval(expr, ctx)).toEqual({
+      start: '2026-08-15T12:00:00Z',
+      end: '2027-01-01T00:00:00Z',
+    });
+  });
+});
