@@ -11,7 +11,7 @@ Both implementations live in this repository — JS at the root (npm `nl2time`),
 | IR JSON Schema | `schema/timeexpr.schema.json` | the wire format |
 | IR semantics | `docs/ir-spec.md` | prose semantics incl. candidate ordering |
 | Conformance corpora | `corpus/forward/`, `corpus/reverse/` | behavior spec: (text, ctx) → values; (value, ctx) → text |
-| **Engine-parity fixtures** | `corpus/ir/resolved-*.json` | machine-generated (expr, ctx) → candidates from the JS reference — **2,782 fixtures** |
+| **Engine-parity fixtures** | `corpus/ir/resolved-*.json` | machine-generated (expr, ctx) → candidates from the JS reference — **2,790 fixtures** |
 | Locale data | `src/data/` (JSON-able slices) | CLDR week data, day-period rules |
 | Domain-pack format | `docs/extending.md` + pack JSON | packs are data; they work unchanged on any port |
 
@@ -26,7 +26,7 @@ What is deliberately **not** kept in sync mechanically: rule/parser *implementat
 ## Python implementation plan
 
 - **Time model**: [`whenever`](https://github.com/ariebovenberg/whenever) — Temporal/jiff-inspired, same semantics we rely on (DST-aware calendar arithmetic, `Instant`/`ZonedDateTime`/`Date` mapping per the table below).
-- **Order of work**: ① IR types + validator, `TimeContext`, engine `resolve` — **done, 100% parity (2,782/2,782 fixtures, `uv run --project python --extra dev pytest python/tests`)**; ② corpus runner; ③ English parser (climb `imported-recognizers-en.json`); ④ describe (needs Babel for CLDR rendering); ⑤ other languages.
+- **Order of work**: ① IR types + validator, `TimeContext`, engine `resolve` — **done, 100% parity (2,790/2,790 fixtures, `uv run --project python --extra dev pytest python/tests`)**; ② corpus runner; ③ English parser (climb `imported-recognizers-en.json`); ④ describe (needs Babel for CLDR rendering); ⑤ other languages.
 - **Packaging**: `python/pyproject.toml`, PyPI name `nl2time` (verified free). The sdist ships the library only; corpora stay repo-level (dev/test concern).
 
 | JS (Temporal) | Python (whenever) |

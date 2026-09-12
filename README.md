@@ -120,11 +120,11 @@ Every imported conformance case carries machine-readable provenance (upstream pr
 pip install nl2time
 ```
 
-The Python engine port lives in [`python/`](python/) (`whenever`-based time model): IR validation, `TimeContext`, and the full deterministic resolver at **100% bit-exact parity** with the JS reference across all 2,782 engine-parity fixtures (`corpus/ir/`), enforced in CI on every push. Parsers and `describe()` are JS-only so far — [docs/porting.md](docs/porting.md) has the strategy and the divergence gates.
+The Python engine port lives in [`python/`](python/) (`whenever`-based time model): IR validation, `TimeContext`, and the full deterministic resolver at **100% bit-exact parity** with the JS reference across all 2,790 engine-parity fixtures (`corpus/ir/`), enforced in CI on every push. Parsers and `describe()` are JS-only so far — [docs/porting.md](docs/porting.md) has the strategy and the divergence gates.
 
 ## Release history
 
-See **[CHANGELOG.md](CHANGELOG.md)** and [GitHub releases](https://github.com/AndyFooBlah/nl2time/releases). Current: v0.3.2 (JS) · py-v0.1.2 (Python engine). Releases publish to npm/PyPI automatically via OIDC trusted publishing — see [docs/RELEASING.md](docs/RELEASING.md).
+See **[CHANGELOG.md](CHANGELOG.md)** and [GitHub releases](https://github.com/AndyFooBlah/nl2time/releases). Current: v0.3.3 (JS) · py-v0.1.2 (Python engine). Releases publish to npm/PyPI automatically via OIDC trusted publishing — see [docs/RELEASING.md](docs/RELEASING.md).
 
 ## Development
 

@@ -2109,28 +2109,12 @@
      "op": "now"
     },
     "end": {
-     "op": "between",
-     "start": {
-      "op": "offset",
-      "base": {
-       "op": "snap",
-       "base": {
-        "op": "now"
-       },
-       "unit": "year",
-       "edge": "start"
-      },
-      "amount": 6,
-      "unit": "month"
+     "op": "snap",
+     "base": {
+      "op": "now"
      },
-     "end": {
-      "op": "snap",
-      "base": {
-       "op": "now"
-      },
-      "unit": "year",
-      "edge": "end"
-     }
+     "unit": "year",
+     "edge": "end"
     }
    },
    "candidates": [
@@ -2155,28 +2139,12 @@
      "op": "now"
     },
     "end": {
-     "op": "between",
-     "start": {
-      "op": "offset",
-      "base": {
-       "op": "snap",
-       "base": {
-        "op": "now"
-       },
-       "unit": "month",
-       "edge": "start"
-      },
-      "amount": 15,
-      "unit": "day"
+     "op": "snap",
+     "base": {
+      "op": "now"
      },
-     "end": {
-      "op": "snap",
-      "base": {
-       "op": "now"
-      },
-      "unit": "month",
-      "edge": "end"
-     }
+     "unit": "month",
+     "edge": "end"
     }
    },
    "candidates": [
@@ -2184,12 +2152,6 @@
      "kind": "interval",
      "start": "2026-08-15T12:00:00Z",
      "end": "2026-09-01T00:00:00Z",
-     "grain": "instant"
-    },
-    {
-     "kind": "interval",
-     "start": "2026-08-15T12:00:00Z",
-     "end": "2026-08-16T00:00:00Z",
      "grain": "instant"
     }
    ]
@@ -2207,28 +2169,12 @@
      "op": "now"
     },
     "end": {
-     "op": "between",
-     "start": {
-      "op": "offset",
-      "base": {
-       "op": "snap",
-       "base": {
-        "op": "now"
-       },
-       "unit": "quarter",
-       "edge": "start"
-      },
-      "amount": 45,
-      "unit": "day"
+     "op": "snap",
+     "base": {
+      "op": "now"
      },
-     "end": {
-      "op": "snap",
-      "base": {
-       "op": "now"
-      },
-      "unit": "quarter",
-      "edge": "end"
-     }
+     "unit": "quarter",
+     "edge": "end"
     }
    },
    "candidates": [
@@ -2253,28 +2199,12 @@
      "op": "now"
     },
     "end": {
-     "op": "between",
-     "start": {
-      "op": "offset",
-      "base": {
-       "op": "snap",
-       "base": {
-        "op": "now"
-       },
-       "unit": "week",
-       "edge": "start"
-      },
-      "amount": 3,
-      "unit": "day"
+     "op": "snap",
+     "base": {
+      "op": "now"
      },
-     "end": {
-      "op": "snap",
-      "base": {
-       "op": "now"
-      },
-      "unit": "week",
-      "edge": "end"
-     }
+     "unit": "week",
+     "edge": "end"
     }
    },
    "candidates": [
@@ -2410,6 +2340,240 @@
      "start": "2027-07-04T00:00:00Z",
      "end": "2027-07-10T00:00:00Z",
      "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0073",
+   "ctx": {
+    "now": "2026-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "month",
+     "edge": "end"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-05T00:00:00Z",
+     "end": "2026-09-01T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0074",
+   "ctx": {
+    "now": "2026-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "month",
+     "edge": "end"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-05T00:00:00Z",
+     "end": "2026-09-01T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0075",
+   "ctx": {
+    "now": "2026-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "month",
+     "edge": "end"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-05T00:00:00Z",
+     "end": "2026-09-01T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0076",
+   "ctx": {
+    "now": "2026-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "year",
+     "edge": "end"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-05T00:00:00Z",
+     "end": "2027-01-01T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0077",
+   "ctx": {
+    "now": "2026-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "year",
+     "edge": "end"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-05T00:00:00Z",
+     "end": "2027-01-01T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0078",
+   "ctx": {
+    "now": "2026-08-05T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "month",
+     "edge": "end"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-05T00:00:00Z",
+     "end": "2026-09-01T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0079",
+   "ctx": {
+    "now": "2026-08-25T00:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "now"
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "week",
+     "edge": "end"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-25T00:00:00Z",
+     "end": "2026-08-30T00:00:00Z",
+     "grain": "instant"
+    }
+   ]
+  },
+  {
+   "id": "fw-0080",
+   "ctx": {
+    "now": "2026-08-05T09:00:00Z",
+    "timeZone": "UTC",
+    "locale": "en-US"
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "now"
+    },
+    "unit": "day",
+    "edge": "end"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-06T00:00:00Z",
+     "end": "2026-08-06T00:00:00Z",
+     "grain": "instant"
     }
    ]
   }

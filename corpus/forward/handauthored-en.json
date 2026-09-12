@@ -1,1609 +1,1789 @@
 {
- "description": "Hand-authored NL\u2192time cases (English), including locale-policy contrasts (week start, dateOrder, bias, nextWeekday, partialPeriod) and ambiguity-candidate ordering. Reference default: Monday 2026-07-20T10:00 America/Los_Angeles.",
- "cases": [
-  {
-   "id": "fw-0001",
-   "text": "last week",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "en-US week starts Sunday: Jul 12\u201319",
-   "expect": {
-    "first": {
-     "start": "2026-07-12T07:00:00Z",
-     "end": "2026-07-19T07:00:00Z",
-     "grain": "week"
+  "description": "Hand-authored NL→time cases (English), including locale-policy contrasts (week start, dateOrder, bias, nextWeekday, partialPeriod) and ambiguity-candidate ordering. Reference default: Monday 2026-07-20T10:00 America/Los_Angeles.",
+  "cases": [
+    {
+      "id": "fw-0001",
+      "text": "last week",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "en-US week starts Sunday: Jul 12–19",
+      "expect": {
+        "first": {
+          "start": "2026-07-12T07:00:00Z",
+          "end": "2026-07-19T07:00:00Z",
+          "grain": "week"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0002",
+      "text": "last week",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-GB"
+      },
+      "note": "en-GB week starts Monday: Jul 13–20 — same words, different interval",
+      "expect": {
+        "first": {
+          "start": "2026-07-13T07:00:00Z",
+          "end": "2026-07-20T07:00:00Z",
+          "grain": "week"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0003",
+      "text": "this week",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-19T07:00:00Z",
+          "end": "2026-07-26T07:00:00Z",
+          "grain": "week"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0004",
+      "text": "today",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-20T07:00:00Z",
+          "end": "2026-07-21T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0005",
+      "text": "yesterday",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-19T07:00:00Z",
+          "end": "2026-07-20T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0006",
+      "text": "tomorrow",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-21T07:00:00Z",
+          "end": "2026-07-22T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0007",
+      "text": "the day before yesterday",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-18T07:00:00Z",
+          "end": "2026-07-19T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0008",
+      "text": "3 days ago",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-17T07:00:00Z",
+          "end": "2026-07-18T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0009",
+      "text": "2 weeks ago",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "coarse offsets resolve to the day, Duckling-style",
+      "expect": {
+        "first": {
+          "start": "2026-07-06T07:00:00Z",
+          "end": "2026-07-07T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0010",
+      "text": "in 2 hours",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-20T19:00:00Z",
+          "end": "2026-07-20T19:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0011",
+      "text": "an hour ago",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-20T16:00:00Z",
+          "end": "2026-07-20T16:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0012",
+      "text": "next tuesday",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "nextWeekday 'nearest' (default): the upcoming Tuesday",
+      "expect": {
+        "first": {
+          "start": "2026-07-21T07:00:00Z",
+          "end": "2026-07-22T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0013",
+      "text": "next tuesday",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US",
+        "nextWeekday": "week-after"
+      },
+      "note": "the dialectal alternative: Tuesday of next week",
+      "expect": {
+        "first": {
+          "start": "2026-07-28T07:00:00Z",
+          "end": "2026-07-29T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0014",
+      "text": "last tuesday",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-14T07:00:00Z",
+          "end": "2026-07-15T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0015",
+      "text": "friday",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "bare weekday defaults future-ward",
+      "expect": {
+        "first": {
+          "start": "2026-07-24T07:00:00Z",
+          "end": "2026-07-25T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0016",
+      "text": "friday",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US",
+        "bias": "past"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-17T07:00:00Z",
+          "end": "2026-07-18T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0017",
+      "text": "last night",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "night of Jul 19: 21:00 PDT wrapping to 06:00 Jul 20",
+      "expect": {
+        "first": {
+          "start": "2026-07-20T04:00:00Z",
+          "end": "2026-07-20T13:00:00Z",
+          "grain": "hour"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0018",
+      "text": "yesterday at 9pm",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "the motivating example: 9pm Jul 19 Pacific = 04:00Z Jul 20",
+      "expect": {
+        "first": {
+          "start": "2026-07-20T04:00:00Z",
+          "end": "2026-07-20T05:00:00Z",
+          "grain": "hour"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0019",
+      "text": "tomorrow morning",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-21T13:00:00Z",
+          "end": "2026-07-21T19:00:00Z",
+          "grain": "hour"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0020",
+      "text": "tonight",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-21T04:00:00Z",
+          "end": "2026-07-21T13:00:00Z",
+          "grain": "hour"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0021",
+      "text": "next tuesday at 4pm",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-21T23:00:00Z",
+          "end": "2026-07-22T00:00:00Z",
+          "grain": "hour"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0022",
+      "text": "at 4",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "ambiguous meridiem: pm reading first for small hours",
+      "expect": {
+        "candidates": [
+          {
+            "start": "2026-07-20T23:00:00Z",
+            "end": "2026-07-21T00:00:00Z",
+            "grain": "hour"
+          },
+          {
+            "start": "2026-07-20T11:00:00Z",
+            "end": "2026-07-20T12:00:00Z",
+            "grain": "hour"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0023",
+      "text": "at 9",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "am reading first for 7–11",
+      "expect": {
+        "candidates": [
+          {
+            "start": "2026-07-20T16:00:00Z",
+            "end": "2026-07-20T17:00:00Z",
+            "grain": "hour"
+          },
+          {
+            "start": "2026-07-21T04:00:00Z",
+            "end": "2026-07-21T05:00:00Z",
+            "grain": "hour"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0024",
+      "text": "noon",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-20T19:00:00Z",
+          "end": "2026-07-20T20:00:00Z",
+          "grain": "hour"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0025",
+      "text": "midnight",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-20T07:00:00Z",
+          "end": "2026-07-20T08:00:00Z",
+          "grain": "hour"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0026",
+      "text": "may 29",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "underspecified year → nearest occurrence first, alternate second [expect 2 candidates]",
+      "expect": {
+        "first": {
+          "start": "2026-05-29T07:00:00Z",
+          "end": "2026-05-30T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0027",
+      "text": "may 29, 2026",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-05-29T07:00:00Z",
+          "end": "2026-05-30T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0028",
+      "text": "29 may 2026",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-05-29T07:00:00Z",
+          "end": "2026-05-30T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0029",
+      "text": "5/29",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "en-US MDY",
+      "expect": {
+        "first": {
+          "start": "2026-05-29T07:00:00Z",
+          "end": "2026-05-30T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0030",
+      "text": "29/5/2026",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-GB"
+      },
+      "note": "en-GB DMY",
+      "expect": {
+        "first": {
+          "start": "2026-05-29T07:00:00Z",
+          "end": "2026-05-30T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0031",
+      "text": "2026-05-29",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "ISO is unambiguous under any dateOrder",
+      "expect": {
+        "first": {
+          "start": "2026-05-29T07:00:00Z",
+          "end": "2026-05-30T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0032",
+      "text": "the last 3 days",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "partialPeriod 'include' (default): trailing 72h ending at now",
+      "expect": {
+        "first": {
+          "start": "2026-07-17T17:00:00Z",
+          "end": "2026-07-20T17:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0033",
+      "text": "the last 3 days",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US",
+        "partialPeriod": "exclude"
+      },
+      "note": "complete days only",
+      "expect": {
+        "first": {
+          "start": "2026-07-17T07:00:00Z",
+          "end": "2026-07-20T07:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0034",
+      "text": "the past week",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "trailing 7 days — distinct from calendar 'last week'",
+      "expect": {
+        "first": {
+          "start": "2026-07-13T17:00:00Z",
+          "end": "2026-07-20T17:00:00Z",
+          "grain": "week"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0035",
+      "text": "next 2 weeks",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-20T17:00:00Z",
+          "end": "2026-08-03T17:00:00Z",
+          "grain": "week"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0036",
+      "text": "last month",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-06-01T07:00:00Z",
+          "end": "2026-07-01T07:00:00Z",
+          "grain": "month"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0037",
+      "text": "q3",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "first": {
+          "start": "2026-07-01T07:00:00Z",
+          "end": "2026-10-01T07:00:00Z",
+          "grain": "quarter"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0038",
+      "text": "q1 2027",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "Q1 boundaries are in PST (UTC-8)",
+      "expect": {
+        "first": {
+          "start": "2027-01-01T08:00:00Z",
+          "end": "2027-04-01T07:00:00Z",
+          "grain": "quarter"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0039",
+      "text": "march",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "bias none → nearest March first (this year's, ~4.5 months back vs ~7.5 forward) [expect 2 candidates]",
+      "expect": {
+        "first": {
+          "start": "2026-03-01T08:00:00Z",
+          "end": "2026-04-01T07:00:00Z",
+          "grain": "month"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0040",
+      "text": "for 90 minutes",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "amount": {
+          "minutes": 90
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0041",
+      "text": "sales were great",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "noMatch": true
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0042",
+      "text": "8 this morning",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "values": [
+          {
+            "startLocal": "2026-07-20T08:00:00",
+            "endLocal": "2026-07-20T09:00:00"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      },
+      "tags": [
+        "issue-9"
+      ]
+    },
+    {
+      "id": "fw-0043",
+      "text": "the gardener aerated the lawn at 8 this morning",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "values": [
+          {
+            "startLocal": "2026-07-20T08:00:00",
+            "endLocal": "2026-07-20T09:00:00"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      },
+      "tags": [
+        "issue-9"
+      ]
+    },
+    {
+      "id": "fw-0044",
+      "text": "5 this afternoon",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "values": [
+          {
+            "startLocal": "2026-07-20T17:00:00",
+            "endLocal": "2026-07-20T18:00:00"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      },
+      "tags": [
+        "issue-9"
+      ]
+    },
+    {
+      "id": "fw-0045",
+      "text": "coffee at building 4 this afternoon",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "values": [
+          {
+            "startLocal": "2026-07-20T12:00:00",
+            "endLocal": "2026-07-20T18:00:00"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      },
+      "tags": [
+        "issue-9"
+      ]
+    },
+    {
+      "id": "fw-0046",
+      "text": "10 last night",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "values": [
+          {
+            "startLocal": "2026-07-19T22:00:00",
+            "endLocal": "2026-07-19T23:00:00"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      },
+      "tags": [
+        "issue-10"
+      ],
+      "note": "day-shifted period supplies meridiem (pm) AND the day shift"
+    },
+    {
+      "id": "fw-0047",
+      "text": "8 yesterday morning",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "values": [
+          {
+            "startLocal": "2026-07-19T08:00:00",
+            "endLocal": "2026-07-19T09:00:00"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      },
+      "tags": [
+        "issue-10"
+      ]
+    },
+    {
+      "id": "fw-0048",
+      "text": "5 tomorrow afternoon",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "values": [
+          {
+            "startLocal": "2026-07-21T17:00:00",
+            "endLocal": "2026-07-21T18:00:00"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      },
+      "tags": [
+        "issue-10"
+      ]
+    },
+    {
+      "id": "fw-0049",
+      "text": "3 last night",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "values": [
+          {
+            "startLocal": "2026-07-19T03:00:00",
+            "endLocal": "2026-07-19T04:00:00"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      },
+      "tags": [
+        "issue-10"
+      ],
+      "note": "small hours belong to the night: am reading"
+    },
+    {
+      "id": "fw-0050",
+      "text": "the count was 4 last night",
+      "ctx": {
+        "now": "2026-07-20T17:00:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "expect": {
+        "values": [
+          {
+            "startLocal": "2026-07-19T21:00:00",
+            "endLocal": "2026-07-20T06:00:00"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      },
+      "tags": [
+        "issue-10"
+      ],
+      "note": "noun-guard: unlicensed bare number keeps the period's range reading"
+    },
+    {
+      "id": "fw-0051",
+      "text": "between July 4th and July 10th",
+      "ctx": {
+        "now": "2026-07-26T12:15:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "conversational 'between DATE and DATE' includes the named end day (#17): Jul 4 00:00 through Jul 11 00:00 ET; exclusive reading remains an alternative",
+      "expect": {
+        "first": {
+          "start": "2026-07-04T04:00:00Z",
+          "end": "2026-07-11T04:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0052",
+      "text": "earlier this week",
+      "ctx": {
+        "now": "2026-07-16T13:30:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "on a Thursday, 'earlier this week' reaches through yesterday: end = start of today, not the midpoint (#20)",
+      "expect": {
+        "first": {
+          "start": "2026-07-12T04:00:00Z",
+          "end": "2026-07-16T04:00:00Z",
+          "grain": "week"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0053",
+      "text": "last night between 11pm and 1am",
+      "ctx": {
+        "now": "2026-07-16T16:30:00Z",
+        "timeZone": "America/Los_Angeles",
+        "locale": "en-US"
+      },
+      "note": "cross-midnight clock range survives the day-shifting anchor: Wed 11pm through Thu 1am, not clipped at midnight (#19)",
+      "expect": {
+        "first": {
+          "start": "2026-07-16T06:00:00Z",
+          "end": "2026-07-16T08:00:00Z",
+          "grain": "hour"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0054",
+      "text": "since June 15th",
+      "ctx": {
+        "now": "2026-07-26T12:15:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "open range (#18): 'since X' = [start(X), now], not the bare day",
+      "expect": {
+        "first": {
+          "start": "2026-06-15T04:00:00Z",
+          "end": "2026-07-26T12:15:00Z"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0055",
+      "text": "until July 10th",
+      "ctx": {
+        "now": "2026-07-06T12:15:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "open range (#18): 'until X' = [now, end(X)] inclusive of the named day",
+      "expect": {
+        "first": {
+          "start": "2026-07-06T12:15:00Z",
+          "end": "2026-07-11T04:00:00Z"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0056",
+      "text": "by Friday",
+      "ctx": {
+        "now": "2026-07-26T12:15:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "deadline connector (#18): 'by <weekday>' = [now, end of that day]; Sun Jul 26 -> Fri Jul 31",
+      "expect": {
+        "first": {
+          "start": "2026-07-26T12:15:00Z",
+          "end": "2026-08-01T04:00:00Z"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0057",
+      "text": "Friday before last",
+      "ctx": {
+        "now": "2026-07-26T12:15:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "seek weekday n=2 into the past (#21): last Friday = Jul 24, before last = Jul 17",
+      "expect": {
+        "first": {
+          "start": "2026-07-17T04:00:00Z",
+          "end": "2026-07-18T04:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0058",
+      "text": "the Friday before last",
+      "ctx": {
+        "now": "2026-07-26T12:15:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "article form of #21",
+      "expect": {
+        "first": {
+          "start": "2026-07-17T04:00:00Z",
+          "end": "2026-07-18T04:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0059",
+      "text": "the week before last",
+      "ctx": {
+        "now": "2026-07-26T12:15:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "unit form of #21: en-US week (Sun-start) two back from Jul 26-Aug 1 is Jul 12-18",
+      "expect": {
+        "first": {
+          "start": "2026-07-12T04:00:00Z",
+          "end": "2026-07-19T04:00:00Z",
+          "grain": "week"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0060",
+      "text": "the weekend of July 18th and 19th",
+      "ctx": {
+        "now": "2026-07-22T16:00:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "the named Sat-Sun weekend, conjunct day absorbed (#22): Jul 18-19, not an 8-day span",
+      "expect": {
+        "first": {
+          "start": "2026-07-18T04:00:00Z",
+          "end": "2026-07-20T04:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0061",
+      "text": "the weekend of July 15th",
+      "ctx": {
+        "now": "2026-07-22T16:00:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "midweek date (Wed) maps to the immediately following weekend (#22)",
+      "expect": {
+        "first": {
+          "start": "2026-07-18T04:00:00Z",
+          "end": "2026-07-20T04:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0062",
+      "text": "the weekend of July 19th",
+      "ctx": {
+        "now": "2026-07-22T16:00:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "a Sunday maps back to its own containing weekend (#22)",
+      "expect": {
+        "first": {
+          "start": "2026-07-18T04:00:00Z",
+          "end": "2026-07-20T04:00:00Z",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0063",
+      "text": "the first half of the year",
+      "ctx": {
+        "now": "2026-07-26T12:15:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "fixed half-split, not reference-clamped (#24): Jan 1 through Jul 1",
+      "expect": {
+        "first": {
+          "start": "2026-01-01T05:00:00Z",
+          "end": "2026-07-01T04:00:00Z"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0064",
+      "text": "the second half of the year",
+      "ctx": {
+        "now": "2026-07-26T12:15:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "second half (#24): Jul 1 through next Jan 1",
+      "expect": {
+        "first": {
+          "start": "2026-07-01T04:00:00Z",
+          "end": "2027-01-01T05:00:00Z"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0065",
+      "text": "the first half of next month",
+      "ctx": {
+        "now": "2026-07-26T12:15:00Z",
+        "timeZone": "America/New_York",
+        "locale": "en-US"
+      },
+      "note": "month halves split at the 16th (#24)",
+      "expect": {
+        "first": {
+          "start": "2026-08-01T04:00:00Z",
+          "end": "2026-08-16T04:00:00Z"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0066",
+      "text": "by end of year",
+      "ctx": {
+        "now": "2026-08-15T12:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "deadline over a multi-day fine-grained end (late-part split, Jul 1 → Jan 1): must take the calendar reading, not clock-time — previously resolved as \"by July 1\" and was dropped as past",
+      "expect": {
+        "first": {
+          "start": "2026-08-15T12:00:00Z",
+          "end": "2027-01-01T00:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0067",
+      "text": "by end of month",
+      "ctx": {
+        "now": "2026-08-15T12:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "same path as fw-0066; previously resolved to the late-part START (the 16th) — silently wrong",
+      "expect": {
+        "first": {
+          "start": "2026-08-15T12:00:00Z",
+          "end": "2026-09-01T00:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0068",
+      "text": "by end of quarter",
+      "ctx": {
+        "now": "2026-08-15T12:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "same path as fw-0066",
+      "expect": {
+        "first": {
+          "start": "2026-08-15T12:00:00Z",
+          "end": "2026-10-01T00:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0069",
+      "text": "by end of week",
+      "ctx": {
+        "now": "2026-08-15T12:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "same path as fw-0066; en-US week ends Sunday midnight — previously zero candidates",
+      "expect": {
+        "first": {
+          "start": "2026-08-15T12:00:00Z",
+          "end": "2026-08-16T00:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0070",
+      "text": "9:30pm to 7:30am",
+      "ctx": {
+        "now": "2026-08-15T12:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "guard for fw-0066..69: a sub-day fine-grained end keeps clock-time semantics and rolls past midnight",
+      "expect": {
+        "first": {
+          "start": "2026-08-15T21:30:00Z",
+          "end": "2026-08-16T07:30:00Z",
+          "grain": "minute"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0071",
+      "text": "by 5pm",
+      "ctx": {
+        "now": "2026-08-15T12:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "guard for fw-0066..69: a point end is used directly",
+      "expect": {
+        "first": {
+          "start": "2026-08-15T12:00:00Z",
+          "end": "2026-08-15T17:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0072",
+      "text": "between July 4th and July 10th",
+      "ctx": {
+        "now": "2026-08-15T12:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "guard for fw-0066..69: day-grain ends keep the inclusive-then-exclusive candidate pair (#17)",
+      "expect": {
+        "candidates": [
+          {
+            "start": "2026-07-04T00:00:00Z",
+            "end": "2026-07-11T00:00:00Z",
+            "grain": "day"
+          },
+          {
+            "start": "2026-07-04T00:00:00Z",
+            "end": "2026-07-10T00:00:00Z",
+            "grain": "day"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0073",
+      "text": "by the end of the month",
+      "ctx": {
+        "now": "2026-08-05T00:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "#29: article form of fw-0067 — the connector must survive \"the … the\"; previously resolved to the late part alone (Aug 16 → Sep 1)",
+      "expect": {
+        "first": {
+          "start": "2026-08-05T00:00:00Z",
+          "end": "2026-09-01T00:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0074",
+      "text": "by the end of month",
+      "ctx": {
+        "now": "2026-08-05T00:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "#29: single article before the edge phrase",
+      "expect": {
+        "first": {
+          "start": "2026-08-05T00:00:00Z",
+          "end": "2026-09-01T00:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0075",
+      "text": "until the end of the month",
+      "ctx": {
+        "now": "2026-08-05T00:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "#29: same article form with a different connector",
+      "expect": {
+        "first": {
+          "start": "2026-08-05T00:00:00Z",
+          "end": "2026-09-01T00:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0076",
+      "text": "before end of year",
+      "ctx": {
+        "now": "2026-08-05T00:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "#29: \"before\" is a deadline connector; previously not a connector at all (resolved to the late part Jul 1 → Jan 1)",
+      "expect": {
+        "first": {
+          "start": "2026-08-05T00:00:00Z",
+          "end": "2027-01-01T00:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0077",
+      "text": "before the end of the year",
+      "ctx": {
+        "now": "2026-08-05T00:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "#29: \"before\" + article form",
+      "expect": {
+        "first": {
+          "start": "2026-08-05T00:00:00Z",
+          "end": "2027-01-01T00:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0078",
+      "text": "by end of month",
+      "ctx": {
+        "now": "2026-08-05T00:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "#29 guard: with now before the late-part start the deadline must be ONE candidate — the late part's inclusive/exclusive pair (#17) used to leak a second [now → Aug 16]",
+      "expect": {
+        "candidates": [
+          {
+            "start": "2026-08-05T00:00:00Z",
+            "end": "2026-09-01T00:00:00Z",
+            "grain": "instant"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0079",
+      "text": "by end of week",
+      "ctx": {
+        "now": "2026-08-25T00:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "#29 guard: same single-candidate expectation for the week form on a Tuesday (previously also offered [now → Aug 26])",
+      "expect": {
+        "candidates": [
+          {
+            "start": "2026-08-25T00:00:00Z",
+            "end": "2026-08-30T00:00:00Z",
+            "grain": "instant"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0080",
+      "text": "by EOD",
+      "ctx": {
+        "now": "2026-08-05T09:00:00Z",
+        "timeZone": "UTC",
+        "locale": "en-US"
+      },
+      "note": "#29 guard: boundary points keep their point reading (not turned into a range by the connector rewrite)",
+      "expect": {
+        "first": {
+          "start": "2026-08-06T00:00:00Z",
+          "end": "2026-08-06T00:00:00Z",
+          "grain": "instant"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
     }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0002",
-   "text": "last week",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-GB"
-   },
-   "note": "en-GB week starts Monday: Jul 13\u201320 \u2014 same words, different interval",
-   "expect": {
-    "first": {
-     "start": "2026-07-13T07:00:00Z",
-     "end": "2026-07-20T07:00:00Z",
-     "grain": "week"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0003",
-   "text": "this week",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-19T07:00:00Z",
-     "end": "2026-07-26T07:00:00Z",
-     "grain": "week"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0004",
-   "text": "today",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-20T07:00:00Z",
-     "end": "2026-07-21T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0005",
-   "text": "yesterday",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-19T07:00:00Z",
-     "end": "2026-07-20T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0006",
-   "text": "tomorrow",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-21T07:00:00Z",
-     "end": "2026-07-22T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0007",
-   "text": "the day before yesterday",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-18T07:00:00Z",
-     "end": "2026-07-19T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0008",
-   "text": "3 days ago",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-17T07:00:00Z",
-     "end": "2026-07-18T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0009",
-   "text": "2 weeks ago",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "coarse offsets resolve to the day, Duckling-style",
-   "expect": {
-    "first": {
-     "start": "2026-07-06T07:00:00Z",
-     "end": "2026-07-07T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0010",
-   "text": "in 2 hours",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-20T19:00:00Z",
-     "end": "2026-07-20T19:00:00Z",
-     "grain": "instant"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0011",
-   "text": "an hour ago",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-20T16:00:00Z",
-     "end": "2026-07-20T16:00:00Z",
-     "grain": "instant"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0012",
-   "text": "next tuesday",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "nextWeekday 'nearest' (default): the upcoming Tuesday",
-   "expect": {
-    "first": {
-     "start": "2026-07-21T07:00:00Z",
-     "end": "2026-07-22T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0013",
-   "text": "next tuesday",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US",
-    "nextWeekday": "week-after"
-   },
-   "note": "the dialectal alternative: Tuesday of next week",
-   "expect": {
-    "first": {
-     "start": "2026-07-28T07:00:00Z",
-     "end": "2026-07-29T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0014",
-   "text": "last tuesday",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-14T07:00:00Z",
-     "end": "2026-07-15T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0015",
-   "text": "friday",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "bare weekday defaults future-ward",
-   "expect": {
-    "first": {
-     "start": "2026-07-24T07:00:00Z",
-     "end": "2026-07-25T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0016",
-   "text": "friday",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US",
-    "bias": "past"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-17T07:00:00Z",
-     "end": "2026-07-18T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0017",
-   "text": "last night",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "night of Jul 19: 21:00 PDT wrapping to 06:00 Jul 20",
-   "expect": {
-    "first": {
-     "start": "2026-07-20T04:00:00Z",
-     "end": "2026-07-20T13:00:00Z",
-     "grain": "hour"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0018",
-   "text": "yesterday at 9pm",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "the motivating example: 9pm Jul 19 Pacific = 04:00Z Jul 20",
-   "expect": {
-    "first": {
-     "start": "2026-07-20T04:00:00Z",
-     "end": "2026-07-20T05:00:00Z",
-     "grain": "hour"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0019",
-   "text": "tomorrow morning",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-21T13:00:00Z",
-     "end": "2026-07-21T19:00:00Z",
-     "grain": "hour"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0020",
-   "text": "tonight",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-21T04:00:00Z",
-     "end": "2026-07-21T13:00:00Z",
-     "grain": "hour"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0021",
-   "text": "next tuesday at 4pm",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-21T23:00:00Z",
-     "end": "2026-07-22T00:00:00Z",
-     "grain": "hour"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0022",
-   "text": "at 4",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "ambiguous meridiem: pm reading first for small hours",
-   "expect": {
-    "candidates": [
-     {
-      "start": "2026-07-20T23:00:00Z",
-      "end": "2026-07-21T00:00:00Z",
-      "grain": "hour"
-     },
-     {
-      "start": "2026-07-20T11:00:00Z",
-      "end": "2026-07-20T12:00:00Z",
-      "grain": "hour"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0023",
-   "text": "at 9",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "am reading first for 7\u201311",
-   "expect": {
-    "candidates": [
-     {
-      "start": "2026-07-20T16:00:00Z",
-      "end": "2026-07-20T17:00:00Z",
-      "grain": "hour"
-     },
-     {
-      "start": "2026-07-21T04:00:00Z",
-      "end": "2026-07-21T05:00:00Z",
-      "grain": "hour"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0024",
-   "text": "noon",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-20T19:00:00Z",
-     "end": "2026-07-20T20:00:00Z",
-     "grain": "hour"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0025",
-   "text": "midnight",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-20T07:00:00Z",
-     "end": "2026-07-20T08:00:00Z",
-     "grain": "hour"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0026",
-   "text": "may 29",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "underspecified year \u2192 nearest occurrence first, alternate second [expect 2 candidates]",
-   "expect": {
-    "first": {
-     "start": "2026-05-29T07:00:00Z",
-     "end": "2026-05-30T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0027",
-   "text": "may 29, 2026",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-05-29T07:00:00Z",
-     "end": "2026-05-30T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0028",
-   "text": "29 may 2026",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-05-29T07:00:00Z",
-     "end": "2026-05-30T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0029",
-   "text": "5/29",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "en-US MDY",
-   "expect": {
-    "first": {
-     "start": "2026-05-29T07:00:00Z",
-     "end": "2026-05-30T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0030",
-   "text": "29/5/2026",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-GB"
-   },
-   "note": "en-GB DMY",
-   "expect": {
-    "first": {
-     "start": "2026-05-29T07:00:00Z",
-     "end": "2026-05-30T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0031",
-   "text": "2026-05-29",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "ISO is unambiguous under any dateOrder",
-   "expect": {
-    "first": {
-     "start": "2026-05-29T07:00:00Z",
-     "end": "2026-05-30T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0032",
-   "text": "the last 3 days",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "partialPeriod 'include' (default): trailing 72h ending at now",
-   "expect": {
-    "first": {
-     "start": "2026-07-17T17:00:00Z",
-     "end": "2026-07-20T17:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0033",
-   "text": "the last 3 days",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US",
-    "partialPeriod": "exclude"
-   },
-   "note": "complete days only",
-   "expect": {
-    "first": {
-     "start": "2026-07-17T07:00:00Z",
-     "end": "2026-07-20T07:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0034",
-   "text": "the past week",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "trailing 7 days \u2014 distinct from calendar 'last week'",
-   "expect": {
-    "first": {
-     "start": "2026-07-13T17:00:00Z",
-     "end": "2026-07-20T17:00:00Z",
-     "grain": "week"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0035",
-   "text": "next 2 weeks",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-20T17:00:00Z",
-     "end": "2026-08-03T17:00:00Z",
-     "grain": "week"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0036",
-   "text": "last month",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-06-01T07:00:00Z",
-     "end": "2026-07-01T07:00:00Z",
-     "grain": "month"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0037",
-   "text": "q3",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "first": {
-     "start": "2026-07-01T07:00:00Z",
-     "end": "2026-10-01T07:00:00Z",
-     "grain": "quarter"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0038",
-   "text": "q1 2027",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "Q1 boundaries are in PST (UTC-8)",
-   "expect": {
-    "first": {
-     "start": "2027-01-01T08:00:00Z",
-     "end": "2027-04-01T07:00:00Z",
-     "grain": "quarter"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0039",
-   "text": "march",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "bias none \u2192 nearest March first (this year's, ~4.5 months back vs ~7.5 forward) [expect 2 candidates]",
-   "expect": {
-    "first": {
-     "start": "2026-03-01T08:00:00Z",
-     "end": "2026-04-01T07:00:00Z",
-     "grain": "month"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0040",
-   "text": "for 90 minutes",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "amount": {
-     "minutes": 90
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0041",
-   "text": "sales were great",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "noMatch": true
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0042",
-   "text": "8 this morning",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "values": [
-     {
-      "startLocal": "2026-07-20T08:00:00",
-      "endLocal": "2026-07-20T09:00:00"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   },
-   "tags": [
-    "issue-9"
-   ]
-  },
-  {
-   "id": "fw-0043",
-   "text": "the gardener aerated the lawn at 8 this morning",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "values": [
-     {
-      "startLocal": "2026-07-20T08:00:00",
-      "endLocal": "2026-07-20T09:00:00"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   },
-   "tags": [
-    "issue-9"
-   ]
-  },
-  {
-   "id": "fw-0044",
-   "text": "5 this afternoon",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "values": [
-     {
-      "startLocal": "2026-07-20T17:00:00",
-      "endLocal": "2026-07-20T18:00:00"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   },
-   "tags": [
-    "issue-9"
-   ]
-  },
-  {
-   "id": "fw-0045",
-   "text": "coffee at building 4 this afternoon",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "values": [
-     {
-      "startLocal": "2026-07-20T12:00:00",
-      "endLocal": "2026-07-20T18:00:00"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   },
-   "tags": [
-    "issue-9"
-   ]
-  },
-  {
-   "id": "fw-0046",
-   "text": "10 last night",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "values": [
-     {
-      "startLocal": "2026-07-19T22:00:00",
-      "endLocal": "2026-07-19T23:00:00"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   },
-   "tags": [
-    "issue-10"
-   ],
-   "note": "day-shifted period supplies meridiem (pm) AND the day shift"
-  },
-  {
-   "id": "fw-0047",
-   "text": "8 yesterday morning",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "values": [
-     {
-      "startLocal": "2026-07-19T08:00:00",
-      "endLocal": "2026-07-19T09:00:00"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   },
-   "tags": [
-    "issue-10"
-   ]
-  },
-  {
-   "id": "fw-0048",
-   "text": "5 tomorrow afternoon",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "values": [
-     {
-      "startLocal": "2026-07-21T17:00:00",
-      "endLocal": "2026-07-21T18:00:00"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   },
-   "tags": [
-    "issue-10"
-   ]
-  },
-  {
-   "id": "fw-0049",
-   "text": "3 last night",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "values": [
-     {
-      "startLocal": "2026-07-19T03:00:00",
-      "endLocal": "2026-07-19T04:00:00"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   },
-   "tags": [
-    "issue-10"
-   ],
-   "note": "small hours belong to the night: am reading"
-  },
-  {
-   "id": "fw-0050",
-   "text": "the count was 4 last night",
-   "ctx": {
-    "now": "2026-07-20T17:00:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "expect": {
-    "values": [
-     {
-      "startLocal": "2026-07-19T21:00:00",
-      "endLocal": "2026-07-20T06:00:00"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   },
-   "tags": [
-    "issue-10"
-   ],
-   "note": "noun-guard: unlicensed bare number keeps the period's range reading"
-  },
-  {
-   "id": "fw-0051",
-   "text": "between July 4th and July 10th",
-   "ctx": {
-    "now": "2026-07-26T12:15:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "conversational 'between DATE and DATE' includes the named end day (#17): Jul 4 00:00 through Jul 11 00:00 ET; exclusive reading remains an alternative",
-   "expect": {
-    "first": {
-     "start": "2026-07-04T04:00:00Z",
-     "end": "2026-07-11T04:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0052",
-   "text": "earlier this week",
-   "ctx": {
-    "now": "2026-07-16T13:30:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "on a Thursday, 'earlier this week' reaches through yesterday: end = start of today, not the midpoint (#20)",
-   "expect": {
-    "first": {
-     "start": "2026-07-12T04:00:00Z",
-     "end": "2026-07-16T04:00:00Z",
-     "grain": "week"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0053",
-   "text": "last night between 11pm and 1am",
-   "ctx": {
-    "now": "2026-07-16T16:30:00Z",
-    "timeZone": "America/Los_Angeles",
-    "locale": "en-US"
-   },
-   "note": "cross-midnight clock range survives the day-shifting anchor: Wed 11pm through Thu 1am, not clipped at midnight (#19)",
-   "expect": {
-    "first": {
-     "start": "2026-07-16T06:00:00Z",
-     "end": "2026-07-16T08:00:00Z",
-     "grain": "hour"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0054",
-   "text": "since June 15th",
-   "ctx": {
-    "now": "2026-07-26T12:15:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "open range (#18): 'since X' = [start(X), now], not the bare day",
-   "expect": {
-    "first": {
-     "start": "2026-06-15T04:00:00Z",
-     "end": "2026-07-26T12:15:00Z"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0055",
-   "text": "until July 10th",
-   "ctx": {
-    "now": "2026-07-06T12:15:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "open range (#18): 'until X' = [now, end(X)] inclusive of the named day",
-   "expect": {
-    "first": {
-     "start": "2026-07-06T12:15:00Z",
-     "end": "2026-07-11T04:00:00Z"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0056",
-   "text": "by Friday",
-   "ctx": {
-    "now": "2026-07-26T12:15:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "deadline connector (#18): 'by <weekday>' = [now, end of that day]; Sun Jul 26 -> Fri Jul 31",
-   "expect": {
-    "first": {
-     "start": "2026-07-26T12:15:00Z",
-     "end": "2026-08-01T04:00:00Z"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0057",
-   "text": "Friday before last",
-   "ctx": {
-    "now": "2026-07-26T12:15:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "seek weekday n=2 into the past (#21): last Friday = Jul 24, before last = Jul 17",
-   "expect": {
-    "first": {
-     "start": "2026-07-17T04:00:00Z",
-     "end": "2026-07-18T04:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0058",
-   "text": "the Friday before last",
-   "ctx": {
-    "now": "2026-07-26T12:15:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "article form of #21",
-   "expect": {
-    "first": {
-     "start": "2026-07-17T04:00:00Z",
-     "end": "2026-07-18T04:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0059",
-   "text": "the week before last",
-   "ctx": {
-    "now": "2026-07-26T12:15:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "unit form of #21: en-US week (Sun-start) two back from Jul 26-Aug 1 is Jul 12-18",
-   "expect": {
-    "first": {
-     "start": "2026-07-12T04:00:00Z",
-     "end": "2026-07-19T04:00:00Z",
-     "grain": "week"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0060",
-   "text": "the weekend of July 18th and 19th",
-   "ctx": {
-    "now": "2026-07-22T16:00:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "the named Sat-Sun weekend, conjunct day absorbed (#22): Jul 18-19, not an 8-day span",
-   "expect": {
-    "first": {
-     "start": "2026-07-18T04:00:00Z",
-     "end": "2026-07-20T04:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0061",
-   "text": "the weekend of July 15th",
-   "ctx": {
-    "now": "2026-07-22T16:00:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "midweek date (Wed) maps to the immediately following weekend (#22)",
-   "expect": {
-    "first": {
-     "start": "2026-07-18T04:00:00Z",
-     "end": "2026-07-20T04:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0062",
-   "text": "the weekend of July 19th",
-   "ctx": {
-    "now": "2026-07-22T16:00:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "a Sunday maps back to its own containing weekend (#22)",
-   "expect": {
-    "first": {
-     "start": "2026-07-18T04:00:00Z",
-     "end": "2026-07-20T04:00:00Z",
-     "grain": "day"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0063",
-   "text": "the first half of the year",
-   "ctx": {
-    "now": "2026-07-26T12:15:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "fixed half-split, not reference-clamped (#24): Jan 1 through Jul 1",
-   "expect": {
-    "first": {
-     "start": "2026-01-01T05:00:00Z",
-     "end": "2026-07-01T04:00:00Z"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0064",
-   "text": "the second half of the year",
-   "ctx": {
-    "now": "2026-07-26T12:15:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "second half (#24): Jul 1 through next Jan 1",
-   "expect": {
-    "first": {
-     "start": "2026-07-01T04:00:00Z",
-     "end": "2027-01-01T05:00:00Z"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0065",
-   "text": "the first half of next month",
-   "ctx": {
-    "now": "2026-07-26T12:15:00Z",
-    "timeZone": "America/New_York",
-    "locale": "en-US"
-   },
-   "note": "month halves split at the 16th (#24)",
-   "expect": {
-    "first": {
-     "start": "2026-08-01T04:00:00Z",
-     "end": "2026-08-16T04:00:00Z"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0066",
-   "text": "by end of year",
-   "ctx": {
-    "now": "2026-08-15T12:00:00Z",
-    "timeZone": "UTC",
-    "locale": "en-US"
-   },
-   "note": "deadline over a multi-day fine-grained end (late-part split, Jul 1 → Jan 1): must take the calendar reading, not clock-time — previously resolved as \"by July 1\" and was dropped as past",
-   "expect": {
-    "first": {
-     "start": "2026-08-15T12:00:00Z",
-     "end": "2027-01-01T00:00:00Z",
-     "grain": "instant"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0067",
-   "text": "by end of month",
-   "ctx": {
-    "now": "2026-08-15T12:00:00Z",
-    "timeZone": "UTC",
-    "locale": "en-US"
-   },
-   "note": "same path as fw-0066; previously resolved to the late-part START (the 16th) — silently wrong",
-   "expect": {
-    "first": {
-     "start": "2026-08-15T12:00:00Z",
-     "end": "2026-09-01T00:00:00Z",
-     "grain": "instant"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0068",
-   "text": "by end of quarter",
-   "ctx": {
-    "now": "2026-08-15T12:00:00Z",
-    "timeZone": "UTC",
-    "locale": "en-US"
-   },
-   "note": "same path as fw-0066",
-   "expect": {
-    "first": {
-     "start": "2026-08-15T12:00:00Z",
-     "end": "2026-10-01T00:00:00Z",
-     "grain": "instant"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0069",
-   "text": "by end of week",
-   "ctx": {
-    "now": "2026-08-15T12:00:00Z",
-    "timeZone": "UTC",
-    "locale": "en-US"
-   },
-   "note": "same path as fw-0066; en-US week ends Sunday midnight — previously zero candidates",
-   "expect": {
-    "first": {
-     "start": "2026-08-15T12:00:00Z",
-     "end": "2026-08-16T00:00:00Z",
-     "grain": "instant"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0070",
-   "text": "9:30pm to 7:30am",
-   "ctx": {
-    "now": "2026-08-15T12:00:00Z",
-    "timeZone": "UTC",
-    "locale": "en-US"
-   },
-   "note": "guard for fw-0066..69: a sub-day fine-grained end keeps clock-time semantics and rolls past midnight",
-   "expect": {
-    "first": {
-     "start": "2026-08-15T21:30:00Z",
-     "end": "2026-08-16T07:30:00Z",
-     "grain": "minute"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0071",
-   "text": "by 5pm",
-   "ctx": {
-    "now": "2026-08-15T12:00:00Z",
-    "timeZone": "UTC",
-    "locale": "en-US"
-   },
-   "note": "guard for fw-0066..69: a point end is used directly",
-   "expect": {
-    "first": {
-     "start": "2026-08-15T12:00:00Z",
-     "end": "2026-08-15T17:00:00Z",
-     "grain": "instant"
-    }
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  },
-  {
-   "id": "fw-0072",
-   "text": "between July 4th and July 10th",
-   "ctx": {
-    "now": "2026-08-15T12:00:00Z",
-    "timeZone": "UTC",
-    "locale": "en-US"
-   },
-   "note": "guard for fw-0066..69: day-grain ends keep the inclusive-then-exclusive candidate pair (#17)",
-   "expect": {
-    "candidates": [
-     {
-      "start": "2026-07-04T00:00:00Z",
-      "end": "2026-07-11T00:00:00Z",
-      "grain": "day"
-     },
-     {
-      "start": "2026-07-04T00:00:00Z",
-      "end": "2026-07-10T00:00:00Z",
-      "grain": "day"
-     }
-    ]
-   },
-   "level": "core",
-   "source": {
-    "name": "nl2time",
-    "license": "MIT"
-   }
-  }
- ]
+  ]
 }

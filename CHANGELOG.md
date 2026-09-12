@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.3 — 2026-09-12
+
+Parser (English; engine unchanged, parity fixtures regenerated — Python needs no release):
+
+- Deadline connectors ([#29](https://github.com/AndyFooBlah/nl2time/issues/29), follow-up to [@ariesclark](https://github.com/ariesclark)'s [#25](https://github.com/AndyFooBlah/nl2time/pull/25)): `before` joins `by` / `until` / `till` / `through` / `up to` as an open-range connector, and the article forms are accepted — "by **the** end of **the** month", "until the end of the month", "before the end of the year" now resolve to [now, end) like their article-less forms instead of dropping the connector and returning the late part alone.
+- Late-part deadlines collapse to the period's end point: "by end of month" is now `between(now, snap(month, end))` rather than `between(now, <late part>)`, so the #17 inclusive/exclusive pair no longer leaks a spurious second candidate when `now` precedes the late-part start ("by end of month" on the 5th used to also offer [now → the 16th]). Symmetrically "since the beginning of the month" opens at the period start. Existing fixtures fw-0066–fw-0069 updated accordingly; candidates[0] is unchanged for all of them.
+- "before Friday" / "before the 15th" now behave like "by Friday" / "by the 15th": [now, end(X)) with the #17 pair for day-grain ends. No imported-corpus baseline moved.
+- Corpus cases fw-0073–fw-0080 (four phrasings, two single-candidate guards, one point-reading guard); 2,790 engine-parity fixtures.
+
 ## 0.3.2 — 2026-09-10
 
 Engine (semantics — mirrored in Python 0.1.2, parity fixtures regenerated):

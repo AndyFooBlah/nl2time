@@ -672,25 +672,33 @@ function buildRange(
 
 /**
  * Open-range connectors (#18): "since X" → [start(X), now]; "until X" /
- * "till X" / "through X" / "up to X" / "by X" (deadline) → [now, end(X)].
- * These only fire when the connector opens the range — "A until B" and
- * "from A through B" are consumed earlier by the range rule.
+ * "till X" / "through X" / "up to X" / "by X" / "before X" (deadline) →
+ * [now, end(X)]. These only fire when the connector opens the range —
+ * "A until B" and "from A through B" are consumed earlier by the range rule.
  */
 const ruleOpenRange: Rule = (tokens, i, ctx) => {
   const w = word(tokens[i]);
   let mode: 'since' | 'until' | undefined;
   let at = i + 1;
   if (w === 'since') mode = 'since';
-  else if (w === 'until' || w === 'till' || w === 'through' || w === 'thru' || w === 'by') {
+  else if (
+    w === 'until' || w === 'till' || w === 'through' || w === 'thru' || w === 'by' || w === 'before'
+  ) {
     mode = 'until';
   } else if (w === 'up' && word(tokens[i + 1]) === 'to') {
     mode = 'until';
     at = i + 2;
   }
   if (!mode) return undefined;
-  // "by the 15th": a bare article only before an explicit calendar date —
-  // NOT "through the week"-style prose, which stays unmatched.
-  if (word(tokens[at]) === 'the' && ruleCalendarDate(tokens, at + 1, ctx)) at += 1;
+  // "by the 15th" / "by the end of the month": a bare article only before an
+  // explicit calendar date or an edge phrase (#29) — NOT "through the
+  // week"-style prose, which stays unmatched.
+  if (
+    word(tokens[at]) === 'the' &&
+    (ruleCalendarDate(tokens, at + 1, ctx) || ruleEndOf(tokens, at + 1, ctx))
+  ) {
+    at += 1;
+  }
   const inner =
     ruleDeicticDay(tokens, at, ctx) ??
     ruleLastThisNext(tokens, at, ctx) ??
@@ -702,13 +710,28 @@ const ruleOpenRange: Rule = (tokens, i, ctx) => {
     ruleClockTime(tokens, at, ctx) ??
     ruleWeekdayAlone(tokens, at, ctx);
   if (!inner || inner.role === 'duration') return undefined;
-  // Boundary points ("by EOD", "by the end of the month") keep their point
-  // reading — the deadline instant is the answer there, not a range.
+  // Boundary points ("by EOD") keep their point reading — the deadline
+  // instant is the answer there, not a range.
   if (inner.expr.op === 'snap' && inner.expr.edge !== undefined) return undefined;
+  // Late-part edge phrases ("end of month/year/quarter/week") parse as the
+  // period's late part — between(offset(start), end). As a deadline the
+  // answer is the period's END point, not the whole late part: using the
+  // interval would make the engine emit the inclusive/exclusive pair (#17)
+  // as a spurious second candidate whenever `now` precedes the late-part
+  // start (#29). Symmetrically, "since the beginning of the month" opens at
+  // the period's START point.
+  let target = inner.expr;
+  if (target.op === 'between') {
+    if (mode === 'until' && target.end.op === 'snap' && target.end.edge === 'end') {
+      target = target.end;
+    } else if (mode === 'since' && target.start.op === 'snap' && target.start.edge === 'start') {
+      target = target.start;
+    }
+  }
   const expr: TimeExpr =
     mode === 'since'
-      ? { op: 'between', start: inner.expr, end: NOW }
-      : { op: 'between', start: NOW, end: inner.expr };
+      ? { op: 'between', start: target, end: NOW }
+      : { op: 'between', start: NOW, end: target };
   return { expr, consumed: at + inner.consumed - i, confidence: 0.9, role: 'datetime' };
 };
 
