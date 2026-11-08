@@ -49,11 +49,13 @@ jobs:
           if [ -n "$INPUT_PR" ]; then
             echo "prs=[$INPUT_PR]" >> "$GITHUB_OUTPUT"; echo "alerts=" >> "$GITHUB_OUTPUT"; exit 0
           fi
-          # Red Dependabot / deps-fixer PRs that have not been given up on (at most 3 a day).
+          # Red Dependabot / deps-fixer PRs (at most 3 a day). Skip PRs given up on or
+          # green and waiting for owner review, and ignore failed deps/* jobs: a failed
+          # merge (token, conflict) is not something code changes fix.
           prs=$(gh pr list --state open --json number,author,headRefName,labels,statusCheckRollup --jq '
             [.[] | select((.author.login|test("dependabot")) or (.headRefName|startswith("deps/fix-")))
-                 | select(([.labels[].name]|index("deps-gave-up"))|not)
-                 | select([.statusCheckRollup[]? | select(.conclusion=="FAILURE")] | length > 0)
+                 | select([.labels[].name] | (index("deps-gave-up") or index("needs-owner-review")) | not)
+                 | select([.statusCheckRollup[]? | select(.conclusion=="FAILURE" and ((.name // "")|startswith("deps /")|not))] | length > 0)
                  | .number][:3]')
           echo "prs=$prs" >> "$GITHUB_OUTPUT"
           # Open alerts with a patched version and no open PR naming the package.
