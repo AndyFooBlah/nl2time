@@ -1,0 +1,199 @@
+# Dependency program (AndyFooBlah/andy-private-docs#57, deps/POLICY.md there).
+# Same file in every repo. Claude fixes a Dependabot PR whose CI failed, pushes
+# the fix to the PR branch and re-runs CI (whose deps-merge job then merges it).
+# The daily run also sweeps for red Dependabot PRs and for open alerts that have
+# no PR, and opens a deps/fix-* PR for those.
+name: deps-fixer
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: PR number to fix (empty = sweep)
+        required: false
+        default: ""
+  schedule:
+    - cron: "41 13 * * *"   # 06:41 PDT / 05:41 PST
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: deps-fixer
+  cancel-in-progress: false
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  GH_REPO: ${{ github.repository }}
+  OWNER: AndyFooBlah
+  CI_WORKFLOW: ci.yml
+  MAX_ATTEMPTS: "2"
+
+jobs:
+  pick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      prs: ${{ steps.pick.outputs.prs }}
+      alerts: ${{ steps.pick.outputs.alerts }}
+    steps:
+      - id: pick
+        env:
+          INPUT_PR: ${{ inputs.pr }}
+          ALERTS_TOKEN: ${{ secrets.DEPENDABOT_ALERTS_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -n "$INPUT_PR" ]; then
+            echo "prs=[$INPUT_PR]" >> "$GITHUB_OUTPUT"; echo "alerts=" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          # Red Dependabot / deps-fixer PRs that have not been given up on (at most 3 a day).
+          prs=$(gh pr list --state open --json number,author,headRefName,labels,statusCheckRollup --jq '
+            [.[] | select((.author.login|test("dependabot")) or (.headRefName|startswith("deps/fix-")))
+                 | select(([.labels[].name]|index("deps-gave-up"))|not)
+                 | select([.statusCheckRollup[]? | select(.conclusion=="FAILURE")] | length > 0)
+                 | .number][:3]')
+          echo "prs=$prs" >> "$GITHUB_OUTPUT"
+          # Open alerts with a patched version and no open PR naming the package.
+          alerts=""
+          if [ -n "$ALERTS_TOKEN" ] && ! gh pr list --state open --json headRefName --jq '.[].headRefName' | grep -q '^deps/fix-'; then
+            titles=$(gh pr list --state open --json title --jq '.[].title')
+            alerts=$(GH_TOKEN="$ALERTS_TOKEN" gh api --paginate "repos/$GH_REPO/dependabot/alerts?state=open&per_page=100" \
+              --jq '.[] | select(.security_vulnerability.first_patched_version != null)
+                    | "\(.dependency.package.ecosystem) \(.dependency.package.name) >= \(.security_vulnerability.first_patched_version.identifier) in \(.dependency.manifest_path) (\(.security_advisory.ghsa_id), \(.security_advisory.severity))"' \
+              | while read -r eco name rest; do grep -qiF -- " $name " <<<" $(tr '\n' ' ' <<<"$titles") " || echo "$eco $name $rest"; done \
+              | sort -u | head -40 | jq -Rsc .)
+          fi
+          echo "alerts=$alerts" >> "$GITHUB_OUTPUT"
+          echo "PRs to fix: $prs"; echo "Alerts with no PR: $alerts"
+
+  fix-pr:
+    needs: pick
+    if: needs.pick.outputs.prs != '' && needs.pick.outputs.prs != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        pr: ${{ fromJSON(needs.pick.outputs.prs) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Check out the PR and count attempts
+        id: pr
+        run: |
+          set -euo pipefail
+          gh pr checkout ${{ matrix.pr }}
+          info=$(gh pr view ${{ matrix.pr }} --json title,headRefName,labels,headRefOid)
+          echo "title=$(jq -r .title <<<"$info")" >> "$GITHUB_OUTPUT"
+          echo "branch=$(jq -r .headRefName <<<"$info")" >> "$GITHUB_OUTPUT"
+          n=$(jq '[.labels[].name | select(startswith("deps-fix-attempt"))] | length' <<<"$info")
+          echo "attempts=$n" >> "$GITHUB_OUTPUT"; echo "next=$((n + 1))" >> "$GITHUB_OUTPUT"
+          run=$(gh run list --workflow "$CI_WORKFLOW" --commit "$(jq -r .headRefOid <<<"$info")" --json databaseId,conclusion \
+                --jq '[.[] | select(.conclusion=="failure")][0].databaseId // empty')
+          { [ -n "$run" ] && gh run view "$run" --log-failed | tail -400 || echo "(no failed CI log found)"; } > "$RUNNER_TEMP/ci-failure.log"
+      - name: Give up after too many attempts
+        if: steps.pr.outputs.attempts >= env.MAX_ATTEMPTS
+        run: |
+          gh label create deps-gave-up --color B60205 --description "deps-fixer could not make CI pass" --force >/dev/null
+          gh pr edit ${{ matrix.pr }} --add-label deps-gave-up --add-assignee "$OWNER"
+          gh pr comment ${{ matrix.pr }} --body "@$OWNER deps-fixer tried $MAX_ATTEMPTS times and CI still fails. Needs a person."
+      - uses: ./.github/actions/deps-toolchain
+        if: steps.pr.outputs.attempts < env.MAX_ATTEMPTS
+      - name: Claude fixes the PR
+        if: steps.pr.outputs.attempts < env.MAX_ATTEMPTS
+        uses: anthropics/claude-code-action@61a9c274fa7110a66dfafc1bbbced03833eb25fe # v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          claude_args: --max-turns 80 --allowedTools "Bash,Read,Edit,Write,Glob,Grep"
+          prompt: |
+            You are fixing dependency-update PR #${{ matrix.pr }} ("${{ steps.pr.outputs.title }}") in this repository so that CI passes.
+            The PR branch is checked out. CI is defined in .github/workflows/${{ env.CI_WORKFLOW }}; read it for the exact install, build and test commands, and run them yourself.
+            The failing CI log is at ${{ runner.temp }}/ci-failure.log.
+
+            Rules:
+            - Keep the dependency update. Do not revert, pin back or remove the updated packages. Make the smallest code, config or lockfile change that makes CI pass.
+            - Do not skip, weaken or delete tests or type checks, and do not edit anything under .github/.
+            - Never run anything that calls paid external APIs (evals, live model calls, deploys). Never print, write or commit secrets.
+            - If the update is truly incompatible and cannot reasonably be fixed, write a short explanation to ${{ runner.temp }}/fixer-giveup.md and stop.
+            - Append one line to the project journal (JOURNAL.md in the root, or docs/journal.md if that is the journal): `- <UTC timestamp like 2026-11-08T18:05Z> [step] deps-fixer: <what broke and what you changed> (PR #${{ matrix.pr }}).`
+            - Leave your changes uncommitted; the workflow commits and pushes them.
+      - name: Commit, push, re-run CI
+        if: steps.pr.outputs.attempts < env.MAX_ATTEMPTS
+        run: |
+          set -euo pipefail
+          gh label create deps-fix-attempt-${{ steps.pr.outputs.next }} --color FBCA04 --force >/dev/null
+          gh pr edit ${{ matrix.pr }} --add-label deps-fix-attempt-${{ steps.pr.outputs.next }}
+          if [ -f "$RUNNER_TEMP/fixer-giveup.md" ] || [ -z "$(git status --porcelain)" ]; then
+            gh label create deps-gave-up --color B60205 --description "deps-fixer could not make CI pass" --force >/dev/null
+            gh pr edit ${{ matrix.pr }} --add-label deps-gave-up --add-assignee "$OWNER"
+            { echo "@$OWNER deps-fixer could not fix this update."; echo; cat "$RUNNER_TEMP/fixer-giveup.md" 2>/dev/null || echo "(Claude made no changes.)"; } \
+              | gh pr comment ${{ matrix.pr }} --body-file -
+            exit 0
+          fi
+          if git status --porcelain | grep -q ' \.github/'; then echo "::error::fixer touched .github/; refusing to push"; exit 1; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -F - <<EOF
+          deps-fixer: make "${{ steps.pr.outputs.title }}" pass CI
+
+          Assisted by Claude.
+          EOF
+          git push -q origin HEAD:${{ steps.pr.outputs.branch }}
+          gh workflow run "$CI_WORKFLOW" --ref "${{ steps.pr.outputs.branch }}" -f pr=${{ matrix.pr }}
+
+  fix-alerts:
+    needs: pick
+    if: needs.pick.outputs.alerts != '' && needs.pick.outputs.alerts != '""'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/deps-toolchain
+      - name: Write the alert list
+        env:
+          ALERTS: ${{ needs.pick.outputs.alerts }}
+        run: jq -r . <<<"$ALERTS" > "$RUNNER_TEMP/alerts.txt"; cat "$RUNNER_TEMP/alerts.txt"
+      - name: Claude upgrades the vulnerable packages
+        uses: anthropics/claude-code-action@61a9c274fa7110a66dfafc1bbbced03833eb25fe # v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ github.token }}
+          claude_args: --max-turns 80 --allowedTools "Bash,Read,Edit,Write,Glob,Grep"
+          prompt: |
+            Dependabot could not open pull requests for these open security alerts (one per line: ecosystem, package, patched version, manifest, advisory):
+            see ${{ runner.temp }}/alerts.txt.
+            Upgrade each package to at least the patched version, including transitive dependencies (npm `overrides`, pnpm `pnpm.overrides`, uv `uv lock --upgrade-package`, and so on), and update the lockfiles.
+            CI is defined in .github/workflows/${{ env.CI_WORKFLOW }}; read it and run its install, build and test commands yourself until they pass.
+
+            Rules:
+            - Smallest change that removes the vulnerable versions and keeps CI green. Do not skip, weaken or delete tests, and do not edit anything under .github/.
+            - Never run anything that calls paid external APIs (evals, live model calls, deploys). Never print, write or commit secrets.
+            - If a package cannot be upgraded safely, leave it and explain why in ${{ runner.temp }}/fixer-notes.md.
+            - Append one line to the project journal (JOURNAL.md in the root, or docs/journal.md if that is the journal): `- <UTC timestamp like 2026-11-08T18:05Z> [step] deps-fixer: <what you upgraded>.`
+            - Leave your changes uncommitted; the workflow commits them and opens the PR.
+      - name: Open the PR and run CI
+        run: |
+          set -euo pipefail
+          [ -n "$(git status --porcelain)" ] || { echo "No changes"; exit 0; }
+          if git status --porcelain | grep -q ' \.github/'; then echo "::error::fixer touched .github/; refusing to push"; exit 1; fi
+          branch="deps/fix-$(date -u +%Y%m%d-%H%M)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b "$branch"; git add -A
+          git commit -q -F - <<EOF
+          deps-fixer: upgrade packages with open security alerts
+
+          Assisted by Claude.
+          EOF
+          git push -q origin "$branch"
+          { echo "deps-fixer upgrade for open Dependabot alerts that had no PR (AndyFooBlah/andy-private-docs#57)."; echo; echo '```'; cat "$RUNNER_TEMP/alerts.txt"; echo '```';
+            [ -f "$RUNNER_TEMP/fixer-notes.md" ] && { echo; echo "## Notes"; cat "$RUNNER_TEMP/fixer-notes.md"; }; } > "$RUNNER_TEMP/body.md"
+          url=$(gh pr create --head "$branch" --title "Security: upgrade packages with open alerts" --body-file "$RUNNER_TEMP/body.md")
+          gh workflow run "$CI_WORKFLOW" --ref "$branch" -f pr="${url##*/}"

@@ -3,6 +3,19 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: PR number (set by deps-fixer after it pushes a fix)
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || inputs.pr || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -62,3 +75,91 @@ jobs:
       - run: uv run --project python --extra dev --with 'whenever==0.10.0' pytest python/tests -q
       - name: Installed whenever is the declared floor
         run: uv run --project python --with 'whenever==0.10.0' python -c "import whenever, nl2time; print(whenever.__version__, nl2time.__version__); assert whenever.__version__ == '0.10.0'"
+
+  # ---------------------------------------------------------------------------
+  # Dependency program (AndyFooBlah/andy-private-docs#57, deps/POLICY.md there).
+  # Same block in every repo. A Dependabot PR (or a deps-fixer PR) that passes
+  # the jobs above is merged and, if the app is deployed, redeployed. One that
+  # fails is handed to deps-fixer.yml. Tier and deploy workflow are set below.
+  # ---------------------------------------------------------------------------
+  deps-merge:
+    name: deps / merge
+    needs: [test, fixtures, python, python-floor]
+    if: >-
+      always() && !cancelled()
+      && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+      && ((github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]')
+          || (github.event_name == 'workflow_dispatch' && inputs.pr != ''))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      actions: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      DEPS_TIER: standard
+      DEPLOY_WORKFLOW: ""
+      OWNER: AndyFooBlah
+      PR: ${{ inputs.pr || github.event.pull_request.number }}
+      TESTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      ALERTS_TOKEN: ${{ secrets.DEPENDABOT_ALERTS_TOKEN }}
+    steps:
+      - name: Merge if policy allows
+        run: |
+          set -euo pipefail
+          info=$(gh pr view "$PR" --json author,headRefName,headRefOid,title,state,baseRefName)
+          author=$(jq -r .author.login <<<"$info"); head=$(jq -r .headRefName <<<"$info")
+          sha=$(jq -r .headRefOid <<<"$info"); title=$(jq -r .title <<<"$info")
+          base=$(jq -r .baseRefName <<<"$info")
+          [ "$(jq -r .state <<<"$info")" = OPEN ] || { echo "PR #$PR is not open"; exit 0; }
+          if [[ "$author" != *dependabot* && "$head" != deps/fix-* ]]; then
+            echo "PR #$PR is not a Dependabot or deps-fixer PR"; exit 0
+          fi
+          [ "$sha" = "$TESTED_SHA" ] || { echo "PR head moved since this run started; the next run decides"; exit 0; }
+
+          security=no
+          if [[ "$head" == deps/fix-* ]]; then security=yes
+          elif [ -n "$ALERTS_TOKEN" ]; then
+            pkgs=$(GH_TOKEN="$ALERTS_TOKEN" gh api --paginate "repos/$GH_REPO/dependabot/alerts?state=open&per_page=100" \
+              --jq '.[].dependency.package.name' | sort -u)
+            while read -r p; do
+              [ -n "$p" ] && grep -qiF -- " $p " <<<" $title " && security=yes
+            done <<<"$pkgs"
+          fi
+          echo "tier=$DEPS_TIER security=$security title=$title"
+
+          if [ "$DEPS_TIER" = high ] && [ "$security" = no ]; then
+            gh label create needs-owner-review --color B60205 --description "Routine update in a high-security repo" --force >/dev/null
+            gh pr edit "$PR" --add-label needs-owner-review --add-assignee "$OWNER" >/dev/null
+            echo "High-security repo, routine update: left for owner review"; exit 0
+          fi
+
+          gh pr merge "$PR" --squash --delete-branch --match-head-commit "$sha"
+          if [ "$security" = yes ] && [ "$DEPS_TIER" = high ]; then
+            gh pr comment "$PR" --body "@$OWNER security update merged on green CI (high-security repo; review after the fact if you want): $title"
+          fi
+          if [ -n "$DEPLOY_WORKFLOW" ]; then
+            gh workflow run "$DEPLOY_WORKFLOW" --ref "$base"
+            echo "Dispatched $DEPLOY_WORKFLOW on $base"
+          fi
+
+  deps-fix:
+    name: deps / hand to fixer
+    needs: [test, fixtures, python, python-floor]
+    if: >-
+      always() && !cancelled() && contains(needs.*.result, 'failure')
+      && ((github.event_name == 'pull_request' && github.event.pull_request.user.login == 'dependabot[bot]')
+          || (github.event_name == 'workflow_dispatch' && inputs.pr != ''))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      PR: ${{ inputs.pr || github.event.pull_request.number }}
+    steps:
+      - run: gh workflow run deps-fixer.yml --ref "${{ github.event.repository.default_branch }}" -f pr="$PR"
