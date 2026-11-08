@@ -88,9 +88,19 @@ jobs:
         run: |
           set -euo pipefail
           gh pr checkout ${{ matrix.pr }}
-          info=$(gh pr view ${{ matrix.pr }} --json title,headRefName,labels,headRefOid)
+          info=$(gh pr view ${{ matrix.pr }} --json title,headRefName,labels,headRefOid,baseRefName)
           echo "title=$(jq -r .title <<<"$info")" >> "$GITHUB_OUTPUT"
           echo "branch=$(jq -r .headRefName <<<"$info")" >> "$GITHUB_OUTPUT"
+          base=$(jq -r .baseRefName <<<"$info"); echo "base=$base" >> "$GITHUB_OUTPUT"
+          echo "orig=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          # Fix against current main, and pick up main's newer workflows: merge the
+          # base in first. Conflicts are left in the tree for Claude to resolve.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git merge -q --no-edit "origin/$base" >/dev/null 2>&1; then
+            git diff --name-only --diff-filter=U > "$RUNNER_TEMP/conflicts.txt"
+            echo "Merge of $base conflicts in: $(tr '\n' ' ' < "$RUNNER_TEMP/conflicts.txt")"
+          fi
           n=$(jq '[.labels[].name | select(startswith("deps-fix-attempt"))] | length' <<<"$info")
           echo "attempts=$n" >> "$GITHUB_OUTPUT"; echo "next=$((n + 1))" >> "$GITHUB_OUTPUT"
           run=$(gh run list --workflow "$CI_WORKFLOW" --commit "$(jq -r .headRefOid <<<"$info")" --json databaseId,conclusion \
@@ -116,6 +126,7 @@ jobs:
             You are fixing dependency-update PR #${{ matrix.pr }} ("${{ steps.pr.outputs.title }}") in this repository so that CI passes.
             The PR branch is checked out. CI is defined in .github/workflows/${{ env.CI_WORKFLOW }}; read it for the exact install, build and test commands, and run them yourself.
             The failing CI log is at ${{ runner.temp }}/ci-failure.log.
+            The workflow has already merged the base branch (${{ steps.pr.outputs.base }}) into the PR branch, so you are fixing against current ${{ steps.pr.outputs.base }}. If ${{ runner.temp }}/conflicts.txt exists, it lists files with merge conflicts: resolve those first, keeping the PR's dependency update and the base branch's other changes. For a lockfile, take the base branch's version and re-run the package manager so it applies the PR's update. Do not run `git commit` or `git merge --abort`.
 
             Rules:
             - Keep the dependency update. Do not revert, pin back or remove the updated packages. Make the smallest code, config or lockfile change that makes CI pass.
@@ -130,22 +141,30 @@ jobs:
           set -euo pipefail
           gh label create deps-fix-attempt-${{ steps.pr.outputs.next }} --color FBCA04 --force >/dev/null
           gh pr edit ${{ matrix.pr }} --add-label deps-fix-attempt-${{ steps.pr.outputs.next }}
-          if [ -f "$RUNNER_TEMP/fixer-giveup.md" ] || [ -z "$(git status --porcelain)" ]; then
+          # Nothing to push only if Claude changed nothing and the base merged in as a no-op.
+          if [ -f "$RUNNER_TEMP/fixer-giveup.md" ] || { [ -z "$(git status --porcelain)" ] && [ "$(git rev-parse HEAD)" = "${{ steps.pr.outputs.orig }}" ]; }; then
             gh label create deps-gave-up --color B60205 --description "deps-fixer could not make CI pass" --force >/dev/null
             gh pr edit ${{ matrix.pr }} --add-label deps-gave-up --add-assignee "$OWNER"
             { echo "@$OWNER deps-fixer could not fix this update."; echo; cat "$RUNNER_TEMP/fixer-giveup.md" 2>/dev/null || echo "(Claude made no changes.)"; } \
               | gh pr comment ${{ matrix.pr }} --body-file -
             exit 0
           fi
-          if git status --porcelain | grep -q ' \.github/'; then echo "::error::fixer touched .github/; refusing to push"; exit 1; fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Claude must not edit .github/. Files there may only differ from HEAD because
+          # an unfinished (conflicted) merge brought in the base branch's version.
+          for f in $( { git diff --name-only HEAD -- .github; git ls-files --others --exclude-standard .github; } | sort -u); do
+            git diff --quiet "origin/${{ steps.pr.outputs.base }}" -- "$f" 2>/dev/null \
+              || { echo "::error::fixer touched $f; refusing to push"; exit 1; }
+          done
           git add -A
-          git commit -q -F - <<EOF
+          # A clean merge of the base with no edits is already committed; otherwise commit
+          # (which also concludes a merge Claude resolved).
+          if [ -n "$(git status --porcelain)" ] || [ -f .git/MERGE_HEAD ]; then
+            git commit -q -F - <<EOF
           deps-fixer: make "${{ steps.pr.outputs.title }}" pass CI
 
           Assisted by Claude.
           EOF
+          fi
           git push -q origin HEAD:${{ steps.pr.outputs.branch }}
           gh workflow run "$CI_WORKFLOW" --ref "${{ steps.pr.outputs.branch }}" -f pr=${{ matrix.pr }}
 
