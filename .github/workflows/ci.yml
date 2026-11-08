@@ -122,9 +122,11 @@ jobs:
 
           security=no
           if [[ "$head" == deps/fix-* ]]; then security=yes
-          elif [ -n "$ALERTS_TOKEN" ]; then
+          elif [ "$DEPS_TIER" = high ] && [ -n "$ALERTS_TOKEN" ]; then
+            # A rejected or expired token must not block merges; it only means "routine".
             pkgs=$(GH_TOKEN="$ALERTS_TOKEN" gh api --paginate "repos/$GH_REPO/dependabot/alerts?state=open&per_page=100" \
-              --jq '.[].dependency.package.name' | sort -u)
+              --jq '.[].dependency.package.name' 2>/dev/null | sort -u) \
+              || { echo "::warning::DEPENDABOT_ALERTS_TOKEN was rejected; treating this PR as routine"; pkgs=""; }
             while read -r p; do
               [ -n "$p" ] && grep -qiF -- " $p " <<<" $title " && security=yes
             done <<<"$pkgs"
@@ -137,13 +139,20 @@ jobs:
             echo "High-security repo, routine update: left for owner review"; exit 0
           fi
 
-          gh pr merge "$PR" --squash --delete-branch --match-head-commit "$sha"
+          if ! gh pr merge "$PR" --squash --delete-branch --match-head-commit "$sha"; then
+            echo "::warning::merge failed (likely a conflict with another update); asking Dependabot to rebase"
+            [[ "$author" == *dependabot* ]] && gh pr comment "$PR" --body "@dependabot rebase"
+            exit 0
+          fi
           if [ "$security" = yes ] && [ "$DEPS_TIER" = high ]; then
             gh pr comment "$PR" --body "@$OWNER security update merged on green CI (high-security repo; review after the fact if you want): $title"
           fi
           if [ -n "$DEPLOY_WORKFLOW" ]; then
             gh workflow run "$DEPLOY_WORKFLOW" --ref "$base"
             echo "Dispatched $DEPLOY_WORKFLOW on $base"
+          else
+            # Merges by this job don't trigger CI on $base, so test the combined result.
+            gh workflow run "$GITHUB_WORKFLOW" --ref "$base"
           fi
 
   deps-fix:

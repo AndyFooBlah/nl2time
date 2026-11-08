@@ -64,7 +64,7 @@ jobs:
               --jq '.[] | select(.security_vulnerability.first_patched_version != null)
                     | "\(.dependency.package.ecosystem) \(.dependency.package.name) >= \(.security_vulnerability.first_patched_version.identifier) in \(.dependency.manifest_path) (\(.security_advisory.ghsa_id), \(.security_advisory.severity))"' \
               | while read -r eco name rest; do grep -qiF -- " $name " <<<" $(tr '\n' ' ' <<<"$titles") " || echo "$eco $name $rest"; done \
-              | sort -u | head -40 | jq -Rsc .)
+              | sort -u | head -40 | jq -Rsc .) || { echo "::warning::DEPENDABOT_ALERTS_TOKEN was rejected; skipping the alert sweep"; alerts=""; }
           fi
           echo "alerts=$alerts" >> "$GITHUB_OUTPUT"
           echo "PRs to fix: $prs"; echo "Alerts with no PR: $alerts"
