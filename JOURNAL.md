@@ -28,3 +28,4 @@ are anchored to commits where available.
 - 2026-09-12T06:48Z [step] Deadline connectors: article forms, "before", late-part deadlines collapse to one candidate (38c6009).
 - 2026-09-18T23:20Z [step] Dependency bumps; GitHub Actions pinned to current majors by SHA (4bb7816).
 - 2026-10-16T20:30Z [step] Journal created per new global journal policy; backfilled from git history, issues #9–#13/#17/#20, PR #25, and session transcripts.
+- 2026-11-08T17:31Z [step] Turned on Dependabot alerts and security updates, and added a standard `.github/dependabot.yml`: weekly grouped minor/patch updates with a 5-day cooldown (14 days for majors); security updates open immediately. Part of the cross-repo dependency security program (AndyFooBlah/andy-private-docs#57).
