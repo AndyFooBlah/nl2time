@@ -45,7 +45,7 @@ nl2time puts a small symbolic IR in the middle of both directions:
 - **`TimeExpr`** — a JSON operator tree (`now`, `literal`, `offset`, `snap`, `span`, `seek`, `between`, `intersect`, `recur`) over timeline intervals. [Spec](docs/ir-spec.md), [JSON Schema](schema/timeexpr.schema.json).
 - **`resolve(expr, ctx)`** — deterministic evaluation against a `TimeContext` (reference instant, IANA timezone, locale, week start, ambiguity policies). Ambiguity is data: candidates come back ordered, never silently guessed.
 - **`describe(value, ctx)`** — chooses framing (calendar / elapsed / absolute), builds the IR expression that describes the value, renders it via `Intl`. Round-trip invariant: `resolve(describe(v).expr, ctx)` contains `v`.
-- **Everything language refers to is an interval with a grain.** "Last week" is seven days; "9pm" is an hour; "March" is a month. Intervals are half-open `[start, end)`; a range with no lower bound ("orders placed before March 2022") has `start: null`.
+- **Everything language refers to is an interval with a grain.** "Last week" is seven days; "9pm" is an hour; "March" is a month. Intervals are half-open `[start, end)`; a range with no lower bound ("orders placed before March 2022") has `start: null`, and one with no upper bound ("after next week") has `end: null`.
 
 ## The LLM boundary (optional)
 
@@ -120,7 +120,7 @@ Every imported conformance case carries machine-readable provenance (upstream pr
 pip install nl2time
 ```
 
-The Python engine port lives in [`python/`](python/) (`whenever`-based time model): IR validation, `TimeContext`, and the full deterministic resolver at **100% bit-exact parity** with the JS reference across all 2,827 engine-parity fixtures (`corpus/ir/`), enforced in CI on every push. Parsers and `describe()` are JS-only so far — [docs/porting.md](docs/porting.md) has the strategy and the divergence gates.
+The Python engine port lives in [`python/`](python/) (`whenever`-based time model): IR validation, `TimeContext`, and the full deterministic resolver at **100% bit-exact parity** with the JS reference across all 2,845 engine-parity fixtures (`corpus/ir/`), enforced in CI on every push. Parsers and `describe()` are JS-only so far — [docs/porting.md](docs/porting.md) has the strategy and the divergence gates.
 
 ## Release history
 

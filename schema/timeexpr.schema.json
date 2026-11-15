@@ -14,6 +14,7 @@
         { "$ref": "#/$defs/Span" },
         { "$ref": "#/$defs/Between" },
         { "$ref": "#/$defs/Until" },
+        { "$ref": "#/$defs/After" },
         { "$ref": "#/$defs/Seek" },
         { "$ref": "#/$defs/Intersect" },
         { "$ref": "#/$defs/Duration" },
@@ -168,6 +169,18 @@
         "mod": { "$ref": "#/$defs/Mod" }
       },
       "required": ["op", "end"],
+      "additionalProperties": false
+    },
+    "After": {
+      "type": "object",
+      "description": "The stretch from start on ('after March 2022', 'on or after March 1', 'from 2020 onward'): from the end of start (its start when inclusive) to now while start is over, otherwise an open-end range (resolved values carry end: null). Clock times and boundary points start at the point itself.",
+      "properties": {
+        "op": { "const": "after" },
+        "start": { "$ref": "#/$defs/TimeExpr" },
+        "inclusive": { "type": "boolean" },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "start"],
       "additionalProperties": false
     },
     "Seek": {

@@ -173,6 +173,11 @@ def validate_expr(input: Any, path: str = "$") -> TimeExpr:
         if obj.get("exclusive") is not None and not isinstance(obj["exclusive"], bool):
             raise IRValidationError("exclusive must be boolean", f"{path}.exclusive")
         return obj
+    if op == "after":
+        validate_expr(obj.get("start"), f"{path}.start")
+        if obj.get("inclusive") is not None and not isinstance(obj["inclusive"], bool):
+            raise IRValidationError("inclusive must be boolean", f"{path}.inclusive")
+        return obj
     if op == "seek":
         validate_expr(obj.get("base"), f"{path}.base")
         if obj.get("dir") not in _DIRS:

@@ -49,9 +49,15 @@ export function describe(
       return describeAmount(value, ctx);
     }
     if (value.start === null) {
+      if (value.end === null) throw new RangeError('cannot describe an interval with no start and no end');
       // Open start ("before March 2022", #32): describe the boundary.
       const bound = describeInterval(toZoned(value.end, ctx.timeZone), value.grain, ctx, 'absolute', style);
       return { ...bound, text: `before ${bound.text}`, expr: { op: 'until', end: bound.expr, exclusive: true } };
+    }
+    if (value.end === null) {
+      // Open end ("after next week", #58): describe the boundary.
+      const bound = describeInterval(toZoned(value.start, ctx.timeZone), value.grain, ctx, 'absolute', style);
+      return { ...bound, text: `from ${bound.text} on`, expr: { op: 'after', start: bound.expr, inclusive: true } };
     }
     const start = toZoned(value.start, ctx.timeZone);
     return describeInterval(start, value.grain, ctx, framing, style);

@@ -32,6 +32,8 @@ export interface IntervalExpect {
   endLocal?: string;
   /** Unbounded start ("before March 2022"): the candidate's start must be null (#32). */
   openStart?: boolean;
+  /** Unbounded end ("after next week"): the candidate's end must be null (#58). */
+  openEnd?: boolean;
   /** Civil point: candidate interval start must equal it. */
   pointLocal?: string;
   /** Omit or null to skip the grain check (imported cases). */
@@ -158,14 +160,18 @@ function matchesInterval(v: TimeValue, spec: IntervalExpect, timeZone: string): 
   if (v.kind !== 'interval') return false;
   if (spec.grain !== undefined && spec.grain !== null && v.grain !== spec.grain) return false;
   if ((spec.openStart === true) !== (v.start === null)) return false;
+  if ((spec.openEnd === true) !== (v.end === null)) return false;
   if (v.start === null) {
-    if (spec.end !== undefined && v.end.toString() !== spec.end) return false;
-    if (spec.endLocal !== undefined && !localEq(localString(v.end, timeZone), normLocal(spec.endLocal))) return false;
-    return spec.start === undefined && spec.startLocal === undefined && spec.pointLocal === undefined;
+    if (spec.start !== undefined || spec.startLocal !== undefined || spec.pointLocal !== undefined) return false;
+  } else {
+    if (spec.start !== undefined && v.start.toString() !== spec.start) return false;
+    if (spec.startLocal !== undefined && !localEq(localString(v.start, timeZone), normLocal(spec.startLocal))) return false;
+    if (spec.pointLocal !== undefined && !localEq(localString(v.start, timeZone), normLocal(spec.pointLocal))) return false;
   }
-  if (spec.start !== undefined && v.start.toString() !== spec.start) return false;
+  if (v.end === null) {
+    return spec.end === undefined && spec.endLocal === undefined;
+  }
   if (spec.end !== undefined && v.end.toString() !== spec.end) return false;
-  if (spec.startLocal !== undefined && !localEq(localString(v.start, timeZone), normLocal(spec.startLocal))) return false;
   if (spec.endLocal !== undefined) {
     const actualEnd = localString(v.end, timeZone);
     let expectedEnd = normLocal(spec.endLocal);
@@ -178,7 +184,6 @@ function matchesInterval(v: TimeValue, spec: IntervalExpect, timeZone: string): 
       return false;
     }
   }
-  if (spec.pointLocal !== undefined && !localEq(localString(v.start, timeZone), normLocal(spec.pointLocal))) return false;
   return true;
 }
 
@@ -257,7 +262,7 @@ function describeMismatch(candidates: TimeValue[], tz: string): string {
     .slice(0, 3)
     .map((v) =>
       v.kind === 'interval'
-        ? `[${v.start === null ? '-inf' : localString(v.start, tz)}, ${localString(v.end, tz)}) ${v.grain}`
+        ? `[${v.start === null ? '-inf' : localString(v.start, tz)}, ${v.end === null ? '+inf' : localString(v.end, tz)}) ${v.grain}`
         : JSON.stringify(v),
     )
     .join(' | ');

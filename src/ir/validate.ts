@@ -81,6 +81,13 @@ export function validateExpr(input: unknown, path = '$'): TimeExpr {
       }
       return obj as unknown as TimeExpr;
     }
+    case 'after': {
+      validateExpr(obj.start, `${path}.start`);
+      if (obj.inclusive !== undefined && typeof obj.inclusive !== 'boolean') {
+        throw new IRValidationError('inclusive must be boolean', `${path}.inclusive`);
+      }
+      return obj as unknown as TimeExpr;
+    }
     case 'seek': {
       validateExpr(obj.base, `${path}.base`);
       if (!DIRS.includes(obj.dir as string)) {

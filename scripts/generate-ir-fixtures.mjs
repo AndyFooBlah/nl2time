@@ -47,7 +47,7 @@ for (const src of SOURCES) {
       expr: match.expr,
       candidates: candidates.map((v) =>
         v.kind === 'interval'
-          ? { kind: 'interval', start: v.start === null ? null : v.start.toString(), end: v.end.toString(), grain: v.grain }
+          ? { kind: 'interval', start: v.start === null ? null : v.start.toString(), end: v.end === null ? null : v.end.toString(), grain: v.grain }
           : v,
       ),
     });
