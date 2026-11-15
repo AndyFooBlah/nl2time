@@ -468,9 +468,11 @@ function readOperand(
 ): { operand: RangeOperand; consumed: number } | undefined {
   // "between the end of 2007 and the end of 2008" — inside a range, "end of
   // YEAR" means the year's end boundary (a point), not its final third.
-  const w0 = word(tokens[i]);
-  if ((w0 === 'end' || w0 === 'beginning' || w0 === 'start') && word(tokens[i + 1]) === 'of') {
-    let yAt = i + 2;
+  // "through the end of 2024" (#32): an article before the boundary word.
+  const lead = word(tokens[i]) === 'the' ? 1 : 0;
+  const w0 = word(tokens[i + lead]);
+  if ((w0 === 'end' || w0 === 'beginning' || w0 === 'start') && word(tokens[i + lead + 1]) === 'of') {
+    let yAt = i + lead + 2;
     if (word(tokens[yAt]) === 'the') yAt += 1;
     const year = yearAt(tokens, yAt);
     if (year !== undefined) {
@@ -488,6 +490,8 @@ function readOperand(
       };
     }
   }
+  const wdd = readWeekdayDate(tokens, i, ctx);
+  if (wdd) return { operand: { kind: 'date', expr: wdd.expr }, consumed: wdd.consumed };
   const rel = ruleLastThisNext(tokens, i, ctx);
   if (rel && rel.role === 'date') {
     // "this friday 5/12": an explicit date after the weekday supersedes it.
@@ -736,13 +740,89 @@ const ruleOpenRange: Rule = (tokens, i, ctx) => {
 };
 
 /** "week of April 10th", "the first/last week of July", "the week starting on Feb 4". */
+/**
+ * A weekday written next to an explicit month-day ("Thursday 2026-08-20",
+ * "Monday, March 3, 2025") checks the date rather than naming a second,
+ * relative weekday: the date wins (#34). A weekday that contradicts a full
+ * date keeps the date at lowered confidence.
+ */
+function readWeekdayDate(
+  tokens: Token[],
+  i: number,
+  ctx: TimeContext,
+): { expr: TimeExpr; consumed: number; confidence: number } | undefined {
+  const w = word(tokens[i]);
+  const weekday = w !== undefined ? WEEKDAY_WORDS[w] : undefined;
+  if (!weekday) return undefined;
+  const d = ruleCalendarDate(tokens, i + 1, ctx);
+  if (!d || d.role !== 'date' || d.expr.op !== 'literal') return undefined;
+  const date = d.expr.date;
+  if (!date || date.month === undefined || date.day === undefined) return undefined;
+  let confidence = Math.max(d.confidence, 0.9);
+  if (date.year !== undefined && isoWeekday(date.year, date.month, date.day) !== weekday) confidence = 0.6;
+  return { expr: d.expr, consumed: 1 + d.consumed, confidence };
+}
+
+const WEEKDAY_BY_ISO: readonly Weekday[] = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+/** Weekday of a proleptic Gregorian date (Sakamoto), without Temporal. */
+function isoWeekday(year: number, month: number, day: number): Weekday {
+  const t = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
+  const y = month < 3 ? year - 1 : year;
+  const sun0 = (y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) + t[month - 1]! + day) % 7;
+  return WEEKDAY_BY_ISO[(sun0 + 6) % 7]!;
+}
+
+/** "Thursday 2026-08-20" → the date (#34). */
+const ruleWeekdayDate: Rule = (tokens, i, ctx) => {
+  const r = readWeekdayDate(tokens, i, ctx);
+  return r ? { expr: r.expr, consumed: r.consumed, confidence: r.confidence, role: 'date' } : undefined;
+};
+
+/**
+ * "twelve months ended June", "the 12 months ending June 30, 2026", "the
+ * three years ended 2025" (#36): the N units up to and including the date's
+ * period — span(date, -N units), i.e. [end(date) − N units, end(date)).
+ */
+const ruleNUnitsEnded: Rule = (tokens, i, ctx) => {
+  let at = i;
+  if (word(tokens[at]) === 'the') at += 1;
+  const n = readNumber(tokens, at);
+  if (!n || !Number.isInteger(n.value) || n.value < 1) return undefined;
+  at += n.consumed;
+  const unit = UNIT_WORDS[word(tokens[at]) ?? ''];
+  if (unit !== 'day' && unit !== 'week' && unit !== 'month' && unit !== 'quarter' && unit !== 'year') return undefined;
+  at += 1;
+  const conn = word(tokens[at]);
+  if (conn !== 'ended' && conn !== 'ending') return undefined;
+  at += 1;
+  if (word(tokens[at]) === 'on' || word(tokens[at]) === 'in') at += 1;
+  if (word(tokens[at]) === 'the') at += 1;
+  const year = yearAt(tokens, at);
+  const inner =
+    ruleCalendarDate(tokens, at, ctx) ??
+    ruleLastThisNext(tokens, at, ctx) ??
+    (year !== undefined
+      ? { expr: { op: 'literal', date: { year } } as TimeExpr, consumed: 1, confidence: 0.85, role: 'date' as const }
+      : undefined);
+  if (!inner || inner.role !== 'date') return undefined;
+  const amount =
+    unit === 'quarter' ? { months: -3 * n.value } : { [`${unit}s`]: -n.value };
+  return {
+    expr: { op: 'span', anchor: inner.expr, amount },
+    consumed: at + inner.consumed - i,
+    confidence: 0.95,
+    role: 'date',
+  };
+};
+
 const ruleWeekOf: Rule = (tokens, i, ctx) => {
   let at = i;
   if (word(tokens[at]) === 'the') at += 1;
 
   // "w/c Feb 4" (week commencing)
   if (word(tokens[at]) === 'w/c' || word(tokens[at]) === 'wc') {
-    const date = ruleCalendarDate(tokens, at + 1, ctx);
+    const date = ruleWeekdayDate(tokens, at + 1, ctx) ?? ruleCalendarDate(tokens, at + 1, ctx);
     if (date && date.role === 'date') {
       return {
         expr: { op: 'snap', base: date.expr, unit: 'week' },
@@ -757,7 +837,8 @@ const ruleWeekOf: Rule = (tokens, i, ctx) => {
   if (word(tokens[at]) === 'week' && ['starting', 'beginning', 'commencing'].includes(word(tokens[at + 1]) ?? '')) {
     let dAt = at + 2;
     if (word(tokens[dAt]) === 'on' || word(tokens[dAt]) === 'from') dAt += 1;
-    const date = ruleCalendarDate(tokens, dAt, ctx) ?? ruleDeicticDay(tokens, dAt, ctx);
+    const date =
+      ruleWeekdayDate(tokens, dAt, ctx) ?? ruleCalendarDate(tokens, dAt, ctx) ?? ruleDeicticDay(tokens, dAt, ctx);
     if (date && date.role === 'date') {
       return {
         expr: { op: 'snap', base: date.expr, unit: 'week' },
@@ -784,7 +865,7 @@ const ruleWeekOf: Rule = (tokens, i, ctx) => {
   let scope: TimeExpr | undefined;
   let consumed = 0;
   const year = yearAt(tokens, at);
-  const date = ruleCalendarDate(tokens, at, ctx);
+  const date = ruleWeekdayDate(tokens, at, ctx) ?? ruleCalendarDate(tokens, at, ctx);
   if (date) {
     scope = date.expr;
     consumed = date.consumed;
@@ -1050,9 +1131,16 @@ const ruleHalfOf: Rule = (tokens, i, ctx) => {
     which = t.value as 1 | 2;
   }
   if (which === undefined) return undefined;
-  if (word(tokens[at + 1]) !== 'half' || word(tokens[at + 2]) !== 'of') return undefined;
-  at += 3;
-  if (word(tokens[at]) === 'the') at += 1;
+  if (word(tokens[at + 1]) !== 'half') return undefined;
+  if (word(tokens[at + 2]) === 'of') {
+    at += 3;
+    if (word(tokens[at]) === 'the') at += 1;
+  } else if (yearAt(tokens, at + 2) !== undefined) {
+    // "first half 2025" (#36): no "of" before a bare year.
+    at += 2;
+  } else {
+    return undefined;
+  }
 
   // Scope: a bare unit ("the year"), a relative period ("next month"), a
   // month name, a quarter, or a year.
@@ -1065,10 +1153,14 @@ const ruleHalfOf: Rule = (tokens, i, ctx) => {
     unit = uw;
     consumed = 1;
   } else {
-    const inner =
+    const bareYear = yearAt(tokens, at);
+    const inner: RuleMatch | undefined =
       ruleLastThisNext(tokens, at, ctx) ??
       ruleBareYear(tokens, at, ctx) ??
-      ruleCalendarDate(tokens, at, ctx);
+      ruleCalendarDate(tokens, at, ctx) ??
+      (bareYear !== undefined
+        ? { expr: { op: 'literal', date: { year: bareYear } }, consumed: 1, confidence: 0.85, role: 'date' }
+        : undefined);
     if (inner && inner.role === 'date') {
       unit = halfScopeUnit(inner.expr);
       if (unit) {
@@ -1912,11 +2004,26 @@ const ruleBareYear: Rule = (tokens, i) => {
   const y = readYear(tokens, i);
   if (!y || y.value < 1500 || y.value > 2199) return undefined;
   const prev = word(tokens[i - 1]);
-  if (prev !== undefined && !['in', 'since', 'by', 'until', 'during', 'year', 'of', 'from'].includes(prev)) {
+  if (
+    prev !== undefined &&
+    !['in', 'since', 'by', 'until', 'during', 'year', 'of', 'from', 'for', 'calendar', 'cy', 'throughout'].includes(prev)
+  ) {
     return undefined;
+  }
+  // "for 2024" / "revenue for 2024" (#36) — but not "for 2000 people": after
+  // "for", the year must end the phrase or be followed by a function word.
+  if (prev === 'for') {
+    const next = tokens[i + y.consumed];
+    const nw = word(next);
+    if (next !== undefined && (nw === undefined || !YEAR_FOLLOWERS.has(nw))) return undefined;
   }
   return { expr: { op: 'literal', date: { year: y.value } }, consumed: y.consumed, confidence: 0.85, role: 'date' };
 };
+
+const YEAR_FOLLOWERS = new Set([
+  'and', 'or', 'vs', 'versus', 'compared', 'to', 'through', 'thru', 'by', 'in', 'on', 'at', 'from', 'with',
+  'was', 'were', 'is', 'are', 'only', 'alone', 'so', 'than', 'but', '-', '?', '.', ';', ':', ')',
+]);
 
 /** Decades ("1990s", "the 90s") and centuries ("21st century"). */
 const ruleDecadeCentury: Rule = (tokens, i) => {
@@ -2919,6 +3026,8 @@ export const EN_RULE_ENTRIES: readonly { name: string; rule: Rule }[] = [
   { name: 'bare-year', rule: ruleBareYear },
   { name: 'calendar-date', rule: ruleCalendarDate },
   { name: 'clock-time', rule: ruleClockTime },
+  { name: 'weekday-date', rule: ruleWeekdayDate },
+  { name: 'n-units-ended', rule: ruleNUnitsEnded },
   { name: 'weekday-day', rule: ruleWeekdayDay },
   { name: 'weekday-alone', rule: ruleWeekdayAlone },
   { name: 'period-alone', rule: rulePeriodAlone },

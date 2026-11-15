@@ -10,6 +10,9 @@ Engine (semantics — mirrored in the Python engine, parity fixtures regenerated
 Parser:
 
 - "end of day yesterday", "yesterday at end of day", "at the end of the day yesterday" resolve to the end of yesterday ([#33](https://github.com/AndyFooBlah/nl2time/issues/33)) — a bare day edge now applies to the date it modifies instead of intersecting today's edge with that date (zero candidates).
+- A weekday written next to an explicit date ("Thursday 2026-08-20", "Monday, March 3, 2025") checks the date instead of adding a second, relative weekday ([#34](https://github.com/AndyFooBlah/nl2time/issues/34)); range ends and "the week of" use the date. A weekday that contradicts a dated year drops confidence to 0.6. 18 imported-English fixtures now record the date as their first match.
+- "from 2024-03-01 through the end of 2024" is one range ([#32](https://github.com/AndyFooBlah/nl2time/issues/32), parser part): range operands accept "the end/start/beginning of <year>".
+- New phrasings ([#36](https://github.com/AndyFooBlah/nl2time/issues/36)): "for 2024" / "revenue for 2024" (not "for 2000 people"), "calendar 2024", "first half 2025" (no "of"), "twelve months ended June" / "the 12 months ending June 30, 2026" / "three years ended 2025" = `span(<date>, -N units)`.
 - Fractional calendar amounts ("3,5 años", "半年", "123,45 secondes") are emitted as exact `duration`s ([#16](https://github.com/AndyFooBlah/nl2time/issues/16)), so the parser's output always passes `validateExpr`; a new test validates every `corpus/ir` expression.
 
 ## 0.3.3 — 2026-09-12

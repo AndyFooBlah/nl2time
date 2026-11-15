@@ -4148,27 +4148,23 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "tue"
+    "op": "literal",
+    "date": {
+     "month": 5,
+     "day": 9
     }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2018-01-09T00:00:00Z",
-     "end": "2018-01-10T00:00:00Z",
+     "start": "2017-05-09T00:00:00Z",
+     "end": "2017-05-10T00:00:00Z",
      "grain": "day"
     },
     {
      "kind": "interval",
-     "start": "2018-01-02T00:00:00Z",
-     "end": "2018-01-03T00:00:00Z",
+     "start": "2018-05-09T00:00:00Z",
+     "end": "2018-05-10T00:00:00Z",
      "grain": "day"
     }
    ]
@@ -8993,27 +8989,23 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "fri"
+    "op": "literal",
+    "date": {
+     "month": 7,
+     "day": 6
     }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2018-07-13T00:00:00Z",
-     "end": "2018-07-14T00:00:00Z",
+     "start": "2018-07-06T00:00:00Z",
+     "end": "2018-07-07T00:00:00Z",
      "grain": "day"
     },
     {
      "kind": "interval",
-     "start": "2018-06-29T00:00:00Z",
-     "end": "2018-06-30T00:00:00Z",
+     "start": "2019-07-06T00:00:00Z",
+     "end": "2019-07-07T00:00:00Z",
      "grain": "day"
     }
    ]
@@ -9051,27 +9043,23 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "fri"
+    "op": "literal",
+    "date": {
+     "month": 7,
+     "day": 6
     }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2018-07-13T00:00:00Z",
-     "end": "2018-07-14T00:00:00Z",
+     "start": "2018-07-06T00:00:00Z",
+     "end": "2018-07-07T00:00:00Z",
      "grain": "day"
     },
     {
      "kind": "interval",
-     "start": "2018-06-29T00:00:00Z",
-     "end": "2018-06-30T00:00:00Z",
+     "start": "2019-07-06T00:00:00Z",
+     "end": "2019-07-07T00:00:00Z",
      "grain": "day"
     }
    ]
@@ -9225,27 +9213,18 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "fri"
+    "op": "literal",
+    "date": {
+     "year": 2018,
+     "month": 7,
+     "day": 6
     }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2018-07-13T00:00:00Z",
-     "end": "2018-07-14T00:00:00Z",
-     "grain": "day"
-    },
-    {
-     "kind": "interval",
-     "start": "2018-06-29T00:00:00Z",
-     "end": "2018-06-30T00:00:00Z",
+     "start": "2018-07-06T00:00:00Z",
+     "end": "2018-07-07T00:00:00Z",
      "grain": "day"
     }
    ]
@@ -11056,28 +11035,37 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "thu"
-    }
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "month": 3,
+       "day": 29
+      }
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 11,
+       "minute": 0,
+       "meridiem": "am"
+      }
+     }
+    ]
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2018-09-13T00:00:00Z",
-     "end": "2018-09-14T00:00:00Z",
-     "grain": "day"
+     "start": "2018-03-29T11:00:00Z",
+     "end": "2018-03-29T11:01:00Z",
+     "grain": "minute"
     },
     {
      "kind": "interval",
-     "start": "2018-09-06T00:00:00Z",
-     "end": "2018-09-07T00:00:00Z",
-     "grain": "day"
+     "start": "2019-03-29T11:00:00Z",
+     "end": "2019-03-29T11:01:00Z",
+     "grain": "minute"
     }
    ]
   },
@@ -17003,28 +16991,48 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "tue"
-    }
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "month": 1,
+       "day": 15
+      }
+     },
+     {
+      "op": "between",
+      "start": {
+       "op": "literal",
+       "time": {
+        "hour": 1,
+        "minute": 0,
+        "meridiem": "pm"
+       }
+      },
+      "end": {
+       "op": "literal",
+       "time": {
+        "hour": 1,
+        "minute": 15,
+        "meridiem": "pm"
+       }
+      }
+     }
+    ]
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2019-03-05T00:00:00Z",
-     "end": "2019-03-06T00:00:00Z",
-     "grain": "day"
+     "start": "2019-01-15T13:00:00Z",
+     "end": "2019-01-15T13:15:00Z",
+     "grain": "minute"
     },
     {
      "kind": "interval",
-     "start": "2019-02-26T00:00:00Z",
-     "end": "2019-02-27T00:00:00Z",
-     "grain": "day"
+     "start": "2020-01-15T13:00:00Z",
+     "end": "2020-01-15T13:15:00Z",
+     "grain": "minute"
     }
    ]
   },
@@ -17884,28 +17892,36 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "fri"
-    }
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "month": 3,
+       "day": 15
+      }
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 9,
+       "meridiem": "am"
+      }
+     }
+    ]
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2019-04-26T00:00:00Z",
-     "end": "2019-04-27T00:00:00Z",
-     "grain": "day"
+     "start": "2019-03-15T09:00:00Z",
+     "end": "2019-03-15T10:00:00Z",
+     "grain": "hour"
     },
     {
      "kind": "interval",
-     "start": "2019-04-19T00:00:00Z",
-     "end": "2019-04-20T00:00:00Z",
-     "grain": "day"
+     "start": "2020-03-15T09:00:00Z",
+     "end": "2020-03-15T10:00:00Z",
+     "grain": "hour"
     }
    ]
   },
@@ -18419,27 +18435,23 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "fri"
+    "op": "literal",
+    "date": {
+     "month": 5,
+     "day": 12
     }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2019-05-24T00:00:00Z",
-     "end": "2019-05-25T00:00:00Z",
+     "start": "2019-05-12T00:00:00Z",
+     "end": "2019-05-13T00:00:00Z",
      "grain": "day"
     },
     {
      "kind": "interval",
-     "start": "2019-05-17T00:00:00Z",
-     "end": "2019-05-18T00:00:00Z",
+     "start": "2020-05-12T00:00:00Z",
+     "end": "2020-05-13T00:00:00Z",
      "grain": "day"
     }
    ]
@@ -28173,16 +28185,30 @@
     ]
    },
    "expr": {
-    "op": "literal",
-    "date": {
-     "year": 2007
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2007
+     }
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "literal",
+      "date": {
+       "year": 2008
+      }
+     },
+     "unit": "year",
+     "edge": "end"
     }
    },
    "candidates": [
     {
      "kind": "interval",
      "start": "2007-01-01T00:00:00Z",
-     "end": "2008-01-01T00:00:00Z",
+     "end": "2009-01-01T00:00:00Z",
      "grain": "year"
     }
    ]
@@ -28220,24 +28246,31 @@
     ]
    },
    "expr": {
-    "op": "span",
-    "anchor": {
+    "op": "between",
+    "start": {
      "op": "literal",
      "date": {
-      "year": 2008,
-      "month": 9
+      "year": 2007
      }
     },
-    "amount": {
-     "months": 4
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "literal",
+      "date": {
+       "year": 2008
+      }
+     },
+     "unit": "year",
+     "edge": "end"
     }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2008-09-01T00:00:00Z",
+     "start": "2007-01-01T00:00:00Z",
      "end": "2009-01-01T00:00:00Z",
-     "grain": "month"
+     "grain": "year"
     }
    ]
   },
@@ -28327,9 +28360,23 @@
     ]
    },
    "expr": {
-    "op": "literal",
-    "date": {
-     "year": 2007
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2007
+     }
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "literal",
+      "date": {
+       "year": 2008
+      }
+     },
+     "unit": "year",
+     "edge": "start"
     }
    },
    "candidates": [
@@ -28374,24 +28421,36 @@
     ]
    },
    "expr": {
-    "op": "span",
-    "anchor": {
-     "op": "literal",
-     "date": {
-      "year": 2007,
-      "month": 9
-     }
+    "op": "between",
+    "start": {
+     "op": "snap",
+     "base": {
+      "op": "literal",
+      "date": {
+       "year": 2007
+      }
+     },
+     "unit": "year",
+     "edge": "end"
     },
-    "amount": {
-     "months": 4
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "literal",
+      "date": {
+       "year": 2008
+      }
+     },
+     "unit": "year",
+     "edge": "end"
     }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2007-09-01T00:00:00Z",
-     "end": "2008-01-01T00:00:00Z",
-     "grain": "month"
+     "start": "2008-01-01T00:00:00Z",
+     "end": "2009-01-01T00:00:00Z",
+     "grain": "year"
     }
    ]
   },
@@ -44779,28 +44838,60 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "tue"
-    }
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "month": 5,
+       "day": 22
+      }
+     },
+     {
+      "op": "between",
+      "start": {
+       "op": "literal",
+       "time": {
+        "hour": 9,
+        "minute": 30,
+        "meridiem": "unknown"
+       }
+      },
+      "end": {
+       "op": "literal",
+       "time": {
+        "hour": 3,
+        "minute": 0,
+        "meridiem": "pm"
+       }
+      }
+     }
+    ]
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2018-06-19T00:00:00Z",
-     "end": "2018-06-20T00:00:00Z",
-     "grain": "day"
+     "start": "2018-05-22T09:30:00Z",
+     "end": "2018-05-22T15:00:00Z",
+     "grain": "minute"
     },
     {
      "kind": "interval",
-     "start": "2018-06-05T00:00:00Z",
-     "end": "2018-06-06T00:00:00Z",
-     "grain": "day"
+     "start": "2018-05-22T21:30:00Z",
+     "end": "2018-05-23T00:00:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-05-22T09:30:00Z",
+     "end": "2019-05-22T15:00:00Z",
+     "grain": "minute"
+    },
+    {
+     "kind": "interval",
+     "start": "2019-05-22T21:30:00Z",
+     "end": "2019-05-23T00:00:00Z",
+     "grain": "minute"
     }
    ]
   },
@@ -46408,27 +46499,23 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "fri"
+    "op": "literal",
+    "date": {
+     "month": 7,
+     "day": 6
     }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2018-07-13T00:00:00Z",
-     "end": "2018-07-14T00:00:00Z",
+     "start": "2018-07-06T00:00:00Z",
+     "end": "2018-07-07T00:00:00Z",
      "grain": "day"
     },
     {
      "kind": "interval",
-     "start": "2018-06-29T00:00:00Z",
-     "end": "2018-06-30T00:00:00Z",
+     "start": "2019-07-06T00:00:00Z",
+     "end": "2019-07-07T00:00:00Z",
      "grain": "day"
     }
    ]
@@ -46466,27 +46553,23 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "fri"
+    "op": "literal",
+    "date": {
+     "month": 7,
+     "day": 6
     }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2018-07-13T00:00:00Z",
-     "end": "2018-07-14T00:00:00Z",
+     "start": "2018-07-06T00:00:00Z",
+     "end": "2018-07-07T00:00:00Z",
      "grain": "day"
     },
     {
      "kind": "interval",
-     "start": "2018-06-29T00:00:00Z",
-     "end": "2018-06-30T00:00:00Z",
+     "start": "2019-07-06T00:00:00Z",
+     "end": "2019-07-07T00:00:00Z",
      "grain": "day"
     }
    ]
@@ -46640,27 +46723,18 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "fri"
+    "op": "literal",
+    "date": {
+     "year": 2018,
+     "month": 7,
+     "day": 6
     }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2018-07-13T00:00:00Z",
-     "end": "2018-07-14T00:00:00Z",
-     "grain": "day"
-    },
-    {
-     "kind": "interval",
-     "start": "2018-06-29T00:00:00Z",
-     "end": "2018-06-30T00:00:00Z",
+     "start": "2018-07-06T00:00:00Z",
+     "end": "2018-07-07T00:00:00Z",
      "grain": "day"
     }
    ]
@@ -47995,28 +48069,37 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "thu"
-    }
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "month": 3,
+       "day": 29
+      }
+     },
+     {
+      "op": "literal",
+      "time": {
+       "hour": 11,
+       "minute": 0,
+       "meridiem": "am"
+      }
+     }
+    ]
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2018-09-13T00:00:00Z",
-     "end": "2018-09-14T00:00:00Z",
-     "grain": "day"
+     "start": "2018-03-29T11:00:00Z",
+     "end": "2018-03-29T11:01:00Z",
+     "grain": "minute"
     },
     {
      "kind": "interval",
-     "start": "2018-09-06T00:00:00Z",
-     "end": "2018-09-07T00:00:00Z",
-     "grain": "day"
+     "start": "2019-03-29T11:00:00Z",
+     "end": "2019-03-29T11:01:00Z",
+     "grain": "minute"
     }
    ]
   },
@@ -53693,28 +53776,48 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "tue"
-    }
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "literal",
+      "date": {
+       "month": 1,
+       "day": 15
+      }
+     },
+     {
+      "op": "between",
+      "start": {
+       "op": "literal",
+       "time": {
+        "hour": 1,
+        "minute": 0,
+        "meridiem": "pm"
+       }
+      },
+      "end": {
+       "op": "literal",
+       "time": {
+        "hour": 1,
+        "minute": 15,
+        "meridiem": "pm"
+       }
+      }
+     }
+    ]
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2019-03-05T00:00:00Z",
-     "end": "2019-03-06T00:00:00Z",
-     "grain": "day"
+     "start": "2019-01-15T13:00:00Z",
+     "end": "2019-01-15T13:15:00Z",
+     "grain": "minute"
     },
     {
      "kind": "interval",
-     "start": "2019-02-26T00:00:00Z",
-     "end": "2019-02-27T00:00:00Z",
-     "grain": "day"
+     "start": "2020-01-15T13:00:00Z",
+     "end": "2020-01-15T13:15:00Z",
+     "grain": "minute"
     }
    ]
   },
@@ -54495,27 +54598,23 @@
     ]
    },
    "expr": {
-    "op": "seek",
-    "base": {
-     "op": "now"
-    },
-    "dir": "nearest",
-    "target": {
-     "kind": "weekday",
-     "weekday": "fri"
+    "op": "literal",
+    "date": {
+     "month": 5,
+     "day": 12
     }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2019-05-24T00:00:00Z",
-     "end": "2019-05-25T00:00:00Z",
+     "start": "2019-05-12T00:00:00Z",
+     "end": "2019-05-13T00:00:00Z",
      "grain": "day"
     },
     {
      "kind": "interval",
-     "start": "2019-05-17T00:00:00Z",
-     "end": "2019-05-18T00:00:00Z",
+     "start": "2020-05-12T00:00:00Z",
+     "end": "2020-05-13T00:00:00Z",
      "grain": "day"
     }
    ]

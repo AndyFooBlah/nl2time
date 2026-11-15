@@ -1,7 +1,7 @@
 {
  "corpus": "corpus/forward/imported-recognizers-en.json",
  "total": 1031,
- "passing": 873,
+ "passing": 876,
  "passingIds": [
   "rt-dtm-0000",
   "rt-dtm-0001",
@@ -451,7 +451,10 @@
   "rt-dtm-0683",
   "rt-dtm-0686",
   "rt-dtm-0687",
+  "rt-dtm-0688",
+  "rt-dtm-0689",
   "rt-dtm-0691",
+  "rt-dtm-0692",
   "rt-dtm-0696",
   "rt-dtm-0697",
   "rt-dtm-0702",
