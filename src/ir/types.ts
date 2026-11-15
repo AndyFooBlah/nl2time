@@ -104,6 +104,13 @@ export type TimeExprBody =
    */
   | { op: 'until'; end: TimeExpr; exclusive?: boolean }
   /**
+   * The stretch from `start` on ("after March 2022", "from 2020 onward"):
+   * from the end of `start` (its start when `inclusive`, as in "on or
+   * after") to now while `start` is over, else with an unbounded end. Clock
+   * times and boundary points start at the point itself.
+   */
+  | { op: 'after'; start: TimeExpr; inclusive?: boolean }
+  /**
    * Directed calendar navigation: seek(now, 'next', weekday tue) is "next
    * Tuesday" (semantics of 'next' controlled by context nextWeekday policy);
    * seek(marchExpr, 'next', weekday mon, 2) is "the 2nd Monday of March".

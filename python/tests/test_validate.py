@@ -84,3 +84,13 @@ def test_until_validation() -> None:
         validate_expr({"op": "until"})
     with pytest.raises(IRValidationError):
         validate_expr({"op": "until", "end": {"op": "now"}, "exclusive": "yes"})
+
+
+def test_after_validation() -> None:
+    # #58: the open-end op, mirroring validate.test.ts.
+    validate_expr({"op": "after", "start": {"op": "now"}, "inclusive": True})
+    validate_expr({"op": "after", "start": {"op": "literal", "date": {"year": 2022}}})
+    with pytest.raises(IRValidationError):
+        validate_expr({"op": "after"})
+    with pytest.raises(IRValidationError):
+        validate_expr({"op": "after", "start": {"op": "now"}, "inclusive": "yes"})

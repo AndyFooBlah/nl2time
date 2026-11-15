@@ -691,18 +691,110 @@ function buildRange(
  * [now, end(X)]. These only fire when the connector opens the range —
  * "A until B" and "from A through B" are consumed earlier by the range rule.
  */
+/**
+ * The operand of an open range ("since X", "until X", "after X"). A date and
+ * a clock time next to each other ("5pm on Friday", "Friday at 5pm", "9am
+ * yesterday") are one operand: wrapping only the first and leaving the other
+ * as a separate match, or merging it onto the wrapped range, loses the
+ * boundary (#58).
+ */
+function readOpenOperand(tokens: Token[], at: number, ctx: TimeContext): RuleMatch | undefined {
+  const first = readOpenOperandPart(tokens, at, ctx);
+  if (!first) return undefined;
+  const dateish = (r: RuleMatch['role']): boolean => r === 'date' || r === 'datetime';
+  const end = at + first.consumed;
+  for (const j of word(tokens[end]) === 'on' || word(tokens[end]) === 'at' ? [end, end + 1] : [end]) {
+    const second = readOpenOperandPart(tokens, j, ctx);
+    if (!second) continue;
+    const pair =
+      first.role === 'time' && dateish(second.role)
+        ? [second, first]
+        : dateish(first.role) && second.role === 'time'
+          ? [first, second]
+          : undefined;
+    if (!pair) return first;
+    return {
+      expr: { op: 'intersect', parts: [pair[0]!.expr, pair[1]!.expr] },
+      consumed: j + second.consumed - at,
+      confidence: Math.min(first.confidence, second.confidence),
+      role: 'datetime',
+    };
+  }
+  return first;
+}
+
+function readOpenOperandPart(tokens: Token[], at: number, ctx: TimeContext): RuleMatch | undefined {
+  return (
+    ruleDeicticDay(tokens, at, ctx) ??
+    ruleLastThisNext(tokens, at, ctx) ??
+    ruleHoliday(tokens, at, ctx) ??
+    ruleEndOf(tokens, at, ctx) ??
+    ruleWeekOf(tokens, at, ctx) ??
+    ruleBareYear(tokens, at, ctx) ??
+    ruleCalendarDate(tokens, at, ctx) ??
+    ruleClockTime(tokens, at, ctx) ??
+    ruleWeekdayAlone(tokens, at, ctx)
+  );
+}
+
+type OpenMode = 'since' | 'until' | 'after';
+
+/**
+ * Build the open-range expression for an operand. Late-part edge phrases
+ * ("end of month/year/quarter/week") parse as the period's late part —
+ * between(offset(start), end). As a deadline the answer is the period's END
+ * point, not the whole late part: using the interval would make the engine
+ * emit the inclusive/exclusive pair (#17) as a spurious second candidate
+ * whenever `now` precedes the late-part start (#29). Symmetrically, "since
+ * the beginning of the month" opens at the period's START point.
+ */
+function openRangeExpr(inner: TimeExpr, mode: OpenMode, flag: boolean): TimeExpr {
+  let target = inner;
+  if (target.op === 'between') {
+    if (mode !== 'since' && target.end.op === 'snap' && target.end.edge === 'end') {
+      target = target.end;
+    } else if (mode !== 'until' && target.start.op === 'snap' && target.start.edge === 'start') {
+      target = target.start;
+    }
+  }
+  // Deadlines become `until`: [now, X) while X is ahead, else the history up
+  // to X with an unbounded start ("orders before March 2022", #32). `after`
+  // mirrors it: X's end to now once X is over, else an unbounded end (#58).
+  if (mode === 'since') return { op: 'between', start: target, end: NOW };
+  if (mode === 'until') return { op: 'until', end: target, ...(flag ? { exclusive: true } : {}) };
+  return { op: 'after', start: target, ...(flag ? { inclusive: true } : {}) };
+}
+
+/**
+ * "since X", "until X", "by X", "before X", "up to X"; "after X", "on or
+ * after X", "starting (from) X" (#58).
+ */
 const ruleOpenRange: Rule = (tokens, i, ctx) => {
   const w = word(tokens[i]);
-  let mode: 'since' | 'until' | undefined;
+  let mode: OpenMode | undefined;
   let at = i + 1;
+  // until: `flag` = exclusive ("before"); after: `flag` = inclusive.
+  let flag = false;
   if (w === 'since') mode = 'since';
   else if (
     w === 'until' || w === 'till' || w === 'through' || w === 'thru' || w === 'by' || w === 'before'
   ) {
     mode = 'until';
+    flag = w === 'before';
   } else if (w === 'up' && word(tokens[i + 1]) === 'to') {
     mode = 'until';
     at = i + 2;
+  } else if (w === 'after') {
+    mode = 'after';
+  } else if (w === 'on' && word(tokens[i + 1]) === 'or' && word(tokens[i + 2]) === 'after') {
+    mode = 'after';
+    flag = true;
+    at = i + 3;
+  } else if (w === 'starting') {
+    mode = 'after';
+    flag = true;
+    const nw = word(tokens[at]);
+    if (nw === 'from' || nw === 'on' || nw === 'in' || nw === 'with') at += 1;
   }
   if (!mode) return undefined;
   // "by the 15th" / "by the end of the month": a bare article only before an
@@ -717,51 +809,53 @@ const ruleOpenRange: Rule = (tokens, i, ctx) => {
   // "through the end of 2024" (#32): a year's end is its boundary point here,
   // as in range operands, not the year's late part.
   const yearEdge = readYearEdge(tokens, word(tokens[at]) === 'the' ? at + 1 : at);
-  if (yearEdge && mode === 'until') {
+  if (yearEdge && mode !== 'since') {
     const consumed = (word(tokens[at]) === 'the' ? 1 : 0) + yearEdge.consumed;
     return {
-      expr: { op: 'until', end: yearEdge.expr, ...(w === 'before' ? { exclusive: true } : {}) },
+      expr: openRangeExpr(yearEdge.expr, mode, flag),
       consumed: at + consumed - i,
       confidence: 0.9,
       role: 'datetime',
     };
   }
-  const inner =
-    ruleDeicticDay(tokens, at, ctx) ??
-    ruleLastThisNext(tokens, at, ctx) ??
-    ruleHoliday(tokens, at, ctx) ??
-    ruleEndOf(tokens, at, ctx) ??
-    ruleWeekOf(tokens, at, ctx) ??
-    ruleBareYear(tokens, at, ctx) ??
-    ruleCalendarDate(tokens, at, ctx) ??
-    ruleClockTime(tokens, at, ctx) ??
-    ruleWeekdayAlone(tokens, at, ctx);
+  const inner = readOpenOperand(tokens, at, ctx);
   if (!inner || inner.role === 'duration') return undefined;
   // Boundary points ("by EOD") keep their point reading — the deadline
   // instant is the answer there, not a range.
-  if (inner.expr.op === 'snap' && inner.expr.edge !== undefined) return undefined;
-  // Late-part edge phrases ("end of month/year/quarter/week") parse as the
-  // period's late part — between(offset(start), end). As a deadline the
-  // answer is the period's END point, not the whole late part: using the
-  // interval would make the engine emit the inclusive/exclusive pair (#17)
-  // as a spurious second candidate whenever `now` precedes the late-part
-  // start (#29). Symmetrically, "since the beginning of the month" opens at
-  // the period's START point.
-  let target = inner.expr;
-  if (target.op === 'between') {
-    if (mode === 'until' && target.end.op === 'snap' && target.end.edge === 'end') {
-      target = target.end;
-    } else if (mode === 'since' && target.start.op === 'snap' && target.start.edge === 'start') {
-      target = target.start;
-    }
+  if (mode !== 'after' && inner.expr.op === 'snap' && inner.expr.edge !== undefined) return undefined;
+  let consumed = at + inner.consumed - i;
+  // "starting March 2022 onward": the suffix adds nothing but is consumed.
+  if (mode === 'after' && ONWARD_WORDS.has(word(tokens[i + consumed]) ?? '')) consumed += 1;
+  return { expr: openRangeExpr(inner.expr, mode, flag), consumed, confidence: 0.9, role: 'datetime' };
+};
+
+const ONWARD_WORDS = new Set(['onward', 'onwards', 'forward']);
+
+/**
+ * "(from) March 2022 onward(s)", "from 2020 on", "2020 and later", "Q3 or
+ * after": an inclusive open range from the operand on (#58).
+ */
+const ruleOnward: Rule = (tokens, i, ctx) => {
+  const from = word(tokens[i]) === 'from';
+  const at = from ? i + 1 : i;
+  const inner = readOpenOperand(tokens, at, ctx);
+  if (!inner || inner.role === 'duration') return undefined;
+  let end = at + inner.consumed;
+  const w1 = word(tokens[end]);
+  const w2 = word(tokens[end + 1]);
+  if (w1 === 'onward' || w1 === 'onwards' || w1 === 'forward' || (from && w1 === 'on')) {
+    end += 1;
+  } else if (
+    (w1 === 'and' || w1 === 'or') &&
+    // "and after" only closes the phrase: not "on 1/1/2016 and after my work
+    // item is done", where "after" starts a clause.
+    (w2 === 'later' || (w2 === 'after' && (tokens[end + 2] === undefined || tokens[end + 2]!.type !== 'word')))
+  ) {
+    end += 2;
+  } else {
+    return undefined;
   }
-  // Deadlines become `until`: [now, X) while X is ahead, else the history
-  // up to X with an unbounded start ("orders before March 2022", #32).
-  const expr: TimeExpr =
-    mode === 'since'
-      ? { op: 'between', start: target, end: NOW }
-      : { op: 'until', end: target, ...(w === 'before' ? { exclusive: true } : {}) };
-  return { expr, consumed: at + inner.consumed - i, confidence: 0.9, role: 'datetime' };
+  return { expr: openRangeExpr(inner.expr, 'after', true), consumed: end - i, confidence: 0.9, role: 'datetime' };
 };
 
 /** "week of April 10th", "the first/last week of July", "the week starting on Feb 4". */
@@ -1439,7 +1533,9 @@ const ruleNAfterDate: Rule = (tokens, i, ctx) => {
   if (lead === 'within') { spanMode = true; at += 1; }
   else if (lead === 'less' && word(tokens[at + 1]) === 'than') { spanMode = true; at += 2; }
 
-  const n = readNumber(tokens, at);
+  // "the day after Christmas" / "the day before yesterday" (#58): one day.
+  const theDay = !spanMode && lead === 'the' && UNIT_WORDS[word(tokens[at + 1]) ?? ''] === 'day';
+  const n = theDay ? { value: 1, consumed: 1 } : readNumber(tokens, at);
   if (!n || !Number.isInteger(n.value)) return undefined;
   const unit = UNIT_WORDS[word(tokens[at + n.consumed]) ?? ''];
   if (!unit) return undefined;
@@ -2130,13 +2226,17 @@ const ruleBareYear: Rule = (tokens, i) => {
   if (
     prev !== undefined &&
     !coordinated &&
-    !['in', 'since', 'by', 'until', 'during', 'year', 'of', 'from', 'for', 'calendar', 'cy', 'throughout'].includes(prev)
+    ![
+      'in', 'since', 'by', 'until', 'during', 'year', 'of', 'from', 'for', 'calendar', 'cy', 'throughout',
+      'after', 'before', 'starting',
+    ].includes(prev)
   ) {
     return undefined;
   }
   // "for 2024" / "revenue for 2024" (#36) — but not "for 2000 people": after
-  // "for", the year must end the phrase or be followed by a function word.
-  if (prev === 'for') {
+  // "for" (and "after"/"before"/"starting", #58), the year must end the
+  // phrase or be followed by a function word.
+  if (prev === 'for' || prev === 'after' || prev === 'before' || prev === 'starting') {
     const next = tokens[i + y.consumed];
     const nw = word(next);
     if (next !== undefined && (nw === undefined || !YEAR_FOLLOWERS.has(nw))) return undefined;
@@ -2147,6 +2247,7 @@ const ruleBareYear: Rule = (tokens, i) => {
 const YEAR_FOLLOWERS = new Set([
   'and', 'or', 'vs', 'versus', 'compared', 'to', 'through', 'thru', 'by', 'in', 'on', 'at', 'from', 'with',
   'was', 'were', 'is', 'are', 'only', 'alone', 'so', 'than', 'but', '-', '?', '.', ';', ':', ')',
+  'onward', 'onwards', 'forward',
 ]);
 
 /** Decades ("1990s", "the 90s") and centuries ("21st century"). */
@@ -3124,6 +3225,7 @@ const ruleAllUnit: Rule = (tokens, i) => {
 export const EN_RULE_ENTRIES: readonly { name: string; rule: Rule }[] = [
   { name: 'range', rule: ruleRange },
   { name: 'open-range', rule: ruleOpenRange },
+  { name: 'onward', rule: ruleOnward },
   { name: 'week-of', rule: ruleWeekOf },
   { name: 'nth-weekday-of', rule: ruleNthWeekdayOf },
   { name: 'day-of-scope', rule: ruleDayOfScope },

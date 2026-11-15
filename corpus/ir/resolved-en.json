@@ -23869,11 +23869,11 @@
     ]
    },
    "expr": {
-    "op": "intersect",
-    "parts": [
-     {
-      "op": "span",
-      "anchor": {
+    "op": "span",
+    "anchor": {
+     "op": "intersect",
+     "parts": [
+      {
        "op": "seek",
        "base": {
         "op": "now"
@@ -23884,31 +23884,31 @@
         "weekday": "fri"
        }
       },
-      "amount": {
-       "days": 1
+      {
+       "op": "literal",
+       "time": {
+        "hour": 5,
+        "meridiem": "pm"
+       }
       }
-     },
-     {
-      "op": "literal",
-      "time": {
-       "hour": 5,
-       "meridiem": "pm"
-      }
-     }
-    ]
+     ]
+    },
+    "amount": {
+     "days": 1
+    }
    },
    "candidates": [
     {
      "kind": "interval",
      "start": "2019-10-11T17:00:00Z",
-     "end": "2019-10-11T18:00:00Z",
-     "grain": "hour"
+     "end": "2019-10-12T17:00:00Z",
+     "grain": "day"
     },
     {
      "kind": "interval",
      "start": "2019-10-04T17:00:00Z",
-     "end": "2019-10-04T18:00:00Z",
-     "grain": "hour"
+     "end": "2019-10-05T17:00:00Z",
+     "grain": "day"
     }
    ]
   },
@@ -37499,57 +37499,18 @@
     ]
    },
    "expr": {
-    "op": "intersect",
-    "parts": [
-     {
-      "op": "intersect",
-      "parts": [
-       {
-        "op": "until",
-        "end": {
-         "op": "snap",
-         "base": {
-          "op": "offset",
-          "base": {
-           "op": "now"
-          },
-          "amount": 1,
-          "unit": "day"
-         },
-         "unit": "day"
-        }
-       },
-       {
-        "op": "literal",
-        "time": {
-         "hour": 2,
-         "meridiem": "pm"
-        }
-       }
-      ]
-     },
-     {
-      "op": "literal",
-      "time": {
-       "hour": 4,
-       "minute": 30,
-       "meridiem": "pm"
-      }
-     }
-    ]
+    "op": "literal",
+    "time": {
+     "hour": 2,
+     "meridiem": "pm"
+    }
    },
    "candidates": [
     {
      "kind": "interval",
-     "start": "2016-11-07T16:30:00Z",
-     "end": "2016-11-07T16:31:00Z",
-     "grain": "minute"
-    },
-    {
-     "kind": "interval",
-     "start": "2016-11-07T16:30:00Z",
-     "end": "2016-11-07T16:31:00Z",
-     "grain": "minute"
+     "start": "2016-11-07T14:00:00Z",
+     "end": "2016-11-07T15:00:00Z",
+     "grain": "hour"
     }
    ]
   },

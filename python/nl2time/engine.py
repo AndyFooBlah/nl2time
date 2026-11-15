@@ -55,7 +55,8 @@ MAX_CANDIDATES = 8
 Cand = dict[str, Any]
 
 # A resolved value (TimeValue) is a dict:
-#   {"kind": "interval", "start": Instant, "end": Instant, "grain": str}
+#   {"kind": "interval", "start": Instant | None, "end": Instant | None, "grain": str}
+#   (start None = unbounded start, #32; end None = unbounded end, #58)
 #   {"kind": "duration", "iso": str}
 #   {"kind": "amount", "amount": dict}
 TimeValue = dict[str, Any]
@@ -146,6 +147,36 @@ def _open_start_pair(e: ZInterval, ctx: TimeContext) -> list[Cand]:
     ]
 
 
+# Internal stand-in for an unbounded end; `_to_value` turns it into None.
+_OPEN_END = Instant.from_utc(9999, 1, 1)
+
+
+def _after_readings(s: ZInterval, inclusive: bool, ctx: TimeContext) -> list[Cand]:
+    """Readings for one start operand of `after` (#58). Plain "after X"
+    starts where X ends, with X's start as the alternative; `inclusive`
+    swaps the two. Clock times and boundary points start at the point itself.
+    A start that is already over (a date that has ended, a clock time that
+    has begun) runs to now, like "since X"; otherwise the end is open."""
+    point = _is_point(s)
+    clock = not point and _is_time_grained(s)
+    grain = _edge_grain(s.start) if point else s.grain
+    if point or clock:
+        bounds = [s.start]
+    elif inclusive:
+        bounds = [s.start, s.end]
+    else:
+        bounds = [s.end, s.start]
+    over = compare(s.start if clock else s.end, ctx.zoned_now) <= 0
+    out: list[Cand] = []
+    for b in bounds:
+        if not over:
+            open_ = _OPEN_END.to_tz(ctx.time_zone)
+            out.append({"type": "interval", "zi": ZInterval(b, open_, grain)})
+        elif compare(b, ctx.zoned_now) < 0:
+            out.append({"type": "interval", "zi": ZInterval(b, ctx.zoned_now, grain)})
+    return out
+
+
 def _edge_grain(z: ZonedDateTime) -> str:
     """Coarsest calendar boundary a single point sits on ("end of 2024" -> year)."""
     if compare(z, start_of_day(z)) != 0:
@@ -185,7 +216,7 @@ def value_to_json(v: TimeValue) -> dict[str, Any]:
         return {
             "kind": "interval",
             "start": None if v["start"] is None else format_instant(v["start"]),
-            "end": format_instant(v["end"]),
+            "end": None if v["end"] is None else format_instant(v["end"]),
             "grain": v["grain"],
         }
     return v
@@ -198,7 +229,7 @@ def _to_value(c: Cand) -> TimeValue:
         return {
             "kind": "interval",
             "start": None if open_start else zi.start.to_instant(),
-            "end": zi.end.to_instant(),
+            "end": None if zi.end.to_instant() == _OPEN_END else zi.end.to_instant(),
             "grain": zi.grain,
         }
     if c["type"] == "duration":
@@ -387,6 +418,15 @@ def _eval_expr_inner(
                 pair = [pair[1], pair[0]]
             out.extend(pair)
         return out
+
+    if op == "after":
+        # "after March 2022", "on or after March 1", "from 2020 onward" (#58).
+        return [
+            r
+            for s in _eval_expr(expr["start"], ctx, anchor)
+            if s["type"] == "interval"
+            for r in _after_readings(s["zi"], expr.get("inclusive") is True, ctx)
+        ]
 
     if op == "seek":
         return _eval_seek(expr, ctx, anchor)

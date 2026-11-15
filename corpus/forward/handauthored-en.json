@@ -2917,6 +2917,516 @@
         "name": "nl2time",
         "license": "MIT"
       }
+    },
+    {
+      "id": "fw-0124",
+      "text": "orders after March 2022",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: 'after' a past month starts where it ends and runs to now; X's start is the alternative",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2022-04-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "month"
+          },
+          {
+            "startLocal": "2022-03-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "month"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0125",
+      "text": "after 2020",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: bare year after 'after'",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2021-01-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "year"
+          },
+          {
+            "startLocal": "2020-01-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "year"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0126",
+      "text": "after 2025-06-30",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2025-07-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "day"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0127",
+      "text": "after yesterday",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2026-10-13T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "day"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0128",
+      "text": "after the end of 2024",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: a boundary point starts at the point itself",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2025-01-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "year"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0129",
+      "text": "on or after March 1",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: inclusive leads",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2026-03-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "day"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0130",
+      "text": "from March 2022 onward",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: inclusive",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2022-03-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "month"
+          },
+          {
+            "startLocal": "2022-04-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "month"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0131",
+      "text": "March 2022 onwards",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: inclusive suffix",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2022-03-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "month"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0132",
+      "text": "starting March 2022",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: inclusive",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2022-03-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "month"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0133",
+      "text": "2020 and later",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: inclusive suffix",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2020-01-01T00:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "year"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0134",
+      "text": "after next week",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: a start not yet over has an unbounded end",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2026-10-26T00:00:00",
+            "openEnd": true,
+            "grain": "week"
+          },
+          {
+            "startLocal": "2026-10-19T00:00:00",
+            "openEnd": true,
+            "grain": "week"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0135",
+      "text": "after March 2027",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: future month, unbounded end",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2027-04-01T00:00:00",
+            "openEnd": true,
+            "grain": "month"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0136",
+      "text": "after 5pm",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: a clock time starts at the time itself (not the end of the 17:00 hour)",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2026-10-13T17:00:00",
+            "openEnd": true,
+            "grain": "hour"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0137",
+      "text": "after 5pm on Friday",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: date + clock time is one operand; past bias leads with last Friday",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2026-10-09T17:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "hour"
+          },
+          {
+            "startLocal": "2026-10-16T17:00:00",
+            "openEnd": true,
+            "grain": "hour"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0138",
+      "text": "until Friday at 5pm",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: date + clock time is one deadline (was intersect(until Friday, 5pm))",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2026-10-13T08:00:00",
+            "endLocal": "2026-10-16T17:00:00"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0139",
+      "text": "since 9am yesterday",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: clock time + date is one operand (was split into two matches)",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2026-10-12T09:00:00",
+            "endLocal": "2026-10-13T08:00:00",
+            "grain": "hour"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0140",
+      "text": "before 2020",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58 sibling of #32: bare year after 'before'",
+      "expect": {
+        "candidates": [
+          {
+            "openStart": true,
+            "endLocal": "2020-01-01T00:00:00",
+            "grain": "year"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0141",
+      "text": "the day after Christmas",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#58: was Christmas itself",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2025-12-26T00:00:00",
+            "endLocal": "2025-12-27T00:00:00",
+            "grain": "day"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
     }
   ]
 }

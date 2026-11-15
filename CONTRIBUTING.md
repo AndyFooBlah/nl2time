@@ -6,7 +6,7 @@ Thanks for helping out. Bug reports and pull requests are welcome; the notes bel
 
 ```sh
 npm ci && npm run typecheck && npm test && npm run build     # JS: TypeScript reference (~209 tests + corpus baselines)
-uv run --project python --extra dev pytest python/tests -q   # Python: engine port (2,827 engine-parity fixtures)
+uv run --project python --extra dev pytest python/tests -q   # Python: engine port (2,845 engine-parity fixtures)
 ```
 
 CI runs both, plus the fixture-drift gate described below, on every push and pull request. First-time contributors' workflow runs need a maintainer's approval click before they start.

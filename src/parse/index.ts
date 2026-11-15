@@ -141,8 +141,11 @@ function mergeAdjacent(matches: Positioned[], tokens: Token[], connectors: reado
       const [anchorPart, durPart] = cur.role === 'duration' ? [next, cur] : [cur, next];
       const amount = amountOf(durPart.expr);
       if (amount) {
+        // "for a week starting tomorrow": "starting X" parses as an open
+        // range from X (#58); as a span anchor only X itself counts.
+        const anchor = anchorPart.expr.op === 'after' ? anchorPart.expr.start : anchorPart.expr;
         out.push({
-          expr: { op: 'span', anchor: anchorPart.expr, amount },
+          expr: { op: 'span', anchor, amount },
           consumed: next.tokenEnd - cur.tokenStart,
           confidence: Math.max(cur.confidence, next.confidence),
           // A span anchored at a time-of-day is still time-of-day-ish: it can
@@ -222,6 +225,10 @@ function mergeAdjacent(matches: Positioned[], tokens: Token[], connectors: reado
 }
 
 function canMerge(a: Positioned, b: Positioned): boolean {
+  // An open range already carries its own boundary; a neighbouring clock time
+  // is not a refinement of it ("from 2pm till tomorrow 4:30pm", #58).
+  const open = (e: TimeExpr): boolean => e.op === 'until' || e.op === 'after';
+  if (open(a.expr) || open(b.expr)) return false;
   const dateish = (r: string): boolean => r === 'date' || r === 'datetime';
   return (dateish(a.role) && b.role === 'time') || (a.role === 'time' && dateish(b.role));
 }

@@ -82,3 +82,14 @@ suite('until (#32)', () => {
     expect(() => validateExpr({ op: 'until', end: { op: 'now' }, exclusive: 'yes' })).toThrow(IRValidationError);
   });
 });
+
+suite('after (#58)', () => {
+  test('accepts after with an optional boolean inclusive', () => {
+    expect(() => validateExpr({ op: 'after', start: { op: 'literal', date: { year: 2022, month: 3 } }, inclusive: true })).not.toThrow();
+    expect(() => validateExpr({ op: 'after', start: { op: 'now' } })).not.toThrow();
+  });
+  test('rejects a missing start or a non-boolean inclusive', () => {
+    expect(() => validateExpr({ op: 'after' })).toThrow(IRValidationError);
+    expect(() => validateExpr({ op: 'after', start: { op: 'now' }, inclusive: 'yes' })).toThrow(IRValidationError);
+  });
+});

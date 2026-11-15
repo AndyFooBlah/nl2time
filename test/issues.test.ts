@@ -53,3 +53,29 @@ suite('#35 disjunctions and anaphora', () => {
     expect(texts('between 2020 and 2022')).toEqual(['between 2020 and 2022']);
   });
 });
+
+suite('#58 "after X" open ranges', () => {
+  test('a future start resolves with end null', () => {
+    const [m] = parse('after next week', ctx).matches;
+    const [c] = resolve(m!.expr, ctx).candidates;
+    expect(c).toMatchObject({ kind: 'interval', end: null, grain: 'week' });
+  });
+  test('describe() renders an open-end interval as "from … on" and round-trips', () => {
+    const [m] = parse('after March 2027', ctx).matches;
+    const [c] = resolve(m!.expr, ctx).candidates;
+    const d = describe(c!, ctx);
+    expect(d.text).toMatch(/^from .* on$/);
+    const [back] = resolve(d.expr, ctx).candidates;
+    expect(back).toMatchObject({ end: null });
+    expect(back!.kind === 'interval' && c!.kind === 'interval' && back!.start!.equals(c!.start!)).toBe(true);
+  });
+  test('"after" that does not introduce a time is left alone', () => {
+    expect(texts('after 2000 attempts')).toEqual([]);
+    expect(texts('after the meeting')).toEqual([]);
+    expect(texts('I can only leave on 1/1/2016 and after my work item is done')).toEqual(['1/1/2016']);
+  });
+  test('"for a week starting tomorrow" stays a span anchored on tomorrow', () => {
+    const [m] = parse('for a week starting tomorrow', ctx).matches;
+    expect(m!.expr).toMatchObject({ op: 'span', anchor: { op: 'snap' }, amount: { weeks: 1 } });
+  });
+});

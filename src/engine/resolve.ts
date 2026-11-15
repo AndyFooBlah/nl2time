@@ -38,8 +38,11 @@ export class AmbiguityError extends Error {
 
 /** A resolved value. Intervals are half-open [start, end). */
 export type TimeValue =
-  /** `start` is null for an unbounded start ("before March 2022", #32). */
-  | { kind: 'interval'; start: Instant | null; end: Instant; grain: Grain }
+  /**
+   * `start` is null for an unbounded start ("before March 2022", #32); `end`
+   * is null for an unbounded end ("after next week", #58).
+   */
+  | { kind: 'interval'; start: Instant | null; end: Instant | null; grain: Grain }
   | { kind: 'duration'; iso: string }
   | { kind: 'amount'; amount: CalendarAmount };
 
@@ -162,6 +165,38 @@ function openStartPair(e: ZInterval, ctx: TimeContext): Cand[] {
   ];
 }
 
+/**
+ * Internal stand-in for an unbounded end; `toValue` turns it into `end: null`.
+ * Far enough ahead that no calendar arithmetic reaches it.
+ */
+const OPEN_END = Temporal.Instant.from('9999-01-01T00:00:00Z');
+
+/**
+ * Readings for one start operand of `after` (#58). Plain "after X" starts
+ * where X ends ("after March" = April on), with X's start as the
+ * alternative; `inclusive` ("on or after", "from X onward") swaps the two.
+ * Clock times and boundary points start at the point itself. A start that
+ * is already over (a date that has ended, a clock time that has begun) runs
+ * to now, like "since X"; otherwise the end is open.
+ */
+function afterReadings(s: ZInterval, inclusive: boolean, ctx: TimeContext): Cand[] {
+  const point = isPointZi(s);
+  const clock = !point && isTimeGrained(s);
+  const grain = point ? edgeGrain(s.start) : s.grain;
+  const bounds = point || clock ? [s.start] : inclusive ? [s.start, s.end] : [s.end, s.start];
+  // A date is over once it has ended; a clock time once it has started.
+  const over = Temporal_compare(clock ? s.start : s.end, ctx.zonedNow) <= 0;
+  const out: Cand[] = [];
+  for (const b of bounds) {
+    if (!over) {
+      out.push({ type: 'interval', zi: { start: b, end: OPEN_END.toZonedDateTimeISO(ctx.timeZone), grain } });
+    } else if (Temporal_compare(b, ctx.zonedNow) < 0) {
+      out.push({ type: 'interval', zi: { start: b, end: ctx.zonedNow, grain } });
+    }
+  }
+  return out;
+}
+
 /** Coarsest calendar boundary a single point sits on ("end of 2024" → year). */
 function edgeGrain(z: Zoned): Grain {
   if (Temporal_compare(z, z.startOfDay()) !== 0) return 'instant';
@@ -196,7 +231,7 @@ function toValue(c: Cand): TimeValue {
       return {
         kind: 'interval',
         start: c.zi.start.epochMilliseconds === OPEN_START.epochMilliseconds ? null : c.zi.start.toInstant(),
-        end: c.zi.end.toInstant(),
+        end: c.zi.end.epochMilliseconds === OPEN_END.epochMilliseconds ? null : c.zi.end.toInstant(),
         grain: c.zi.grain,
       };
     case 'duration':
@@ -361,6 +396,12 @@ function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | und
       }
       return out;
     }
+
+    case 'after':
+      // "after March 2022", "on or after March 1", "from 2020 onward" (#58).
+      return evalExpr(expr.start, ctx, anchor).flatMap((s) =>
+        s.type === 'interval' ? afterReadings(s.zi, expr.inclusive === true, ctx) : [],
+      );
 
     case 'seek':
       return evalSeek(expr, ctx, anchor);

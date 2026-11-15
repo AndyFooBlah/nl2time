@@ -34,13 +34,14 @@ resolve(expr, ctx)["candidates"][0]
 # {"kind": "interval", "start": Instant("2026-07-12 07:00:00Z"),
 #  "end": Instant("2026-07-19 07:00:00Z"), "grain": "week"}
 # (values are `whenever.Instant`; candidates are ordered, ambiguity is data;
-#  an open-start range such as {"op": "until", ...} for a past boundary has "start": None)
+#  an open-start range such as {"op": "until", ...} for a past boundary has "start": None,
+#  and an open-end range such as {"op": "after", ...} for a future boundary has "end": None)
 ```
 
 ## Parity guarantee
 
 This engine reproduces the JS reference **bit-exactly** — instants, grains,
-and candidate order — across all 2,827 machine-generated engine-parity
+and candidate order — across all 2,845 machine-generated engine-parity
 fixtures derived from the project's six-language conformance corpora, enforced
 in CI on every commit. Spec: [ir-spec.md](https://github.com/AndyFooBlah/nl2time/blob/main/docs/ir-spec.md);
 strategy: [porting.md](https://github.com/AndyFooBlah/nl2time/blob/main/docs/porting.md);

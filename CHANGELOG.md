@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.5.0 — 2026-11-15
+
+"after X" and its relatives ([#58](https://github.com/AndyFooBlah/nl2time/issues/58)). Minor bump because `TimeValue.end` can now be `null`. Engine changes are mirrored in Python 0.3.0; 2,845 engine-parity fixtures.
+
+- New IR op `after {start, inclusive?}`, the mirror of `until`, for "after / on or after / starting (from) X", "(from) X onward(s)", "from X on" and "X and/or later". Before, every one of these dropped the connector and returned X itself ("orders after March 2022" → March 2022). Now:
+  - A start that is over runs to now, like "since": "orders after March 2022" → [2022-04-01, now), "after 2020" → [2021-01-01, now).
+  - A start that is not over yet has an **unbounded end**: "after next week" → [2026-10-26, ∞).
+  - Plain "after X" begins where X ends; the inclusive forms ("on or after", "onward", "starting") begin where X begins. Each keeps the other as the second candidate.
+  - Clock times begin at the time itself: "after 5pm" → [17:00, ∞), not 18:00.
+  - Additive IR change: `IR_VERSION` stays 1, and the JSON schema gains `After`.
+- **Breaking (TypeScript type):** `TimeValue` intervals have `end: Instant | null` (Python: `None`), and `null` means unbounded. `describe()` renders such a value as "from … on", which round-trips through `after`. The corpus format gains `openEnd`.
+- Open-range operands read a date and a clock time next to each other as one boundary:
+  - "until Friday at 5pm" → [now, Fri 17:00). It was `intersect(until Friday, 5pm)`.
+  - "since 9am yesterday" and "after 5pm on Friday" were each split into two matches.
+  - One more imported case passes (rt-dtm-0581, "for a day starting this Friday at 5 pm"), and the baseline is promoted to 874.
+- "before 2020" / "after 2020" / "starting 2020" now match. Bare years after these words need the same function-word guard as "for", so "after 2000 attempts" still does not match.
+- "the day after Christmas" / "the day before yesterday" are one-day offsets. "the day after Christmas" used to return Christmas itself.
+- "X and after" counts only at the end of a phrase: "on 1/1/2016 and after my work item is done" keeps just the date.
+
+## Python 0.3.0 (PyPI) — 2026-11-15
+
+Engine parity release for 0.5.0: the `after` op with `"end": None` for open-end ranges (#58), plus `validate_expr` support. 100% bit-exact parity with the JS reference (2,845 fixtures).
+
 ## 0.4.0 — 2026-11-15
 
 Bug round: every open bug report fixed ([#14](https://github.com/AndyFooBlah/nl2time/issues/14), [#16](https://github.com/AndyFooBlah/nl2time/issues/16), [#23](https://github.com/AndyFooBlah/nl2time/issues/23), [#32](https://github.com/AndyFooBlah/nl2time/issues/32)–[#37](https://github.com/AndyFooBlah/nl2time/issues/37)). Minor bump because `TimeValue.start` can now be `null`. Engine changes are mirrored in Python 0.2.0; 2,827 engine-parity fixtures.
