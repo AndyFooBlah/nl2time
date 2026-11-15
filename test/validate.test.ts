@@ -71,3 +71,14 @@ suite("the parser's own output validates (#16)", () => {
     });
   }
 });
+
+suite('until (#32)', () => {
+  test('accepts until with an optional boolean exclusive', () => {
+    expect(() => validateExpr({ op: 'until', end: { op: 'literal', date: { year: 2022, month: 3 } }, exclusive: true })).not.toThrow();
+    expect(() => validateExpr({ op: 'until', end: { op: 'now' } })).not.toThrow();
+  });
+  test('rejects a missing end or a non-boolean exclusive', () => {
+    expect(() => validateExpr({ op: 'until' })).toThrow(IRValidationError);
+    expect(() => validateExpr({ op: 'until', end: { op: 'now' }, exclusive: 'yes' })).toThrow(IRValidationError);
+  });
+});

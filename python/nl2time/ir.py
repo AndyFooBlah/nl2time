@@ -168,6 +168,11 @@ def validate_expr(input: Any, path: str = "$") -> TimeExpr:
         validate_expr(obj.get("start"), f"{path}.start")
         validate_expr(obj.get("end"), f"{path}.end")
         return obj
+    if op == "until":
+        validate_expr(obj.get("end"), f"{path}.end")
+        if obj.get("exclusive") is not None and not isinstance(obj["exclusive"], bool):
+            raise IRValidationError("exclusive must be boolean", f"{path}.exclusive")
+        return obj
     if op == "seek":
         validate_expr(obj.get("base"), f"{path}.base")
         if obj.get("dir") not in _DIRS:

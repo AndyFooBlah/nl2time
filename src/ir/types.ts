@@ -97,6 +97,13 @@ export type TimeExprBody =
   | { op: 'span'; anchor: TimeExpr; amount: CalendarAmount; business?: boolean }
   | { op: 'between'; start: TimeExpr; end: TimeExpr }
   /**
+   * The stretch up to `end` ("by Friday", "until 2025-06-30", "before March
+   * 2022"): [now, end) while `end` is ahead of now, else (−∞, end) with an
+   * unbounded start. `exclusive` ("before") ranks the reading that stops at
+   * the start of `end` first.
+   */
+  | { op: 'until'; end: TimeExpr; exclusive?: boolean }
+  /**
    * Directed calendar navigation: seek(now, 'next', weekday tue) is "next
    * Tuesday" (semantics of 'next' controlled by context nextWeekday policy);
    * seek(marchExpr, 'next', weekday mon, 2) is "the 2nd Monday of March".

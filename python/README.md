@@ -33,7 +33,8 @@ expr = {
 resolve(expr, ctx)["candidates"][0]
 # {"kind": "interval", "start": Instant("2026-07-12 07:00:00Z"),
 #  "end": Instant("2026-07-19 07:00:00Z"), "grain": "week"}
-# (values are `whenever.Instant`; candidates are ordered, ambiguity is data)
+# (values are `whenever.Instant`; candidates are ordered, ambiguity is data;
+#  an open-start range such as {"op": "until", ...} for a past boundary has "start": None)
 ```
 
 ## Parity guarantee

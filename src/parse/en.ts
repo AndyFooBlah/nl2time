@@ -461,6 +461,20 @@ type RangeOperand =
   | { kind: 'time'; time: PartialTime }
   | { kind: 'date'; expr: TimeExpr };
 
+/** "end of 2024" / "beginning of the year 2024" → the year's boundary point. */
+function readYearEdge(tokens: Token[], i: number): { expr: TimeExpr; consumed: number } | undefined {
+  const w0 = word(tokens[i]);
+  if ((w0 !== 'end' && w0 !== 'beginning' && w0 !== 'start') || word(tokens[i + 1]) !== 'of') return undefined;
+  let yAt = i + 2;
+  if (word(tokens[yAt]) === 'the') yAt += 1;
+  const year = yearAt(tokens, yAt);
+  if (year === undefined) return undefined;
+  return {
+    expr: { op: 'snap', base: { op: 'literal', date: { year } }, unit: 'year', edge: w0 === 'end' ? 'end' : 'start' },
+    consumed: yAt + 1 - i,
+  };
+}
+
 function readOperand(
   tokens: Token[],
   i: number,
@@ -470,26 +484,8 @@ function readOperand(
   // YEAR" means the year's end boundary (a point), not its final third.
   // "through the end of 2024" (#32): an article before the boundary word.
   const lead = word(tokens[i]) === 'the' ? 1 : 0;
-  const w0 = word(tokens[i + lead]);
-  if ((w0 === 'end' || w0 === 'beginning' || w0 === 'start') && word(tokens[i + lead + 1]) === 'of') {
-    let yAt = i + lead + 2;
-    if (word(tokens[yAt]) === 'the') yAt += 1;
-    const year = yearAt(tokens, yAt);
-    if (year !== undefined) {
-      return {
-        operand: {
-          kind: 'date',
-          expr: {
-            op: 'snap',
-            base: { op: 'literal', date: { year } },
-            unit: 'year',
-            edge: w0 === 'end' ? 'end' : 'start',
-          },
-        },
-        consumed: yAt + 1 - i,
-      };
-    }
-  }
+  const edge = readYearEdge(tokens, i + lead);
+  if (edge) return { operand: { kind: 'date', expr: edge.expr }, consumed: lead + edge.consumed };
   const wdd = readWeekdayDate(tokens, i, ctx);
   if (wdd) return { operand: { kind: 'date', expr: wdd.expr }, consumed: wdd.consumed };
   const rel = ruleLastThisNext(tokens, i, ctx);
@@ -703,6 +699,18 @@ const ruleOpenRange: Rule = (tokens, i, ctx) => {
   ) {
     at += 1;
   }
+  // "through the end of 2024" (#32): a year's end is its boundary point here,
+  // as in range operands, not the year's late part.
+  const yearEdge = readYearEdge(tokens, word(tokens[at]) === 'the' ? at + 1 : at);
+  if (yearEdge && mode === 'until') {
+    const consumed = (word(tokens[at]) === 'the' ? 1 : 0) + yearEdge.consumed;
+    return {
+      expr: { op: 'until', end: yearEdge.expr, ...(w === 'before' ? { exclusive: true } : {}) },
+      consumed: at + consumed - i,
+      confidence: 0.9,
+      role: 'datetime',
+    };
+  }
   const inner =
     ruleDeicticDay(tokens, at, ctx) ??
     ruleLastThisNext(tokens, at, ctx) ??
@@ -732,10 +740,12 @@ const ruleOpenRange: Rule = (tokens, i, ctx) => {
       target = target.start;
     }
   }
+  // Deadlines become `until`: [now, X) while X is ahead, else the history
+  // up to X with an unbounded start ("orders before March 2022", #32).
   const expr: TimeExpr =
     mode === 'since'
       ? { op: 'between', start: target, end: NOW }
-      : { op: 'between', start: NOW, end: target };
+      : { op: 'until', end: target, ...(w === 'before' ? { exclusive: true } : {}) };
   return { expr, consumed: at + inner.consumed - i, confidence: 0.9, role: 'datetime' };
 };
 

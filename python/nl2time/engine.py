@@ -9,7 +9,7 @@ from __future__ import annotations
 import calendar
 from typing import Any, Callable
 
-from whenever import ZonedDateTime
+from whenever import Instant, ZonedDateTime
 
 from .clock import (
     ZInterval,
@@ -92,6 +92,69 @@ def _range_grain(
     return _finer_grain(s.grain, e.grain)
 
 
+def _is_time_grained(e: ZInterval) -> bool:
+    """Clock-time semantics need a fine grain AND a sub-day extent."""
+    return _GI[e.grain] < _DAY_I and (
+        _is_point(e) or compare(add_calendar(e.start, days=1), e.end) > 0
+    )
+
+
+def _between_pair(s: ZInterval, e: ZInterval, touches_now: bool) -> list[Cand]:
+    """Candidates for one (start, end) operand pair of `between` (betweenPair in resolve.ts)."""
+    out: list[Cand] = []
+    is_point = _is_point(e)
+    time_grained = _is_time_grained(e)
+    # Day-grain-or-coarser ends are conversationally inclusive: "between July
+    # 4th and July 10th" covers the 10th. Emit the inclusive reading first,
+    # with the strict exclusive-at-start reading as an alternative (#17).
+    if not is_point and not time_grained:
+        if compare(s.start, e.end) < 0:
+            grain = _range_grain(s, e, s.start, e.end, touches_now)
+            out.append({"type": "interval", "zi": ZInterval(s.start, e.end, grain)})
+        if compare(s.start, e.start) < 0:
+            grain = _range_grain(s, e, s.start, e.start, touches_now)
+            out.append({"type": "interval", "zi": ZInterval(s.start, e.start, grain)})
+        return out
+    # Non-point time ends are exclusive at their *start* ("9 to 5pm" ends at
+    # 17:00); point ends are used directly.
+    end_point = e.end if is_point else e.start
+    if compare(s.start, end_point) >= 0:
+        # A clock-time range wrapping midnight rolls the end into the next
+        # day; date ranges just drop.
+        if not time_grained:
+            return out
+        end_point = add_calendar(end_point, days=1)
+        if compare(s.start, end_point) >= 0:
+            return out
+    grain = _range_grain(s, e, s.start, end_point, touches_now)
+    out.append({"type": "interval", "zi": ZInterval(s.start, end_point, grain)})
+    return out
+
+
+# Internal stand-in for an unbounded start; _to_value turns it into None.
+_OPEN_START = Instant.from_utc(100, 1, 1)
+
+
+def _open_start_pair(e: ZInterval, ctx: TimeContext) -> list[Cand]:
+    """(-inf, end) readings for an `until` whose end is not after now (#32)."""
+    open_ = _OPEN_START.to_tz(ctx.time_zone)
+    if _is_point(e):
+        return [{"type": "interval", "zi": ZInterval(open_, e.end, _edge_grain(e.end))}]
+    return [
+        {"type": "interval", "zi": ZInterval(open_, e.end, e.grain)},
+        {"type": "interval", "zi": ZInterval(open_, e.start, e.grain)},
+    ]
+
+
+def _edge_grain(z: ZonedDateTime) -> str:
+    """Coarsest calendar boundary a single point sits on ("end of 2024" -> year)."""
+    if compare(z, start_of_day(z)) != 0:
+        return "instant"
+    if z.day != 1:
+        return "day"
+    return "year" if z.month == 1 else "month"
+
+
 def _aligned_grain(start: ZonedDateTime, end: ZonedDateTime) -> str:
     if compare(start, end) == 0:
         return "instant"
@@ -121,7 +184,7 @@ def value_to_json(v: TimeValue) -> dict[str, Any]:
     if v["kind"] == "interval":
         return {
             "kind": "interval",
-            "start": format_instant(v["start"]),
+            "start": None if v["start"] is None else format_instant(v["start"]),
             "end": format_instant(v["end"]),
             "grain": v["grain"],
         }
@@ -131,9 +194,10 @@ def value_to_json(v: TimeValue) -> dict[str, Any]:
 def _to_value(c: Cand) -> TimeValue:
     if c["type"] == "interval":
         zi: ZInterval = c["zi"]
+        open_start = zi.start.to_instant() == _OPEN_START
         return {
             "kind": "interval",
-            "start": zi.start.to_instant(),
+            "start": None if open_start else zi.start.to_instant(),
             "end": zi.end.to_instant(),
             "grain": zi.grain,
         }
@@ -283,80 +347,45 @@ def _eval_expr_inner(
         )
 
     if op == "between":
-        starts = _eval_expr(expr["start"], ctx, anchor)
         touches_now = expr["start"]["op"] == "now" or expr["end"]["op"] == "now"
         out: list[Cand] = []
-        for s in starts:
+        for s in _eval_expr(expr["start"], ctx, anchor):
             if s["type"] != "interval":
                 continue
-            s_zi: ZInterval = s["zi"]
             # The end operand resolves anchored to the start (shared context:
             # "between 3 and 12 of Sept" — the 3 anchors to September).
-            for e in _eval_expr(expr["end"], ctx, s_zi):
+            for e in _eval_expr(expr["end"], ctx, s["zi"]):
                 if e["type"] != "interval":
                     continue
-                e_zi: ZInterval = e["zi"]
-                is_point = compare(e_zi.start, e_zi.end) == 0
-                # Clock-time semantics need a fine grain AND a sub-day extent:
-                # a multi-day interval whose edges are snap points ("end of
-                # year" = Jul 1 -> Jan 1) carries grain 'instant' but is a
-                # calendar period, not a time of day.
-                time_grained = _GI[e_zi.grain] < _DAY_I and (
-                    is_point
-                    or compare(add_calendar(e_zi.start, days=1), e_zi.end) > 0
-                )
-                # Day-grain-or-coarser ends are conversationally inclusive:
-                # "between July 4th and July 10th" covers the 10th. Emit the
-                # inclusive reading (end operand contributes its END) first,
-                # with the strict exclusive-at-start reading as an
-                # alternative — the Recognizers-derived corpus pins the
-                # exclusive value, so both must remain candidates (#17).
-                if not is_point and not time_grained:
-                    if compare(s_zi.start, e_zi.end) < 0:
-                        grain = _range_grain(
-                            s_zi, e_zi, s_zi.start, e_zi.end, touches_now
-                        )
-                        out.append(
-                            {
-                                "type": "interval",
-                                "zi": ZInterval(s_zi.start, e_zi.end, grain),
-                            }
-                        )
-                    if compare(s_zi.start, e_zi.start) < 0:
-                        grain = _range_grain(
-                            s_zi, e_zi, s_zi.start, e_zi.start, touches_now
-                        )
-                        out.append(
-                            {
-                                "type": "interval",
-                                "zi": ZInterval(s_zi.start, e_zi.start, grain),
-                            }
-                        )
-                    continue
-                # Non-point time ends are exclusive at their *start* ("9 to
-                # 5pm" ends at 17:00); point ends are used directly.
-                end_point = e_zi.end if is_point else e_zi.start
-                if compare(s_zi.start, end_point) >= 0:
-                    # A clock-time range wrapping midnight ("9:30pm to
-                    # 7:30am") rolls the end into the next day; date ranges
-                    # just drop.
-                    if not time_grained:
-                        continue
-                    end_point = add_calendar(end_point, days=1)
-                    if compare(s_zi.start, end_point) >= 0:
-                        continue
-                out.append(
-                    {
-                        "type": "interval",
-                        "zi": ZInterval(
-                            s_zi.start,
-                            end_point,
-                            _range_grain(
-                                s_zi, e_zi, s_zi.start, end_point, touches_now
-                            ),
-                        ),
-                    }
-                )
+                out.extend(_between_pair(s["zi"], e["zi"], touches_now))
+        return out
+
+    if op == "until":
+        # "by Friday", "until 2025-06-30", "before March 2022" (#32): a
+        # deadline [now, end) for the end candidates still ahead of now; only
+        # when none is ahead, the history up to the end with an unbounded
+        # start. Clock-time ends always keep the deadline reading.
+        now_zi = point_interval(ctx.zoned_now)
+        ends = [
+            e["zi"]
+            for e in _eval_expr(expr["end"], ctx, anchor)
+            if e["type"] == "interval"
+        ]
+        ahead = [
+            e
+            for e in ends
+            if compare(e.end, ctx.zoned_now) > 0
+            or (not _is_point(e) and _is_time_grained(e))
+        ]
+        out = []
+        for e in ahead if ahead else ends:
+            pair = (
+                _between_pair(now_zi, e, True) if ahead else _open_start_pair(e, ctx)
+            )
+            # "before X" excludes X: its exclusive reading leads.
+            if expr.get("exclusive") and len(pair) == 2:
+                pair = [pair[1], pair[0]]
+            out.extend(pair)
         return out
 
     if op == "seek":

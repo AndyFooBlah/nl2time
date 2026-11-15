@@ -45,7 +45,7 @@ nl2time puts a small symbolic IR in the middle of both directions:
 - **`TimeExpr`** — a JSON operator tree (`now`, `literal`, `offset`, `snap`, `span`, `seek`, `between`, `intersect`, `recur`) over timeline intervals. [Spec](docs/ir-spec.md), [JSON Schema](schema/timeexpr.schema.json).
 - **`resolve(expr, ctx)`** — deterministic evaluation against a `TimeContext` (reference instant, IANA timezone, locale, week start, ambiguity policies). Ambiguity is data: candidates come back ordered, never silently guessed.
 - **`describe(value, ctx)`** — chooses framing (calendar / elapsed / absolute), builds the IR expression that describes the value, renders it via `Intl`. Round-trip invariant: `resolve(describe(v).expr, ctx)` contains `v`.
-- **Everything language refers to is an interval with a grain.** "Last week" is seven days; "9pm" is an hour; "March" is a month.
+- **Everything language refers to is an interval with a grain.** "Last week" is seven days; "9pm" is an hour; "March" is a month. Intervals are half-open `[start, end)`; a range with no lower bound ("orders placed before March 2022") has `start: null`.
 
 ## The LLM boundary (optional)
 

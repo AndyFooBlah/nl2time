@@ -42,6 +42,9 @@ Cartesian over candidates, dropping pairs where start ≥ end. Grain (#37): a ra
 - **Time-grained ends** (finer than day *and* shorter than one day; a multi-day interval with point edges, e.g. "end of year" as a late-part interval, is a calendar period and takes the rule below) are exclusive at their start ("9 to 5pm" ends at 17:00); a clock range wrapping midnight rolls the end into the next day.
 - **Day-grain-or-coarser ends** yield *two* candidates per pair: the conversational **inclusive** reading first — the end operand contributes its END, so "between July 4th and July 10th" covers the 10th — followed by the strict exclusive-at-start reading (`[start.start, end.start)`), which the Recognizers-Text corpora pin for date ranges.
 
+### `until {end, exclusive?}`
+The stretch up to a boundary — "by Friday", "until 2025-06-30", "before March 2022", "through the end of 2024" (#32). Resolve `end` to candidates; those still ahead of `now` (end edge after `now`, or any clock-time end) give **deadline** readings, exactly `between(now, end)`. Only when *no* candidate is ahead does the expression read as **history up to the boundary**, with an **unbounded start**: for each candidate, `(−∞, end.end)` then `(−∞, end.start)` (a point end gives just `(−∞, end)`). Resolved values carry `start: null` (JS) / `None` (Python) for the unbounded start. `exclusive: true` ("before") swaps each inclusive/exclusive pair so the reading that stops at the start of `end` leads. Grain: deadlines as `between`; open ranges take the end operand's grain, or for a point end the coarsest boundary it sits on (`year` for Jan 1 00:00, `month` for the 1st, `day` for midnight, else `instant`).
+
 ### `seek {base, dir, target, n?}`
 Directed navigation:
 

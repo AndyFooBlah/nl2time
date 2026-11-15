@@ -1,4 +1,5 @@
 import {
+  Temporal,
   addUnits,
   calendarDaysBetween,
   containingUnit,
@@ -37,7 +38,8 @@ export class AmbiguityError extends Error {
 
 /** A resolved value. Intervals are half-open [start, end). */
 export type TimeValue =
-  | { kind: 'interval'; start: Instant; end: Instant; grain: Grain }
+  /** `start` is null for an unbounded start ("before March 2022", #32). */
+  | { kind: 'interval'; start: Instant | null; end: Instant; grain: Grain }
   | { kind: 'duration'; iso: string }
   | { kind: 'amount'; amount: CalendarAmount };
 
@@ -94,6 +96,79 @@ function rangeGrain(
   return finerGrain(s.grain, e.grain);
 }
 
+/**
+ * Clock-time semantics need a fine grain AND a sub-day extent: a multi-day
+ * interval whose edges are snap points ("end of year" = Jul 1 → Jan 1) is a
+ * calendar period, not a time of day.
+ */
+function isTimeGrained(e: ZInterval): boolean {
+  return (
+    GRAIN_ORDER.indexOf(e.grain) < GRAIN_ORDER.indexOf('day') &&
+    (isPointZi(e) || Temporal_compare(e.start.add({ days: 1 }), e.end) > 0)
+  );
+}
+
+/** Candidates for one (start, end) operand pair of `between`. */
+function betweenPair(s: ZInterval, e: ZInterval, touchesNow: boolean): Cand[] {
+  const out: Cand[] = [];
+  const isPoint = isPointZi(e);
+  const timeGrained = isTimeGrained(e);
+  // Day-grain-or-coarser ends are conversationally inclusive: "between July
+  // 4th and July 10th" covers the 10th. Emit the inclusive reading (end
+  // operand contributes its END) first, with the strict exclusive-at-start
+  // reading as an alternative — the Recognizers-derived corpus pins the
+  // exclusive value, so both must remain candidates (#17).
+  if (!isPoint && !timeGrained) {
+    if (Temporal_compare(s.start, e.end) < 0) {
+      const grain = rangeGrain(s, e, s.start, e.end, touchesNow);
+      out.push({ type: 'interval', zi: { start: s.start, end: e.end, grain } });
+    }
+    if (Temporal_compare(s.start, e.start) < 0) {
+      const grain = rangeGrain(s, e, s.start, e.start, touchesNow);
+      out.push({ type: 'interval', zi: { start: s.start, end: e.start, grain } });
+    }
+    return out;
+  }
+  // Non-point time ends are exclusive at their *start* ("9 to 5pm" ends at
+  // 17:00); point ends are used directly.
+  let endPoint = isPoint ? e.end : e.start;
+  if (Temporal_compare(s.start, endPoint) >= 0) {
+    // A clock-time range wrapping midnight ("9:30pm to 7:30am") rolls the
+    // end into the next day; date ranges just drop.
+    if (!timeGrained) return out;
+    endPoint = endPoint.add({ days: 1 });
+    if (Temporal_compare(s.start, endPoint) >= 0) return out;
+  }
+  out.push({
+    type: 'interval',
+    zi: { start: s.start, end: endPoint, grain: rangeGrain(s, e, s.start, endPoint, touchesNow) },
+  });
+  return out;
+}
+
+/**
+ * Internal stand-in for an unbounded start; `toValue` turns it into
+ * `start: null`. Far enough back that no calendar arithmetic reaches it.
+ */
+const OPEN_START = Temporal.Instant.from('0100-01-01T00:00:00Z');
+
+/** (−∞, end) readings for an `until` whose end is not after now (#32). */
+function openStartPair(e: ZInterval, ctx: TimeContext): Cand[] {
+  const open = OPEN_START.toZonedDateTimeISO(ctx.timeZone);
+  if (isPointZi(e)) return [{ type: 'interval', zi: { start: open, end: e.end, grain: edgeGrain(e.end) } }];
+  return [
+    { type: 'interval', zi: { start: open, end: e.end, grain: e.grain } },
+    { type: 'interval', zi: { start: open, end: e.start, grain: e.grain } },
+  ];
+}
+
+/** Coarsest calendar boundary a single point sits on ("end of 2024" → year). */
+function edgeGrain(z: Zoned): Grain {
+  if (Temporal_compare(z, z.startOfDay()) !== 0) return 'instant';
+  if (z.day !== 1) return 'day';
+  return z.month === 1 ? 'year' : 'month';
+}
+
 function alignedGrain(start: Zoned, end: Zoned): Grain {
   if (Temporal_compare(start, end) === 0) return 'instant';
   const atDayStart = (z: Zoned): boolean => Temporal_compare(z, z.startOfDay()) === 0;
@@ -120,7 +195,7 @@ function toValue(c: Cand): TimeValue {
     case 'interval':
       return {
         kind: 'interval',
-        start: c.zi.start.toInstant(),
+        start: c.zi.start.epochMilliseconds === OPEN_START.epochMilliseconds ? null : c.zi.start.toInstant(),
         end: c.zi.end.toInstant(),
         grain: c.zi.grain,
       };
@@ -253,59 +328,36 @@ function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | und
       );
 
     case 'between': {
-      const starts = evalExpr(expr.start, ctx, anchor);
       const touchesNow = expr.start.op === 'now' || expr.end.op === 'now';
       const out: Cand[] = [];
-      for (const s of starts) {
-        if (s.type !== 'interval') continue;
+      for (const st of evalExpr(expr.start, ctx, anchor)) {
+        if (st.type !== 'interval') continue;
         // The end operand resolves anchored to the start (shared context:
         // "between 3 and 12 of Sept" — the 3 anchors to September).
-        for (const e of evalExpr(expr.end, ctx, s.zi)) {
+        for (const e of evalExpr(expr.end, ctx, st.zi)) {
           if (e.type !== 'interval') continue;
-          const isPoint = Temporal_compare(e.zi.start, e.zi.end) === 0;
-          // Clock-time semantics need a fine grain AND a sub-day extent: a
-          // multi-day interval whose edges are snap points ("end of year" =
-          // Jul 1 → Jan 1) carries grain 'instant' but is a calendar period,
-          // not a time of day.
-          const timeGrained =
-            GRAIN_ORDER.indexOf(e.zi.grain) < GRAIN_ORDER.indexOf('day') &&
-            (isPoint || Temporal_compare(e.zi.start.add({ days: 1 }), e.zi.end) > 0);
-          // Day-grain-or-coarser ends are conversationally inclusive:
-          // "between July 4th and July 10th" covers the 10th. Emit the
-          // inclusive reading (end operand contributes its END) first, with
-          // the strict exclusive-at-start reading as an alternative — the
-          // Recognizers-derived corpus pins the exclusive value, so both
-          // must remain candidates (#17).
-          if (!isPoint && !timeGrained) {
-            if (Temporal_compare(s.zi.start, e.zi.end) < 0) {
-              const grain = rangeGrain(s.zi, e.zi, s.zi.start, e.zi.end, touchesNow);
-              out.push({ type: 'interval', zi: { start: s.zi.start, end: e.zi.end, grain } });
-            }
-            if (Temporal_compare(s.zi.start, e.zi.start) < 0) {
-              const grain = rangeGrain(s.zi, e.zi, s.zi.start, e.zi.start, touchesNow);
-              out.push({ type: 'interval', zi: { start: s.zi.start, end: e.zi.start, grain } });
-            }
-            continue;
-          }
-          // Non-point time ends are exclusive at their *start* ("9 to 5pm"
-          // ends at 17:00); point ends are used directly.
-          let endPoint = isPoint ? e.zi.end : e.zi.start;
-          if (Temporal_compare(s.zi.start, endPoint) >= 0) {
-            // A clock-time range wrapping midnight ("9:30pm to 7:30am") rolls
-            // the end into the next day; date ranges just drop.
-            if (!timeGrained) continue;
-            endPoint = endPoint.add({ days: 1 });
-            if (Temporal_compare(s.zi.start, endPoint) >= 0) continue;
-          }
-          out.push({
-            type: 'interval',
-            zi: {
-              start: s.zi.start,
-              end: endPoint,
-              grain: rangeGrain(s.zi, e.zi, s.zi.start, endPoint, touchesNow),
-            },
-          });
+          out.push(...betweenPair(st.zi, e.zi, touchesNow));
         }
+      }
+      return out;
+    }
+
+    case 'until': {
+      // "by Friday", "until 2025-06-30", "before March 2022" (#32): a
+      // deadline [now, end) for the end candidates still ahead of now. Only
+      // when none is ahead does it read as the stretch of history up to the
+      // end, with an unbounded start. Clock-time ends always keep the
+      // deadline reading (they roll to the next day like any time range).
+      const now = pointInterval(ctx.zonedNow);
+      const ends = evalExpr(expr.end, ctx, anchor).flatMap((e) => (e.type === 'interval' ? [e.zi] : []));
+      const ahead = ends.filter(
+        (e) => Temporal_compare(e.end, ctx.zonedNow) > 0 || (!isPointZi(e) && isTimeGrained(e)),
+      );
+      const out: Cand[] = [];
+      for (const e of ahead.length > 0 ? ahead : ends) {
+        const pair = ahead.length > 0 ? betweenPair(now, e, true) : openStartPair(e, ctx);
+        // "before X" excludes X: its exclusive reading leads.
+        out.push(...(expr.exclusive && pair.length === 2 ? [pair[1]!, pair[0]!] : pair));
       }
       return out;
     }
