@@ -120,7 +120,7 @@ Every imported conformance case carries machine-readable provenance (upstream pr
 pip install nl2time
 ```
 
-The Python engine port lives in [`python/`](python/) (`whenever`-based time model): IR validation, `TimeContext`, and the full deterministic resolver at **100% bit-exact parity** with the JS reference across all 2,790 engine-parity fixtures (`corpus/ir/`), enforced in CI on every push. Parsers and `describe()` are JS-only so far — [docs/porting.md](docs/porting.md) has the strategy and the divergence gates.
+The Python engine port lives in [`python/`](python/) (`whenever`-based time model): IR validation, `TimeContext`, and the full deterministic resolver at **100% bit-exact parity** with the JS reference across all 2,827 engine-parity fixtures (`corpus/ir/`), enforced in CI on every push. Parsers and `describe()` are JS-only so far — [docs/porting.md](docs/porting.md) has the strategy and the divergence gates.
 
 ## Release history
 
