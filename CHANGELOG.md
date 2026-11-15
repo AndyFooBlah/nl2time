@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+Engine (semantics — mirrored in the Python engine, parity fixtures regenerated):
+
+- `between` grain ([#37](https://github.com/AndyFooBlah/nl2time/issues/37)): "the second half of 2024" / "first half of 2025" are now grain `month` (were `instant`), matching "H2 2024"; "since 2020" keeps its start's grain `year`. Deadlines from `now` ("by end of month") stay `instant`. Fixture diff is grain-only (50 → `day`, 34 → `month`, 6 → `year`).
+- Year-less dates that don't exist in the reference period ([#14](https://github.com/AndyFooBlah/nl2time/issues/14)): "February 29" completes to the nearest leap years (2024 / 2028 from 2026) instead of clamping to Feb 28; "the 31st" skips 30-day months. 29 more imported Recognizers cases pass across all six languages (German now 157/157); baselines promoted.
+
+Parser:
+
+- "end of day yesterday", "yesterday at end of day", "at the end of the day yesterday" resolve to the end of yesterday ([#33](https://github.com/AndyFooBlah/nl2time/issues/33)) — a bare day edge now applies to the date it modifies instead of intersecting today's edge with that date (zero candidates).
+- Fractional calendar amounts ("3,5 años", "半年", "123,45 secondes") are emitted as exact `duration`s ([#16](https://github.com/AndyFooBlah/nl2time/issues/16)), so the parser's output always passes `validateExpr`; a new test validates every `corpus/ir` expression.
+
 ## 0.3.3 — 2026-09-12
 
 Parser (English; engine unchanged, parity fixtures regenerated — Python needs no release):

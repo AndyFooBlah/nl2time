@@ -110,7 +110,7 @@ function parseWithRules(text: string, ctx: TimeContext, rules: readonly Rule[]):
         text: text.slice(startTok.start, endTok.end),
         start: startTok.start,
         end: endTok.end,
-        expr: m.expr,
+        expr: wholeAmounts(m.expr),
         confidence: m.confidence,
         source: 'rules' as const,
       };
@@ -198,8 +198,14 @@ function mergeAdjacent(matches: Positioned[], tokens: Token[], connectors: reado
           if (!wraps) dateExpr = stripDayPeriod(dateExpr) ?? dateExpr;
         }
       }
+      // "end of day yesterday" / "yesterday at start of day": a bare day
+      // edge (built against today) moves onto the date it modifies instead
+      // of intersecting today's edge with that date, which is empty (#33).
+      const dayEdge = todayDayEdge(timeExpr);
       out.push({
-        expr: { op: 'intersect', parts: [dateExpr, timeExpr] },
+        expr: dayEdge
+          ? { op: 'snap', base: dateExpr, unit: 'day', edge: dayEdge }
+          : { op: 'intersect', parts: [dateExpr, timeExpr] },
         consumed: next.tokenEnd - cur.tokenStart,
         confidence: Math.max(cur.confidence, next.confidence),
         role: 'datetime',
@@ -281,6 +287,37 @@ function forceMeridiem(expr: TimeExpr, period: string): TimeExpr {
   const meridiem =
     period === 'morning' ? 'am' : (period === 'night' || period === 'evening') && hour <= 5 ? 'am' : 'pm';
   return { ...expr, time: { ...expr.time, meridiem } };
+}
+
+const AMOUNT_SECONDS: Record<string, number> = {
+  seconds: 1,
+  minutes: 60,
+  hours: 3600,
+  days: 86400,
+  weeks: 604800,
+  months: 2592000,
+  years: 31536000,
+};
+
+/**
+ * Calendar amounts are integers in the IR. A fractional one ("3,5 años",
+ * "半年", "123,45 secondes") becomes an exact duration, using the same
+ * nominal unit lengths as the English duration rules (#16).
+ */
+function wholeAmounts(expr: TimeExpr): TimeExpr {
+  if (expr.op !== 'amount') return expr;
+  const entries = Object.entries(expr.amount) as [string, number][];
+  if (entries.every(([, v]) => Number.isInteger(v))) return expr;
+  let secs = 0;
+  for (const [k, v] of entries) secs += v * (AMOUNT_SECONDS[k] ?? 0);
+  return { op: 'duration', iso: `PT${Math.round(secs * 100) / 100}S` };
+}
+
+/** The edge of a bare "start/end of day" point anchored to today, if `expr` is one. */
+function todayDayEdge(expr: TimeExpr): 'start' | 'end' | undefined {
+  if (expr.op !== 'snap' || expr.unit !== 'day' || !expr.edge) return undefined;
+  const b = expr.base;
+  return b.op === 'snap' && b.unit === 'day' && !b.edge && b.base.op === 'now' ? expr.edge : undefined;
 }
 
 /** Remove day-period literals from an intersect; undefined if nothing remains. */

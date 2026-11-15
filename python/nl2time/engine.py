@@ -6,6 +6,7 @@ including its quirks). See docs/ir-spec.md for prose semantics.
 
 from __future__ import annotations
 
+import calendar
 from typing import Any, Callable
 
 from whenever import ZonedDateTime
@@ -22,6 +23,7 @@ from .clock import (
     floor_to,
     format_instant,
     point_interval,
+    start_of_day,
     weekday_number,
     with_fields,
 )
@@ -61,6 +63,43 @@ TimeValue = dict[str, Any]
 
 def _finer_grain(a: str, b: str) -> str:
     return a if _GI[a] <= _GI[b] else b
+
+
+def _is_point(zi: ZInterval) -> bool:
+    return compare(zi.start, zi.end) == 0
+
+
+def _range_grain(
+    s: ZInterval,
+    e: ZInterval,
+    start: ZonedDateTime,
+    end: ZonedDateTime,
+    touches_now: bool,
+) -> str:
+    """Grain of a `between` result (#37); mirrors rangeGrain in resolve.ts.
+
+    A range that starts on a calendar period and ends on a point ("since
+    2020") keeps the start's grain; two point operands take their grain from
+    how the edges align ("the second half of 2024" is month-grained), unless
+    one is `now` (an arbitrary instant). Otherwise the finer operand grain.
+    """
+    sp = _is_point(s)
+    ep = _is_point(e)
+    if sp and ep and not touches_now:
+        return _aligned_grain(start, end)
+    if not sp and ep:
+        return s.grain
+    return _finer_grain(s.grain, e.grain)
+
+
+def _aligned_grain(start: ZonedDateTime, end: ZonedDateTime) -> str:
+    if compare(start, end) == 0:
+        return "instant"
+    if compare(start, start_of_day(start)) != 0 or compare(end, start_of_day(end)) != 0:
+        return "instant"
+    if start.day != 1 or end.day != 1:
+        return "day"
+    return "year" if start.month == 1 and end.month == 1 else "month"
 
 
 def resolve(expr: dict[str, Any], ctx: TimeContext) -> dict[str, Any]:
@@ -245,6 +284,7 @@ def _eval_expr_inner(
 
     if op == "between":
         starts = _eval_expr(expr["start"], ctx, anchor)
+        touches_now = expr["start"]["op"] == "now" or expr["end"]["op"] == "now"
         out: list[Cand] = []
         for s in starts:
             if s["type"] != "interval":
@@ -272,8 +312,10 @@ def _eval_expr_inner(
                 # alternative — the Recognizers-derived corpus pins the
                 # exclusive value, so both must remain candidates (#17).
                 if not is_point and not time_grained:
-                    grain = _finer_grain(s_zi.grain, e_zi.grain)
                     if compare(s_zi.start, e_zi.end) < 0:
+                        grain = _range_grain(
+                            s_zi, e_zi, s_zi.start, e_zi.end, touches_now
+                        )
                         out.append(
                             {
                                 "type": "interval",
@@ -281,6 +323,9 @@ def _eval_expr_inner(
                             }
                         )
                     if compare(s_zi.start, e_zi.start) < 0:
+                        grain = _range_grain(
+                            s_zi, e_zi, s_zi.start, e_zi.start, touches_now
+                        )
                         out.append(
                             {
                                 "type": "interval",
@@ -306,7 +351,9 @@ def _eval_expr_inner(
                         "zi": ZInterval(
                             s_zi.start,
                             end_point,
-                            _finer_grain(s_zi.grain, e_zi.grain),
+                            _range_grain(
+                                s_zi, e_zi, s_zi.start, end_point, touches_now
+                            ),
                         ),
                     }
                 )
@@ -744,7 +791,14 @@ def _resolve_date(
     if month is not None and day_n is not None:
         # "May 29" with no year -> most recent occurrence on-or-before today,
         # then the following one ("past + future" pairing).
-        def mk_md(year_delta: int) -> ZInterval:
+        # Occurrence k walks over years where the date exists, so "Feb 29"
+        # lands on leap years instead of clamping to Feb 28 (#14).
+        def valid_md(d: int) -> bool:
+            y = add_calendar(ref, years=d).year
+            return calendar.monthrange(y, month)[1] >= day_n
+
+        def mk_md(k: int) -> ZInterval:
+            year_delta = _nth_valid_delta(k, valid_md)
             d = with_fields(
                 add_calendar(ref, years=year_delta), month=month, day=day_n
             ).start_of("day")
@@ -768,7 +822,13 @@ def _resolve_date(
 
     if day_n is not None:
         # "the 3rd" -> most recent occurrence on-or-before today, then next.
-        def mk_d(month_delta: int) -> ZInterval:
+        # Skip months too short for the day ("the 31st" never means the 30th).
+        def valid_d(d: int) -> bool:
+            z = add_calendar(ref, months=d)
+            return calendar.monthrange(z.year, z.month)[1] >= day_n
+
+        def mk_d(k: int) -> ZInterval:
+            month_delta = _nth_valid_delta(k, valid_d)
             d = with_fields(add_calendar(ref, months=month_delta), day=day_n).start_of(
                 "day"
             )
@@ -782,6 +842,24 @@ def _resolve_date(
 
     day = floor_to(ref, "day", ctx.week_start)
     return [ZInterval(day, add_calendar(day, days=1), "day")]
+
+
+def _nth_valid_delta(k: int, valid: Callable[[int], bool]) -> int:
+    """Occurrence index -> calendar delta over valid deltas only (nthValidDelta in resolve.ts)."""
+    limit = 16
+    d = 0
+    g = 0
+    while not valid(d) and g < limit:
+        d += 1
+        g += 1
+    step = 1 if k > 0 else -1
+    for _ in range(abs(k)):
+        d += step
+        g = 0
+        while not valid(d) and g < limit:
+            d += step
+            g += 1
+    return d
 
 
 def _order_by_bias(
