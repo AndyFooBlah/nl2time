@@ -2901,6 +2901,318 @@
      "grain": "day"
     }
    ]
+  },
+  {
+   "id": "fw-0090",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2026,
+     "month": 8,
+     "day": 20
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-20T05:00:00Z",
+     "end": "2026-08-21T05:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0091",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2026,
+      "month": 8,
+      "day": 18
+     }
+    },
+    "end": {
+     "op": "literal",
+     "date": {
+      "year": 2026,
+      "month": 8,
+      "day": 20
+     }
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-08-18T05:00:00Z",
+     "end": "2026-08-21T05:00:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-08-18T05:00:00Z",
+     "end": "2026-08-20T05:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0092",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "literal",
+     "date": {
+      "month": 3,
+      "day": 3,
+      "year": 2025
+     }
+    },
+    "unit": "week"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2025-03-03T06:00:00Z",
+     "end": "2025-03-10T05:00:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "fw-0093",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "literal",
+     "date": {
+      "year": 2024,
+      "month": 3,
+      "day": 1
+     }
+    },
+    "end": {
+     "op": "snap",
+     "base": {
+      "op": "literal",
+      "date": {
+       "year": 2024
+      }
+     },
+     "unit": "year",
+     "edge": "end"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2024-03-01T06:00:00Z",
+     "end": "2025-01-01T06:00:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0094",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2024
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2024-01-01T06:00:00Z",
+     "end": "2025-01-01T06:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "fw-0095",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2024
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2024-01-01T06:00:00Z",
+     "end": "2025-01-01T06:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "fw-0097",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "snap",
+     "base": {
+      "op": "literal",
+      "date": {
+       "year": 2025
+      }
+     },
+     "unit": "year",
+     "edge": "start"
+    },
+    "end": {
+     "op": "offset",
+     "base": {
+      "op": "snap",
+      "base": {
+       "op": "literal",
+       "date": {
+        "year": 2025
+       }
+      },
+      "unit": "year",
+      "edge": "start"
+     },
+     "amount": 6,
+     "unit": "month"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2025-01-01T06:00:00Z",
+     "end": "2025-07-01T05:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "fw-0098",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "literal",
+     "date": {
+      "month": 6
+     }
+    },
+    "amount": {
+     "months": -12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2025-07-01T05:00:00Z",
+     "end": "2026-07-01T05:00:00Z",
+     "grain": "month"
+    },
+    {
+     "kind": "interval",
+     "start": "2024-07-01T05:00:00Z",
+     "end": "2025-07-01T05:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "fw-0099",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "literal",
+     "date": {
+      "month": 6,
+      "day": 30,
+      "year": 2026
+     }
+    },
+    "amount": {
+     "months": -12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2025-07-01T05:00:00Z",
+     "end": "2026-07-01T05:00:00Z",
+     "grain": "month"
+    }
+   ]
   }
  ]
 }
