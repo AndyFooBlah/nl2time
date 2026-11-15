@@ -30,6 +30,8 @@ export interface IntervalExpect {
   /** Civil expectations, compared in the case's timeZone ("YYYY-MM-DDTHH:MM:SS"). */
   startLocal?: string;
   endLocal?: string;
+  /** Unbounded start ("before March 2022"): the candidate's start must be null (#32). */
+  openStart?: boolean;
   /** Civil point: candidate interval start must equal it. */
   pointLocal?: string;
   /** Omit or null to skip the grain check (imported cases). */
@@ -155,6 +157,12 @@ function isoDurationToSeconds(iso: string): number | undefined {
 function matchesInterval(v: TimeValue, spec: IntervalExpect, timeZone: string): boolean {
   if (v.kind !== 'interval') return false;
   if (spec.grain !== undefined && spec.grain !== null && v.grain !== spec.grain) return false;
+  if ((spec.openStart === true) !== (v.start === null)) return false;
+  if (v.start === null) {
+    if (spec.end !== undefined && v.end.toString() !== spec.end) return false;
+    if (spec.endLocal !== undefined && !localEq(localString(v.end, timeZone), normLocal(spec.endLocal))) return false;
+    return spec.start === undefined && spec.startLocal === undefined && spec.pointLocal === undefined;
+  }
   if (spec.start !== undefined && v.start.toString() !== spec.start) return false;
   if (spec.end !== undefined && v.end.toString() !== spec.end) return false;
   if (spec.startLocal !== undefined && !localEq(localString(v.start, timeZone), normLocal(spec.startLocal))) return false;
@@ -249,7 +257,7 @@ function describeMismatch(candidates: TimeValue[], tz: string): string {
     .slice(0, 3)
     .map((v) =>
       v.kind === 'interval'
-        ? `[${localString(v.start, tz)}, ${localString(v.end, tz)}) ${v.grain}`
+        ? `[${v.start === null ? '-inf' : localString(v.start, tz)}, ${localString(v.end, tz)}) ${v.grain}`
         : JSON.stringify(v),
     )
     .join(' | ');

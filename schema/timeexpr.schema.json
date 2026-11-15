@@ -13,6 +13,7 @@
         { "$ref": "#/$defs/Snap" },
         { "$ref": "#/$defs/Span" },
         { "$ref": "#/$defs/Between" },
+        { "$ref": "#/$defs/Until" },
         { "$ref": "#/$defs/Seek" },
         { "$ref": "#/$defs/Intersect" },
         { "$ref": "#/$defs/Duration" },
@@ -155,6 +156,18 @@
         "mod": { "$ref": "#/$defs/Mod" }
       },
       "required": ["op", "start", "end"],
+      "additionalProperties": false
+    },
+    "Until": {
+      "type": "object",
+      "description": "The stretch up to end ('by Friday', 'until 2025-06-30', 'before March 2022'): [now, end) while end is ahead of now, otherwise an open-start range ending at end (resolved values carry start: null). exclusive ('before') ranks the reading that stops at the start of end first.",
+      "properties": {
+        "op": { "const": "until" },
+        "end": { "$ref": "#/$defs/TimeExpr" },
+        "exclusive": { "type": "boolean" },
+        "mod": { "$ref": "#/$defs/Mod" }
+      },
+      "required": ["op", "end"],
       "additionalProperties": false
     },
     "Seek": {

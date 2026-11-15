@@ -37559,10 +37559,7 @@
       "op": "intersect",
       "parts": [
        {
-        "op": "between",
-        "start": {
-         "op": "now"
-        },
+        "op": "until",
         "end": {
          "op": "snap",
          "base": {

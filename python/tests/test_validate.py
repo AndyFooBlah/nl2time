@@ -74,3 +74,13 @@ def test_accepts_every_fixture_expr() -> None:
 def test_rejects_garbage(garbage: Any) -> None:
     with pytest.raises(IRValidationError):
         validate_expr(garbage)
+
+
+def test_until_validation() -> None:
+    # #32: the open-start/deadline op, mirroring validate.test.ts.
+    validate_expr({"op": "until", "end": {"op": "now"}, "exclusive": True})
+    validate_expr({"op": "until", "end": {"op": "literal", "date": {"year": 2022}}})
+    with pytest.raises(IRValidationError):
+        validate_expr({"op": "until"})
+    with pytest.raises(IRValidationError):
+        validate_expr({"op": "until", "end": {"op": "now"}, "exclusive": "yes"})

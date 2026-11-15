@@ -12,7 +12,7 @@ from pathlib import Path
 
 import pytest
 
-from nl2time import TimeContext, resolve, value_to_json
+from nl2time import TimeContext, resolve, validate_expr, value_to_json
 
 FIXTURE_DIR = Path(__file__).resolve().parent.parent.parent / "corpus" / "ir"
 
@@ -37,9 +37,9 @@ def test_fixtures_present() -> None:
 
 @pytest.mark.parametrize("case", CASES)
 def test_engine_parity(case: dict) -> None:
-    # Note: resolve the raw expr without validate_expr — the fixture pipeline
-    # records parser output directly, which may contain values the structural
-    # validator rejects (e.g. fractional calendar amounts), exactly as in JS.
+    # The fixture pipeline records parser output directly; since #16 the
+    # parser only emits valid IR, so the port's validator must accept it too.
+    validate_expr(case["expr"])
     ctx = TimeContext.make(case["ctx"])
     got = [value_to_json(v) for v in resolve(case["expr"], ctx)["candidates"]]
     assert got == case["candidates"]

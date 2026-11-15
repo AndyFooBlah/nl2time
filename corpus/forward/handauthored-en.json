@@ -2290,6 +2290,179 @@
         "name": "nl2time",
         "license": "MIT"
       }
+    },
+    {
+      "id": "fw-0100",
+      "text": "orders placed before March 2022",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#32: a past boundary reads as history up to it, unbounded start; 'before' leads with the exclusive reading",
+      "expect": {
+        "candidates": [
+          {
+            "openStart": true,
+            "endLocal": "2022-03-01T00:00:00",
+            "grain": "month"
+          },
+          {
+            "openStart": true,
+            "endLocal": "2022-04-01T00:00:00",
+            "grain": "month"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0101",
+      "text": "until 2025-06-30",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#32: inclusive of the named day",
+      "expect": {
+        "candidates": [
+          {
+            "openStart": true,
+            "endLocal": "2025-07-01T00:00:00",
+            "grain": "day"
+          },
+          {
+            "openStart": true,
+            "endLocal": "2025-06-30T00:00:00",
+            "grain": "day"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0102",
+      "text": "by 2025-06-30",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#32",
+      "expect": {
+        "first": {
+          "openStart": true,
+          "endLocal": "2025-07-01T00:00:00",
+          "grain": "day"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0103",
+      "text": "through the end of 2024",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#32: year end as the boundary point; grain from its alignment",
+      "expect": {
+        "candidates": [
+          {
+            "openStart": true,
+            "endLocal": "2025-01-01T00:00:00",
+            "grain": "year"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0104",
+      "text": "before March 2027",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#32 guard: a future boundary keeps the deadline reading [now, X); 'before' now leads with the exclusive end",
+      "expect": {
+        "candidates": [
+          {
+            "startLocal": "2026-10-13T08:00:00",
+            "endLocal": "2027-03-01T00:00:00",
+            "grain": "instant"
+          },
+          {
+            "startLocal": "2026-10-13T08:00:00",
+            "endLocal": "2027-04-01T00:00:00",
+            "grain": "instant"
+          }
+        ]
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
+    },
+    {
+      "id": "fw-0105",
+      "text": "until June",
+      "ctx": {
+        "now": "2026-10-13T08:00:00-05:00",
+        "timeZone": "America/Chicago",
+        "locale": "en-US",
+        "weekStart": "mon",
+        "bias": "past",
+        "partialPeriod": "exclude"
+      },
+      "note": "#32: a year-less boundary with every occurrence past (bias past) reads as history, most recent first",
+      "expect": {
+        "first": {
+          "openStart": true,
+          "endLocal": "2026-07-01T00:00:00",
+          "grain": "month"
+        }
+      },
+      "level": "core",
+      "source": {
+        "name": "nl2time",
+        "license": "MIT"
+      }
     }
   ]
 }

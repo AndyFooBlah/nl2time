@@ -48,6 +48,11 @@ export function describe(
     if (value.kind === 'duration' || value.kind === 'amount') {
       return describeAmount(value, ctx);
     }
+    if (value.start === null) {
+      // Open start ("before March 2022", #32): describe the boundary.
+      const bound = describeInterval(toZoned(value.end, ctx.timeZone), value.grain, ctx, 'absolute', style);
+      return { ...bound, text: `before ${bound.text}`, expr: { op: 'until', end: bound.expr, exclusive: true } };
+    }
     const start = toZoned(value.start, ctx.timeZone);
     return describeInterval(start, value.grain, ctx, framing, style);
   }
