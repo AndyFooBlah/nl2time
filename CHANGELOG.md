@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 — 2026-11-15
+
+Bug round: every open bug report fixed ([#14](https://github.com/AndyFooBlah/nl2time/issues/14), [#16](https://github.com/AndyFooBlah/nl2time/issues/16), [#23](https://github.com/AndyFooBlah/nl2time/issues/23), [#32](https://github.com/AndyFooBlah/nl2time/issues/32)–[#37](https://github.com/AndyFooBlah/nl2time/issues/37)). Minor bump because `TimeValue.start` can now be `null`. Engine changes are mirrored in Python 0.2.0; 2,827 engine-parity fixtures.
 
 Engine (semantics — mirrored in the Python engine, parity fixtures regenerated):
 
@@ -24,6 +26,10 @@ Parser:
 - "from 2024-03-01 through the end of 2024" is one range ([#32](https://github.com/AndyFooBlah/nl2time/issues/32), parser part): range operands accept "the end/start/beginning of <year>".
 - New phrasings ([#36](https://github.com/AndyFooBlah/nl2time/issues/36)): "for 2024" / "revenue for 2024" (not "for 2000 people"), "calendar 2024", "first half 2025" (no "of"), "twelve months ended June" / "the 12 months ending June 30, 2026" / "three years ended 2025" = `span(<date>, -N units)`.
 - Fractional calendar amounts ("3,5 años", "半年", "123,45 secondes") are emitted as exact `duration`s ([#16](https://github.com/AndyFooBlah/nl2time/issues/16)), so the parser's output always passes `validateExpr`; a new test validates every `corpus/ir` expression.
+
+## Python 0.2.0 (PyPI) — 2026-11-15
+
+Engine parity release for 0.4.0: `between` grain rules (#37), leap-day / short-month completion (#14), the `until` op with `"start": None` for open-start ranges (#32), seek direction `this` (#23), and `validate_expr` support for both new IR forms. The parity suite now also validates every fixture expression. 100% bit-exact parity with the JS reference (2,827 fixtures).
 
 ## 0.3.3 — 2026-09-12
 
