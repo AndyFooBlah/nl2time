@@ -43,3 +43,13 @@ suite('#34 weekday + date', () => {
     expect(m!.confidence).toBeLessThan(0.9);
   });
 });
+
+suite('#35 disjunctions and anaphora', () => {
+  test('both years of a coordination are matched', () => {
+    expect(texts('2024 or 2025')).toEqual(['2024', '2025']);
+    expect(texts('in 2024 and 2025')).toEqual(['2024', '2025']);
+  });
+  test('"between 2020 and 2022" stays one range', () => {
+    expect(texts('between 2020 and 2022')).toEqual(['between 2020 and 2022']);
+  });
+});

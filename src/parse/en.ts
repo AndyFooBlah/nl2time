@@ -188,8 +188,23 @@ const TIME_PREPOSITIONS = new Set([
 // --- rules -----------------------------------------------------------------
 
 /** today / yesterday / tomorrow / tonight / day before yesterday / day after tomorrow */
-const ruleDeicticDay: Rule = (tokens, i) => {
+const ruleDeicticDay: Rule = (tokens, i, ctx) => {
   const w = word(tokens[i]);
+  // "overnight" (#23): the night just ended, or tonight once it is afternoon
+  // and the context looks forward (bias 'future', or 'none' after noon). A
+  // night still in progress is "last night" (the night period wraps midnight).
+  if (w === 'overnight') {
+    const tonight = ctx.bias === 'future' || (ctx.bias === 'none' && ctx.zonedNow.hour >= 12);
+    return {
+      expr: {
+        op: 'intersect',
+        parts: [tonight ? snapNow('day') : snapOffset(-1, 'day'), { op: 'literal', dayPeriod: 'night' }],
+      },
+      consumed: 1,
+      confidence: 0.85,
+      role: 'datetime',
+    };
+  }
   if (w === 'today' || w === 'tdy') return { expr: snapNow('day'), consumed: 1, confidence: 1, role: 'date' };
   if (w === 'yesterday') return { expr: snapOffset(-1, 'day'), consumed: 1, confidence: 1, role: 'date' };
   if (w === 'tomorrow' || w === 'tmrw' || w === 'tmr') {
@@ -1204,11 +1219,12 @@ const ruleHalfOf: Rule = (tokens, i, ctx) => {
 
 const REL_SYNONYMS: Record<string, 'last' | 'this' | 'next'> = {
   last: 'last', previous: 'last', prior: 'last',
-  this: 'this', current: 'this', present: 'this', that: 'this',
+  // Not "that": "that year" points back into the conversation, not at now (#35).
+  this: 'this', current: 'this', present: 'this',
   next: 'next', coming: 'next', upcoming: 'next', following: 'next',
 };
 
-function weekendExpr(dir: 'next' | 'prev' | 'nearest'): TimeExpr {
+function weekendExpr(dir: 'next' | 'prev' | 'nearest' | 'this'): TimeExpr {
   // Weekend = Saturday 00:00 → Monday 00:00.
   return {
     op: 'span',
@@ -1247,7 +1263,8 @@ const ruleLastThisNext: Rule = (tokens, i, ctx) => {
   }
 
   if (nextWord === 'weekend') {
-    const dir = w === 'last' ? 'prev' : w === 'next' ? 'next' : 'nearest';
+    // "this weekend" is deictic: the current/upcoming one leads (#23).
+    const dir = w === 'last' ? 'prev' : w === 'next' ? 'next' : 'this';
     return { expr: weekendExpr(dir), consumed: 2, confidence: 1, role: 'date' };
   }
 
@@ -1286,11 +1303,12 @@ const ruleLastThisNext: Rule = (tokens, i, ctx) => {
 
   const weekday = WEEKDAY_WORDS[nextWord];
   if (weekday) {
-    const dir = w === 'last' ? 'prev' : w === 'next' ? 'next' : 'nearest';
+    // "this Friday" is deictic: today-or-next leads, whatever the bias (#23).
+    const dir = w === 'last' ? 'prev' : w === 'next' ? 'next' : 'this';
     // Only the literal words "next"/"last" carry the dialect ambiguity;
     // "upcoming Friday" is strictly the adjacent occurrence (n: 1).
     const literalWord = word(tokens[i]);
-    const strict = (literalWord === 'upcoming' || literalWord === 'coming') && dir !== 'nearest';
+    const strict = (literalWord === 'upcoming' || literalWord === 'coming') && dir !== 'this';
     return {
       expr: {
         op: 'seek',
@@ -1550,6 +1568,96 @@ const ruleNextN: Rule = (tokens, i) => {
 };
 
 /** "the year [2008]", "the week [31]", "the month", "the day" — with ISO week numbers. */
+/** Words that open a relative clause after "the <unit>" ("the year we …"). */
+const RELATIVE_CLAUSE_STARTS = new Set([
+  'the', 'a', 'an', 'we', 'i', 'you', 'they', 'he', 'she', 'it', 'that', 'which', 'when', 'where', 'our',
+  'my', 'your', 'their', 'his', 'her', 'its', 'this', 'these', 'those', 'in', 'during', 'after', 'before',
+]);
+
+/**
+ * "year to date", "YTD", "so far this month", "this quarter so far" (#36):
+ * from the start of the current period up to now — the period itself as the
+ * start operand keeps the period's grain. Ends at now, not at the start of
+ * today, whatever `partialPeriod` says (owner decision D3).
+ */
+function toDate(unit: Unit): TimeExpr {
+  return { op: 'between', start: snapNow(unit), end: NOW };
+}
+
+const TO_DATE_ABBREV: Record<string, Unit> = { ytd: 'year', qtd: 'quarter', mtd: 'month', wtd: 'week' };
+
+const ruleToDate: Rule = (tokens, i) => {
+  const w = word(tokens[i]);
+  if (w !== undefined && TO_DATE_ABBREV[w]) {
+    return { expr: toDate(TO_DATE_ABBREV[w]!), consumed: 1, confidence: 0.95, role: 'date' };
+  }
+  const periodUnit = (u: string | undefined): Unit | undefined => {
+    const unit = UNIT_WORDS[u ?? ''];
+    return unit === 'year' || unit === 'quarter' || unit === 'month' || unit === 'week' || unit === 'day'
+      ? unit
+      : undefined;
+  };
+  // "year to date" / "year-to-date" (the article form is in ruleTheUnit).
+  const u0 = periodUnit(w);
+  if (u0) {
+    let at = i + 1;
+    if (word(tokens[at]) === '-') at += 1;
+    if (word(tokens[at]) === 'to') {
+      at += 1;
+      if (word(tokens[at]) === '-') at += 1;
+      if (word(tokens[at]) === 'date') return { expr: toDate(u0), consumed: at + 1 - i, confidence: 0.95, role: 'date' };
+    }
+  }
+  // "so far this year" / "so far in the month"
+  if (w === 'so' && word(tokens[i + 1]) === 'far') {
+    let at = i + 2;
+    if (word(tokens[at]) === 'in' || word(tokens[at]) === 'during') at += 1;
+    if (word(tokens[at]) === 'this' || word(tokens[at]) === 'the') {
+      const u = periodUnit(word(tokens[at + 1]));
+      if (u) return { expr: toDate(u), consumed: at + 2 - i, confidence: 0.95, role: 'date' };
+    }
+  }
+  // "this year so far" / "this month to date"
+  if (w === 'this') {
+    const u = periodUnit(word(tokens[i + 1]));
+    const tail = word(tokens[i + 2]);
+    if (u && ((tail === 'so' && word(tokens[i + 3]) === 'far') || (tail === 'to' && word(tokens[i + 3]) === 'date'))) {
+      return { expr: toDate(u), consumed: 4, confidence: 0.95, role: 'date' };
+    }
+  }
+  return undefined;
+};
+
+/**
+ * "trailing twelve months", "TTM", "LTM", "the trailing 4 quarters" (#36):
+ * the N most recent COMPLETE units before the current one — [start of the
+ * current unit − N, start of the current unit). The finance/BI convention
+ * (complete periods compare like with like); "the past 12 months" stays the
+ * rolling window.
+ */
+const ruleTrailing: Rule = (tokens, i) => {
+  const w = word(tokens[i]);
+  const trailing = (unit: Unit, n: number, consumed: number): RuleMatch => ({
+    expr: {
+      op: 'span',
+      anchor: { op: 'snap', base: NOW, unit, edge: 'start' },
+      amount: unit === 'quarter' ? { months: -3 * n } : { [`${unit}s`]: -n },
+    },
+    consumed,
+    confidence: 0.95,
+    role: 'date',
+  });
+  if (w === 'ttm' || w === 'ltm') return trailing('month', 12, 1);
+  let at = i;
+  if (w === 'the') at += 1;
+  if (word(tokens[at]) !== 'trailing') return undefined;
+  const n = readNumber(tokens, at + 1);
+  if (!n || !Number.isInteger(n.value) || n.value < 1) return undefined;
+  const unit = UNIT_WORDS[word(tokens[at + 1 + n.consumed]) ?? ''];
+  if (unit !== 'day' && unit !== 'week' && unit !== 'month' && unit !== 'quarter' && unit !== 'year') return undefined;
+  return trailing(unit, n.value, at + 2 + n.consumed - i);
+};
+
 const ruleTheUnit: Rule = (tokens, i) => {
   if (word(tokens[i]) !== 'the') return undefined;
   // "the same week/month/year (that it happened)" → the current one.
@@ -1583,14 +1691,15 @@ const ruleTheUnit: Rule = (tokens, i) => {
   }
   const unit = UNIT_WORDS[uw];
   if (!unit || unit === 'second' || unit === 'minute' || unit === 'hour') return undefined;
+  // "over the years" is generic, and "the year the invoice was posted" /
+  // "the month we launched" name a period by a clause, not the current one:
+  // no match rather than a confident "this year" (#35).
+  if (uw.endsWith('s') && UNIT_WORDS[uw.slice(0, -1)] === unit) return undefined;
+  if (RELATIVE_CLAUSE_STARTS.has(word(tokens[i + 2]) ?? '')) return undefined;
   // "the year to date", "the month to date"
   if (word(tokens[i + 2]) === 'to' && word(tokens[i + 3]) === 'date') {
     return {
-      expr: {
-        op: 'between',
-        start: { op: 'snap', base: NOW, unit, edge: 'start' },
-        end: { op: 'snap', base: NOW, unit: 'day', edge: 'start' },
-      },
+      expr: toDate(unit),
       consumed: 4,
       confidence: 1,
       role: 'date',
@@ -2014,8 +2123,13 @@ const ruleBareYear: Rule = (tokens, i) => {
   const y = readYear(tokens, i);
   if (!y || y.value < 1500 || y.value > 2199) return undefined;
   const prev = word(tokens[i - 1]);
+  // "2024 or 2025", "in 2024 and 2025" (#35): the second year of a
+  // coordination is its own match instead of being dropped.
+  const coordinated =
+    prev !== undefined && ['or', 'and', '&', 'vs', 'versus'].includes(prev) && yearAt(tokens, i - 2) !== undefined;
   if (
     prev !== undefined &&
+    !coordinated &&
     !['in', 'since', 'by', 'until', 'during', 'year', 'of', 'from', 'for', 'calendar', 'cy', 'throughout'].includes(prev)
   ) {
     return undefined;
@@ -3038,6 +3152,8 @@ export const EN_RULE_ENTRIES: readonly { name: string; rule: Rule }[] = [
   { name: 'clock-time', rule: ruleClockTime },
   { name: 'weekday-date', rule: ruleWeekdayDate },
   { name: 'n-units-ended', rule: ruleNUnitsEnded },
+  { name: 'to-date', rule: ruleToDate },
+  { name: 'trailing', rule: ruleTrailing },
   { name: 'weekday-day', rule: ruleWeekdayDay },
   { name: 'weekday-alone', rule: ruleWeekdayAlone },
   { name: 'period-alone', rule: rulePeriodAlone },

@@ -39,7 +39,7 @@ HOLIDAY_NAMES = [
 ]
 
 _MODS = ["approx", "start", "mid", "end"]
-_DIRS = ["next", "prev", "nearest"]
+_DIRS = ["next", "prev", "nearest", "this"]
 _AMOUNT_FIELDS = ["years", "months", "weeks", "days", "hours", "minutes", "seconds"]
 
 TimeExpr = dict[str, Any]
@@ -176,7 +176,7 @@ def validate_expr(input: Any, path: str = "$") -> TimeExpr:
     if op == "seek":
         validate_expr(obj.get("base"), f"{path}.base")
         if obj.get("dir") not in _DIRS:
-            raise IRValidationError("dir must be next|prev|nearest", f"{path}.dir")
+            raise IRValidationError("dir must be next|prev|nearest|this", f"{path}.dir")
         _validate_target(obj.get("target"), f"{path}.target")
         if obj.get("n") is not None:
             _require_int(obj["n"], f"{path}.n")

@@ -48,7 +48,7 @@ The stretch up to a boundary — "by Friday", "until 2025-06-30", "before March 
 ### `seek {base, dir, target, n?}`
 Directed navigation:
 
-- `weekday` from a point/day base: `next` = strictly after the base day (`nextWeekday:'week-after'` instead targets the weekday within the following/previous week — the dialect policy applies only when `n` is absent; an explicit `n` means strict occurrence counting); `prev` = strictly before; `nearest` = both directions as candidates (strict, `n:1`), ordered future-first unless `bias:'past'`. Result: that day, grain `day`.
+- `weekday` from a point/day base: `next` = strictly after the base day (`nextWeekday:'week-after'` instead targets the weekday within the following/previous week — the dialect policy applies only when `n` is absent; an explicit `n` means strict occurrence counting); `prev` = strictly before; `nearest` = both directions as candidates (strict, `n:1`), ordered future-first unless `bias:'past'`. `this` (deictic "this Friday", "this weekend", #23) = the occurrence on or after the base day (today included) first and the previous one second, *regardless of bias* — except that the previous one leads when it is Saturday and the base day is the Sunday after it (the weekend in progress), or when `bias:'past'` and it was at most 3 days ago ("this weekend" said on a Monday or Tuesday). Explicit month-days without a year stay bias-ordered. Result: that day, grain `day`.
 - `weekday` from a coarser base interval: the `n`-th occurrence **within** the interval (empty if it overflows).
 - `month`: that calendar month, moving ±1 year if `dir` demands strict order relative to the base.
 - `dayPeriod`: the period within the base's day.

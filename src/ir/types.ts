@@ -108,7 +108,7 @@ export type TimeExprBody =
    * Tuesday" (semantics of 'next' controlled by context nextWeekday policy);
    * seek(marchExpr, 'next', weekday mon, 2) is "the 2nd Monday of March".
    */
-  | { op: 'seek'; base: TimeExpr; dir: 'next' | 'prev' | 'nearest'; target: Target; n?: number }
+  | { op: 'seek'; base: TimeExpr; dir: 'next' | 'prev' | 'nearest' | 'this'; target: Target; n?: number }
   /** Constraint intersection: "Tuesday" ∩ "morning" (SCATE-style). */
   | { op: 'intersect'; parts: TimeExpr[] }
   /** An exact elapsed duration ("for 90 minutes"). ISO-8601 duration string. */
