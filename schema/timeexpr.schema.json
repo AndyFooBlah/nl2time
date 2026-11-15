@@ -176,7 +176,7 @@
       "properties": {
         "op": { "const": "seek" },
         "base": { "$ref": "#/$defs/TimeExpr" },
-        "dir": { "enum": ["next", "prev", "nearest"] },
+        "dir": { "enum": ["next", "prev", "nearest", "this"] },
         "target": { "$ref": "#/$defs/Target" },
         "n": { "type": "integer", "minimum": 1 },
         "mod": { "$ref": "#/$defs/Mod" }

@@ -1603,7 +1603,7 @@
      "base": {
       "op": "now"
      },
-     "dir": "nearest",
+     "dir": "this",
      "target": {
       "kind": "weekday",
       "weekday": "sun"
@@ -6907,7 +6907,7 @@
     "base": {
      "op": "now"
     },
-    "dir": "nearest",
+    "dir": "this",
     "target": {
      "kind": "weekday",
      "weekday": "fri"
@@ -9542,54 +9542,6 @@
    ]
   },
   {
-   "id": "rt-dtm-0229",
-   "ctx": {
-    "now": "2018-07-17T13:00:00Z",
-    "timeZone": "UTC",
-    "locale": "en-US",
-    "weekStart": "mon",
-    "partialPeriod": "exclude",
-    "nextWeekday": "week-after",
-    "dayPeriods": [
-     {
-      "period": "morning",
-      "from": 8,
-      "before": 12
-     },
-     {
-      "period": "afternoon",
-      "from": 12,
-      "before": 16
-     },
-     {
-      "period": "evening",
-      "from": 16,
-      "before": 20
-     },
-     {
-      "period": "night",
-      "from": 20,
-      "before": 24
-     }
-    ]
-   },
-   "expr": {
-    "op": "snap",
-    "base": {
-     "op": "now"
-    },
-    "unit": "year"
-   },
-   "candidates": [
-    {
-     "kind": "interval",
-     "start": "2018-01-01T00:00:00Z",
-     "end": "2019-01-01T00:00:00Z",
-     "grain": "year"
-    }
-   ]
-  },
-  {
    "id": "rt-dtm-0230",
    "ctx": {
     "now": "2018-07-17T13:00:00Z",
@@ -10898,24 +10850,18 @@
      "base": {
       "op": "now"
      },
-     "unit": "year",
-     "edge": "start"
+     "unit": "year"
     },
     "end": {
-     "op": "snap",
-     "base": {
-      "op": "now"
-     },
-     "unit": "day",
-     "edge": "start"
+     "op": "now"
     }
    },
    "candidates": [
     {
      "kind": "interval",
      "start": "2018-01-01T00:00:00Z",
-     "end": "2018-09-07T00:00:00Z",
-     "grain": "day"
+     "end": "2018-09-07T12:00:00Z",
+     "grain": "year"
     }
    ]
   },
@@ -18327,7 +18273,7 @@
     "base": {
      "op": "now"
     },
-    "dir": "nearest",
+    "dir": "this",
     "target": {
      "kind": "weekday",
      "weekday": "fri"
@@ -18493,7 +18439,7 @@
     "base": {
      "op": "now"
     },
-    "dir": "nearest",
+    "dir": "this",
     "target": {
      "kind": "weekday",
      "weekday": "fri"
@@ -23932,7 +23878,7 @@
        "base": {
         "op": "now"
        },
-       "dir": "nearest",
+       "dir": "this",
        "target": {
         "kind": "weekday",
         "weekday": "fri"
@@ -45498,7 +45444,7 @@
       "base": {
        "op": "now"
       },
-      "dir": "nearest",
+      "dir": "this",
       "target": {
        "kind": "weekday",
        "weekday": "sun"
@@ -47929,24 +47875,18 @@
      "base": {
       "op": "now"
      },
-     "unit": "year",
-     "edge": "start"
+     "unit": "year"
     },
     "end": {
-     "op": "snap",
-     "base": {
-      "op": "now"
-     },
-     "unit": "day",
-     "edge": "start"
+     "op": "now"
     }
    },
    "candidates": [
     {
      "kind": "interval",
      "start": "2018-01-01T00:00:00Z",
-     "end": "2018-09-07T00:00:00Z",
-     "grain": "day"
+     "end": "2018-09-07T12:00:00Z",
+     "grain": "year"
     }
    ]
   },
@@ -54487,7 +54427,7 @@
     "base": {
      "op": "now"
     },
-    "dir": "nearest",
+    "dir": "this",
     "target": {
      "kind": "weekday",
      "weekday": "fri"
@@ -54653,7 +54593,7 @@
     "base": {
      "op": "now"
     },
-    "dir": "nearest",
+    "dir": "this",
     "target": {
      "kind": "weekday",
      "weekday": "fri"

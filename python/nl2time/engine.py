@@ -581,7 +581,29 @@ def _eval_seek(
                 if zi is not None:
                     out.append({"type": "interval", "zi": zi})
             continue
-        zi = _seek_from(b_zi, expr, ctx)
+        # Deictic "this Friday" / "this weekend" (#23); mirrors evalSeek.
+        if (
+            expr["dir"] == "this"
+            and expr["target"]["kind"] == "weekday"
+            and b_zi.grain in ("instant", "day")
+        ):
+            today = floor_to(b_zi.start, "day", ctx.week_start)
+            target = weekday_number(expr["target"]["weekday"])
+            dow = today.date().day_of_week().value
+            up_delta = (target - dow + 7) % 7
+            back_delta = ((dow - target + 6) % 7) + 1
+            up = add_calendar(today, days=up_delta)
+            prev = add_calendar(today, days=-back_delta)
+            prev_leads = (target == 6 and back_delta == 1) or (
+                ctx.bias == "past" and back_delta <= 3
+            )
+            for d in [prev, up] if prev_leads else [up, prev]:
+                out.append(
+                    {"type": "interval", "zi": ZInterval(d, add_calendar(d, days=1), "day")}
+                )
+            continue
+        seek_expr = {**expr, "dir": "nearest"} if expr["dir"] == "this" else expr
+        zi = _seek_from(b_zi, seek_expr, ctx)
         if zi is not None:
             out.append({"type": "interval", "zi": zi})
     return out

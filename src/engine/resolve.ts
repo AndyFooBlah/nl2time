@@ -547,7 +547,25 @@ function evalSeek(
       for (const zi of ordered) if (zi) out.push({ type: 'interval', zi });
       continue;
     }
-    const zi = seekFrom(b.zi, expr, ctx);
+    // Deictic "this Friday" / "this weekend" (#23): the occurrence on or
+    // after the base day leads, whatever the bias; the previous one follows.
+    // It leads instead when it is the weekend still in progress (Sunday)
+    // or, under bias 'past', when it was at most 3 days ago ("this weekend"
+    // said on Monday or Tuesday).
+    if (expr.dir === 'this' && expr.target.kind === 'weekday' && (b.zi.grain === 'instant' || b.zi.grain === 'day')) {
+      const today = floorTo(b.zi.start, 'day', ctx.weekStart);
+      const target = weekdayNumber(expr.target.weekday);
+      const upDelta = (target - today.dayOfWeek + 7) % 7;
+      const backDelta = ((today.dayOfWeek - target + 6) % 7) + 1;
+      const up = today.add({ days: upDelta });
+      const prev = today.subtract({ days: backDelta });
+      const prevLeads = (target === 6 && backDelta === 1) || (ctx.bias === 'past' && backDelta <= 3);
+      for (const d of prevLeads ? [prev, up] : [up, prev]) {
+        out.push({ type: 'interval', zi: { start: d, end: d.add({ days: 1 }), grain: 'day' } });
+      }
+      continue;
+    }
+    const zi = seekFrom(b.zi, expr.dir === 'this' ? { ...expr, dir: 'nearest' } : expr, ctx);
     if (zi) out.push({ type: 'interval', zi });
   }
   return out;

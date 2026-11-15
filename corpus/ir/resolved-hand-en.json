@@ -3396,6 +3396,484 @@
      "grain": "month"
     }
    ]
+  },
+  {
+   "id": "fw-0110",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "literal",
+    "date": {
+     "year": 2024
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2024-01-01T06:00:00Z",
+     "end": "2025-01-01T06:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "fw-0111",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "year"
+    },
+    "end": {
+     "op": "now"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-01-01T06:00:00Z",
+     "end": "2026-10-13T13:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "fw-0112",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "year"
+    },
+    "end": {
+     "op": "now"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-01-01T06:00:00Z",
+     "end": "2026-10-13T13:00:00Z",
+     "grain": "year"
+    }
+   ]
+  },
+  {
+   "id": "fw-0113",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "between",
+    "start": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "month"
+    },
+    "end": {
+     "op": "now"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-10-01T05:00:00Z",
+     "end": "2026-10-13T13:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "fw-0114",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "month",
+     "edge": "start"
+    },
+    "amount": {
+     "months": -12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2025-10-01T05:00:00Z",
+     "end": "2026-10-01T05:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "fw-0115",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "month",
+     "edge": "start"
+    },
+    "amount": {
+     "months": -12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2025-10-01T05:00:00Z",
+     "end": "2026-10-01T05:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "fw-0116",
+   "ctx": {
+    "now": "2026-10-13T08:00:00-05:00",
+    "timeZone": "America/Chicago",
+    "locale": "en-US",
+    "weekStart": "mon",
+    "bias": "past",
+    "partialPeriod": "exclude"
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "snap",
+     "base": {
+      "op": "now"
+     },
+     "unit": "quarter",
+     "edge": "start"
+    },
+    "amount": {
+     "months": -12
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2025-10-01T05:00:00Z",
+     "end": "2026-10-01T05:00:00Z",
+     "grain": "month"
+    }
+   ]
+  },
+  {
+   "id": "fw-0117",
+   "ctx": {
+    "now": "2026-07-09T10:00:00+05:30",
+    "timeZone": "Asia/Kolkata",
+    "locale": "en-IN",
+    "bias": "past"
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "seek",
+     "base": {
+      "op": "now"
+     },
+     "dir": "this",
+     "target": {
+      "kind": "weekday",
+      "weekday": "sat"
+     }
+    },
+    "amount": {
+     "days": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-10T18:30:00Z",
+     "end": "2026-07-12T18:30:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-07-03T18:30:00Z",
+     "end": "2026-07-05T18:30:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0118",
+   "ctx": {
+    "now": "2026-07-13T10:00:00+05:30",
+    "timeZone": "Asia/Kolkata",
+    "locale": "en-IN",
+    "bias": "past"
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "seek",
+     "base": {
+      "op": "now"
+     },
+     "dir": "this",
+     "target": {
+      "kind": "weekday",
+      "weekday": "sat"
+     }
+    },
+    "amount": {
+     "days": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-10T18:30:00Z",
+     "end": "2026-07-12T18:30:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-07-17T18:30:00Z",
+     "end": "2026-07-19T18:30:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0119",
+   "ctx": {
+    "now": "2026-07-12T10:00:00+05:30",
+    "timeZone": "Asia/Kolkata",
+    "locale": "en-IN",
+    "bias": "future"
+   },
+   "expr": {
+    "op": "span",
+    "anchor": {
+     "op": "seek",
+     "base": {
+      "op": "now"
+     },
+     "dir": "this",
+     "target": {
+      "kind": "weekday",
+      "weekday": "sat"
+     }
+    },
+    "amount": {
+     "days": 2
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-10T18:30:00Z",
+     "end": "2026-07-12T18:30:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-07-17T18:30:00Z",
+     "end": "2026-07-19T18:30:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0120",
+   "ctx": {
+    "now": "2026-07-09T10:00:00+05:30",
+    "timeZone": "Asia/Kolkata",
+    "locale": "en-IN",
+    "bias": "past"
+   },
+   "expr": {
+    "op": "seek",
+    "base": {
+     "op": "now"
+    },
+    "dir": "this",
+    "target": {
+     "kind": "weekday",
+     "weekday": "fri"
+    }
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-09T18:30:00Z",
+     "end": "2026-07-10T18:30:00Z",
+     "grain": "day"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-07-02T18:30:00Z",
+     "end": "2026-07-03T18:30:00Z",
+     "grain": "day"
+    }
+   ]
+  },
+  {
+   "id": "fw-0121",
+   "ctx": {
+    "now": "2026-07-09T10:00:00+05:30",
+    "timeZone": "Asia/Kolkata",
+    "locale": "en-IN",
+    "bias": "past"
+   },
+   "expr": {
+    "op": "snap",
+    "base": {
+     "op": "literal",
+     "date": {
+      "month": 8,
+      "day": 3
+     }
+    },
+    "unit": "week"
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2025-08-02T18:30:00Z",
+     "end": "2025-08-09T18:30:00Z",
+     "grain": "week"
+    },
+    {
+     "kind": "interval",
+     "start": "2026-08-01T18:30:00Z",
+     "end": "2026-08-08T18:30:00Z",
+     "grain": "week"
+    }
+   ]
+  },
+  {
+   "id": "fw-0122",
+   "ctx": {
+    "now": "2026-07-09T10:00:00+05:30",
+    "timeZone": "Asia/Kolkata",
+    "locale": "en-IN",
+    "bias": "past"
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "snap",
+      "base": {
+       "op": "offset",
+       "base": {
+        "op": "now"
+       },
+       "amount": -1,
+       "unit": "day"
+      },
+      "unit": "day"
+     },
+     {
+      "op": "literal",
+      "dayPeriod": "night"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-08T15:30:00Z",
+     "end": "2026-07-09T00:30:00Z",
+     "grain": "hour"
+    }
+   ]
+  },
+  {
+   "id": "fw-0123",
+   "ctx": {
+    "now": "2026-07-09T15:00:00+05:30",
+    "timeZone": "Asia/Kolkata",
+    "locale": "en-IN"
+   },
+   "expr": {
+    "op": "intersect",
+    "parts": [
+     {
+      "op": "snap",
+      "base": {
+       "op": "now"
+      },
+      "unit": "day"
+     },
+     {
+      "op": "literal",
+      "dayPeriod": "night"
+     }
+    ]
+   },
+   "candidates": [
+    {
+     "kind": "interval",
+     "start": "2026-07-09T15:30:00Z",
+     "end": "2026-07-10T00:30:00Z",
+     "grain": "hour"
+    }
+   ]
   }
  ]
 }

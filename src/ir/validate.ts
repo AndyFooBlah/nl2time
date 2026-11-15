@@ -17,7 +17,7 @@ export class IRValidationError extends Error {
 }
 
 const MODS = ['approx', 'start', 'mid', 'end'];
-const DIRS = ['next', 'prev', 'nearest'];
+const DIRS = ['next', 'prev', 'nearest', 'this'];
 
 /**
  * Structural validation of untrusted input (LLM output, stored IR, network)
@@ -84,7 +84,7 @@ export function validateExpr(input: unknown, path = '$'): TimeExpr {
     case 'seek': {
       validateExpr(obj.base, `${path}.base`);
       if (!DIRS.includes(obj.dir as string)) {
-        throw new IRValidationError('dir must be next|prev|nearest', `${path}.dir`);
+        throw new IRValidationError('dir must be next|prev|nearest|this', `${path}.dir`);
       }
       validateTarget(obj.target, `${path}.target`);
       if (obj.n !== undefined) requireInt(obj.n, `${path}.n`);
