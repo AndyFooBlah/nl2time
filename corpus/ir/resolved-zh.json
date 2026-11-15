@@ -149,8 +149,8 @@
    "candidates": [
     {
      "kind": "interval",
-     "start": "2018-02-28T00:00:00Z",
-     "end": "2018-03-01T00:00:00Z",
+     "start": "2018-01-29T00:00:00Z",
+     "end": "2018-01-30T00:00:00Z",
      "grain": "day"
     },
     {
@@ -314,8 +314,8 @@
     },
     {
      "kind": "interval",
-     "start": "2018-02-28T00:00:00Z",
-     "end": "2018-03-01T00:00:00Z",
+     "start": "2018-03-29T00:00:00Z",
+     "end": "2018-03-30T00:00:00Z",
      "grain": "day"
     }
    ]
@@ -4041,7 +4041,7 @@
      "kind": "interval",
      "start": "2018-01-01T00:00:00Z",
      "end": "2018-07-16T00:00:00Z",
-     "grain": "instant"
+     "grain": "day"
     }
    ]
   },
@@ -5548,17 +5548,13 @@
     ]
    },
    "expr": {
-    "op": "amount",
-    "amount": {
-     "hours": 0.5
-    }
+    "op": "duration",
+    "iso": "PT1800S"
    },
    "candidates": [
     {
-     "kind": "amount",
-     "amount": {
-      "hours": 0.5
-     }
+     "kind": "duration",
+     "iso": "PT1800S"
     }
    ]
   },
@@ -5595,17 +5591,13 @@
     ]
    },
    "expr": {
-    "op": "amount",
-    "amount": {
-     "months": 0.5
-    }
+    "op": "duration",
+    "iso": "PT1296000S"
    },
    "candidates": [
     {
-     "kind": "amount",
-     "amount": {
-      "months": 0.5
-     }
+     "kind": "duration",
+     "iso": "PT1296000S"
     }
    ]
   },
@@ -5642,17 +5634,13 @@
     ]
    },
    "expr": {
-    "op": "amount",
-    "amount": {
-     "years": 0.5
-    }
+    "op": "duration",
+    "iso": "PT15768000S"
    },
    "candidates": [
     {
-     "kind": "amount",
-     "amount": {
-      "years": 0.5
-     }
+     "kind": "duration",
+     "iso": "PT15768000S"
     }
    ]
   },
@@ -5736,17 +5724,13 @@
     ]
    },
    "expr": {
-    "op": "amount",
-    "amount": {
-     "hours": 0.5
-    }
+    "op": "duration",
+    "iso": "PT1800S"
    },
    "candidates": [
     {
-     "kind": "amount",
-     "amount": {
-      "hours": 0.5
-     }
+     "kind": "duration",
+     "iso": "PT1800S"
     }
    ]
   },
@@ -7404,17 +7388,13 @@
     ]
    },
    "expr": {
-    "op": "amount",
-    "amount": {
-     "years": 3.5
-    }
+    "op": "duration",
+    "iso": "PT110376000S"
    },
    "candidates": [
     {
-     "kind": "amount",
-     "amount": {
-      "years": 3.5
-     }
+     "kind": "duration",
+     "iso": "PT110376000S"
     }
    ]
   },
@@ -8661,14 +8641,14 @@
    "candidates": [
     {
      "kind": "interval",
-     "start": "2017-02-28T00:00:00Z",
-     "end": "2017-03-01T00:00:00Z",
+     "start": "2016-02-29T00:00:00Z",
+     "end": "2016-03-01T00:00:00Z",
      "grain": "day"
     },
     {
      "kind": "interval",
-     "start": "2018-02-28T00:00:00Z",
-     "end": "2018-03-01T00:00:00Z",
+     "start": "2020-02-29T00:00:00Z",
+     "end": "2020-03-01T00:00:00Z",
      "grain": "day"
     }
    ]
@@ -8715,8 +8695,8 @@
    "candidates": [
     {
      "kind": "interval",
-     "start": "2019-02-28T00:00:00Z",
-     "end": "2019-03-01T00:00:00Z",
+     "start": "2016-02-29T00:00:00Z",
+     "end": "2016-03-01T00:00:00Z",
      "grain": "day"
     },
     {
@@ -8775,8 +8755,8 @@
     },
     {
      "kind": "interval",
-     "start": "2021-02-28T00:00:00Z",
-     "end": "2021-03-01T00:00:00Z",
+     "start": "2024-02-29T00:00:00Z",
+     "end": "2024-03-01T00:00:00Z",
      "grain": "day"
     }
    ]
@@ -8823,8 +8803,8 @@
    "candidates": [
     {
      "kind": "interval",
-     "start": "2019-02-28T00:00:00Z",
-     "end": "2019-03-01T00:00:00Z",
+     "start": "2016-02-29T00:00:00Z",
+     "end": "2016-03-01T00:00:00Z",
      "grain": "day"
     },
     {
@@ -9024,26 +9004,26 @@
    "candidates": [
     {
      "kind": "interval",
-     "start": "2019-02-28T00:00:00Z",
-     "end": "2019-03-02T00:00:00Z",
+     "start": "2016-02-29T00:00:00Z",
+     "end": "2016-03-02T00:00:00Z",
      "grain": "day"
     },
     {
      "kind": "interval",
-     "start": "2019-02-28T00:00:00Z",
-     "end": "2019-03-01T00:00:00Z",
+     "start": "2016-02-29T00:00:00Z",
+     "end": "2016-03-01T00:00:00Z",
      "grain": "day"
     },
     {
      "kind": "interval",
-     "start": "2019-02-28T00:00:00Z",
-     "end": "2020-03-02T00:00:00Z",
+     "start": "2016-02-29T00:00:00Z",
+     "end": "2017-03-02T00:00:00Z",
      "grain": "day"
     },
     {
      "kind": "interval",
-     "start": "2019-02-28T00:00:00Z",
-     "end": "2020-03-01T00:00:00Z",
+     "start": "2016-02-29T00:00:00Z",
+     "end": "2017-03-01T00:00:00Z",
      "grain": "day"
     },
     {

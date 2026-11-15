@@ -1,3 +1,7 @@
+import { readdirSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import { describe as suite, expect, test } from 'vitest';
 
 import { IRValidationError, validateExpr } from '../src/index.js';
@@ -45,4 +49,25 @@ suite('IR validation (untrusted input boundary)', () => {
     expect(() => validateExpr('now')).toThrow(IRValidationError);
     expect(() => validateExpr(null)).toThrow(IRValidationError);
   });
+});
+
+suite("the parser's own output validates (#16)", () => {
+  // Every expression the rule parsers emit for the corpora is recorded in
+  // corpus/ir; the library's validator must accept all of them, or LLM
+  // fallback validation and ports disagree with the parser.
+  const root = join(dirname(fileURLToPath(import.meta.url)), '..', 'corpus', 'ir');
+  for (const file of readdirSync(root).filter((f) => f.endsWith('.json'))) {
+    test(file, () => {
+      const data = JSON.parse(readFileSync(join(root, file), 'utf8')) as { cases: { id: string; expr: unknown }[] };
+      const bad: string[] = [];
+      for (const f of data.cases) {
+        try {
+          validateExpr(f.expr);
+        } catch (e) {
+          bad.push(`${f.id}: ${(e as Error).message}`);
+        }
+      }
+      expect(bad).toEqual([]);
+    });
+  }
 });

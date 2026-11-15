@@ -18,7 +18,7 @@ The context reference instant as a point interval.
 Civil components **asserted by the source text only** — missing components are completed at resolution:
 
 - `year+month+day` → that day. `year+month` → that month. `year` → that year.
-- `month+day` (no year) → the occurrence in the reference year AND the adjacent year, ordered by policy (below). `month` alone → same at month granularity. `day` alone → occurrence in reference month AND adjacent month.
+- `month+day` (no year) → the occurrence in the reference year AND the adjacent year, ordered by policy (below). `month` alone → same at month granularity. `day` alone → occurrence in reference month AND adjacent month. Occurrences count only years/months where the date exists: a year-less Feb 29 completes to the nearest leap years (2024 / 2028 from 2026), and "the 31st" skips 30-day months — never a clamped Feb 28 or 30th (#14). *Current* is the reference-period occurrence, or the next valid one when the date does not exist in the reference period.
 - `time`: applied to the anchor day (the intersect anchor, else the reference day). Grain = finest given component (hour if only hour, etc.). `meridiem:'unknown'` with hour 1–12 yields **both readings**: pm-first for hours 1–6 and 12, am-first for 7–11.
 - `dayPeriod`: the locale day-period interval of the anchor day; periods may wrap midnight (en `night` = 21:00 → 06:00 next day), grain `hour`.
 - Hour 12 special cases: `12am` → 00:00, `12pm` → 12:00.
@@ -36,7 +36,7 @@ The containing `unit` interval of `base.start`: floor to the unit boundary, exte
 Anchored extent. Signed `amount` fields: negative extends backward from `anchor.end`, positive forward from `anchor.start`. Grain = smallest unit present in `amount`. If the anchor is the reference point itself (grain `instant`, equal to `now`), the amount's smallest unit is day-or-coarser, and `partialPeriod:'exclude'`, the span covers complete days only ("the last 3 days" ends at today's start; "the next 3 days" begins at tomorrow's start). `business: true` counts weekdays only, walking day by day from the anchor and skipping Saturday/Sunday.
 
 ### `between {start, end}`
-Cartesian over candidates, dropping pairs where start ≥ end; grain = finer of the two. The end operand's contribution depends on its shape:
+Cartesian over candidates, dropping pairs where start ≥ end. Grain (#37): a range from a calendar-period start to a point end keeps the start's grain ("since 2020" = [2020-01-01, now), grain `year`); a range between two points, neither of them `now`, takes the coarsest grain both edges align to — `year` (both Jan 1 00:00), `month` (both 1st-of-month 00:00), `day` (both 00:00), else `instant` ("the second half of 2024" = [Jul 1, Jan 1), grain `month`, matching "H2 2024"); otherwise the finer of the two operand grains (so deadlines from `now` stay `instant`). The end operand's contribution depends on its shape:
 
 - **Point ends** (grain `instant`, e.g. a `snap` edge or `now`) bound the range directly.
 - **Time-grained ends** (finer than day *and* shorter than one day; a multi-day interval with point edges, e.g. "end of year" as a late-part interval, is a calendar period and takes the rule below) are exclusive at their start ("9 to 5pm" ends at 17:00); a clock range wrapping midnight rolls the end into the next day.

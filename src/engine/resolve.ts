@@ -69,6 +69,39 @@ function finerGrain(a: Grain, b: Grain): Grain {
 
 const MAX_CANDIDATES = 8;
 
+const isPointZi = (zi: ZInterval): boolean => Temporal_compare(zi.start, zi.end) === 0;
+
+/**
+ * Grain of a `between` result (#37). A range that starts on a calendar period
+ * and ends on a point ("since 2020" = 2020 → now) keeps the start's grain;
+ * a range between two points takes its grain from how the edges align ("the
+ * second half of 2024" = Jul 1 → Jan 1 is month-grained, while a deadline
+ * "by end of month" = now → Sep 1 stays 'instant'). Otherwise the finer
+ * operand grain, as before.
+ */
+function rangeGrain(
+  s: ZInterval,
+  e: ZInterval,
+  start: Zoned,
+  end: Zoned,
+  touchesNow: boolean,
+): Grain {
+  const sp = isPointZi(s);
+  const ep = isPointZi(e);
+  // `now` is an arbitrary instant even when a fixture pins it to midnight.
+  if (sp && ep && !touchesNow) return alignedGrain(start, end);
+  if (!sp && ep) return s.grain;
+  return finerGrain(s.grain, e.grain);
+}
+
+function alignedGrain(start: Zoned, end: Zoned): Grain {
+  if (Temporal_compare(start, end) === 0) return 'instant';
+  const atDayStart = (z: Zoned): boolean => Temporal_compare(z, z.startOfDay()) === 0;
+  if (!atDayStart(start) || !atDayStart(end)) return 'instant';
+  if (start.day !== 1 || end.day !== 1) return 'day';
+  return start.month === 1 && end.month === 1 ? 'year' : 'month';
+}
+
 export function resolve(expr: TimeExpr, ctx: TimeContext): Resolution {
   const cands = evalExpr(expr, ctx, undefined).slice(0, MAX_CANDIDATES);
   return { candidates: cands.map((c) => toValue(c)) };
@@ -221,6 +254,7 @@ function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | und
 
     case 'between': {
       const starts = evalExpr(expr.start, ctx, anchor);
+      const touchesNow = expr.start.op === 'now' || expr.end.op === 'now';
       const out: Cand[] = [];
       for (const s of starts) {
         if (s.type !== 'interval') continue;
@@ -243,11 +277,12 @@ function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | und
           // Recognizers-derived corpus pins the exclusive value, so both
           // must remain candidates (#17).
           if (!isPoint && !timeGrained) {
-            const grain = finerGrain(s.zi.grain, e.zi.grain);
             if (Temporal_compare(s.zi.start, e.zi.end) < 0) {
+              const grain = rangeGrain(s.zi, e.zi, s.zi.start, e.zi.end, touchesNow);
               out.push({ type: 'interval', zi: { start: s.zi.start, end: e.zi.end, grain } });
             }
             if (Temporal_compare(s.zi.start, e.zi.start) < 0) {
+              const grain = rangeGrain(s.zi, e.zi, s.zi.start, e.zi.start, touchesNow);
               out.push({ type: 'interval', zi: { start: s.zi.start, end: e.zi.start, grain } });
             }
             continue;
@@ -267,7 +302,7 @@ function evalExprInner(expr: TimeExpr, ctx: TimeContext, anchor: ZInterval | und
             zi: {
               start: s.zi.start,
               end: endPoint,
-              grain: finerGrain(s.zi.grain, e.zi.grain),
+              grain: rangeGrain(s.zi, e.zi, s.zi.start, endPoint, touchesNow),
             },
           });
         }
@@ -715,9 +750,13 @@ function resolveDate(date: PartialDate, ctx: TimeContext, anchor: ZInterval | un
   if (date.month !== undefined && date.day !== undefined) {
     // "May 29" with no year → the most recent occurrence starting on-or-
     // before today, then the following one ("past + future" pairing).
-    const mk = (yearDelta: number): ZInterval => {
+    // Occurrence k walks over years where the date exists, so "Feb 29"
+    // lands on leap years instead of clamping to Feb 28 (#14).
+    const valid = (d: number): boolean =>
+      ref.add({ years: d }).with({ month: date.month, day: 1 }).daysInMonth >= date.day!;
+    const mk = (k: number): ZInterval => {
       const day = ref
-        .add({ years: yearDelta })
+        .add({ years: nthValidDelta(k, valid) })
         .with({ month: date.month, day: date.day })
         .startOfDay();
       return { start: day, end: day.add({ days: 1 }), grain: 'day' };
@@ -740,8 +779,13 @@ function resolveDate(date: PartialDate, ctx: TimeContext, anchor: ZInterval | un
 
   if (date.day !== undefined) {
     // "the 3rd" → most recent occurrence on-or-before today, then the next.
-    const mk = (monthDelta: number): ZInterval => {
-      const day = ref.add({ months: monthDelta }).with({ day: date.day }).startOfDay();
+    // Skip months too short for the day ("the 31st" never means the 30th).
+    const valid = (d: number): boolean => ref.add({ months: d }).with({ day: 1 }).daysInMonth >= date.day!;
+    const mk = (k: number): ZInterval => {
+      const day = ref
+        .add({ months: nthValidDelta(k, valid) })
+        .with({ day: date.day })
+        .startOfDay();
       return { start: day, end: day.add({ days: 1 }), grain: 'day' };
     };
     if (ctx.bias === 'none') {
@@ -754,6 +798,23 @@ function resolveDate(date: PartialDate, ctx: TimeContext, anchor: ZInterval | un
 
   const day = floorTo(ref, 'day', ctx.weekStart);
   return [{ start: day, end: day.add({ days: 1 }), grain: 'day' }];
+}
+
+/**
+ * Map occurrence index k to a calendar delta, counting only deltas where
+ * `valid` holds: index 0 is the first valid delta >= 0, k > 0 steps forward
+ * and k < 0 steps back from it. With every delta valid this is the identity.
+ */
+function nthValidDelta(k: number, valid: (d: number) => boolean): number {
+  const LIMIT = 16; // leap years skip at most 8 years; month lengths at most 2
+  let d = 0;
+  for (let g = 0; !valid(d) && g < LIMIT; g++) d++;
+  const step = k > 0 ? 1 : -1;
+  for (let i = 0; i < Math.abs(k); i++) {
+    d += step;
+    for (let g = 0; !valid(d) && g < LIMIT; g++) d += step;
+  }
+  return d;
 }
 
 /**
