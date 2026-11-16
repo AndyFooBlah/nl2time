@@ -15,12 +15,18 @@ on:
   schedule:
     - cron: "41 13 * * *"   # 06:41 PDT / 05:41 PST
 
+# Default for the two fix jobs, which push to PR branches, label and comment on
+# PRs and dispatch CI. The pick job overrides it with a read-only set.
 permissions:
   contents: write
   pull-requests: write
   issues: write
   actions: write
 
+# One fixer at a time per repo; a run that is fixing a PR is never cancelled.
+# Every job has a timeout, so a run holds the group for about 3 hours at most.
+# (The "queued, no jobs" records GitHub's 2026-11-11 incident left behind never
+# entered the queue: they do not hold the group, and the API refuses to cancel them.)
 concurrency:
   group: deps-fixer
   cancel-in-progress: false
@@ -36,6 +42,18 @@ jobs:
   pick:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    # Read-only. `gh pr list --json statusCheckRollup` walks PR -> commit -> check
+    # runs and commit statuses -> workflow run, and in a private repo each hop needs
+    # its own scope: pull-requests, contents, checks, statuses, actions. Without
+    # checks and statuses the query fails with "Resource not accessible by
+    # integration" as soon as a private repo has an open PR that has run CI (a
+    # public repo answers regardless). Probed scope by scope on 2026-11-15.
+    permissions:
+      contents: read
+      pull-requests: read
+      checks: read
+      statuses: read
+      actions: read
     outputs:
       prs: ${{ steps.pick.outputs.prs }}
       alerts: ${{ steps.pick.outputs.alerts }}
@@ -51,22 +69,40 @@ jobs:
           fi
           # Red Dependabot / deps-fixer PRs (at most 3 a day). Skip PRs given up on or
           # green and waiting for owner review, and ignore failed deps/* jobs: a failed
-          # merge (token, conflict) is not something code changes fix.
-          prs=$(gh pr list --state open --json number,author,headRefName,labels,statusCheckRollup --jq '
-            [.[] | select((.author.login|test("dependabot")) or (.headRefName|startswith("deps/fix-")))
-                 | select([.labels[].name] | (index("deps-gave-up") or index("needs-owner-review")) | not)
-                 | select([.statusCheckRollup[]? | select(.conclusion=="FAILURE" and ((.name // "")|startswith("deps /")|not))] | length > 0)
-                 | .number][:3]')
+          # merge (token, conflict) is not something code changes fix. Every open PR
+          # gets a line in the log, so a run that fixes nothing still shows what it saw.
+          open=$(gh pr list --state open --limit 100 --json number,title,author,headRefName,labels,statusCheckRollup)
+          seen=$(jq -c '
+            [.[] | [.labels[].name] as $labels
+                 | [.statusCheckRollup[]? | select(.conclusion=="FAILURE" and ((.name // "")|startswith("deps /")|not)) | .name] as $red
+                 | {number, head: .headRefName, checks: (.statusCheckRollup | length), red: $red,
+                    verdict: (if ((.author.login|test("dependabot")) or (.headRefName|startswith("deps/fix-"))) | not then "skip, not a dependency PR"
+                              elif $labels | index("deps-gave-up") then "skip, deps-gave-up"
+                              elif $labels | index("needs-owner-review") then "skip, needs-owner-review"
+                              elif ($red | length) == 0 then "skip, no failed CI job"
+                              else "fix" end)}]' <<<"$open")
+          echo "Open PRs evaluated: $(jq length <<<"$seen")"
+          jq -r '.[] | "  #\(.number) \(.head): \(.checks) checks, failed: \(if .red == [] then "none" else .red | join(", ") end) -> \(.verdict)"' <<<"$seen"
+          prs=$(jq -c '[.[] | select(.verdict == "fix") | .number][:3]' <<<"$seen")
           echo "prs=$prs" >> "$GITHUB_OUTPUT"
           # Open alerts with a patched version and no open PR naming the package.
           alerts=""
-          if [ -n "$ALERTS_TOKEN" ] && ! gh pr list --state open --json headRefName --jq '.[].headRefName' | grep -q '^deps/fix-'; then
-            titles=$(gh pr list --state open --json title --jq '.[].title')
-            alerts=$(GH_TOKEN="$ALERTS_TOKEN" gh api --paginate "repos/$GH_REPO/dependabot/alerts?state=open&per_page=100" \
-              --jq '.[] | select(.security_vulnerability.first_patched_version != null)
-                    | "\(.dependency.package.ecosystem) \(.dependency.package.name) >= \(.security_vulnerability.first_patched_version.identifier) in \(.dependency.manifest_path) (\(.security_advisory.ghsa_id), \(.security_advisory.severity))"' \
-              | while read -r eco name rest; do grep -qiF -- " $name " <<<" $(tr '\n' ' ' <<<"$titles") " || echo "$eco $name $rest"; done \
-              | sort -u | head -40 | jq -Rsc .) || { echo "::warning::DEPENDABOT_ALERTS_TOKEN was rejected; skipping the alert sweep"; alerts=""; }
+          if [ -z "$ALERTS_TOKEN" ]; then
+            echo "::warning::DEPENDABOT_ALERTS_TOKEN is not set; skipping the alert sweep"
+          elif jq -e 'any(.[]; .headRefName | startswith("deps/fix-"))' <<<"$open" >/dev/null; then
+            echo "Alert sweep skipped: a deps/fix-* PR is already open"
+          elif found=$(GH_TOKEN="$ALERTS_TOKEN" gh api --paginate "repos/$GH_REPO/dependabot/alerts?state=open&per_page=100" \
+              --jq '.[] | if .security_vulnerability.first_patched_version == null then "unpatched"
+                    else "\(.dependency.package.ecosystem) \(.dependency.package.name) >= \(.security_vulnerability.first_patched_version.identifier) in \(.dependency.manifest_path) (\(.security_advisory.ghsa_id), \(.security_advisory.severity))" end'); then
+            titles=$(jq -r '.[].title' <<<"$open" | tr '\n' ' ')
+            todo=$(grep -vx -e unpatched -e '' <<<"$found" \
+              | while read -r eco name rest; do grep -qiF -- " $name " <<<" $titles " || echo "$eco $name $rest"; done \
+              | sort -u | head -40 || true)
+            echo "Open alerts evaluated: $(grep -c . <<<"$found" || true) ($(grep -cx unpatched <<<"$found" || true) with no patched version, $(grep -c . <<<"$todo" || true) patchable with no PR)"
+            alerts=$(jq -Rsc . <<<"$todo")
+            [ -n "$todo" ] || alerts=""
+          else
+            echo "::warning::DEPENDABOT_ALERTS_TOKEN was rejected; skipping the alert sweep"
           fi
           echo "alerts=$alerts" >> "$GITHUB_OUTPUT"
           echo "PRs to fix: $prs"; echo "Alerts with no PR: $alerts"
@@ -76,6 +112,10 @@ jobs:
     if: needs.pick.outputs.prs != '' && needs.pick.outputs.prs != '[]'
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    # A PR the fixer cannot even start on (broken branch, toolchain or Claude step
+    # failing) must not turn the whole run red or block the other PRs. The last
+    # step records the failure on the PR and counts it as an attempt.
+    continue-on-error: true
     strategy:
       max-parallel: 1
       fail-fast: false
@@ -85,37 +125,48 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-      - name: Check out the PR and count attempts
+      - name: Read the PR and count attempts
         id: pr
         run: |
           set -euo pipefail
-          gh pr checkout ${{ matrix.pr }}
           info=$(gh pr view ${{ matrix.pr }} --json title,headRefName,labels,headRefOid,baseRefName)
-          echo "title=$(jq -r .title <<<"$info")" >> "$GITHUB_OUTPUT"
-          echo "branch=$(jq -r .headRefName <<<"$info")" >> "$GITHUB_OUTPUT"
-          base=$(jq -r .baseRefName <<<"$info"); echo "base=$base" >> "$GITHUB_OUTPUT"
-          echo "orig=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-          # Fix against current main, and pick up main's newer workflows: merge the
-          # base in first. Conflicts are left in the tree for Claude to resolve.
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if ! git merge -q --no-edit "origin/$base" >/dev/null 2>&1; then
-            git diff --name-only --diff-filter=U > "$RUNNER_TEMP/conflicts.txt"
-            echo "Merge of $base conflicts in: $(tr '\n' ' ' < "$RUNNER_TEMP/conflicts.txt")"
-          fi
           n=$(jq '[.labels[].name | select(startswith("deps-fix-attempt"))] | length' <<<"$info")
-          echo "attempts=$n" >> "$GITHUB_OUTPUT"; echo "next=$((n + 1))" >> "$GITHUB_OUTPUT"
-          run=$(gh run list --workflow "$CI_WORKFLOW" --commit "$(jq -r .headRefOid <<<"$info")" --json databaseId,conclusion \
-                --jq '[.[] | select(.conclusion=="failure")][0].databaseId // empty')
-          { [ -n "$run" ] && gh run view "$run" --log-failed | tail -400 || echo "(no failed CI log found)"; } > "$RUNNER_TEMP/ci-failure.log"
+          { echo "title=$(jq -r .title <<<"$info")"
+            echo "branch=$(jq -r .headRefName <<<"$info")"
+            echo "base=$(jq -r .baseRefName <<<"$info")"
+            echo "head=$(jq -r .headRefOid <<<"$info")"
+            echo "attempts=$n"; echo "next=$((n + 1))"; } >> "$GITHUB_OUTPUT"
       - name: Give up after too many attempts
         if: steps.pr.outputs.attempts >= env.MAX_ATTEMPTS
         run: |
           gh label create deps-gave-up --color B60205 --description "deps-fixer could not make CI pass" --force >/dev/null
           gh pr edit ${{ matrix.pr }} --add-label deps-gave-up --add-assignee "$OWNER"
           gh pr comment ${{ matrix.pr }} --body "@$OWNER deps-fixer tried $MAX_ATTEMPTS times and CI still fails. Needs a person."
+      # The toolchain is set up here, on the default branch's tree. After the merge
+      # below, package.json can hold conflict markers, and setup actions that parse it
+      # (pnpm/action-setup, setup-node) then fail before Claude ever sees the conflict.
       - uses: ./.github/actions/deps-toolchain
         if: steps.pr.outputs.attempts < env.MAX_ATTEMPTS
+      - name: Check out the PR and merge the base
+        id: co
+        if: steps.pr.outputs.attempts < env.MAX_ATTEMPTS
+        env:
+          BASE: ${{ steps.pr.outputs.base }}
+        run: |
+          set -euo pipefail
+          gh pr checkout ${{ matrix.pr }}
+          echo "orig=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          # Fix against current main, and pick up main's newer workflows: merge the
+          # base in first. Conflicts are left in the tree for Claude to resolve.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git merge -q --no-edit "origin/$BASE" >/dev/null 2>&1; then
+            git diff --name-only --diff-filter=U > "$RUNNER_TEMP/conflicts.txt"
+            echo "Merge of $BASE conflicts in: $(tr '\n' ' ' < "$RUNNER_TEMP/conflicts.txt")"
+          fi
+          run=$(gh run list --workflow "$CI_WORKFLOW" --commit "${{ steps.pr.outputs.head }}" --json databaseId,conclusion \
+                --jq '[.[] | select(.conclusion=="failure")][0].databaseId // empty')
+          { [ -n "$run" ] && gh run view "$run" --log-failed | tail -400 || echo "(no failed CI log found)"; } > "$RUNNER_TEMP/ci-failure.log"
       - name: Claude fixes the PR
         if: steps.pr.outputs.attempts < env.MAX_ATTEMPTS
         uses: anthropics/claude-code-action@61a9c274fa7110a66dfafc1bbbced03833eb25fe # v1
@@ -144,7 +195,7 @@ jobs:
           gh label create deps-fix-attempt-${{ steps.pr.outputs.next }} --color FBCA04 --force >/dev/null
           gh pr edit ${{ matrix.pr }} --add-label deps-fix-attempt-${{ steps.pr.outputs.next }}
           # Nothing to push only if Claude changed nothing and the base merged in as a no-op.
-          if [ -f "$RUNNER_TEMP/fixer-giveup.md" ] || { [ -z "$(git status --porcelain)" ] && [ "$(git rev-parse HEAD)" = "${{ steps.pr.outputs.orig }}" ]; }; then
+          if [ -f "$RUNNER_TEMP/fixer-giveup.md" ] || { [ -z "$(git status --porcelain)" ] && [ "$(git rev-parse HEAD)" = "${{ steps.co.outputs.orig }}" ]; }; then
             gh label create deps-gave-up --color B60205 --description "deps-fixer could not make CI pass" --force >/dev/null
             gh pr edit ${{ matrix.pr }} --add-label deps-gave-up --add-assignee "$OWNER"
             { echo "@$OWNER deps-fixer could not fix this update."; echo; cat "$RUNNER_TEMP/fixer-giveup.md" 2>/dev/null || echo "(Claude made no changes.)"; } \
@@ -169,6 +220,27 @@ jobs:
           fi
           git push -q origin HEAD:${{ steps.pr.outputs.branch }}
           gh workflow run "$CI_WORKFLOW" --ref "${{ steps.pr.outputs.branch }}" -f pr=${{ matrix.pr }}
+      - name: Record a failed run on the PR
+        if: failure()
+        env:
+          NEXT: ${{ steps.pr.outputs.next }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          echo "::warning::deps-fixer failed on PR #${{ matrix.pr }}; see the failed step above ($RUN_URL)"
+          [ -n "$NEXT" ] || { echo "The PR could not be read, so there is nothing to label"; exit 0; }
+          # Count the failure as an attempt. Without this a PR that breaks the fixer
+          # before the commit step is retried every day and never handed to a person.
+          gh label create "deps-fix-attempt-$NEXT" --color FBCA04 --force >/dev/null
+          gh label create deps-fixer-error --color D93F0B --description "A deps-fixer run failed on this PR" --force >/dev/null
+          gh pr edit ${{ matrix.pr }} --add-label "deps-fix-attempt-$NEXT" --add-label deps-fixer-error
+          if [ "$NEXT" -ge "$MAX_ATTEMPTS" ]; then
+            gh label create deps-gave-up --color B60205 --description "deps-fixer could not make CI pass" --force >/dev/null
+            gh pr edit ${{ matrix.pr }} --add-label deps-gave-up --add-assignee "$OWNER"
+            gh pr comment ${{ matrix.pr }} --body "@$OWNER a deps-fixer run failed on this PR (attempt $NEXT of $MAX_ATTEMPTS): $RUN_URL. Needs a person."
+          else
+            gh pr comment ${{ matrix.pr }} --body "A deps-fixer run failed on this PR (attempt $NEXT of $MAX_ATTEMPTS): $RUN_URL. The next daily sweep tries again."
+          fi
 
   fix-alerts:
     needs: pick
