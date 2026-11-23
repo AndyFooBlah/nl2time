@@ -169,7 +169,7 @@ jobs:
           { [ -n "$run" ] && gh run view "$run" --log-failed | tail -400 || echo "(no failed CI log found)"; } > "$RUNNER_TEMP/ci-failure.log"
       - name: Claude fixes the PR
         if: steps.pr.outputs.attempts < env.MAX_ATTEMPTS
-        uses: anthropics/claude-code-action@4fa93a88de49bbef68b10eb15aabedf28ca0e1ed # v1
+        uses: anthropics/claude-code-action@e5812cd75691ca7bbfc57c0ecf4441db3a1ab7dd # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ github.token }}
@@ -255,7 +255,7 @@ jobs:
           ALERTS: ${{ needs.pick.outputs.alerts }}
         run: jq -r . <<<"$ALERTS" > "$RUNNER_TEMP/alerts.txt"; cat "$RUNNER_TEMP/alerts.txt"
       - name: Claude upgrades the vulnerable packages
-        uses: anthropics/claude-code-action@4fa93a88de49bbef68b10eb15aabedf28ca0e1ed # v1
+        uses: anthropics/claude-code-action@e5812cd75691ca7bbfc57c0ecf4441db3a1ab7dd # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ github.token }}
